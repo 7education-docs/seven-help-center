@@ -155,6 +155,14 @@ a.card:hover{transform:translateY(-2px)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .grid a.card{background:#2a2a2e;border-color:#3d3d44;box-shadow:none} :root:not([data-theme="light"]) .grid a.card .cat-ico{background:#f5f5f5;color:#1e1e1e} }
 :root[data-theme="dark"] .grid a.card{background:#2a2a2e;border-color:#3d3d44;box-shadow:none}
 :root[data-theme="dark"] .grid a.card .cat-ico{background:#f5f5f5;color:#1e1e1e}
+/* Artículos más consultados: mismas tarjetas neutras que las categorías */
+.list.cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px}
+.list.cards a{background:#ffffff;border:1px solid #e4e0e6;border-radius:var(--radius);padding:16px;box-shadow:0 1px 2px rgba(30,30,30,.05);transition:transform .18s ease,border-color .18s ease;height:100%}
+.list.cards a:hover{transform:translateY(-2px);border-color:var(--primary)}
+.list.cards a strong{display:block;font-family:var(--display);font-size:1.02rem;margin-bottom:.3em}
+.list.cards a small{color:var(--muted);font-size:14px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .list.cards a{background:#2a2a2e;border-color:#3d3d44;box-shadow:none} }
+:root[data-theme="dark"] .list.cards a{background:#2a2a2e;border-color:#3d3d44;box-shadow:none}
 </style>
 <div id="app"></div>
 <script>
@@ -209,13 +217,13 @@ const DATA = {"es":{"updated":"2026-11-17","ui":{"center":"Centro de ayuda","sea
       { c: '#ff7a3d', ids: ['cursos-estudiantes', 'conversaciones'] },
       { c: '#17b8b0', ids: ['tareas', 'it'] },
     ];
-    const cats = d.categories.map((c) => '<a class="card" href="' + href(loc, 'cat-' + c.id) + '"><span class="cat-ico" aria-hidden="true">' + esc(c.name.charAt(0)) + '</span><h3>' + esc(c.name) + '</h3><p>' + esc(c.desc) + '</p><span class="count">' + inCat(loc, c.id).length + ' ' + esc(u.articlesWord) + '</span></a>').join('');
+    const cats = d.categories.map((c) => '<a class="card" href="' + href(loc, 'cat-' + c.id) + '"><h3>' + esc(c.name) + '</h3><p>' + esc(c.desc) + '</p><span class="count">' + inCat(loc, c.id).length + ' ' + esc(u.articlesWord) + '</span></a>').join('');
     const popular = u.popular.map((id) => article(loc, id)).filter(Boolean).map((a) => '<li><a href="' + href(loc, 'art-' + a.id) + '"><strong>' + esc(a.title) + '</strong><small>' + esc(a.answer) + '</small></a></li>').join('');
     return '<main class="wrap home" id="main" tabindex="-1">' +
       '<section class="hero"><p class="kicker brand-kick">' + esc(u.kicker) + '</p><h1>' + esc(u.heroTitle) + '<span class="accent">' + esc(u.heroAccent) + '</span></h1><p class="lead">' + esc(u.heroText) + '</p>' +
       '<form class="search" role="search" data-search-form><label class="sr" for="q-hero">' + esc(u.search) + '</label><input id="q-hero" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn primary" type="submit">' + esc(u.searchBtn) + '</button></form></section>' +
       '<section class="section" aria-labelledby="cat-h"><div class="section-head"><h2 id="cat-h">' + esc(u.categories) + '</h2><p>' + esc(u.categoriesText) + '</p></div><div class="grid">' + cats + '</div></section>' +
-      '<section class="section" aria-labelledby="pop-h"><div class="section-head"><h2 id="pop-h">' + esc(u.popularTitle) + '</h2></div><ul class="list">' + popular + '</ul></section>' +
+      '<section class="section" aria-labelledby="pop-h"><div class="section-head"><h2 id="pop-h">' + esc(u.popularTitle) + '</h2></div><ul class="list cards">' + popular + '</ul></section>' +
       '</main>';
   }
 
