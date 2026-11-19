@@ -24,7 +24,7 @@
         },
         {
           "do": "wait",
-          "ms": 2200
+          "ms": 1210
         },
         {
           "do": "shot",
@@ -32,7 +32,8 @@
         },
         {
           "do": "wait",
-          "ms": 8280
+          "ms": 7161,
+          "pad": true
         }
       ]
     },
@@ -51,7 +52,7 @@
         },
         {
           "do": "wait",
-          "ms": 1600
+          "ms": 880
         },
         {
           "do": "shot",
@@ -59,7 +60,8 @@
         },
         {
           "do": "wait",
-          "ms": 5687
+          "ms": 5055,
+          "pad": true
         }
       ]
     },
@@ -82,7 +84,7 @@
         },
         {
           "do": "wait",
-          "ms": 900
+          "ms": 495
         },
         {
           "do": "shot",
@@ -90,7 +92,8 @@
         },
         {
           "do": "wait",
-          "ms": 4505
+          "ms": 3293,
+          "pad": true
         }
       ]
     },
@@ -107,15 +110,16 @@
           "do": "type",
           "selector": "internal:label=\"Título\"s",
           "text": "Laboratório: observar células de cebola",
-          "delay": 45
+          "delay": 31
         },
         {
           "do": "wait",
-          "ms": 500
+          "ms": 275
         },
         {
           "do": "wait",
-          "ms": 3570
+          "ms": 2820,
+          "pad": true
         }
       ]
     },
@@ -145,7 +149,7 @@
         },
         {
           "do": "wait",
-          "ms": 700
+          "ms": 385
         },
         {
           "do": "shot",
@@ -153,7 +157,8 @@
         },
         {
           "do": "wait",
-          "ms": 3685
+          "ms": 2368,
+          "pad": true
         }
       ]
     },
@@ -170,17 +175,17 @@
           "do": "type",
           "selector": "internal:label=\"Local (opcional)\"s",
           "text": "Laboratório 2",
-          "delay": 50
+          "delay": 35
         },
         {
           "do": "type",
           "selector": "textarea",
           "text": "Levar microscópio e amostra de cebola.",
-          "delay": 35
+          "delay": 25
         },
         {
           "do": "wait",
-          "ms": 600
+          "ms": 330
         },
         {
           "do": "shot",
@@ -188,7 +193,8 @@
         },
         {
           "do": "wait",
-          "ms": 808
+          "ms": 674,
+          "pad": true
         }
       ]
     },
@@ -207,7 +213,7 @@
         },
         {
           "do": "wait",
-          "ms": 1800
+          "ms": 990
         },
         {
           "do": "caption",
@@ -220,7 +226,8 @@
         },
         {
           "do": "wait",
-          "ms": 3578
+          "ms": 3368,
+          "pad": true
         }
       ]
     },
@@ -230,7 +237,8 @@
       "actions": [
         {
           "do": "wait",
-          "ms": 7566
+          "ms": 6798,
+          "pad": true
         }
       ]
     }

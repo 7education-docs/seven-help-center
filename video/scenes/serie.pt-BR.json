@@ -34,7 +34,7 @@
         },
         {
           "do": "wait",
-          "ms": 1800
+          "ms": 990
         },
         {
           "do": "shot",
@@ -42,7 +42,8 @@
         },
         {
           "do": "wait",
-          "ms": 7562
+          "ms": 6383,
+          "pad": true
         }
       ]
     },
@@ -65,7 +66,7 @@
         },
         {
           "do": "wait",
-          "ms": 800
+          "ms": 440
         },
         {
           "do": "shot",
@@ -73,7 +74,8 @@
         },
         {
           "do": "wait",
-          "ms": 1634
+          "ms": 1071,
+          "pad": true
         }
       ]
     },
@@ -90,15 +92,16 @@
           "do": "type",
           "selector": "input[placeholder^=\"e.g. Introduction\"]",
           "text": "A fotossíntese: da luz à matéria",
-          "delay": 45
+          "delay": 31
         },
         {
           "do": "wait",
-          "ms": 500
+          "ms": 275
         },
         {
           "do": "wait",
-          "ms": 2674
+          "ms": 2625,
+          "pad": true
         }
       ]
     },
@@ -115,23 +118,23 @@
           "do": "type",
           "selector": "input[placeholder=\"e.g. Mathematics\"]",
           "text": "Biologia",
-          "delay": 40
+          "delay": 28
         },
         {
           "do": "type",
           "selector": "input[placeholder=\"e.g. 10th Grade\"]",
           "text": "1.º ano",
-          "delay": 40
+          "delay": 28
         },
         {
           "do": "type",
           "selector": "textarea",
           "text": "Entender como as plantas transformam a luz em energia química.",
-          "delay": 22
+          "delay": 25
         },
         {
           "do": "wait",
-          "ms": 700
+          "ms": 385
         },
         {
           "do": "shot",
@@ -154,7 +157,7 @@
         },
         {
           "do": "wait",
-          "ms": 2200
+          "ms": 1210
         },
         {
           "do": "shot",
@@ -162,7 +165,8 @@
         },
         {
           "do": "wait",
-          "ms": 3962
+          "ms": 3644,
+          "pad": true
         }
       ]
     },
@@ -177,11 +181,12 @@
         },
         {
           "do": "wait",
-          "ms": 2000
+          "ms": 1100
         },
         {
           "do": "wait",
-          "ms": 3705
+          "ms": 3001,
+          "pad": true
         }
       ]
     }

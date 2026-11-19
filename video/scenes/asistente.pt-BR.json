@@ -36,7 +36,7 @@
         },
         {
           "do": "wait",
-          "ms": 1800
+          "ms": 990
         },
         {
           "do": "shot",
@@ -44,7 +44,8 @@
         },
         {
           "do": "wait",
-          "ms": 7701
+          "ms": 6582,
+          "pad": true
         }
       ]
     },
@@ -63,7 +64,7 @@
         },
         {
           "do": "wait",
-          "ms": 800
+          "ms": 440
         },
         {
           "do": "shot",
@@ -71,7 +72,8 @@
         },
         {
           "do": "wait",
-          "ms": 1316
+          "ms": 1089,
+          "pad": true
         }
       ]
     },
@@ -88,15 +90,16 @@
           "do": "type",
           "selector": "input:not([type=\"file\"]):not([type=\"hidden\"]) >> nth=0",
           "text": "Assistente de práticas de laboratório",
-          "delay": 40
+          "delay": 28
         },
         {
           "do": "wait",
-          "ms": 600
+          "ms": 330
         },
         {
           "do": "wait",
-          "ms": 2414
+          "ms": 2598,
+          "pad": true
         }
       ]
     },
@@ -115,7 +118,7 @@
         },
         {
           "do": "wait",
-          "ms": 900
+          "ms": 495
         },
         {
           "do": "click",
@@ -123,7 +126,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 660
         },
         {
           "do": "shot",
@@ -131,7 +134,8 @@
         },
         {
           "do": "wait",
-          "ms": 3835
+          "ms": 2913,
+          "pad": true
         }
       ]
     },
@@ -148,11 +152,11 @@
           "do": "type",
           "selector": "textarea[placeholder^=\"Você é\"]",
           "text": "Dê pistas e faça perguntas aos alunos, mas não dê soluções completas.",
-          "delay": 22
+          "delay": 25
         },
         {
           "do": "wait",
-          "ms": 700
+          "ms": 385
         },
         {
           "do": "shot",
@@ -160,7 +164,8 @@
         },
         {
           "do": "wait",
-          "ms": 4792
+          "ms": 3951,
+          "pad": true
         }
       ]
     },
@@ -179,7 +184,7 @@
         },
         {
           "do": "wait",
-          "ms": 2200
+          "ms": 1210
         },
         {
           "do": "shot",
@@ -187,7 +192,8 @@
         },
         {
           "do": "wait",
-          "ms": 2510
+          "ms": 2883,
+          "pad": true
         }
       ]
     },
@@ -216,11 +222,11 @@
           "do": "type",
           "selector": "div[contenteditable=\"true\"]",
           "text": "Como calculo o tamanho de uma célula de cebola com o microscópio?",
-          "delay": 30
+          "delay": 25
         },
         {
           "do": "wait",
-          "ms": 700
+          "ms": 385
         },
         {
           "do": "click",
@@ -234,7 +240,8 @@
           "do": "shot",
           "name": "asistente-6-prueba"
         }
-      ]
+      ],
+      "speed": 4.0
     },
     {
       "id": "final",
@@ -247,11 +254,12 @@
         },
         {
           "do": "wait",
-          "ms": 2000
+          "ms": 1100
         },
         {
           "do": "wait",
-          "ms": 3007
+          "ms": 2765,
+          "pad": true
         }
       ]
     }

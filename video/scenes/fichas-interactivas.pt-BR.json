@@ -20,15 +20,11 @@
         {
           "do": "highlight",
           "selector": "text=Configuração, fontes e análise em três passos",
-          "ms": 1800
+          "ms": 1080
         },
         {
           "do": "wait",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 9809
+          "ms": 825
         }
       ]
     },
@@ -40,19 +36,19 @@
           "do": "type",
           "selector": "input[placeholder^=\"p. ex. Adição\"]",
           "text": "Microscópio óptico: partes e uso",
-          "delay": 30
+          "delay": 25
         },
         {
           "do": "type",
           "selector": "input[placeholder=\"p. ex. Matemática\"]",
           "text": "Biologia e Geologia",
-          "delay": 30
+          "delay": 25
         },
         {
           "do": "type",
           "selector": "input[placeholder=\"p. ex. 6.º ano\"]",
           "text": "7.º ano",
-          "delay": 40
+          "delay": 28
         },
         {
           "do": "select",
@@ -61,11 +57,7 @@
         },
         {
           "do": "wait",
-          "ms": 800
-        },
-        {
-          "do": "wait",
-          "ms": 4436
+          "ms": 440
         }
       ]
     },
@@ -79,11 +71,7 @@
         },
         {
           "do": "wait",
-          "ms": 900
-        },
-        {
-          "do": "wait",
-          "ms": 10686
+          "ms": 495
         }
       ]
     },
@@ -102,7 +90,7 @@
         },
         {
           "do": "wait",
-          "ms": 700
+          "ms": 385
         },
         {
           "do": "click",
@@ -114,7 +102,7 @@
         },
         {
           "do": "wait",
-          "ms": 500
+          "ms": 275
         },
         {
           "do": "click",
@@ -122,7 +110,7 @@
         },
         {
           "do": "wait",
-          "ms": 500
+          "ms": 275
         },
         {
           "do": "click",
@@ -130,11 +118,7 @@
         },
         {
           "do": "wait",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 2731
+          "ms": 825
         }
       ]
     },
@@ -158,22 +142,23 @@
         {
           "do": "highlight",
           "selector": "text=Qualidade das fontes",
-          "ms": 1700
+          "ms": 1020
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 660
         },
         {
           "do": "highlight",
           "selector": "text=Estrutura planeada",
-          "ms": 1700
+          "ms": 1020
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 825
         }
-      ]
+      ],
+      "speed": 7.5
     },
     {
       "id": "ajuste",
@@ -182,15 +167,11 @@
         {
           "do": "highlight",
           "selector": "text=Estrutura planeada",
-          "ms": 1500
+          "ms": 900
         },
         {
           "do": "wait",
-          "ms": 2000
-        },
-        {
-          "do": "wait",
-          "ms": 7116
+          "ms": 1100
         }
       ]
     },
@@ -213,9 +194,10 @@
         },
         {
           "do": "wait",
-          "ms": 2000
+          "ms": 1100
         }
-      ]
+      ],
+      "speed": 8.0
     },
     {
       "id": "resultado",
@@ -224,11 +206,11 @@
         {
           "do": "highlight",
           "selector": "text=Bloco >> nth=0",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 1400
+          "ms": 770
         },
         {
           "do": "scroll",
@@ -237,15 +219,11 @@
         {
           "do": "highlight",
           "selector": "text=Bloco >> nth=2",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 2400
-        },
-        {
-          "do": "wait",
-          "ms": 6094
+          "ms": 1320
         }
       ]
     },
@@ -256,15 +234,11 @@
         {
           "do": "highlight",
           "selector": "text=Biologia e Geologia",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 6450
+          "ms": 825
         }
       ]
     }

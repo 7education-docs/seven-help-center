@@ -20,15 +20,16 @@
         {
           "do": "highlight",
           "selector": "text=Observe células de cebola ao microscópio",
-          "ms": 1800
+          "ms": 1080
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 825
         },
         {
           "do": "wait",
-          "ms": 7437
+          "ms": 7261,
+          "pad": true
         }
       ]
     },
@@ -46,20 +47,21 @@
         },
         {
           "do": "wait",
-          "ms": 900
+          "ms": 495
         },
         {
           "do": "highlight",
           "selector": "text=Critérios de avaliação",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 900
+          "ms": 495
         },
         {
           "do": "wait",
-          "ms": 1920
+          "ms": 2363,
+          "pad": true
         }
       ]
     },
@@ -70,24 +72,25 @@
         {
           "do": "highlight",
           "selector": "text=Descreva a forma e a ordem das células",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 1100
+          "ms": 605
         },
         {
           "do": "highlight",
           "selector": "text=Explique para que serve o microscópio",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 1100
+          "ms": 605
         },
         {
           "do": "wait",
-          "ms": 4942
+          "ms": 5119,
+          "pad": true
         }
       ]
     },
@@ -98,15 +101,16 @@
         {
           "do": "highlight",
           "selector": "text=Access links",
-          "ms": 1800
+          "ms": 1080
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 825
         },
         {
           "do": "wait",
-          "ms": 5479
+          "ms": 5065,
+          "pad": true
         }
       ]
     }

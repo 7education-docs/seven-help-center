@@ -20,15 +20,16 @@
         {
           "do": "highlight",
           "selector": "button:text-is(\"Conteúdo\")",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 2200
+          "ms": 1210
         },
         {
           "do": "wait",
-          "ms": 5446
+          "ms": 6590,
+          "pad": true
         }
       ]
     },
@@ -42,25 +43,26 @@
         },
         {
           "do": "wait",
-          "ms": 700
+          "ms": 385
         },
         {
           "do": "highlight",
           "selector": "[role=menuitem]:has-text(\"Enviar arquivos\")",
-          "ms": 1500
+          "ms": 900
         },
         {
           "do": "highlight",
           "selector": "[role=menuitem]:has-text(\"Adicionar página web\")",
-          "ms": 1800
+          "ms": 1080
         },
         {
           "do": "wait",
-          "ms": 600
+          "ms": 330
         },
         {
           "do": "wait",
-          "ms": 1383
+          "ms": 2862,
+          "pad": true
         }
       ]
     },
@@ -78,17 +80,17 @@
         },
         {
           "do": "wait",
-          "ms": 400
+          "ms": 250
         },
         {
           "do": "type",
           "selector": "input[type=url]",
           "text": "https://pt.wikipedia.org/wiki/Microscópio_óptico",
-          "delay": 45
+          "delay": 31
         },
         {
           "do": "wait",
-          "ms": 700
+          "ms": 385
         },
         {
           "do": "click",
@@ -96,11 +98,12 @@
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 825
         },
         {
           "do": "wait",
-          "ms": 1067
+          "ms": 1738,
+          "pad": true
         }
       ]
     },
@@ -110,7 +113,7 @@
       "actions": [
         {
           "do": "wait",
-          "ms": 2500
+          "ms": 1375
         },
         {
           "do": "waitGone",
@@ -119,9 +122,10 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 660
         }
-      ]
+      ],
+      "speed": 1.5
     },
     {
       "id": "listo",
@@ -130,15 +134,16 @@
         {
           "do": "highlight",
           "selector": "text=Microscópio óptico – Wikipédia",
-          "ms": 2000
+          "ms": 1200
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 825
         },
         {
           "do": "wait",
-          "ms": 3542
+          "ms": 3549,
+          "pad": true
         }
       ]
     },
@@ -152,11 +157,11 @@
         },
         {
           "do": "wait",
-          "ms": 3000
+          "ms": 1650
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 660
         },
         {
           "do": "press",
@@ -164,11 +169,12 @@
         },
         {
           "do": "wait",
-          "ms": 600
+          "ms": 330
         },
         {
           "do": "wait",
-          "ms": 1727
+          "ms": 3028,
+          "pad": true
         }
       ]
     },
@@ -184,15 +190,16 @@
           "do": "type",
           "selector": "input[placeholder=\"Pesquisar documentos…\"]",
           "text": "Microscópio",
-          "delay": 90
+          "delay": 63
         },
         {
           "do": "wait",
-          "ms": 2200
+          "ms": 1210
         },
         {
           "do": "wait",
-          "ms": 1291
+          "ms": 1425,
+          "pad": true
         }
       ]
     }

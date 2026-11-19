@@ -16,7 +16,8 @@ import sys
 import urllib.request
 
 MODELS = pathlib.Path(__file__).resolve().parents[1] / "models"
-SPEED = 0.90  # ritmo pausado y cálido para tono de vídeo comercial
+SPEED = 0.90      # Kokoro (español)
+SPEED_PT = 1.08   # ElevenLabs (portugués): ritmo ágil, sin pausas muertas
 
 ELEVEN_VOICE_PT = os.environ.get("ELEVEN_VOICE_PT", "0t7A9YvHlaUjp3Mon3X1")  # Mariana M (pt-BR)
 ELEVEN_MODEL = "eleven_multilingual_v2"
@@ -36,7 +37,7 @@ def eleven_speech(text: str, mp3_path: pathlib.Path) -> None:
         "text": text,
         "model_id": ELEVEN_MODEL,
         "voice_settings": {"stability": 0.55, "similarity_boost": 0.75, "style": 0.0,
-                           "use_speaker_boost": True, "speed": SPEED},
+                           "use_speaker_boost": True, "speed": SPEED_PT},
     }).encode("utf-8")
     req = urllib.request.Request(
         ELEVEN_URL.format(voice=ELEVEN_VOICE_PT), data=body, method="POST",
@@ -58,7 +59,7 @@ def narrate_pt(timeline: dict, out: pathlib.Path) -> dict:
         scenes.append({"id": sc["id"], "wav": str(wav), "duration": dur})
         print(f"  narración {sc['id']}: {dur:.1f} s (ElevenLabs {ELEVEN_VOICE_PT})")
     return {"provider": "elevenlabs", "voice_id": ELEVEN_VOICE_PT, "model": ELEVEN_MODEL,
-            "lang": "pt-BR", "speed": SPEED, "scenes": scenes}
+            "lang": "pt-BR", "speed": SPEED_PT, "scenes": scenes}
 
 
 def narrate_es(timeline: dict, out: pathlib.Path) -> dict:

@@ -153,7 +153,7 @@ try {
       await page.screenshot({ path: path.join(workDir, `error-${sc.id}.png`) }).catch(() => {});
       throw err;
     }
-    timeline.scenes.push({ id: sc.id, say: sc.say, startMs, endMs: rel() });
+    timeline.scenes.push({ id: sc.id, say: sc.say, startMs, endMs: rel(), speed: sc.speed ?? 1 });
     console.log(`  escena ${sc.id}: ${((rel() - startMs) / 1000).toFixed(1)} s`);
   }
   await ctx.close();

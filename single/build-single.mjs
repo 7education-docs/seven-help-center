@@ -336,6 +336,8 @@ Object.assign(UI.es, { topics: 'Temas', exploreTopics: 'Explorar temas', quickLa
 Object.assign(UI['pt-BR'], { topics: 'Temas', exploreTopics: 'Explorar temas', quickLabel: 'Acessos rápidos', quick: [{ l: 'Criar um curso', id: 'crear-curso' }, { l: 'Convidar os alunos', id: 'invitar-alumnado' }, { l: 'Enviar um documento', id: 'subir-documento' }, { l: 'Não consigo acessar', id: 'no-puedo-acceder' }] });
 Object.assign(UI.es, { video: 'Vídeo tutorial', videoHint: 'Activa los subtítulos con el botón CC del reproductor.' });
 Object.assign(UI['pt-BR'], { video: 'Vídeo tutorial', videoHint: 'Ative as legendas pelo botão CC do player.', vpControls: 'Controles do vídeo', vpCC: 'CC Legendas', vpSpeed: 'Velocidade', vpFallback: 'Não foi possível carregar o vídeo.', vpOpen: 'Abrir o vídeo' });
+Object.assign(UI.es, { footHelp: 'Centro de ayuda', footProduct: 'Seven Assistant', footProductLink: 'Funcionalidades de Seven Assistant', footCompany: 'Seven Education', footCopy: 'Copyright © Seven Education 2026' });
+Object.assign(UI['pt-BR'], { footHelp: 'Central de ajuda', footProduct: 'Seven Assistant', footProductLink: 'Recursos do Seven Assistant', footCompany: 'Seven Education', footCopy: 'Copyright © Seven Education 2026' });
 Object.assign(UI.es, { vpControls: 'Controles del vídeo', vpCC: 'CC Subtítulos', vpSpeed: 'Velocidad', vpFallback: 'No se pudo cargar el vídeo.', vpOpen: 'Abrir el vídeo' });
 const durText = (sec) => (sec >= 60 ? Math.floor(sec / 60) + ' min ' + (sec % 60) + ' s' : sec + ' s');
 async function videosFor(loc, src) {
@@ -383,7 +385,7 @@ const tpl = await readFile(path.join(ROOT, 'single', 'template.html'), 'utf8');
 if (!tpl.includes('/*__DATA__*/null')) throw new Error('plantilla sin marcador de datos');
 const LOGO = 'data:image/png;base64,' + (await readFile(path.join(ROOT, 'single', 'logo-seven-education.png'))).toString('base64');
 const LOGO_ASSISTANT = 'data:image/png;base64,' + (await readFile(path.join(ROOT, 'single', 'logo-seven-assistant.png'))).toString('base64');
-const out = tpl.replace('/*__DATA__*/null', json).replace('__LOGO_ASSISTANT__', LOGO_ASSISTANT).replace('__LOGO__', LOGO);
+const out = tpl.replace('/*__DATA__*/null', json).replace('__LOGO_ASSISTANT__', LOGO_ASSISTANT).split('__LOGO__').join(LOGO);
 const outFile = PUBLIC_SITE ? path.join(ROOT, 'site', 'index.html') : path.join(ROOT, 'single', 'centro-ayuda.html');
 await (await import('node:fs/promises')).mkdir(path.dirname(outFile), { recursive: true });
 await writeFile(outFile, out, 'utf8');

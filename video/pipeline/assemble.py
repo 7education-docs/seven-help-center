@@ -13,7 +13,7 @@ import sys
 import textwrap
 
 FPS = 30
-PAD = 0.6          # silencio tras cada narración
+PAD = 0.25          # silencio tras cada narración
 LEAD = 0.15        # el subtítulo aparece justo antes de que empiece la voz
 MIN_CUE = 1.6      # duración mínima de un subtítulo (lectura cómoda)
 MAX_CHARS = 42
@@ -87,11 +87,12 @@ def main(timeline_path, narration_path, recording, out_mp4, out_vtt):
         assert sc["id"] == nar["id"], "escenas desalineadas entre guion y narración"
         s = min(sc["startMs"] / 1000, rec_dur - 0.1)
         e = min(max(sc["endMs"] / 1000, s + 0.2), rec_dur - 0.05)
-        vdur = e - s
+        speed = float(sc.get("speed", 1) or 1)   # >1: timelapse (p. ej. generación de la IA)
+        vdur = (e - s) / speed
         T = max(vdur, nar["duration"] + PAD)          # duración final de la escena
         extra = max(0.0, T - vdur)                   # se mantiene el último fotograma
         seg = seg_dir / f"seg-{i:02d}.mp4"
-        vf = (f"[0:v]trim=start={s:.3f}:end={e:.3f},setpts=PTS-STARTPTS,fps={FPS},"
+        vf = (f"[0:v]trim=start={s:.3f}:end={e:.3f},setpts=(PTS-STARTPTS)/{speed},fps={FPS},"
               f"scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,"
               f"tpad=stop_mode=clone:stop_duration={extra:.3f}[v]")
         af = f"[1:a]equalizer=f=180:t=h:w=160:g=2.5,equalizer=f=3200:t=q:w=1.2:g=-2,acompressor=threshold=-20dB:ratio=2.2:attack=15:release=180,apad=whole_dur={T:.3f},atrim=0:{T:.3f},aresample=48000[a]"

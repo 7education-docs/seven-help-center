@@ -26,7 +26,7 @@ from narrate import eleven_speech, probe_duration  # noqa: E402  (mismo narrador
 ROOT = HERE.parents[1]
 TEXTS = json.loads((HERE / "intro-texts.json").read_text(encoding="utf-8"))
 BRAND = {"pt": "Seven Assistant", "es": "Seven Assistant"}
-MIN_INTRO = 4.0
+MIN_INTRO = 2.5
 TIME_RE = re.compile(r"(\d{2}):(\d{2}):(\d{2})\.(\d{3})\s*-->\s*(\d{2}):(\d{2}):(\d{2})\.(\d{3})")
 FPS = 30
 
@@ -87,7 +87,7 @@ def process(file: str, lang: str, dir_key: str) -> None:
         if not wav.exists():  # la narración de la portada no cambia: se reutiliza si ya existe
             eleven_speech(narr_text, mp3)
             run(["ffmpeg", "-y", "-v", "error", "-i", str(mp3), "-ac", "1", "-ar", "48000", str(wav)])
-        intro_dur = round(max(MIN_INTRO, probe_duration(wav) + 1.0), 3)
+        intro_dur = round(max(MIN_INTRO, probe_duration(wav) + 0.5), 3)
         audio_in = ["-i", str(wav)]
         audio_chain = f"[1:a]atrim=0:{intro_dur},apad=whole_dur={intro_dur},aformat=sample_rates=48000:channel_layouts=mono[a0];"
     else:

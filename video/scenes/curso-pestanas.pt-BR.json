@@ -25,15 +25,16 @@
         {
           "do": "highlight",
           "selector": "button:has-text(\"Vista geral\")",
-          "ms": 1600
+          "ms": 960
         },
         {
           "do": "wait",
-          "ms": 3200
+          "ms": 1760
         },
         {
           "do": "wait",
-          "ms": 3571
+          "ms": 4081,
+          "pad": true
         }
       ]
     },
@@ -52,7 +53,7 @@
         },
         {
           "do": "wait",
-          "ms": 3600
+          "ms": 1980
         },
         {
           "do": "press",
@@ -60,11 +61,12 @@
         },
         {
           "do": "wait",
-          "ms": 400
+          "ms": 250
         },
         {
           "do": "wait",
-          "ms": 6918
+          "ms": 6616,
+          "pad": true
         }
       ]
     },
@@ -83,16 +85,16 @@
         },
         {
           "do": "wait",
-          "ms": 1400
+          "ms": 770
         },
         {
           "do": "highlight",
           "selector": "button:has-text(\"Criar compromisso\")",
-          "ms": 1800
+          "ms": 1080
         },
         {
           "do": "wait",
-          "ms": 1000
+          "ms": 550
         },
         {
           "do": "shot",
@@ -100,7 +102,8 @@
         },
         {
           "do": "wait",
-          "ms": 4563
+          "ms": 3997,
+          "pad": true
         }
       ]
     },
@@ -119,11 +122,12 @@
         },
         {
           "do": "wait",
-          "ms": 3000
+          "ms": 1650
         },
         {
           "do": "wait",
-          "ms": 2740
+          "ms": 2910,
+          "pad": true
         }
       ]
     },
@@ -142,7 +146,7 @@
         },
         {
           "do": "wait",
-          "ms": 3200
+          "ms": 1760
         },
         {
           "do": "shot",
@@ -150,7 +154,8 @@
         },
         {
           "do": "wait",
-          "ms": 4138
+          "ms": 4167,
+          "pad": true
         }
       ]
     }
