@@ -71,7 +71,7 @@ BED = ROOT / "video" / "work" / "music" / "bed-raw.mp3"   # música generada (El
 FADE_V, FADE_A = 2.5, 2.5
 
 
-HOLD_END = 2.0   # segundos finales con negro, logotipo y música
+HOLD_END = 1.0   # segundo final con negro, logotipo y música
 LOGO_WHITE = ROOT / "video" / "work" / "brand" / "logo-white.png"   # logotipo en blanco para el final en negro
 
 
@@ -95,11 +95,11 @@ def add_bed(src: pathlib.Path, dst: pathlib.Path, intro_dur: float) -> None:
     tr = se + 0.3                                 # pequeño respiro tras la última palabra
     tr_end = tr + FADE_V                          # fin del fundido a negro
     total = tr_end + HOLD_END
-    logo_t = max(0.0, tr_end - 0.6)
+    logo_t = tr + 0.2                             # el logotipo entra durante el fundido a negro
     vol = (f"if(lt(t,1),0.12,if(lt(t,3),0.12-0.108*(t-1)/2,if(lt(t,{tr:.3f}),0.012,"
            f"if(lt(t,{tr_end - 0.5:.3f}),0.012+0.688*(t-{tr:.3f})/{FADE_V - 0.5:.3f},0.7))))")
     filt = (f"[0:v]fade=t=out:st={tr:.3f}:d={FADE_V},tpad=stop_mode=add:stop_duration=10:color=black[vf];"
-            f"[2:v]format=rgba,scale=380:-1,fade=t=in:st={logo_t:.3f}:d=1.2:alpha=1[lg];"
+            f"[2:v]format=rgba,scale=380:-1,fade=t=in:st={logo_t:.3f}:d={FADE_V - 0.7:.3f}:alpha=1[lg];"
             "[vf][lg]overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2[v];"
             "[0:a]apad=pad_dur=10[na];"
             f"[1:a]volume='{vol}':eval=frame[mus];"
