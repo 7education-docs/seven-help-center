@@ -246,7 +246,7 @@ a.cat:hover{transform:translateY(-3px);border-color:#1c1c1c}
 .vcard h3{font-size:17px;margin:0 0 4px;letter-spacing:-.01em}
 .vcard small{color:var(--muted);font-size:13px}
 .section-head h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.03em;font-weight:800}
-</style>
+.faq-list{margin-top:1rem}.faq{border-top:1px solid var(--line);padding:4px 0}.faq:last-child{border-bottom:1px solid var(--line)}.faq summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.08rem;padding:14px 28px 14px 0;list-style:none;position:relative}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:'+';position:absolute;right:4px;top:10px;font-size:1.4rem;color:var(--primary)}.faq[open] summary::after{content:'–'}.faq-body{padding:0 0 18px}.faq-steps,.faq-tips{padding-left:22px;margin:.6em 0}.faq-steps li,.faq-tips li{margin:.35em 0}.faq figure{margin-top:12px}</style>
 <div id="app"></div>
 <script>
 const DATA = /*__DATA__*/null;
@@ -279,7 +279,7 @@ const DATA = /*__DATA__*/null;
     const u = U(loc);
     const langs = ['es', 'pt-BR'].map((l) => '<a href="' + href(l, rest) + '" lang="' + (l === 'es' ? 'es' : 'pt-BR') + '" aria-current="' + (l === loc) + '">' + (l === 'es' ? 'Español' : 'Português') + '</a>').join('');
     return '<header class="top"><div class="wrap"><div class="top-row">' +
-      '<a class="brand" href="' + href(loc, 'home') + '"><img class="brand-logo" src="__LOGO__" alt="Seven Education" height="34"></a><span class="product-tag">Seven Assistant</span>' +
+      '<a class="brand" href="' + href(loc, 'home') + '"><img class="brand-logo" src="__LOGO_ASSISTANT__" alt="Seven Assistant" height="40"></a>' +
       '<a class="docs-back" href="../">' + (loc === 'pt-BR' ? 'Todos os centros de ajuda' : 'Todos los centros de ayuda') + '</a><div class="tools">' + (rest === 'home' ? '' : '<form class="search" role="search" data-search-form><label class="sr" for="q-top">' + esc(u.search) + '</label><input id="q-top" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn small" type="submit">' + esc(u.searchBtn) + '</button></form>') +
       '<div class="lang" role="group" aria-label="' + esc(u.language) + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>' + langs + '</div></div></div>' +
       '</div></header>';
@@ -310,8 +310,23 @@ const DATA = /*__DATA__*/null;
       '</main>';
   }
 
+  /* ---------- Preguntas frecuentes ---------- */
+  function faqView(loc) {
+    const c = category(loc, 'faq'); const u = U(loc), d = D(loc);
+    const items = inCat(loc, 'faq').map((a) => {
+      const figs = (a.img || []).filter((n) => d.shots[n]).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '" loading="lazy"></figure>').join('');
+      return '<details class="faq" id="q-' + esc(a.id) + '"><summary>' + esc(a.title) + '</summary><div class="faq-body"><p>' + esc(a.answer) + '</p>' +
+        (a.steps && a.steps.length ? '<ol class="faq-steps">' + a.steps.map((st) => '<li><strong>' + esc(st.t) + '</strong> ' + esc(st.b) + '</li>').join('') + '</ol>' : '') +
+        (a.tips && a.tips.length ? '<ul class="faq-tips">' + a.tips.map((tp) => '<li>' + esc(tp) + '</li>').join('') + '</ul>' : '') + figs + '</div></details>';
+    }).join('');
+    return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name }]) +
+      '<section class="article-head"><h1>' + esc(c.name) + '</h1><p class="lead">' + esc(c.desc) + '</p></section>' +
+      '<section class="block faq-list">' + items + '</section></main>';
+  }
+
   /* ---------- Categoría ---------- */
   function categoryView(loc, id) {
+    if (id === 'faq') return faqView(loc);
     const c = category(loc, id); if (!c) return notFound(loc);
     const u = U(loc);
     const item = (a) => '<li><a href="' + href(loc, 'art-' + a.id) + '"><strong>' + esc(a.title) + '</strong><small>' + esc(a.answer) + '</small></a></li>';
@@ -328,6 +343,7 @@ const DATA = /*__DATA__*/null;
     const u = U(loc), c = category(loc, a.cat), d = D(loc);
     const inStep = Object.values(a.stepImg || {}); const figs = (a.img || []).filter((n) => d.shots[n] && inStep.indexOf(n) < 0).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '"><figcaption>' + esc(d.alt[n] || '') + '</figcaption></figure>').join('');
     const related = (a.related || []).map((r) => article(loc, r)).filter(Boolean).map((r) => '<li><a href="' + href(loc, 'art-' + r.id) + '">' + esc(r.title) + '</a></li>').join('');
+    const faqRel = (a.faqRelated || []).map((id) => article(loc, id)).filter(Boolean).map((f) => '<li><a href="' + href(loc, 'cat-faq~q-' + f.id) + '">' + esc(f.title) + '</a></li>').join('');
     return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name, href: href(loc, 'cat-' + c.id) }, { label: a.title }]) +
       '<article class="article-head"><h1>' + esc(a.title) + '</h1>' +
       '<div class="answer"><b>' + esc(u.inSummary) + '</b><p>' + esc(a.answer) + '</p></div>' +
@@ -337,6 +353,7 @@ const DATA = /*__DATA__*/null;
       (figs ? '<div class="block">' + figs + '</div>' : '') +
       (d.videos && d.videos[a.id] && d.videos[a.id].after ? videoBlock(d, a.id, u) : '') +
       (a.tips && a.tips.length ? '<aside class="tips" aria-label="' + esc(u.tips) + '"><strong>' + esc(u.tips) + '</strong><ul>' + a.tips.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul></aside>' : '') +
+      (faqRel ? '<section class="related"><h2>' + esc(u.faqRelated) + '</h2><ul class="list">' + faqRel + '</ul></section>' : '') +
       (related ? '<section class="related"><h2>' + esc(u.related) + '</h2><ul class="list">' + related + '</ul></section>' : '') +
       '<p class="pager"><a class="btn" href="' + href(loc, 'cat-' + c.id) + '">' + esc(u.backTo) + ' ' + esc(c.name) + '</a></p>' +
       '</article></main>';
@@ -386,7 +403,7 @@ const DATA = /*__DATA__*/null;
   function route(loc, rest) {
     if (rest === 'home') return home(loc);
     if (rest.indexOf('cat-') === 0) return categoryView(loc, rest.slice(4).split('~')[0]);
-    if (rest.indexOf('art-') === 0) return articleView(loc, rest.slice(4));
+    if (rest.indexOf('art-') === 0) { const aid = rest.slice(4); const al = (D(loc).aliases || {})[aid]; return articleView(loc, article(loc, aid) ? aid : (al || aid)); }
     if (rest === 'search') return search(loc);
     return notFound(loc);
   }
@@ -461,8 +478,9 @@ const DATA = /*__DATA__*/null;
     const live = document.getElementById('route-live'); if (live) live.textContent = title;
     const main = app.querySelector('main'); if (main) main.focus({ preventScroll: true });
     if (gm) { const gel = document.getElementById('g' + gm[1]); if (gel) gel.scrollIntoView({ block: 'start' }); }
+    const qm = p.rest.match(/~q-(.+)$/); if (qm) { const qel = document.getElementById('q-' + qm[1]); if (qel) { qel.open = true; qel.scrollIntoView({ block: 'start' }); } }
   }
-  window.addEventListener('hashchange', () => { render(); if (!/~g\d+$/.test(location.hash)) window.scrollTo(0, 0); });
+  window.addEventListener('hashchange', () => { render(); if (!/~(g\d+|q-.+)$/.test(location.hash)) window.scrollTo(0, 0); });
   document.addEventListener('submit', (e) => {
     const f = e.target;
     if (!f.matches || !f.matches('[data-search-form]')) return;

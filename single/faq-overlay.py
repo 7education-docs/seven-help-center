@@ -40,7 +40,8 @@ def apply_faq_overlay(merged: dict) -> None:
                 offset = len(qa.get('steps') or [])
                 qa['steps'] = (qa.get('steps') or []) + (bl.get('steps') or [])
                 qa['tips'] = (qa.get('tips') or []) + (bl.get('tips') or [])
-                qa['img'] = list(bl.get('img') or [])       # sustituye la captura genérica de inicio
+                # nombres base de las capturas (sin la clave del artículo): la fusión las numera para el nuevo artículo
+                qa['img'] = [n.split('__')[-1] for n in (bl.get('img') or [])]
                 qa['stepOffset'] = offset                   # numeración de la barra lateral en el nuevo artículo
                 qa['title'] = TITLES[loc]
                 rel = (qa.get('related') or []) + (bl.get('related') or [])
@@ -57,7 +58,8 @@ def apply_faq_overlay(merged: dict) -> None:
         # 3) enlaces desde cada artículo a sus FAQ relacionadas
         for a in d['articles']:
             rel = a.get('related') or []
-            faq_rel = [r for r in rel if r in FAQ_IDS] + [r for r in FAQ_LINKS.get(a['id'], []) if r in arts]
+            # idempotente: se conservan las FAQ ya enlazadas y se añaden las de la tabla
+            faq_rel = (a.get('faqRelated') or []) + [r for r in rel if r in FAQ_IDS] + [r for r in FAQ_LINKS.get(a['id'], []) if r in arts]
             a['related'] = [r for r in rel if r not in FAQ_IDS]
             a['faqRelated'] = list(dict.fromkeys(faq_rel))
             if not a['faqRelated']:

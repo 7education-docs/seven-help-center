@@ -338,6 +338,8 @@ Object.assign(UI.es, { video: 'Vídeo tutorial', videoHint: 'Activa los subtítu
 Object.assign(UI['pt-BR'], { featuredVideos: 'Vídeos tutoriais', video: 'Vídeo tutorial', videoHint: 'Ative as legendas pelo botão CC do player.', vpControls: 'Controles do vídeo', vpCC: 'CC Legendas', vpSpeed: 'Velocidade', vpFallback: 'Não foi possível carregar o vídeo.', vpOpen: 'Abrir o vídeo' });
 Object.assign(UI.es, { footHelp: 'Centro de ayuda', footProduct: 'Seven Assistant', footProductLink: 'Funcionalidades de Seven Assistant', footCompany: 'Seven Education', footCopy: 'Copyright © Seven Education 2026' });
 Object.assign(UI['pt-BR'], { footHelp: 'Central de ajuda', footProduct: 'Seven Assistant', footProductLink: 'Recursos do Seven Assistant', footCompany: 'Seven Education', footCopy: 'Copyright © Seven Education 2026' });
+Object.assign(UI.es, { faqRelated: 'Preguntas frecuentes relacionadas' });
+Object.assign(UI['pt-BR'], { faqRelated: 'Perguntas frequentes relacionadas' });
 Object.assign(UI.es, { featuredVideos: 'Vídeos tutoriales', vpControls: 'Controles del vídeo', vpCC: 'CC Subtítulos', vpSpeed: 'Velocidad', vpFallback: 'No se pudo cargar el vídeo.', vpOpen: 'Abrir el vídeo' });
 const durText = (sec) => (sec >= 60 ? Math.floor(sec / 60) + ' min ' + (sec % 60) + ' s' : sec + ' s');
 async function videosFor(loc, src) {

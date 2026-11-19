@@ -35,6 +35,10 @@ def main() -> None:
     for loc in ('es', 'pt-BR'):
         merged[loc]['ui'] = bdata[loc]['ui']
         merged[loc]['videos'] = bdata[loc]['videos']
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('faq_overlay', str(pathlib.Path(__file__).resolve().parent / 'faq-overlay.py'))
+    faq = importlib.util.module_from_spec(spec); spec.loader.exec_module(faq)
+    faq.apply_faq_overlay(merged)
     apply_numbered(merged)
     ser = json.dumps(merged, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     open(out_path, 'w', encoding='utf-8').write(built[:bs] + ser + built[be:])
