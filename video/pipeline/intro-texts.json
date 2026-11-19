@@ -1,0 +1,18 @@
+{
+  "cita":                { "pt": { "title": "Criar um compromisso",             "subtitle": "Compromissos do curso" },
+                           "es": { "title": "Crear una cita",                    "subtitle": "Citas del curso" } },
+  "C-1":                 { "pt": { "title": "Abas de um curso",                  "subtitle": "Cursos" },
+                           "es": { "title": "Pestañas de un curso",              "subtitle": "Cursos" } },
+  "serie":               { "pt": { "title": "Criar uma série de aulas",          "subtitle": "Séries de aulas" },
+                           "es": { "title": "Crear una serie de lecciones",      "subtitle": "Series de lecciones" } },
+  "tarea":               { "pt": { "title": "Criar uma tarefa de correção",      "subtitle": "Tarefas de correção e feedback" },
+                           "es": { "title": "Crear una tarea de corrección",     "subtitle": "Tareas de corrección y feedback" } },
+  "asistente":           { "pt": { "title": "Criar um assistente",               "subtitle": "Modelos e assistentes" },
+                           "es": { "title": "Crear un asistente",                "subtitle": "Plantillas y asistentes" } },
+  "documentos":          { "pt": { "title": "Documentos",                        "subtitle": "Biblioteca de documentos" },
+                           "es": { "title": "Documentos",                        "subtitle": "Biblioteca de documentos" } },
+  "fichas-interactivas": { "pt": { "title": "Criar uma ficha interativa",        "subtitle": "Fichas interativas" },
+                           "es": { "title": "Crear una ficha interactiva",       "subtitle": "Fichas interactivas" } },
+  "ver-alumno":          { "pt": { "title": "O que o aluno vê no meu curso",     "subtitle": "Vista do aluno" },
+                           "es": { "title": "Qué ve el alumnado en mi curso",    "subtitle": "Vista de alumno" } }
+}

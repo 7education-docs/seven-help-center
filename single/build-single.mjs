@@ -335,7 +335,8 @@ Object.assign(UI['pt-BR'], {"kicker": "", "heroTitle": "Central de ajuda", "hero
 Object.assign(UI.es, { topics: 'Temas', exploreTopics: 'Explorar temas', quickLabel: 'Accesos rápidos', quick: [{ l: 'Crear un curso', id: 'crear-curso' }, { l: 'Invitar al alumnado', id: 'invitar-alumnado' }, { l: 'Subir un documento', id: 'subir-documento' }, { l: 'No puedo acceder', id: 'no-puedo-acceder' }] });
 Object.assign(UI['pt-BR'], { topics: 'Temas', exploreTopics: 'Explorar temas', quickLabel: 'Acessos rápidos', quick: [{ l: 'Criar um curso', id: 'crear-curso' }, { l: 'Convidar os alunos', id: 'invitar-alumnado' }, { l: 'Enviar um documento', id: 'subir-documento' }, { l: 'Não consigo acessar', id: 'no-puedo-acceder' }] });
 Object.assign(UI.es, { video: 'Vídeo tutorial', videoHint: 'Activa los subtítulos con el botón CC del reproductor.' });
-Object.assign(UI['pt-BR'], { video: 'Vídeo tutorial', videoHint: 'Ative as legendas pelo botão CC do player.' });
+Object.assign(UI['pt-BR'], { video: 'Vídeo tutorial', videoHint: 'Ative as legendas pelo botão CC do player.', vpControls: 'Controles do vídeo', vpCC: 'CC Legendas', vpSpeed: 'Velocidade', vpFallback: 'Não foi possível carregar o vídeo.', vpOpen: 'Abrir o vídeo' });
+Object.assign(UI.es, { vpControls: 'Controles del vídeo', vpCC: 'CC Subtítulos', vpSpeed: 'Velocidad', vpFallback: 'No se pudo cargar el vídeo.', vpOpen: 'Abrir el vídeo' });
 const durText = (sec) => (sec >= 60 ? Math.floor(sec / 60) + ' min ' + (sec % 60) + ' s' : sec + ' s');
 async function videosFor(loc, src) {
   const out = {};
@@ -347,7 +348,9 @@ async function videosFor(loc, src) {
     const base = path.join(ROOT, 'video', 'review', dir, v.file);
     const dur = Math.round(parseFloat(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', base + '.mp4']).toString()));
     const vtt = 'data:text/vtt;base64,' + (await readFile(base + '.vtt')).toString('base64');
-    out[articleId] = { src: url, vtt, srclang: SRCLANG[loc], label: TRACK_LABEL[loc], dur: durText(dur), title: v.label[loc === 'es' ? 'es' : 'pt'], after: !!v.after };
+    const poster = PUBLIC_SITE ? `videos/${dir}-${v.file}.jpg` : '';
+    const narr = loc === 'es' ? 'Narración en español' : 'Narração em português (Brasil)';
+    out[articleId] = { src: url, vtt, poster, narr, srclang: SRCLANG[loc], label: TRACK_LABEL[loc], dur: durText(dur), title: v.label[loc === 'es' ? 'es' : 'pt'], after: !!v.after };
   }
   return out;
 }
@@ -390,6 +393,8 @@ if (PUBLIC_SITE) {
   for (const dir of ['es', 'pt-br']) for (const f of [...new Set(Object.values(VIDEO_FOR_ARTICLE).map((v) => v.file))]) {
     const src = path.join(ROOT, 'video', 'review', dir, `${f}.mp4`);
     if (existsSync(src) && (out.includes(`videos/${dir}-${f}.mp4`))) await copyFile(src, path.join(ROOT, 'site', 'videos', `${dir}-${f}.mp4`));
+    const poster = path.join(ROOT, 'video', 'review', dir, `${f}.jpg`);
+    if (existsSync(poster) && out.includes(`videos/${dir}-${f}.jpg`)) await copyFile(poster, path.join(ROOT, 'site', 'videos', `${dir}-${f}.jpg`));
   }
 }
 console.log(`✓ single/centro-ayuda.html (${(Buffer.byteLength(out) / 1024).toFixed(0)} KB) · ${data.es.articles.length} artículos por idioma`);

@@ -25,6 +25,10 @@
         {
           "do": "wait",
           "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 7437
         }
       ]
     },
@@ -52,6 +56,10 @@
         {
           "do": "wait",
           "ms": 900
+        },
+        {
+          "do": "wait",
+          "ms": 1920
         }
       ]
     },
@@ -76,6 +84,10 @@
         {
           "do": "wait",
           "ms": 1100
+        },
+        {
+          "do": "wait",
+          "ms": 4942
         }
       ]
     },
@@ -91,62 +103,10 @@
         {
           "do": "wait",
           "ms": 1500
-        }
-      ]
-    },
-    {
-      "id": "entregas",
-      "say": "Quando entregam, a tabela mostra cada aluno com a sua melhor nota e com cada uma das suas entregas.",
-      "actions": [
-        {
-          "do": "highlight",
-          "selector": "text=Best performance",
-          "ms": 1600
         },
         {
           "do": "wait",
-          "ms": 1800
-        }
-      ]
-    },
-    {
-      "id": "revisar",
-      "say": "Clique numa nota para rever a entrega: o texto do aluno, a pontuação de cada critério e o comentário que a justifica.",
-      "actions": [
-        {
-          "do": "click",
-          "selector": "text=\"10/10\" >> nth=-1"
-        },
-        {
-          "do": "waitFor",
-          "selector": "text=Detalhes:"
-        },
-        {
-          "do": "wait",
-          "ms": 4200
-        },
-        {
-          "do": "highlight",
-          "selector": "text=Detalhes:",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 2500
-        }
-      ]
-    },
-    {
-      "id": "cerrar",
-      "say": "Antes de dar a nota final, confirme que o comentário coincide com os critérios. Assim, o feedback também orienta o seu aluno.",
-      "actions": [
-        {
-          "do": "press",
-          "key": "Escape"
-        },
-        {
-          "do": "wait",
-          "ms": 1500
+          "ms": 5479
         }
       ]
     }
