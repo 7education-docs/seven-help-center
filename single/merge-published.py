@@ -46,6 +46,7 @@ def main() -> None:
     content = importlib.util.module_from_spec(spec3); spec3.loader.exec_module(content)
     content.apply_content_overlay(merged)
     apply_numbered(merged)
+    content.apply_course_merge(merged)
     ser = json.dumps(merged, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     open(out_path, 'w', encoding='utf-8').write(built[:bs] + ser + built[be:])
     print(f'✓ {out_path}: datos de artículos de la versión publicada + plantilla y vídeos nuevos')

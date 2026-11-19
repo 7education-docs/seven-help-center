@@ -10,11 +10,6 @@ numeradas dependen del número de pasos. Para cada artículo se reemplazan:
 
 CONTENT = {
     'es': {
-        'importar-curso': dict(
-            answer="Importar curso trae a tu lista un curso que ya existe en otro archivo: uno que exportaste antes con Exportar curso o uno que te ha compartido un compañero. Úsalo cuando quieras recuperar una copia de seguridad, traer un curso preparado por otro docente o repetir el curso del año anterior con el mismo contenido. Así no empiezas de cero cuando el trabajo ya está hecho.",
-            example="Preparaste 'Biología · 3.º ESO' el curso pasado y lo exportaste como copia de seguridad. Este año lo importas, cambias las fechas de las citas y lo adaptas al nuevo grupo, sin volver a subir cada material.",
-            tips=["Revisa el curso importado antes de compartirlo con el alumnado, sobre todo las fechas y los datos que tengan que cambiar.",
-                  "Si el archivo no se abre, comprueba que sea un curso exportado desde Seven Assistant."]),
         'buscar-contenido': dict(
             answer="El buscador de la Biblioteca encuentra documentos, series y fichas por su nombre. Úsalo cuando tienes muchos materiales guardados y quieres dar con uno concreto sin recorrer carpetas, por ejemplo para localizar una práctica de hace meses, comprobar si ya tienes una serie sobre un tema o encontrar el documento vigente entre varias versiones.",
             example="Vas a preparar la clase de fracciones y escribes 'fracciones' en el buscador: aparecen la serie de lecciones, dos fichas y un documento de repaso. Reutilizas la ficha del año pasado en lugar de crearla otra vez.",
@@ -117,11 +112,6 @@ CONTENT = {
             example="En lugar de 'buena argumentación', el criterio dice 'Presenta al menos dos evidencias que apoyen su tesis'. Al corregir, la evidencia está o no está, y al devolver el trabajo puedes señalar exactamente qué falta."),
     },
     'pt-BR': {
-        'importar-curso': dict(
-            answer="Importar curso traz para a sua lista um curso que já existe em outro arquivo: um que você exportou antes com Exportar curso ou um que um colega compartilhou com você. Use quando quiser recuperar uma cópia de segurança, trazer um curso preparado por outro docente ou repetir o curso do ano anterior com o mesmo conteúdo. Assim você não começa do zero quando o trabalho já está pronto.",
-            example="Você preparou 'Biologia · 3.º ano' no ano passado e o exportou como cópia de segurança. Neste ano, importa o arquivo, ajusta as datas das citas e adapta o curso à nova turma, sem enviar de novo cada material.",
-            tips=["Revise o curso importado antes de compartilhá-lo com os estudantes, principalmente as datas e os dados que precisam mudar.",
-                  "Se o arquivo não abrir, confirme que é um curso exportado do Seven Assistant."]),
         'buscar-contenido': dict(
             answer="O buscador da Biblioteca encontra documentos, séries e fichas pelo nome. Use quando tiver muitos materiais guardados e quiser achar um específico sem percorrer pastas, por exemplo para localizar uma prática feita meses atrás, conferir se já existe uma série sobre um tema ou encontrar o documento vigente entre várias versões.",
             example="Você vai preparar a aula de frações e escreve 'frações' no buscador: aparecem a série de aulas, duas fichas e um documento de revisão. Reaproveita a ficha do ano passado em vez de criá-la de novo.",
@@ -237,3 +227,76 @@ def apply_content_overlay(merged: dict) -> None:
             art['example'] = new.get('example', '')
             if 'tips' in new:
                 art['tips'] = new['tips']
+
+
+# ---------------------------------------------------------------------------
+# Crear un curso: una sola guía. Absorbe "Importar un curso" y "Adoptar una plantilla de curso"
+# (los pasos de esos artículos se añaden al final, con sus capturas, y sus URLs redirigen aquí).
+# ---------------------------------------------------------------------------
+GUIDE = {
+    'es': dict(
+        answer="Un curso es el espacio donde reúnes todo lo que trabajas con un grupo de alumnos: las secciones con los temas, los materiales, las actividades, las citas y el código para que el alumnado entre. Sirve para tener cada asignatura organizada en un único lugar, en lugar de repartirla entre carpetas, correos y chats. Puedes empezar un curso desde cero con el asistente, importar uno que ya tienes o adoptar una plantilla; los pasos recogen las tres formas.",
+        example="Imagina que das Matemáticas a tres grupos de 2.º de ESO. Creas un curso por grupo, o adoptas una plantilla y la adaptas a cada uno; organizas las unidades en secciones, subes los materiales y dejas ocultas las entradas que aún no quieres mostrar. Cuando llega el momento, compartes el código y cada grupo entra en su curso, sin que los materiales de 2.º A y 2.º B se mezclen.\n\nEn el colegio, un curso bien montado sirve para tres cosas: preparar una asignatura una sola vez y reutilizarla cada año, mantener el mismo formato de nombres en todo el departamento para encontrar cada curso sin preguntar, y que cada alumno llegue a su grupo desde el primer día con el código de su clase.",
+        tips=["Usa un nombre que identifique grupo y asignatura, por ejemplo \"Matemáticas · 2.º secundaria\".",
+              "Antes de la primera clase, abre el curso con \"Ver como estudiante\" para comprobar qué ve el alumnado.",
+              "Revisa el curso importado antes de compartirlo, sobre todo las fechas y los datos que tengan que cambiar.",
+              "Las plantillas actuales son de España, Alemania y Suiza. Revisa que encajen con el currículo de tu país antes de usarlas."],
+        steps=[
+            dict(t="Abre Cursos y pulsa Crear curso", b="Lo encontrarás en la parte superior derecha de la pantalla de cursos."),
+            dict(t="Paso 1: Datos básicos", b="Escribe el nombre del curso, la asignatura, la clase o curso escolar y una descripción. Puedes añadir una portada."),
+            dict(t="Paso 2: Elegir contenido", b="Vacío para empezar desde cero, Todas las plantillas para partir de una unidad preparada, Copiar para partir de un curso existente o Planificar con IA."),
+            dict(t="Paso 3: Revisar y crear", b="Revisa los datos. Atrás te permite corregir algo antes de pulsar Crear."),
+        ]),
+    'pt-BR': dict(
+        answer="Um curso é o espaço onde você reúne tudo o que trabalha com um grupo de estudantes: as seções com os temas, os materiais, as atividades, os compromissos e o código para que os estudantes entrem. Serve para ter cada disciplina organizada em um só lugar, em vez de espalhá-la entre pastas, e-mails e conversas. Você pode começar um curso do zero com o assistente, importar um que já tem ou adotar um modelo; os passos reúnem as três formas.",
+        example="Imagine que você dá Matemática para três turmas do 8.º ano. Cria um curso por turma, ou adota um modelo e o adapta para cada uma; organiza as unidades em seções, envia os materiais e deixa ocultas as entradas que ainda não quer mostrar. Quando chega a hora, compartilha o código e cada turma entra no seu curso, sem que os materiais do 8.º A e do 8.º B se misturem.\n\nNa escola, um curso bem montado serve para três coisas: preparar uma disciplina uma vez só e reutilizá-la todo ano, manter o mesmo padrão de nomes em todo o departamento para encontrar cada curso sem perguntar, e fazer com que cada estudante chegue ao seu grupo desde o primeiro dia, com o código da sua turma.",
+        tips=["Use um nome que identifique turma e disciplina, por exemplo \"Matemática · 8.º ano\".",
+              "Antes da primeira aula, abra o curso com \"Ver como aluno\" para conferir o que os estudantes veem.",
+              "Revise o curso importado antes de compartilhá-lo, principalmente as datas e os dados que precisam mudar.",
+              "Os modelos atuais são da Espanha, da Alemanha e da Suíça. Confira se combinam com o currículo do seu país antes de usar."],
+        steps=[
+            dict(t="Abra Cursos e clique em Criar curso", b="Fica no canto superior direito da tela de cursos."),
+            dict(t="Passo 1: Dados básicos", b="Escreva o nome do curso, a disciplina, a turma ou série e uma descrição. Você pode adicionar uma capa."),
+            dict(t="Passo 2: Escolher conteúdo", b="Vazio para começar do zero, Todos os modelos para partir de uma unidade pronta, Copiar para partir de um curso existente ou Planejar com IA."),
+            dict(t="Passo 3: Revisar e criar", b="Confira os dados. Voltar permite corrigir algo antes de clicar em Criar."),
+        ]),
+}
+ABSORBED = ['importar-curso', 'plantillas-de-curso']   # se fusionan en crear-curso
+KEEP = 'crear-curso'
+
+
+def apply_course_merge(merged: dict) -> None:
+    """Funde los artículos de importar y de plantillas en "Crear un curso" (después de numerar capturas)."""
+    for loc, G in GUIDE.items():
+        d = merged[loc]
+        arts = {a['id']: a for a in d['articles']}
+        keep = arts.get(KEEP)
+        if keep is None:
+            continue
+        gone = [i for i in ABSORBED if i in arts]
+        steps = [dict(t=s['t'], b=s['b']) for s in G['steps']]
+        img = list(keep.get('img') or [])
+        step_img = dict(keep.get('stepImg') or {})
+        for gid in gone:                       # pasos y capturas de cada artículo absorbido, a continuación
+            src = arts[gid]
+            base = len(steps)
+            for i, st in enumerate(src.get('steps') or []):
+                steps.append({'t': st['t'], 'b': st['b']})
+                k = (src.get('stepImg') or {}).get(str(i + 1))
+                if k:
+                    step_img[str(base + i + 1)] = k
+            for k in src.get('img') or []:
+                if k not in img:
+                    img.append(k)
+            keep['faqRelated'] = list(dict.fromkeys((keep.get('faqRelated') or []) + (src.get('faqRelated') or [])))
+        keep.update(answer=G['answer'], example=G['example'], tips=G['tips'], steps=steps, img=img, stepImg=step_img)
+        d['articles'] = [a for a in d['articles'] if a['id'] not in gone]
+        d.setdefault('aliases', {})
+        for gid in gone:
+            d['aliases'][gid] = KEEP           # enlaces antiguos → la guía
+        for a in d['articles']:                # referencias relacionadas
+            for field in ('related', 'faqRelated'):
+                if a.get(field):
+                    a[field] = [i for i in dict.fromkeys(KEEP if i in gone else i for i in a[field]) if i != a['id']]
+        for g in d.get('courseGroups') or []:  # quitar los absorbidos de los grupos de cursos
+            g['ids'] = [i for i in g['ids'] if i not in gone]
