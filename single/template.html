@@ -112,6 +112,8 @@ ol.steps p{margin:0}
 
 .tips{margin-top:1.4rem;background:var(--tint);border-radius:var(--radius);padding:16px 18px}.tips strong{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}.tips li{font-size:1.05rem}
 .tips ul{margin:.3em 0 0;padding-left:1.1em}
+.uses{margin:.4em 0 0;padding-left:1.2em}.uses li{margin:.4em 0;font-size:1.05rem}
+.example{margin-top:1.4rem;border-left:3px solid var(--primary);padding:4px 0 4px 16px}.example strong{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}.example p{margin:0;font-size:1.05rem}
 .related{margin-top:2rem}
 .pager{margin-top:2rem}
 .site-footer{margin:4.5rem -16px -40px;background:#1c1c1c;color:#fffaf6;font-size:14px;line-height:1.5}.f-inner{padding:56px 64px;position:relative}.f-inner::before{content:"";position:absolute;left:64px;right:64px;top:0;border-top:1px solid rgba(255,250,246,.14)}.f-grid{display:grid;grid-template-columns:384px 167px 173px 153px 154px 1fr;align-items:start}.f-brand{display:block}.f-logo{display:block;width:136px;height:40px;margin-top:17px;filter:invert(1)}.f-social{display:flex;gap:12px;margin-top:80px;color:#fffaf6}.site-footer .f-social a{color:#fffaf6;display:inline-flex}.f-social svg{width:20px;height:20px}.f-copy{margin:16px 0 0;font-size:13px;line-height:18px;color:#fffaf6}.f-h{font-family:var(--body);font-size:14px;font-weight:600;color:#fffaf6;margin:10px 0 11px;line-height:16px}.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}.site-footer li{line-height:16px}.site-footer a{color:rgba(255,250,246,.48);text-decoration:none}.site-footer a:hover{color:#fffaf6}.f-cookies{background:none;border:0;padding:0;font:inherit;color:rgba(255,250,246,.48);cursor:pointer;line-height:16px}.f-cookies:hover{color:#fffaf6}@media (max-width:900px){.f-inner{padding:40px 24px 40px}.f-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 20px}.f-brand{grid-column:1/-1}.f-social{margin-top:28px}}
@@ -316,6 +318,8 @@ const DATA = /*__DATA__*/null;
     const items = inCat(loc, 'faq').map((a) => {
       const figs = (a.img || []).filter((n) => d.shots[n]).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '" loading="lazy"></figure>').join('');
       return '<details class="faq" id="q-' + esc(a.id) + '"><summary>' + esc(a.title) + '</summary><div class="faq-body"><p>' + esc(a.answer) + '</p>' +
+        (a.uses && a.uses.length ? '<h4 class="faq-h">' + esc(u.whenUse) + '</h4><ul class="faq-tips">' + a.uses.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
+        (a.example ? '<p class="faq-ex"><strong>' + esc(u.example) + ': </strong>' + esc(a.example) + '</p>' : '') +
         (a.steps && a.steps.length ? '<ol class="faq-steps">' + a.steps.map((st) => '<li><strong>' + esc(st.t) + '</strong> ' + esc(st.b) + '</li>').join('') + '</ol>' : '') +
         (a.tips && a.tips.length ? '<ul class="faq-tips">' + a.tips.map((tp) => '<li>' + esc(tp) + '</li>').join('') + '</ul>' : '') + figs + '</div></details>';
     }).join('');
@@ -347,6 +351,8 @@ const DATA = /*__DATA__*/null;
     return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name, href: href(loc, 'cat-' + c.id) }, { label: a.title }]) +
       '<article class="article-head"><h1>' + esc(a.title) + '</h1>' +
       '<div class="answer"><b>' + esc(u.inSummary) + '</b><p>' + esc(a.answer) + '</p></div>' +
+      (a.uses && a.uses.length ? '<section class="block"><h2>' + esc(u.whenUse) + '</h2><ul class="uses">' + a.uses.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></section>' : '') +
+      (a.example ? '<aside class="example"><strong>' + esc(u.example) + '</strong><p>' + esc(a.example) + '</p></aside>' : '') +
       (a.table ? '<section class="block"><div class="tbl-wrap"><table class="tbl"><thead><tr>' + a.table.head.map((x) => '<th scope="col">' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' + a.table.rows.map((r) => '<tr>' + r.map((x) => '<td>' + esc(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div></section>' : '') +
       (d.videos && d.videos[a.id] && !d.videos[a.id].after ? videoBlock(d, a.id, u) : '') +
       (a.steps && a.steps.length ? '<section class="block"><h2>' + esc(u.steps) + '</h2><div class="steps">' + a.steps.map((s, i) => '<div class="step-item"><span class="step-n" aria-hidden="true">' + (i + 1) + '</span><h3>' + esc(s.t) + '</h3><p>' + esc(s.b) + '</p>' + (a.stepImg && a.stepImg[i + 1] && d.shots[a.stepImg[i + 1]] ? '<figure class="step-shot"><img src="' + d.shots[a.stepImg[i + 1]] + '" alt="' + esc(d.alt[a.stepImg[i + 1]] || '') + '" loading="lazy"></figure>' : '') + '</div>').join('') + '</div></section>' : '') +

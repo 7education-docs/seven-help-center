@@ -1,0 +1,381 @@
+#!/usr/bin/env python3
+"""Amplía los artículos más escuetos: qué es, cuándo usarlo, un ejemplo y consejos.
+
+Se aplica sobre los datos publicados (merge-published.py). No toca los pasos: las capturas
+numeradas dependen del número de pasos. Para cada artículo se reemplazan:
+  answer   -> qué es y para qué sirve (párrafo "En resumen")
+  uses     -> lista "Cuándo usarlo"
+  example  -> caso concreto ("Ejemplo")
+  tips     -> consejos (si se indica; si no, se mantienen los actuales)
+"""
+
+CONTENT = {
+    'es': {
+        'importar-curso': dict(
+            answer="Importar curso trae a tu lista un curso que ya existe en otro archivo: uno que exportaste antes con Exportar curso, o uno que te compartió un compañero. Sirve para no empezar de cero cuando el trabajo ya está hecho.",
+            uses=["Quieres recuperar un curso que exportaste como copia de seguridad.",
+                  "Un compañero ha preparado un curso y quiere pasártelo.",
+                  "Vas a repetir un curso del año anterior con el mismo contenido."],
+            example="Preparaste 'Biología · 3.º ESO' el curso pasado y lo exportaste como copia de seguridad. Este año lo importas, cambias las fechas de las citas y lo adaptas al nuevo grupo, sin volver a subir cada material.",
+            tips=["Revisa el curso importado antes de compartirlo con el alumnado, sobre todo las fechas y los datos que tengan que cambiar.",
+                  "Si el archivo no se abre, comprueba que sea un curso exportado desde Seven Assistant."]),
+        'buscar-contenido': dict(
+            answer="El buscador de la Biblioteca encuentra documentos, series y fichas por su nombre. Sirve cuando tienes muchos materiales guardados y no quieres recorrer carpetas para dar con uno concreto.",
+            uses=["Buscas la ficha de una práctica que hiciste hace meses.",
+                  "Quieres comprobar si ya tienes una serie sobre un tema antes de crear otra.",
+                  "Necesitas el documento vigente entre varias versiones."],
+            example="Vas a preparar la clase de fracciones y escribes 'fracciones' en el buscador: aparecen la serie de lecciones, dos fichas y un documento de repaso. Reutilizas la ficha del año pasado en lugar de crearla otra vez.",
+            tips=["Busca con palabras del título: los términos de menos de dos letras no se tienen en cuenta.",
+                  "Nombrar bien los materiales (ver Nombrar y actualizar versiones) hace que la búsqueda funcione mejor."]),
+        'ficha-de-trabajo-curso': dict(
+            answer="Una ficha de trabajo es una hoja de práctica que el alumnado resuelve dentro del curso. Sirve para que practique lo que acaba de ver, con ejercicios que tú preparas y con sus propias respuestas.",
+            uses=["Después de explicar un concepto, para que lo practiquen.",
+                  "Como repaso antes de un examen.",
+                  "Cuando quieres que practiquen en casa con la misma hoja que han visto en clase."],
+            example="Tras la clase de ecuaciones de primer grado, añades en la sección 'Álgebra' una ficha con cinco ejercicios graduados. El alumnado la resuelve en casa y, en la sesión siguiente, empiezas por los ejercicios que más les costaron.",
+            tips=["Empieza con un ejercicio resuelto, sigue con ejercicios parecidos y termina con uno más difícil.",
+                  "Revísala como la haría un alumno antes de añadirla (ver Revisar una ficha antes de usarla)."]),
+        'idioma-no-cambia': dict(
+            answer="Si la interfaz sigue en el idioma anterior después de elegir otro, lo más habitual es que la página abierta todavía no haya cargado el cambio. Sirve para revisar las dos causas típicas: la elección en el menú de cuenta y la recarga de la página.",
+            uses=["Acabas de cambiar el idioma y la pantalla sigue igual.",
+                  "Un compañero ve la interfaz en otro idioma y no sabe por qué.",
+                  "Has cambiado de idioma en un equipo compartido y quieres confirmar que se aplicó."],
+            example="Cambias la interfaz a portugués en tu portátil, pero la pestaña que tenías abierta sigue en español. Recargas la página y el cambio se aplica a toda la interfaz. Los textos que ya escribiste siguen en el idioma en que los creaste.",
+            tips=["El cambio afecta a la interfaz, no a los textos que ya creaste."]),
+        'beta': dict(
+            answer="Cursos está en beta: es una versión que se sigue mejorando. Sirve para entender por qué una pantalla o una opción puede no coincidir con esta ayuda y qué hacer en ese caso.",
+            uses=["Una pantalla de Cursos no es igual que la que aparece en la ayuda.",
+                  "Una opción ha cambiado de lugar o de nombre."],
+            example="Buscas el botón de importar y no está donde lo muestra la ayuda. No es un error tuyo: la pantalla ha cambiado durante la beta. Busca la acción por su nombre en el buscador de la ayuda o mira las novedades en el menú de cuenta.",
+            tips=["Cuando algo no coincida, guarda una captura de pantalla: ayuda a explicar el cambio a quien dé soporte."]),
+        'idioma': dict(
+            answer="Cambia el idioma de los menús y botones de Seven Assistant. Sirve para trabajar en español o en portugués de Brasil sin tocar el contenido que ya has creado.",
+            uses=["Trabajas con un grupo de colegas que usa el portugués de Brasil.",
+                  "Compartes equipo con alguien que prefiere otro idioma.",
+                  "Quieres que la interfaz coincida con el idioma de los materiales que preparas."],
+            example="Tú trabajas en español y una compañera de Brasil usa la misma herramienta. Cada una cambia el idioma en su propia cuenta: los menús se ven en su idioma y los cursos siguen en el idioma en que se crearon.",
+            tips=["Los textos que escribes tú se quedan en el idioma en que los creaste."]),
+        'plantilla-nombrar': dict(
+            answer="Nombrar bien a tus asistentes sirve para encontrarlos sin abrirlos uno a uno cuando tienes varios. Un nombre con el tipo de tarea y el nivel te dice al momento para qué es cada uno.",
+            uses=["Tienes más de tres asistentes y ya no recuerdas cuál es cuál.",
+                  "Compartes asistentes con otros docentes del departamento.",
+                  "Has creado un asistente para una tarea que repites cada trimestre."],
+            example="Tienes un asistente que corrige redacciones de 1.º de ESO y otro que prepara guías de laboratorio para bachillerato. Con los nombres 'Redacción · 1.º ESO' y 'Guía de laboratorio · bachillerato' sabes cuál usar sin abrir ninguno."),
+        'ficha-revisar': dict(
+            answer="Revisar una ficha consiste en resolverla tú antes de que llegue al alumnado. Sirve para detectar ejercicios mal planteados, respuestas erróneas o un nivel que no es el de tu grupo.",
+            uses=["Has generado la ficha con el asistente y quieres comprobarla.",
+                  "Vas a usar una ficha de otro curso y no sabes si encaja con el tuyo.",
+                  "Vas a usarla como práctica antes de un examen y quieres asegurarte de que corresponde a lo visto."],
+            example="Generas una ficha de 'Porcentajes' para 2.º de ESO. Al resolver el ejercicio 3 ves que el enunciado pide un cálculo que todavía no se ha explicado en clase. Lo cambias por un ejercicio parecido antes de compartirla.",
+            tips=["Si tú tardas mucho más de lo que tardaría el alumnado, la ficha probablemente es demasiado difícil."]),
+        'respuesta-no-correcta': dict(
+            answer="El asistente puede dar datos equivocados o responder a una pregunta distinta de la que querías. Sirve para saber cómo comprobar una respuesta antes de usarla en clase y cómo pedir una mejor.",
+            uses=["La respuesta contiene cifras, fechas o citas que no sabes si son ciertas.",
+                  "La respuesta habla de otro nivel, otro país o otro formato.",
+                  "La respuesta está bien, pero no sirve para tu grupo."],
+            example="Pides un resumen de la Revolución francesa para 4.º de ESO y la respuesta incluye una fecha que no cuadra. La compruebas en tu libro de texto, pides que la corrija y añades 'alumnado de 14 años, resumen de 10 líneas'. La segunda respuesta sirve.",
+            tips=["No uses en clase un dato de la respuesta sin contrastarlo antes.",
+                  "Cambia una cosa a la vez al pedir ajustes."]),
+        'configuracion-cuenta': dict(
+            answer="Configuración reúne los ajustes de tu cuenta. Sirve para cambiar opciones generales de la cuenta, no las de un curso concreto.",
+            uses=["Quieres revisar los datos de tu cuenta.",
+                  "Quieres cambiar un ajuste general, y no el de un curso (para eso, usa la configuración del curso)."],
+            example="Si quieres cambiar el código de inscripción de un curso, eso está en la configuración de ese curso. Si quieres cambiar tus datos o el idioma de la interfaz, eso está en el menú de cuenta.",
+            tips=["No confundas Configuración de la cuenta (avatar) con Configuración del curso (dentro de Cursos)."]),
+        'serie-ajustar': dict(
+            answer="Ajustar una serie es modificar una serie de lecciones que ya tienes para que encaje con tu grupo. Sirve cuando la primera versión es demasiado larga, demasiado fácil o no trabaja lo que necesitas.",
+            uses=["La serie tiene más sesiones de las que puedes dar en el trimestre.",
+                  "El nivel no es el de tu grupo.",
+                  "La evaluación no coincide con tu programación."],
+            example="La serie de 'Fracciones' tiene doce sesiones y tú tienes ocho. En una conversación pides que la reduzca a ocho manteniendo la progresión, con la evaluación en la sesión 8. Revisas la progresión antes de guardarla."),
+        'alumnado-no-entra': dict(
+            answer="Cuando el alumnado no consigue entrar en el curso, casi siempre el problema está en el código o en el camino de entrada. Sirve para revisar esas dos cosas, en ese orden, antes de buscar otra causa.",
+            uses=["Un grupo entero no puede entrar tras recibir el código.",
+                  "Un alumno dice que el código no funciona.",
+                  "Quieres ver cómo aparece el curso para el alumnado antes de la primera clase."],
+            example="Al empezar el curso, cuatro alumnos escriben el código y reciben un error. En la vista general ves que el código que tienen es el anterior, porque generaste uno nuevo la semana pasada. Compartes el nuevo y todos entran sin problema.",
+            tips=["Comprueba la vista de estudiante antes de compartir el código con el grupo."]),
+        'plantillas-vs-asistentes': dict(
+            answer="Hay dos cosas que se parecen: las plantillas de curso, que son unidades didácticas listas para adoptar dentro de Cursos, y los asistentes, que son plantillas de la barra lateral con instrucciones propias. Sirve para saber dónde buscar lo que necesitas.",
+            uses=["Quieres empezar un curso con una unidad ya preparada: plantilla de curso.",
+                  "Quieres un asistente que siga tus instrucciones para tus tareas: asistente de IA."],
+            example="Si necesitas una unidad sobre 'El agua' para un curso de 3.º de primaria, buscas en Cursos, en la pestaña Plantillas. Si quieres un asistente que corrija tus redacciones con tus criterios, lo creas en Plantillas (icono de estrellas) con tus instrucciones.",
+            tips=["Si quieres contenido ya hecho, es una plantilla de curso; si quieres que la IA trabaje con tus instrucciones, es un asistente."]),
+        'no-encuentro-seccion': dict(
+            answer="Las áreas principales están siempre en la barra lateral. Lo que no ves ahí suele estar dentro de un curso, en la Biblioteca o en el menú de cuenta. Sirve para encontrar rápido dónde está cada cosa.",
+            uses=["Buscas una herramienta que aparece en la ayuda pero no en tu pantalla.",
+                  "Buscas algo y no sabes si es un curso, un documento o un ajuste."],
+            example="Quieres crear una serie de lecciones y no la encuentras en Cursos. Las series se crean desde la Biblioteca, así que vas allí y la creas desde ahí.",
+            tips=["Si buscas un ajuste de un curso concreto, está dentro de ese curso, en Configuración."]),
+        'codigo-filtrado': dict(
+            answer="Si un código o enlace de inscripción llega a personas que no deben entrar, sustitúyelo por uno nuevo. Sirve para que solo entre tu grupo y para cerrar un enlace público que ya no necesitas.",
+            uses=["El código se ha compartido fuera de la clase (redes sociales, otro grupo).",
+                  "Un enlace público sigue activo al terminar el curso."],
+            example="Has compartido el código en un grupo de familias y alguien ajeno al curso lo ha usado. Generas un código nuevo, lo compartes solo con tu grupo y desactivas el enlace público si ya no lo necesitas.",
+            tips=["Si necesitas que alguien concreto entre, compártelo solo con esa persona."]),
+        'regenerar-respuesta': dict(
+            answer="Regenerar una respuesta pide al asistente que vuelva a contestar a la misma pregunta. Sirve cuando la respuesta es floja, genérica o no encaja con tu contexto, sin tener que reescribir la pregunta desde cero.",
+            uses=["La respuesta es correcta, pero demasiado larga o demasiado básica.",
+                  "Quieres otra propuesta de ejemplo o de actividad.",
+                  "La respuesta no sigue el formato que necesitas."],
+            example="Pides una lista de actividades para 5.º de primaria y la primera es demasiado teórica. Regeneras la respuesta y obtienes otra propuesta más práctica; si no te convence, la regeneras otra vez."),
+        'menu-de-cuenta': dict(
+            answer="El menú de cuenta está en el avatar de la parte inferior izquierda, con tus iniciales. Sirve para ajustar tu cuenta, cambiar el idioma, gestionar tareas y carpetas compartidas, y cerrar sesión.",
+            uses=["Quieres cambiar el idioma de la interfaz.",
+                  "Quieres revisar tus tareas o tus carpetas compartidas.",
+                  "Quieres cerrar sesión en un equipo que no es tuyo."],
+            example="Estás en un equipo del centro y terminas de trabajar. Abres el menú con tu avatar, eliges Cerrar sesión y tu cuenta queda protegida en ese equipo.",
+            tips=["Cierra sesión si usas un equipo compartido."]),
+        'tarea-calibrar': dict(
+            answer="Calibrar es corregir unos pocos trabajos de distintos niveles y compararlos con la propuesta de corrección antes de corregir a todo el grupo. Sirve para que los criterios signifiquen lo mismo al aplicarlos a 25 trabajos.",
+            uses=["Acabas de escribir los criterios y no sabes si son claros.",
+                  "Vas a corregir muchos trabajos seguidos.",
+                  "Varias personas del departamento corrigen la misma tarea."],
+            example="Tienes 28 redacciones y los criterios de 'argumentación'. Corriges tres (una débil, una media y una fuerte). En dos de ellas no sabes si el criterio se cumple: reescribes el criterio con un ejemplo y corriges el resto del grupo con él.",
+            tips=["Guarda los tres trabajos calibrados: te servirán de referencia si tienes dudas más adelante."]),
+        'documentos-nombres': dict(
+            answer="Un nombre con materia, grupo, fecha y versión deja claro qué documento está vigente. Sirve para no confundir una versión antigua con la actual cuando hay varias en la Biblioteca.",
+            uses=["Subes la versión corregida de una unidad.",
+                  "Compartes un documento con el departamento y necesitan saber cuál usar.",
+                  "Revisas la Biblioteca al empezar el curso."],
+            example="Tienes 'Unidad 4 · v1' y 'Unidad 4 · v2'. Subes la versión corregida como 'Matemáticas · 2.º de ESO · 2026-11 · v2' y conservas la v1 solo si la necesitas para comparar. Así sabes cuál enviar al alumnado."),
+        'exportar-curso': dict(
+            answer="Exportar un curso guarda una copia completa de su contenido en un archivo, en el formato que necesite la otra herramienta. Sirve para llevarlo a otro sistema o para tener una copia de seguridad fuera de Seven Assistant.",
+            uses=["Quieres una copia de seguridad antes de archivar un curso.",
+                  "Tu centro usa Moodle y quieres llevar el curso allí (formato .mbz).",
+                  "Quieres reutilizar el contenido en otro sistema compatible con IMS Common Cartridge."],
+            example="Terminas el curso de 4.º de ESO en junio. Lo exportas como copia de seguridad de Moodle (.mbz), lo guardas en la carpeta del centro y, si el año siguiente lo necesitas en Moodle, lo importas allí.",
+            tips=["Haz una copia de seguridad al terminar el curso, antes de archivarlo."]),
+        'tipo-de-actividad': dict(
+            answer="Hay cinco tipos de actividad y cada uno hace algo distinto: material para leer o ver, ficha para practicar, entrega para recibir un archivo, tarea con comentarios para devolver una corrección y agente de IA para resolver dudas. Elegir bien evita crear algo que no te sirve.",
+            uses=["Vas a crear una actividad y no sabes cuál encaja.",
+                  "Quieres saber qué vas a recibir de vuelta: un archivo, una corrección o solo preguntas."],
+            example="Quieres comprobar si el alumnado ha entendido la fotosíntesis. Creas una ficha con tres ejercicios para practicar en casa. Si después quieres su texto escrito, añades una entrega; si quieres devolverle comentarios sobre ese texto, usas una tarea con comentarios."),
+        'agregar-material-archivo': dict(
+            answer="Un material con archivo es una pieza que el alumnado puede abrir dentro de la sección del curso: un PDF, una presentación o cualquier documento que ya tengas. Sirve para tener los recursos de clase en el mismo sitio donde el alumnado los busca.",
+            uses=["Quieres compartir la presentación o el PDF de una clase.",
+                  "Quieres que la ficha de apoyo esté junto a la actividad.",
+                  "Quieres preparar el material y dejarlo oculto hasta el día de la clase."],
+            example="El martes explicas la célula. Subes 'ficha-apoyo-celula.pdf' como material en la sección 'La célula' y lo dejas oculto. Al empezar la clase lo haces visible y el alumnado ya lo tiene en su curso.",
+            tips=["En el título, di lo que contiene y no solo el nombre del archivo: 'Ficha de apoyo: partes de la célula' se entiende mejor que 'Doc1'."]),
+        'enlace-y-nota': dict(
+            answer="Un enlace y una nota son dos materiales ligeros dentro de la sección. El enlace lleva a una página web con un título; la nota es un texto breve que el alumnado lee sin abrir nada más. Sirve para dar una referencia o una indicación rápida sin subir un archivo.",
+            uses=["Quieres dar una referencia web que el alumnado debe consultar.",
+                  "Quieres recordar una fórmula, una norma o un aviso breve en la sección.",
+                  "Quieres señalar una fecha o una instrucción sin crear una actividad."],
+            example="En la sección de práctica de microscopía añades un enlace a una guía de uso del microscopio óptico y una nota: 'Recuerda: el aumento total es el producto del aumento del objetivo por el del ocular.' El alumnado tiene la referencia y la fórmula a la vista.",
+            tips=["Usa una nota para lo que hay que recordar y un enlace para lo que hay que consultar."]),
+        'organizacion-centro': dict(
+            answer="Organizar los cursos del centro es acordar cómo se nombran (asignatura, clase o curso escolar y año) antes de crear muchos cursos. Sirve para que cualquier docente o coordinador encuentre y reconozca cada curso sin tener que preguntar.",
+            uses=["Vas a crear los cursos del nuevo año escolar en el centro.",
+                  "Coordinas a varios docentes y quieres que los cursos tengan el mismo formato."],
+            example="En un instituto con cinco profesores de Matemáticas, todos usan el formato 'Matemáticas · 2.º ESO · 2026-2027'. Así la coordinación ve de un vistazo qué curso corresponde a cada grupo y no se crean cursos repetidos."),
+        'secciones': dict(
+            answer="Una sección agrupa el contenido de un curso en un bloque, por ejemplo una unidad didáctica. Sirve para que el alumnado encuentre cada tema en su sitio y para que puedas reorganizar el curso por bloques sin mezclar materiales.",
+            uses=["Quieres dividir el curso por unidades o por trimestres.",
+                  "Quieres que el alumnado vea de forma ordenada qué tiene que hacer en cada bloque."],
+            example="En un curso de Historia creas una sección por tema: 'Revolución industrial', 'Imperialismo' y 'Primera Guerra Mundial'. Dentro de cada una añades el material, la ficha de práctica y la entrega, y el alumnado sabe en qué bloque está cada cosa."),
+        'serie-campos': dict(
+            answer="Una serie de lecciones se define con pocos campos. Tema es obligatorio; los demás ayudan a encontrarla y a que la serie salga adaptada a tu grupo. Sirve para que la serie que generes encaje desde el principio.",
+            uses=["Vas a crear una serie nueva y quieres rellenarla bien a la primera.",
+                  "Tienes muchas series y necesitas encontrarlas por asignatura o por curso."],
+            example="Para una serie de 'Introducción al cálculo integral' rellenas Tema, Asignatura 'Matemáticas', Curso '1.º de bachillerato' y, en Descripción, indicas que el alumnado ya conoce las derivadas. Con esos datos la serie sale a su nivel y después la encuentras por asignatura.",
+            tips=["Cuanto más concreta sea la descripción, mejor encajará la serie con tu grupo."]),
+        'tarea-criterios': dict(
+            answer="Un criterio observable describe algo que puedes ver en el trabajo del alumnado. Sirve para corregir con la misma vara de medir en todos los trabajos y para explicar la nota con claridad.",
+            uses=["Vas a corregir un trabajo con varios aspectos que evaluar.",
+                  "Quieres que el alumnado entienda por qué ha obtenido cada nota."],
+            example="En lugar de 'buena argumentación', el criterio dice 'Presenta al menos dos evidencias que apoyen su tesis'. Al corregir, la evidencia está o no está, y al devolver el trabajo puedes señalar exactamente qué falta."),
+    },
+    'pt-BR': {
+        'importar-curso': dict(
+            answer="Importar curso traz para a sua lista um curso que já existe em outro arquivo: um que você exportou antes com Exportar curso, ou um que um colega compartilhou com você. Serve para não começar do zero quando o trabalho já está pronto.",
+            uses=["Você quer recuperar um curso exportado como cópia de segurança.",
+                  "Um colega preparou um curso e quer passá-lo para você.",
+                  "Você vai repetir um curso do ano anterior com o mesmo conteúdo."],
+            example="Você preparou 'Biologia · 3.º ano' no ano passado e o exportou como cópia de segurança. Neste ano, importa o arquivo, ajusta as datas das citas e adapta o curso à nova turma, sem enviar de novo cada material.",
+            tips=["Revise o curso importado antes de compartilhá-lo com os estudantes, principalmente as datas e os dados que precisam mudar.",
+                  "Se o arquivo não abrir, confirme que é um curso exportado do Seven Assistant."]),
+        'buscar-contenido': dict(
+            answer="O buscador da Biblioteca encontra documentos, séries e fichas pelo nome. Serve quando você tem muitos materiais guardados e não quer percorrer pastas para achar um específico.",
+            uses=["Você procura a ficha de uma prática feita meses atrás.",
+                  "Quer conferir se já tem uma série sobre um tema antes de criar outra.",
+                  "Precisa encontrar o documento vigente entre várias versões."],
+            example="Você vai preparar a aula de frações e escreve 'frações' no buscador: aparecem a série de aulas, duas fichas e um documento de revisão. Reaproveita a ficha do ano passado em vez de criá-la de novo.",
+            tips=["Use palavras do título: termos com menos de duas letras não entram na busca.",
+                  "Nomear bem os materiais (veja Nomear e atualizar versões) melhora os resultados."]),
+        'ficha-de-trabajo-curso': dict(
+            answer="Uma ficha de trabalho é uma folha de prática que o estudante resolve dentro do curso. Serve para que ele treine o que acabou de ver, com exercícios que você prepara e com as próprias respostas.",
+            uses=["Depois de explicar um conceito, para que pratiquem.",
+                  "Como revisão antes de uma prova.",
+                  "Quando quer que treinem em casa com a mesma folha vista em aula."],
+            example="Depois da aula de equações do 1.º grau, você adiciona na seção 'Álgebra' uma ficha com cinco exercícios graduados. Os estudantes resolvem em casa e, na aula seguinte, você começa pelos exercícios que mais deram trabalho.",
+            tips=["Comece com um exercício resolvido, siga com exercícios parecidos e termine com um mais difícil.",
+                  "Revise a ficha como faria um estudante antes de adicioná-la (veja Revisar uma ficha antes de usar)."]),
+        'idioma-no-cambia': dict(
+            answer="Se a interface continua no idioma anterior depois de escolher outro, o mais comum é a página aberta ainda não ter carregado a mudança. Serve para revisar as duas causas típicas: a escolha no menu da conta e o recarregamento da página.",
+            uses=["Você acabou de trocar o idioma e a tela continua igual.",
+                  "Um colega vê a interface em outro idioma e não sabe por quê.",
+                  "Você trocou de idioma em um computador compartilhado e quer confirmar que a mudança foi aplicada."],
+            example="Você muda a interface para espanhol no notebook, mas a aba que já estava aberta continua em português. Recarregue a página e a mudança vale para toda a interface. Os textos que você já escreveu continuam no idioma em que foram criados.",
+            tips=["A mudança afeta a interface, não os textos que você já criou."]),
+        'beta': dict(
+            answer="Cursos está em beta: é uma versão que continua sendo melhorada. Serve para entender por que uma tela ou uma opção pode não coincidir com esta ajuda e o que fazer nesse caso.",
+            uses=["Uma tela de Cursos não é igual à que aparece na ajuda.",
+                  "Uma opção mudou de lugar ou de nome."],
+            example="Você procura o botão de importar e ele não está onde a ajuda mostra. Não é um erro seu: a tela mudou durante a fase beta. Procure a ação pelo nome no buscador da ajuda ou veja as novidades no menu da conta.",
+            tips=["Quando algo não coincidir, guarde uma captura de tela: ajuda a explicar a mudança para quem dá suporte."]),
+        'idioma': dict(
+            answer="Muda o idioma dos menus e botões do Seven Assistant. Serve para trabalhar em espanhol ou em português do Brasil sem alterar o conteúdo que você já criou.",
+            uses=["Você trabalha com colegas que usam o português do Brasil.",
+                  "Você compartilha o computador com alguém que prefere outro idioma.",
+                  "Você quer que a interface combine com o idioma dos materiais que prepara."],
+            example="Você trabalha em português e uma colega de Madrid usa a mesma ferramenta. Cada um muda o idioma na própria conta: os menus aparecem no idioma de cada um, e os cursos continuam no idioma em que foram criados.",
+            tips=["Os textos que você escreve permanecem no idioma em que foram criados."]),
+        'plantilla-nombrar': dict(
+            answer="Dar bons nomes aos seus assistentes serve para encontrá-los sem abrir um por um quando você tem vários. Um nome com o tipo de tarefa e o nível mostra na hora para que serve cada um.",
+            uses=["Você tem mais de três assistentes e já não lembra qual é qual.",
+                  "Você compartilha assistentes com outros docentes do departamento.",
+                  "Você criou um assistente para uma tarefa que repete todo trimestre."],
+            example="Você tem um assistente que corrige redações do 6.º ano e outro que prepara guias de laboratório para o ensino médio. Com os nomes 'Redação · 6.º ano' e 'Guia de laboratório · ensino médio' você sabe qual usar sem abrir nenhum."),
+        'ficha-revisar': dict(
+            answer="Revisar uma ficha é resolvê-la antes que ela chegue aos estudantes. Serve para encontrar exercícios mal formulados, respostas erradas ou um nível que não é o da sua turma.",
+            uses=["Você gerou a ficha com o assistente e quer conferi-la.",
+                  "Vai usar uma ficha de outro curso e não sabe se combina com o seu.",
+                  "Vai aplicar a prática antes de uma prova e quer garantir que ela corresponde ao que foi visto."],
+            example="Você gera uma ficha de 'Porcentagem' para o 7.º ano. Ao resolver o exercício 3, percebe que o enunciado pede um cálculo que ainda não foi explicado em aula. Troca por um exercício parecido antes de compartilhar.",
+            tips=["Se você levar bem mais tempo do que levaria um estudante, a ficha provavelmente está difícil demais."]),
+        'respuesta-no-correcta': dict(
+            answer="O assistente pode dar dados errados ou responder a outra pergunta, diferente da que você fez. Serve para saber como conferir uma resposta antes de usá-la em aula e como pedir uma melhor.",
+            uses=["A resposta traz números, datas ou citações que você não sabe se são verdadeiros.",
+                  "A resposta fala de outro nível, outro país ou outro formato.",
+                  "A resposta está certa, mas não serve para a sua turma."],
+            example="Você pede um resumo da Revolução Francesa para o 9.º ano e a resposta inclui uma data que não bate com o livro. Confira a data no livro didático, peça a correção e acrescente 'alunos de 14 anos, resumo de 10 linhas'. A segunda resposta serve.",
+            tips=["Não use em aula um dado da resposta sem conferi-lo antes.",
+                  "Mude uma coisa de cada vez ao pedir ajustes."]),
+        'configuracion-cuenta': dict(
+            answer="Configurações reúne os ajustes da sua conta. Serve para alterar opções gerais da conta, e não as de um curso específico.",
+            uses=["Você quer revisar os dados da sua conta.",
+                  "Você precisa mudar um ajuste geral, e não o de um curso (para isso, use as Definições do curso)."],
+            example="Se quer trocar o código de inscrição de um curso, isso fica nas definições desse curso. Se quer mudar o idioma da interface ou os seus dados, isso fica no menu da conta.",
+            tips=["Não confunda Configurações da conta (avatar) com Definições do curso (dentro de Cursos)."]),
+        'serie-ajustar': dict(
+            answer="Ajustar uma série é modificar uma série de aulas que você já tem para que ela se encaixe na sua turma. Serve quando a primeira versão é longa demais, fácil demais ou não trabalha o que você precisa.",
+            uses=["A série tem mais sessões do que você consegue dar no trimestre.",
+                  "O nível não é o da sua turma.",
+                  "A avaliação não coincide com o seu planejamento."],
+            example="A série de 'Frações' tem doze sessões e você tem oito. Em uma conversa, peça que ela seja reduzida a oito, mantendo a progressão e com a avaliação na sessão 8. Revise a progressão antes de guardar."),
+        'alumnado-no-entra': dict(
+            answer="Quando o estudante não consegue entrar no curso, quase sempre o problema está no código ou no caminho de entrada. Serve para revisar essas duas coisas, nessa ordem, antes de procurar outra causa.",
+            uses=["Uma turma inteira não consegue entrar depois de receber o código.",
+                  "Um estudante diz que o código não funciona.",
+                  "Você quer ver como o curso aparece para o estudante antes da primeira aula."],
+            example="No primeiro dia de aula, quatro estudantes digitam o código e recebem um erro. Na visão geral você vê que o código que eles têm é o antigo, porque gerou um novo na semana passada. Compartilhe o novo e todos conseguem entrar.",
+            tips=["Confira a visão de estudante antes de compartilhar o código com a turma."]),
+        'plantillas-vs-asistentes': dict(
+            answer="Há duas coisas parecidas: os modelos de curso, que são unidades didáticas prontas para adotar dentro de Cursos, e os assistentes, que são modelos da barra lateral com instruções próprias. Serve para saber onde procurar o que você precisa.",
+            uses=["Você quer começar um curso com uma unidade já pronta: modelo de curso.",
+                  "Você quer um assistente que siga as suas instruções nas suas tarefas: assistente de IA."],
+            example="Se precisa de uma unidade sobre 'A água' para uma turma do 3.º ano, procure em Cursos, na aba Modelos. Se quer um assistente que corrija as suas redações com os seus critérios, crie-o em Modelos (ícone de estrelas) com as suas instruções.",
+            tips=["Se quer um conteúdo já pronto, é um modelo de curso; se quer que a IA trabalhe com as suas instruções, é um assistente."]),
+        'no-encuentro-seccion': dict(
+            answer="As áreas principais estão sempre na barra lateral. O que você não vê ali costuma estar dentro de um curso, na Biblioteca ou no menu da conta. Serve para encontrar rapidamente onde fica cada coisa.",
+            uses=["Você procura uma ferramenta que aparece na ajuda, mas não na sua tela.",
+                  "Você procura algo e não sabe se é um curso, um documento ou um ajuste."],
+            example="Você quer criar uma série de aulas e não a encontra em Cursos. As séries são criadas a partir da Biblioteca, então é lá que você a cria.",
+            tips=["Se procura um ajuste de um curso específico, ele fica dentro desse curso, em Definições."]),
+        'codigo-filtrado': dict(
+            answer="Se um código ou link de inscrição chegou a pessoas que não deveriam entrar, substitua-o por um novo. Serve para que só entre a sua turma e para fechar um link público que você não precisa mais.",
+            uses=["O código foi compartilhado fora da turma (em redes sociais ou com outro grupo).",
+                  "Um link público continua ativo depois do fim do curso."],
+            example="Você compartilhou o código em um grupo de famílias e alguém de fora da turma o usou. Gere um código novo, compartilhe-o apenas com a sua turma e desative o link público, se ele não for mais necessário.",
+            tips=["Se precisar que alguém específico entre, compartilhe o código só com essa pessoa."]),
+        'regenerar-respuesta': dict(
+            answer="Gerar a resposta de novo pede ao assistente que responda outra vez à mesma pergunta. Serve quando a resposta está genérica, fraca ou não combina com o seu contexto, sem que você precise reescrever tudo do zero.",
+            uses=["A resposta está certa, mas longa ou básica demais.",
+                  "Você quer outra proposta de exemplo ou de atividade.",
+                  "A resposta não segue o formato de que você precisa."],
+            example="Você pede uma lista de atividades para o 5.º ano e a primeira é teórica demais. Gera a resposta de novo e obtém outra proposta mais prática; se ainda não agradar, gera mais uma vez."),
+        'menu-de-cuenta': dict(
+            answer="O menu da conta fica no avatar, embaixo à esquerda, com as suas iniciais. Serve para ajustar a conta, trocar o idioma, gerenciar tarefas e pastas compartilhadas e encerrar a sessão.",
+            uses=["Você quer mudar o idioma da interface.",
+                  "Você quer revisar suas tarefas ou pastas compartilhadas.",
+                  "Você quer encerrar a sessão em um computador que não é seu."],
+            example="Você está em um computador da escola e terminou o trabalho. Abre o menu pelo avatar, escolhe Sair e a sua conta fica protegida nesse computador.",
+            tips=["Encerre a sessão se usar um computador compartilhado."]),
+        'tarea-calibrar': dict(
+            answer="Calibrar é corrigir alguns trabalhos de níveis diferentes e compará-los com a proposta de correção antes de corrigir a turma inteira. Serve para que os critérios signifiquem a mesma coisa quando aplicados a 25 trabalhos.",
+            uses=["Você acabou de escrever os critérios e não sabe se estão claros.",
+                  "Vai corrigir muitos trabalhos seguidos.",
+                  "Mais de uma pessoa do departamento corrige a mesma tarefa."],
+            example="Você tem 28 redações e os critérios de 'argumentação'. Corrige três (uma fraca, uma média e uma forte). Em duas delas não sabe se o critério foi cumprido: reescreve o critério com um exemplo e corrige o restante da turma com ele.",
+            tips=["Guarde os três trabalhos calibrados: eles servem de referência se você tiver dúvidas depois."]),
+        'documentos-nombres': dict(
+            answer="Um nome com disciplina, turma, data e versão deixa claro qual documento está vigente. Serve para não confundir uma versão antiga com a atual quando há várias na Biblioteca.",
+            uses=["Você envia a versão corrigida de uma unidade.",
+                  "Você compartilha um documento com o departamento e precisa que todos usem o mesmo.",
+                  "Você revisa a Biblioteca no início do curso."],
+            example="Você tem 'Unidade 4 · v1' e 'Unidade 4 · v2'. Envia a versão corrigida como 'Matemática · 8.º ano · 2026-11 · v2' e guarda a v1 só se precisar compará-las. Assim você sabe qual enviar aos estudantes."),
+        'exportar-curso': dict(
+            answer="Exportar um curso salva uma cópia completa do conteúdo em um arquivo, no formato que a outra ferramenta precisa. Serve para levar o curso para outro sistema ou para ter uma cópia de segurança fora do Seven Assistant.",
+            uses=["Você quer uma cópia de segurança antes de arquivar um curso.",
+                  "Sua escola usa o Moodle e você quer levar o curso para lá (formato .mbz).",
+                  "Você quer reaproveitar o conteúdo em outro sistema compatível com IMS Common Cartridge."],
+            example="Você termina o curso do 9.º ano em dezembro. Exporta como cópia de segurança do Moodle (.mbz), guarda o arquivo na pasta da escola e, se precisar dele no Moodle no ano seguinte, importa lá.",
+            tips=["Faça uma cópia de segurança ao terminar o curso, antes de arquivá-lo."]),
+        'tipo-de-actividad': dict(
+            answer="Há cinco tipos de atividade e cada um faz uma coisa diferente: material para ler ou ver, ficha para praticar, entrega para receber um arquivo, tarefa com comentários para devolver uma correção e agente de IA para tirar dúvidas. Escolher bem evita criar algo que não serve para o que você quer.",
+            uses=["Você vai criar uma atividade e não sabe qual se encaixa.",
+                  "Você quer saber o que vai receber de volta: um arquivo, uma correção ou apenas perguntas."],
+            example="Você quer saber se a turma entendeu a fotossíntese. Cria uma ficha com três exercícios para treinar em casa. Se depois quiser o texto escrito deles, adiciona uma entrega; se quiser devolver comentários sobre o texto, usa uma tarefa com comentários."),
+        'agregar-material-archivo': dict(
+            answer="Um material com arquivo é uma peça que o estudante pode abrir dentro da seção do curso: um PDF, uma apresentação ou qualquer documento que você já tenha. Serve para deixar os recursos da aula no mesmo lugar onde os estudantes os procuram.",
+            uses=["Você quer compartilhar a apresentação ou o PDF de uma aula.",
+                  "Você quer que a ficha de apoio fique junto da atividade.",
+                  "Você quer preparar o material e deixá-lo oculto até o dia da aula."],
+            example="Na terça você explica a célula. Envia 'ficha-apoio-celula.pdf' como material na seção 'A célula' e o deixa oculto. Quando começar a aula, torna o material visível e os estudantes já o têm no curso.",
+            tips=["No título, diga o que o arquivo contém e não só o nome do arquivo: 'Ficha de apoio: partes da célula' é mais claro que 'Doc1'."]),
+        'enlace-y-nota': dict(
+            answer="Um link e uma nota são dois materiais leves dentro da seção. O link leva a uma página da web com um título; a nota é um texto breve que o estudante lê sem abrir mais nada. Serve para dar uma referência ou uma orientação rápida sem enviar um arquivo.",
+            uses=["Você quer indicar uma referência na web para consulta.",
+                  "Você quer lembrar uma fórmula, uma regra ou um aviso curto na seção.",
+                  "Você quer destacar um prazo ou uma instrução sem criar uma atividade."],
+            example="Na seção de prática de microscopia, você adiciona um link para um guia de uso do microscópio óptico e uma nota: 'Lembre-se: o aumento total é o produto do aumento da objetiva pelo da ocular.' O estudante tem a referência e a fórmula à vista.",
+            tips=["Use uma nota para o que é preciso lembrar e um link para o que é preciso consultar."]),
+        'organizacion-centro': dict(
+            answer="Organizar os cursos da escola é combinar como eles são nomeados (disciplina, turma ou série e ano) antes de criar muitos cursos. Serve para que qualquer docente ou coordenador encontre e reconheça cada curso sem precisar perguntar.",
+            uses=["Você vai criar os cursos do novo ano letivo na escola.",
+                  "Você coordena vários docentes e quer que os cursos tenham o mesmo padrão."],
+            example="Em uma escola com cinco professores de Matemática, todos usam o formato 'Matemática · 8.º ano · 2026'. Assim a coordenação vê de relance qual curso corresponde a cada turma e não se criam cursos repetidos."),
+        'secciones': dict(
+            answer="Uma seção agrupa o conteúdo de um curso em um bloco, por exemplo uma unidade didática. Serve para que o estudante encontre cada tema no lugar certo e para que você reorganize o curso por blocos sem misturar materiais.",
+            uses=["Você quer dividir o curso por unidades ou trimestres.",
+                  "Você quer que o estudante veja de forma organizada o que fazer em cada bloco."],
+            example="Em um curso de História, você cria uma seção por tema: 'Revolução Industrial', 'Imperialismo' e 'Primeira Guerra Mundial'. Dentro de cada uma coloca o material, a ficha de prática e a entrega, e o estudante sabe em que bloco está cada coisa."),
+        'serie-campos': dict(
+            answer="Uma série de aulas é definida com poucos campos. Tema é obrigatório; os demais ajudam a encontrar a série e a fazer com que ela saia adaptada à sua turma. Serve para que a série gerada já se encaixe desde o início.",
+            uses=["Você vai criar uma série nova e quer preenchê-la bem na primeira vez.",
+                  "Você tem muitas séries e precisa encontrá-las por disciplina ou curso."],
+            example="Para uma série de 'Introdução ao cálculo integral', você preenche Tema, Disciplina 'Matemática', Curso '1.º ano do ensino médio' e, na Descrição, escreve que a turma já conhece derivadas. Com esses dados a série sai no nível certo, e depois você a encontra por disciplina.",
+            tips=["Quanto mais concreta a descrição, melhor a série se encaixa na sua turma."]),
+        'tarea-criterios': dict(
+            answer="Um critério observável descreve algo que você consegue ver no trabalho do estudante. Serve para corrigir com a mesma régua em todos os trabalhos e para explicar a nota com clareza.",
+            uses=["Você vai corrigir um trabalho com vários aspectos para avaliar.",
+                  "Você quer que o estudante entenda por que recebeu cada nota."],
+            example="Em vez de 'boa argumentação', o critério diz 'Apresenta pelo menos duas evidências que sustentem a tese'. Ao corrigir, a evidência está ou não está, e ao devolver o trabalho você aponta exatamente o que falta."),
+    },
+}
+
+
+def apply_content_overlay(merged: dict) -> None:
+    """Aplica los textos ampliados a cada artículo publicado que exista en CONTENT."""
+    for loc, items in CONTENT.items():
+        for art in merged[loc]['articles']:
+            new = items.get(art['id'])
+            if not new:
+                continue
+            art['answer'] = new['answer']
+            art['uses'] = new.get('uses', [])
+            art['example'] = new.get('example', '')
+            if 'tips' in new:
+                art['tips'] = new['tips']
