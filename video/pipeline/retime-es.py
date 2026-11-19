@@ -27,7 +27,7 @@ RAW = ROOT / 'video' / 'raw' / 'es'
 WORK = ROOT / 'video' / 'work' / 'es-retimed'
 SPEED_ES = 1.08
 MIN_F, MAX_F = 0.5, 2.0
-FILE_TO_SCENE = {'C-1': 'curso-pestanas'}  # archivo de salida -> guion
+FILE_TO_SCENE = {'C-1': 'curso-pestanas', 'tarea': 'tarea-legacy'}  # archivo de salida -> guion (tarea: frases de la grabación antigua)
 
 
 def norm(s: str) -> str:
