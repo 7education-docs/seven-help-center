@@ -112,7 +112,6 @@ ol.steps p{margin:0}
 
 .tips{margin-top:1.4rem;background:var(--tint);border-radius:var(--radius);padding:16px 18px}.tips strong{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}.tips li{font-size:1.05rem}
 .tips ul{margin:.3em 0 0;padding-left:1.1em}
-.uses{margin:.4em 0 0;padding-left:1.2em}.uses li{margin:.4em 0;font-size:1.05rem}
 .example{margin-top:1.4rem;border-left:3px solid var(--primary);padding:4px 0 4px 16px}.example strong{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}.example p{margin:0;font-size:1.05rem}
 .related{margin-top:2rem}
 .pager{margin-top:2rem}
@@ -318,7 +317,6 @@ const DATA = /*__DATA__*/null;
     const items = inCat(loc, 'faq').map((a) => {
       const figs = (a.img || []).filter((n) => d.shots[n]).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '" loading="lazy"></figure>').join('');
       return '<details class="faq" id="q-' + esc(a.id) + '"><summary>' + esc(a.title) + '</summary><div class="faq-body"><p>' + esc(a.answer) + '</p>' +
-        (a.uses && a.uses.length ? '<h4 class="faq-h">' + esc(u.whenUse) + '</h4><ul class="faq-tips">' + a.uses.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>' : '') +
         (a.example ? '<p class="faq-ex"><strong>' + esc(u.example) + ': </strong>' + esc(a.example) + '</p>' : '') +
         (a.steps && a.steps.length ? '<ol class="faq-steps">' + a.steps.map((st) => '<li><strong>' + esc(st.t) + '</strong> ' + esc(st.b) + '</li>').join('') + '</ol>' : '') +
         (a.tips && a.tips.length ? '<ul class="faq-tips">' + a.tips.map((tp) => '<li>' + esc(tp) + '</li>').join('') + '</ul>' : '') + figs + '</div></details>';
@@ -351,7 +349,6 @@ const DATA = /*__DATA__*/null;
     return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name, href: href(loc, 'cat-' + c.id) }, { label: a.title }]) +
       '<article class="article-head"><h1>' + esc(a.title) + '</h1>' +
       '<div class="answer"><b>' + esc(u.inSummary) + '</b><p>' + esc(a.answer) + '</p></div>' +
-      (a.uses && a.uses.length ? '<section class="block"><h2>' + esc(u.whenUse) + '</h2><ul class="uses">' + a.uses.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul></section>' : '') +
       (a.example ? '<aside class="example"><strong>' + esc(u.example) + '</strong><p>' + esc(a.example) + '</p></aside>' : '') +
       (a.table ? '<section class="block"><div class="tbl-wrap"><table class="tbl"><thead><tr>' + a.table.head.map((x) => '<th scope="col">' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' + a.table.rows.map((r) => '<tr>' + r.map((x) => '<td>' + esc(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div></section>' : '') +
       (d.videos && d.videos[a.id] && !d.videos[a.id].after ? videoBlock(d, a.id, u) : '') +
