@@ -82,7 +82,7 @@ def process(file: str, lang: str, dir_key: str) -> None:
         env={**os.environ, "NODE_PATH": os.environ.get("NODE_PATH", "")})
 
     if lang == "pt":
-        narr_text = f"{title}. {subtitle}."
+        narr_text = texts["narration"]  # introducción: qué se aprende en el vídeo, no el título
         mp3, wav = work / "intro.mp3", work / "intro.wav"
         if not wav.exists():  # la narración de la portada no cambia: se reutiliza si ya existe
             eleven_speech(narr_text, mp3)
@@ -109,7 +109,7 @@ def process(file: str, lang: str, dir_key: str) -> None:
          "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-pix_fmt", "yuv420p", "-r", str(FPS),
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(out_mp4)])
 
-    intro_text = f"{title}. {subtitle}."
+    intro_text = texts.get("narration", title)  # el subtítulo de la portada = la narración
     (out_dir / f"{file}.vtt").write_text(
         shift_vtt(raw_vtt.read_text(encoding="utf-8"), intro_dur, intro_text, intro_dur), encoding="utf-8")
     run(["ffmpeg", "-y", "-v", "error", "-i", str(card), "-frames:v", "1", "-q:v", "3", str(out_dir / f"{file}.jpg")])
