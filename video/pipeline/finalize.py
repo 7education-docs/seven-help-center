@@ -68,20 +68,29 @@ def shift_vtt(raw: str, offset: float, intro_text: str, intro_dur: float) -> str
 
 
 BED = ROOT / "video" / "work" / "music" / "bed-raw.mp3"   # música generada (ElevenLabs), se repite en bucle
-FADE_V, FADE_A = 1.5, 2.5
+FADE_V, FADE_A = 2.5, 2.5
+
+
+LOGO_WHITE = ROOT / "video" / "work" / "brand" / "logo-white.png"   # logotipo en blanco para el final en negro
 
 
 def add_bed(src: pathlib.Path, dst: pathlib.Path, intro_dur: float) -> None:
-    """Música de fondo: suena bajo la introducción, casi en silencio en medio y vuelve al final.
-    El vídeo termina con un fundido a negro (imagen y sonido)."""
+    """Final: la imagen y el sonido se funden a negro y aparece el logotipo de Seven Education.
+    Música: baja suave al empezar, casi en silencio mientras se habla, y solo sube durante la transición a negro."""
     d = probe_duration(src)
-    fv, fa = max(0.0, d - FADE_V), max(0.0, d - FADE_A)
-    end_swell = max(intro_dur, d - 6.0)
-    filt = (f"[0:v]fade=t=out:st={fv:.3f}:d={FADE_V}[v];"
-            f"[1:a]volume='if(lt(t,{intro_dur:.3f}),0.22,if(gt(t,{end_swell:.3f}),0.3,0.015))':eval=frame[mus];"
+    fv = max(0.0, d - FADE_V)                 # empieza el fundido a negro
+    r1, r2 = d - FADE_V, d - 0.5              # ventana de subida de la música (transición a negro)
+    logo_t = max(0.0, d - 2.2)                # el logotipo aparece hacia el final del fundido
+    vol = (f"if(lt(t,1),0.12,if(lt(t,3),0.12-0.108*(t-1)/2,if(lt(t,{r1:.3f}),0.012,"
+           f"if(lt(t,{r2:.3f}),0.012+0.338*(t-{r1:.3f})/{FADE_V - 0.5:.3f},0.35))))")
+    filt = (f"[0:v]fade=t=out:st={fv:.3f}:d={FADE_V}[vf];"
+            f"[2:v]format=rgba,scale=380:-1,fade=t=in:st={logo_t:.3f}:d=1.2:alpha=1[lg];"
+            "[vf][lg]overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2[v];"
+            f"[1:a]volume='{vol}':eval=frame[mus];"
             "[0:a][mus]amix=inputs=2:duration=first:normalize=0[mix];"
-            f"[mix]afade=t=out:st={fa:.3f}:d={FADE_A}[a]")
+            f"[mix]afade=t=out:st={fv:.3f}:d={FADE_V}[a]")
     run(["ffmpeg", "-y", "-v", "error", "-i", str(src), "-stream_loop", "-1", "-i", str(BED),
+         "-loop", "1", "-i", str(LOGO_WHITE),
          "-filter_complex", filt, "-map", "[v]", "-map", "[a]", "-t", f"{d:.3f}",
          "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-pix_fmt", "yuv420p", "-r", str(FPS),
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(dst)])
