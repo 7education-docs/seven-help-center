@@ -7,6 +7,7 @@ numeradas dependen del número de pasos. Para cada artículo se reemplazan:
   example  -> caso concreto ("Ejemplo")
   tips     -> consejos (si se indica; si no, se mantienen los actuales)
 """
+import pathlib
 
 CONTENT = {
     'es': {
@@ -300,3 +301,46 @@ def apply_course_merge(merged: dict) -> None:
                     a[field] = [i for i in dict.fromkeys(KEEP if i in gone else i for i in a[field]) if i != a['id']]
         for g in d.get('courseGroups') or []:  # quitar los absorbidos de los grupos de cursos
             g['ids'] = [i for i in g['ids'] if i not in gone]
+
+
+# ---------------------------------------------------------------------------
+# Reescritura de todos los artículos (rewrites-es.py, rewrites-es-2.py, rewrites-pt.py).
+# Cada entrada puede traer answer, example, tips y steps. Los pasos deben tener el mismo número
+# que en el artículo publicado (si no, las capturas numeradas quedarían descolocadas).
+# ---------------------------------------------------------------------------
+def _load_rewrites(name: str, var: str):
+    import importlib.util
+    path = pathlib.Path(__file__).resolve().parent / f'{name}.py'
+    if not path.exists():
+        return None
+    spec = importlib.util.spec_from_file_location(name.replace('-', '_'), str(path))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return getattr(mod, var)
+
+
+def apply_rewrites(merged: dict) -> None:
+    sources = {
+        'es': [_load_rewrites('rewrites-es', 'REWRITES'), _load_rewrites('rewrites-es-2', 'REWRITES_2')],
+        'pt-BR': [_load_rewrites('rewrites-pt', 'REWRITES')],
+    }
+    for loc, dicts in sources.items():
+        arts = {a['id']: a for a in merged[loc]['articles']}
+        n = 0
+        for rw in dicts:
+            for aid, new in (rw or {}).items():
+                art = arts.get(aid)
+                if art is None:
+                    continue
+                if 'steps' in new:
+                    old = art.get('steps') or []
+                    if len(new['steps']) != len(old):
+                        raise SystemExit(f"{loc} · {aid}: {len(new['steps'])} pasos nuevos, {len(old)} en el artículo")
+                    art['steps'] = [dict(t=s['t'], b=s['b']) for s in new['steps']]
+                for key in ('answer', 'example'):
+                    if key in new:
+                        art[key] = new[key]
+                if 'tips' in new:
+                    art['tips'] = list(new['tips'])
+                n += 1
+        print(f'  {loc}: {n} artículos reescritos')

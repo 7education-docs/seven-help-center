@@ -45,6 +45,7 @@ def main() -> None:
     spec3 = importlib.util.spec_from_file_location('content_expansions', str(pathlib.Path(__file__).resolve().parent / 'content-expansions.py'))
     content = importlib.util.module_from_spec(spec3); spec3.loader.exec_module(content)
     content.apply_content_overlay(merged)
+    content.apply_rewrites(merged)
     apply_numbered(merged)
     content.apply_course_merge(merged)
     ser = json.dumps(merged, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
