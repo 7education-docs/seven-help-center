@@ -41,6 +41,10 @@
         {
           "do": "shot",
           "name": "asistente-1-lista"
+        },
+        {
+          "do": "wait",
+          "ms": 7701
         }
       ]
     },
@@ -64,6 +68,10 @@
         {
           "do": "shot",
           "name": "asistente-2-formulario"
+        },
+        {
+          "do": "wait",
+          "ms": 1316
         }
       ]
     },
@@ -85,6 +93,10 @@
         {
           "do": "wait",
           "ms": 600
+        },
+        {
+          "do": "wait",
+          "ms": 2414
         }
       ]
     },
@@ -116,6 +128,10 @@
         {
           "do": "shot",
           "name": "asistente-3-herramientas"
+        },
+        {
+          "do": "wait",
+          "ms": 3835
         }
       ]
     },
@@ -141,6 +157,10 @@
         {
           "do": "shot",
           "name": "asistente-4-instruccion"
+        },
+        {
+          "do": "wait",
+          "ms": 4792
         }
       ]
     },
@@ -164,6 +184,10 @@
         {
           "do": "shot",
           "name": "asistente-5-guardado"
+        },
+        {
+          "do": "wait",
+          "ms": 2510
         }
       ]
     },
@@ -224,6 +248,10 @@
         {
           "do": "wait",
           "ms": 2000
+        },
+        {
+          "do": "wait",
+          "ms": 3007
         }
       ]
     }

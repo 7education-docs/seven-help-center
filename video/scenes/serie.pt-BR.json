@@ -39,6 +39,10 @@
         {
           "do": "shot",
           "name": "serie-1-lista"
+        },
+        {
+          "do": "wait",
+          "ms": 7562
         }
       ]
     },
@@ -66,6 +70,10 @@
         {
           "do": "shot",
           "name": "serie-2-formulario"
+        },
+        {
+          "do": "wait",
+          "ms": 1634
         }
       ]
     },
@@ -87,6 +95,10 @@
         {
           "do": "wait",
           "ms": 500
+        },
+        {
+          "do": "wait",
+          "ms": 2674
         }
       ]
     },
@@ -147,6 +159,10 @@
         {
           "do": "shot",
           "name": "serie-4-guardada"
+        },
+        {
+          "do": "wait",
+          "ms": 3962
         }
       ]
     },
@@ -162,6 +178,10 @@
         {
           "do": "wait",
           "ms": 2000
+        },
+        {
+          "do": "wait",
+          "ms": 3705
         }
       ]
     }

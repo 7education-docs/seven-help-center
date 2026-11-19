@@ -25,6 +25,10 @@
         {
           "do": "wait",
           "ms": 2400
+        },
+        {
+          "do": "wait",
+          "ms": 6457
         }
       ]
     },
@@ -56,6 +60,10 @@
         {
           "do": "shot",
           "name": "ver-alumno-1-oculta"
+        },
+        {
+          "do": "wait",
+          "ms": 1694
         }
       ]
     },
@@ -79,6 +87,10 @@
         {
           "do": "shot",
           "name": "ver-alumno-2-vista"
+        },
+        {
+          "do": "wait",
+          "ms": 2219
         }
       ]
     },
@@ -129,6 +141,10 @@
         {
           "do": "wait",
           "ms": 2200
+        },
+        {
+          "do": "wait",
+          "ms": 3040
         }
       ]
     }
