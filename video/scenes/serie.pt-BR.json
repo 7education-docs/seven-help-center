@@ -1,0 +1,169 @@
+{
+  "lesson": "serie",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/lesson-series"
+    },
+    {
+      "do": "type",
+      "selector": "input[type=\"search\"]",
+      "text": "fotossíntese",
+      "delay": 50
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Séries de lições"
+    },
+    {
+      "do": "wait",
+      "ms": 1000
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Uma série de aulas prepara um tema completo, sessão por sessão. Vou mostrar como criar uma em menos de um minuto.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Crie uma série de aulas",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        },
+        {
+          "do": "shot",
+          "name": "serie-1-lista"
+        }
+      ]
+    },
+    {
+      "id": "abrir",
+      "say": "Clique em Criar e o formulário se abre.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "1 · Clique em Criar",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Criar\"]"
+        },
+        {
+          "do": "waitFor",
+          "selector": "input[placeholder^=\"e.g. Introduction\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "shot",
+          "name": "serie-2-formulario"
+        }
+      ]
+    },
+    {
+      "id": "tema",
+      "say": "Escreva o tema. Por exemplo: a fotossíntese, da luz à matéria.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · Escreva o tema",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder^=\"e.g. Introduction\"]",
+          "text": "A fotossíntese: da luz à matéria",
+          "delay": 45
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "datos",
+      "say": "Indique a disciplina, o ano e uma descrição breve dos objetivos.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Disciplina, ano e objetivos",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"e.g. Mathematics\"]",
+          "text": "Biologia",
+          "delay": 40
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"e.g. 10th Grade\"]",
+          "text": "1.º ano",
+          "delay": 40
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Entender como as plantas transformam a luz em energia química.",
+          "delay": 22
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "shot",
+          "name": "serie-3-completo"
+        }
+      ]
+    },
+    {
+      "id": "guardar",
+      "say": "Clique em Criar outra vez para salvar. A série aparece na lista, pronta para editar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "4 · Salve",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button[type=\"submit\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        },
+        {
+          "do": "shot",
+          "name": "serie-4-guardada"
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Pronto. Da lista você pode abrir, editar ou gerar a série com IA.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Série criada",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    }
+  ]
+}

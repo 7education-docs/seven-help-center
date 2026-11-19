@@ -1,0 +1,99 @@
+{
+  "lesson": "tarea-c",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/feedback-tasks/168"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Access links"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "entregas",
+      "say": "Quando os alunos entregam, a tarefa mostra cada um com a melhor nota e com cada entrega.",
+      "actions": [
+        {
+          "do": "scroll",
+          "selector": "text=Best performance"
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Best performance",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Ana Souza",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 1000
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Bruno Lima",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 1000
+        }
+      ]
+    },
+    {
+      "id": "revisar",
+      "say": "Clique numa nota para rever a entrega: o texto do aluno, a pontuação de cada critério e o comentário que a justifica.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=/\\/10/ >> nth=0"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Detalhes:"
+        },
+        {
+          "do": "wait",
+          "ms": 4200
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Detalhes:",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "cerrar",
+      "say": "Antes de dar a nota final, confirme que o comentário coincide com os critérios. Assim, o feedback também orienta o aluno.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "lesson": "invitar",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/hsb-V2ulM_DGct0zMq5nmA"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Vista general\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Tu alumnado entra al curso en segundos, sin buscar nada. Te enseño las dos formas de invitarlo: con el código o con el enlace.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Invita a tu alumnado",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Invitar al alumnado",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "shot",
+          "name": "invitar-1-tarjeta"
+        }
+      ]
+    },
+    {
+      "id": "codigo",
+      "say": "En la tarjeta de invitación tienes el código de inscripción. Pulsa Copiar código y ya lo tienes listo para compartirlo.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "1 · Copia el código de inscripción",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "[aria-label=\"Copiar código\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 1400
+        },
+        {
+          "do": "shot",
+          "name": "invitar-2-codigo"
+        }
+      ]
+    },
+    {
+      "id": "enlace",
+      "say": "También puedes compartir el enlace de inscripción. Quien lo abra puede entrar sin cuenta, solo con su nombre.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · O comparte el enlace",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Código de inscripción",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Listo. Envía el código a tu grupo y el curso se llena en cuanto entran. Si lo necesitas, puedes generar un código nuevo en cualquier momento.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Tu grupo ya puede entrar",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    }
+  ]
+}

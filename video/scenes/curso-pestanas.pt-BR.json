@@ -1,0 +1,138 @@
+{
+  "lesson": "C.1",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/9LFW6daqyOEv6a08FKD5mQ"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Vista geral\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Neste guia percorremos as abas de um curso. Elas ficam na parte superior, e a primeira é a visão geral.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Abas de um curso",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Vista geral\")",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 3200
+        }
+      ]
+    },
+    {
+      "id": "visao",
+      "say": "Na visão geral, cada seção reúne as atividades do curso. O botão Adicionar atividade ou material abre o menu com todos os tipos disponíveis.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "1 · Visão geral e seções",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Adicionar atividade ou material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3600
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 400
+        }
+      ]
+    },
+    {
+      "id": "compromissos",
+      "say": "Em Compromissos você organiza as sessões com data, horário e local. Veja o botão Criar compromisso.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · Compromissos",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Compromissos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1400
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Criar compromisso\")",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1000
+        },
+        {
+          "do": "shot",
+          "name": "curso-2-compromissos"
+        }
+      ]
+    },
+    {
+      "id": "conteudos",
+      "say": "Conteúdos partilhados reúne materiais, entregas, links e notas numa única lista.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Conteúdos partilhados",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Conteúdos partilhados\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "definicoes",
+      "say": "Definições agrupa os ajustes do curso: o código de inscrição, a visualização e a inteligência artificial.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "4 · Definições do curso",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Definições\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3200
+        },
+        {
+          "do": "shot",
+          "name": "curso-4-definicoes"
+        }
+      ]
+    }
+  ]
+}

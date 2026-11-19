@@ -1,0 +1,136 @@
+{
+  "lesson": "ver-alumno",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/9LFW6daqyOEv6a08FKD5mQ"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Vista geral\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Antes de publicar um material, você quer saber o que os seus alunos veem. Mostro isso com uma atividade real do curso.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "",
+          "text": "O que o aluno vê"
+        },
+        {
+          "do": "wait",
+          "ms": 2400
+        }
+      ]
+    },
+    {
+      "id": "ocultar",
+      "say": "Abra o menu da atividade e escolha Ocultar aos alunos. Só a equipe docente a verá.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "1 ·",
+          "text": "Oculte a atividade"
+        },
+        {
+          "do": "click",
+          "selector": "button[aria-label^=\"Ações para Teoria\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "click",
+          "selector": "role=menuitem[name=/Ocultar aos alunos/]"
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        },
+        {
+          "do": "shot",
+          "name": "ver-alumno-1-oculta"
+        }
+      ]
+    },
+    {
+      "id": "alumno",
+      "say": "Agora clique em Ver como aluno. Assim você confere o que aparece e o que não aparece.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "2 ·",
+          "text": "Veja o curso como aluno"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Ver como aluno\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3600
+        },
+        {
+          "do": "shot",
+          "name": "ver-alumno-2-vista"
+        }
+      ]
+    },
+    {
+      "id": "mostrar",
+      "say": "Volte à vista da equipe docente e escolha Mostrar aos alunos. A mudança é imediata.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "3 ·",
+          "text": "Volte a mostrá-la"
+        },
+        {
+          "do": "goto",
+          "url": "/educa/courses/9LFW6daqyOEv6a08FKD5mQ"
+        },
+        {
+          "do": "waitFor",
+          "selector": "button:has-text(\"Vista geral\")"
+        },
+        {
+          "do": "click",
+          "selector": "button[aria-label^=\"Ações para Teoria\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "click",
+          "selector": "role=menuitem[name=/Mostrar aos alunos/]"
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Assim você confere cada mudança antes que chegue à sua aula.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "",
+          "text": "Confira antes de publicar"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "lesson": "ver-alumno",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/hsb-V2ulM_DGct0zMq5nmA"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Vista general\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Antes de publicar un material, quieres saber qué ve tu alumnado. Te lo enseño con una actividad real del curso.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "",
+          "text": "Qué ve el alumnado"
+        },
+        {
+          "do": "wait",
+          "ms": 2400
+        }
+      ]
+    },
+    {
+      "id": "ocultar",
+      "say": "Abre el menú de la actividad y elige Ocultar al alumnado. Solo el profesorado la verá.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "1 ·",
+          "text": "Oculta la actividad"
+        },
+        {
+          "do": "click",
+          "selector": "button[aria-label^=\"Acciones para Redacción\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "click",
+          "selector": "role=menuitem[name=/Ocultar al alumnado/]"
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        },
+        {
+          "do": "shot",
+          "name": "ver-alumno-1-oculta"
+        }
+      ]
+    },
+    {
+      "id": "alumno",
+      "say": "Ahora pulsa Ver como estudiante. Así compruebas lo que aparece y lo que no.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "2 ·",
+          "text": "Mira el curso como alumno"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Ver como estudiante\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3600
+        },
+        {
+          "do": "shot",
+          "name": "ver-alumno-2-vista"
+        }
+      ]
+    },
+    {
+      "id": "mostrar",
+      "say": "Vuelve a la vista del profesorado y elige Mostrar al alumnado. El cambio es inmediato.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "3 ·",
+          "text": "Vuelve a mostrarla"
+        },
+        {
+          "do": "goto",
+          "url": "/educa/courses/hsb-V2ulM_DGct0zMq5nmA"
+        },
+        {
+          "do": "waitFor",
+          "selector": "button:has-text(\"Vista general\")"
+        },
+        {
+          "do": "click",
+          "selector": "button[aria-label^=\"Acciones para Redacción\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "click",
+          "selector": "role=menuitem[name=/Mostrar al alumnado/]"
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Así compruebas cada cambio antes de que llegue a tu clase.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "",
+          "text": "Compruébalo antes de publicar"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "lesson": "series-lecciones",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/lesson-series"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Editados recientemente"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Una serie de lecciones es una secuencia de sesiones sobre un mismo tema, con objetivos y actividades para cada clase.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Generar con IA\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "lista",
+      "say": "Tus series aparecen ordenadas por fecha de edición. Cada una muestra su asignatura y su curso, y puedes editarla en cualquier momento.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Niveles de organización de los seres vivos",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "crear",
+      "say": "Con Crear abres el formulario. Solo el tema es obligatorio; la asignatura, el curso, el idioma y la descripción ayudan a ajustar la serie.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Crear\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "rellenar",
+      "say": "Escribe el tema, por ejemplo, niveles de organización de los seres vivos, junto con la asignatura y el curso.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder^=\"ej. Introducción\"]",
+          "text": "Niveles de organización de los seres vivos",
+          "delay": 50
+        },
+        {
+          "do": "click",
+          "selector": "input[placeholder=\"ej. Matemáticas\"]"
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"ej. Matemáticas\"]",
+          "text": "Biología y Geología",
+          "delay": 50
+        },
+        {
+          "do": "click",
+          "selector": "input[placeholder=\"p. ej. 4.º de ESO\"]"
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"p. ej. 4.º de ESO\"]",
+          "text": "1.º de ESO",
+          "delay": 50
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "cerrar",
+      "say": "Como es una demostración, cerramos sin guardar. Al generar con IA, la plataforma crea la serie completa a partir de estos datos.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    }
+  ]
+}

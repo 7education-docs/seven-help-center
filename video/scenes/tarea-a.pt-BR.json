@@ -1,0 +1,268 @@
+{
+  "lesson": "tarea-a",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/feedback-tasks"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Editados recentemente"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "As tarefas de correção e feedback permitem que o assistente reveja as entregas dos seus alunos com os seus critérios. Vamos criar uma do zero.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "role=button[name=\"Criar\"]",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Criar\"]"
+        },
+        {
+          "do": "waitFor",
+          "selector": "role=dialog >> input[placeholder=\"Task title\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 600
+        }
+      ]
+    },
+    {
+      "id": "datos",
+      "say": "Escreva um título que os alunos reconheçam e uma descrição clara: é o que vão ver ao entregar. O campo do título aparece com o nome Task title no produto.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "role=dialog >> input[placeholder=\"Task title\"]",
+          "text": "Observe células de cebola ao microscópio",
+          "delay": 25
+        },
+        {
+          "do": "type",
+          "selector": "role=dialog >> textarea[placeholder^=\"Task description\"]",
+          "text": "Observe a preparação de epiderme de cebola e responda com as suas palavras. Descreva a forma e a ordem das células e explique para que serve o microscópio. Entre 80 e 150 palavras.",
+          "delay": 12
+        },
+        {
+          "do": "wait",
+          "ms": 600
+        }
+      ]
+    },
+    {
+      "id": "solucion",
+      "say": "A solução modelo serve de referência para corrigir. Os alunos não a veem. O campo aparece como Sample solution.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "role=dialog >> textarea[placeholder^=\"Hidden\"]",
+          "text": "Devem aparecer células retangulares, ordenadas e unidas, com parede celular visível e um núcleo no interior de cada uma. Valoriza-se explicar o aumento do microscópio.",
+          "delay": 12
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        }
+      ]
+    },
+    {
+      "id": "criterios",
+      "say": "Acrescente cada critério com os seus pontos, pelo botão Add criterion. Os três somam 10 pontos.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Add criterion\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 400
+        },
+        {
+          "do": "fill",
+          "selector": "role=dialog >> input:not([placeholder]) >> nth=0",
+          "value": "Descreva a forma e a ordem das células"
+        },
+        {
+          "do": "fill",
+          "selector": "role=dialog >> input:not([placeholder]) >> nth=1",
+          "value": "4"
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Add criterion\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 400
+        },
+        {
+          "do": "fill",
+          "selector": "role=dialog >> input:not([placeholder]) >> nth=2",
+          "value": "Identifique a parede celular e o núcleo"
+        },
+        {
+          "do": "fill",
+          "selector": "role=dialog >> input:not([placeholder]) >> nth=3",
+          "value": "3"
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Add criterion\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 400
+        },
+        {
+          "do": "fill",
+          "selector": "role=dialog >> input:not([placeholder]) >> nth=4",
+          "value": "Explique para que serve o microscópio"
+        },
+        {
+          "do": "fill",
+          "selector": "role=dialog >> input:not([placeholder]) >> nth=5",
+          "value": "3"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        }
+      ]
+    },
+    {
+      "id": "documento",
+      "say": "Anexe o documento da sua biblioteca em que a tarefa se baseia. Aqui, o artigo da Wikipédia sobre o microscópio óptico.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "role=dialog >> button:has-text(\"Documentos\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "[role=dialog] tr:has-text(\"Microscópio óptico\")"
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        },
+        {
+          "do": "click",
+          "selector": "[role=dialog] tr:has-text(\"Microscópio óptico\")"
+        },
+        {
+          "do": "wait",
+          "ms": 400
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Confirmar\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "guardar",
+      "say": "Clique em Criar. A tarefa aparece na lista, pronta a usar.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Criar\"]"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Observe células de cebola ao microscópio"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "abrir",
+      "say": "Abra-a para confirmar os critérios e o documento de apoio.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Observe células de cebola ao microscópio >> nth=0"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Critérios de avaliação"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Critérios de avaliação",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1400
+        }
+      ]
+    },
+    {
+      "id": "enlace",
+      "say": "Para a repartir, crie um link de acesso. Os alunos entram como convidados, apenas com o nome. Neste produto, o botão aparece como Create link.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Create link\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Generate link\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 1600
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "scroll",
+          "selector": "text=Access links"
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Access links",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "lesson": "tarea-b",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "https://sevenai.es/feedback/access/dcbc4d53-f95e-45a9-a223-c250fdc91aca"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Continuar como invitado"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "entrada",
+      "say": "Tu alumnado abre el enlace de la tarea. No necesita cuenta: escribe su nombre y pulsa Continuar como invitado.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"]",
+          "text": "Lucía Martín",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Continuar como invitado\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "tarea",
+      "say": "Ve la descripción, el documento de apoyo y los criterios con sus puntos. La solución modelo no aparece.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Criterios de calificación"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Documentos",
+          "ms": 1400
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Criterios de calificación",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        }
+      ]
+    },
+    {
+      "id": "respuesta",
+      "say": "Escribe su respuesta. Antes de entregar puede pedir feedback, y tiene un intento para hacerlo.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "textarea[placeholder^=\"Escriba\"]",
+          "text": "Veo células pegadas unas a otras, con forma de cuadrado y ordenadas. Cada una tiene una línea por fuera que la rodea, que es la pared celular. No he visto el núcleo porque es muy pequeño y no lo he distinguido.",
+          "delay": 14
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Obtener feedback\"] >> nth=0"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Obtener feedback\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 42000
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Intento #1"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "scroll",
+          "selector": "text=Su historial de entregas"
+        }
+      ]
+    },
+    {
+      "id": "resultado",
+      "say": "El feedback da una nota por criterio y explica cada puntuación. Así el alumnado sabe qué le falta antes de entregar.",
+      "actions": [
+        {
+          "do": "scroll",
+          "selector": "text=Detalles:"
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Detalles:",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 3800
+        }
+      ]
+    },
+    {
+      "id": "enviar",
+      "say": "Cuando esté conforme, pulsa Enviar. La entrega queda registrada en la tarea.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Enviar\"] >> nth=0"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Enviar\"]"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Ha entregado la tarea"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    }
+  ]
+}

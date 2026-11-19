@@ -1,0 +1,204 @@
+{
+  "lesson": "cita",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/hsb-V2ulM_DGct0zMq5nmA"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Citas\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Vamos a crear una cita en tu curso, de principio a fin. Así tu alumnado sabe siempre cuándo es la próxima sesión o el próximo laboratorio.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "",
+          "text": "Crear una cita"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        },
+        {
+          "do": "shot",
+          "name": "cita-0-inicio"
+        }
+      ]
+    },
+    {
+      "id": "pestana",
+      "say": "Primero, abre la pestaña Citas. Aquí aparecen todas las citas del curso, las pasadas y las próximas.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "1 ·",
+          "text": "Abre la pestaña Citas"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Citas\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1600
+        },
+        {
+          "do": "shot",
+          "name": "cita-1-pestana"
+        }
+      ]
+    },
+    {
+      "id": "crear",
+      "say": "Pulsa Crear cita. Se abre el formulario, con pocos campos que rellenar.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "2 ·",
+          "text": "Pulsa Crear cita"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Crear cita\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "internal:label=\"Título\"s"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "shot",
+          "name": "cita-2-formulario"
+        }
+      ]
+    },
+    {
+      "id": "titulo",
+      "say": "Escribe un título claro, por ejemplo: Laboratorio, observar células de cebolla.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "3 ·",
+          "text": "Escribe el título"
+        },
+        {
+          "do": "type",
+          "selector": "internal:label=\"Título\"s",
+          "text": "Laboratorio: observar células de cebolla",
+          "delay": 45
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "fecha",
+      "say": "Elige la fecha. Después marca la hora de inicio en Inicio y la de fin en Fin.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "4 ·",
+          "text": "Elige la fecha y el horario"
+        },
+        {
+          "do": "fill",
+          "selector": "internal:label=\"Fecha\"s",
+          "value": "2026-11-25"
+        },
+        {
+          "do": "fill",
+          "selector": "internal:label=\"Desde\"s",
+          "value": "10:00"
+        },
+        {
+          "do": "fill",
+          "selector": "internal:label=\"Hasta\"s",
+          "value": "11:00"
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "shot",
+          "name": "cita-3-fecha"
+        }
+      ]
+    },
+    {
+      "id": "lugar",
+      "say": "Indica el lugar, por ejemplo Laboratorio 2, y una nota para el alumnado.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "5 ·",
+          "text": "Indica el lugar y una nota"
+        },
+        {
+          "do": "type",
+          "selector": "internal:label=\"Lugar (opcional)\"s",
+          "text": "Laboratorio 2",
+          "delay": 50
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Traer microscopio y muestra de cebolla.",
+          "delay": 35
+        },
+        {
+          "do": "wait",
+          "ms": 600
+        },
+        {
+          "do": "shot",
+          "name": "cita-4-completo"
+        }
+      ]
+    },
+    {
+      "id": "guardar",
+      "say": "Pulsa Guardar. La cita aparece en la lista, lista para que el alumnado la vea.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "6 ·",
+          "text": "Pulsa Guardar"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Guardar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        },
+        {
+          "do": "caption",
+          "step": "",
+          "text": "Cita creada"
+        },
+        {
+          "do": "shot",
+          "name": "cita-5-guardada"
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Listo. Tu curso queda organizado, y tu alumnado sabe exactamente cuándo es cada sesión."
+    }
+  ]
+}
