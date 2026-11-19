@@ -430,9 +430,9 @@ const DATA = /*__DATA__*/null;
     const speeds = [0.75, 1, 1.25, 1.5].map((s) => '<button type="button" class="vp-btn vp-speed" data-vp-speed="' + s + '" aria-controls="vid-' + id + '" aria-pressed="' + (s === 1) + '">' + s + '×</button>').join('');
     return '<section class="block video-block"><h2>' + esc(u.video) + '</h2><figure class="video">' +
       '<video id="vid-' + id + '" controls playsinline preload="metadata" poster="' + esc(v.poster || '') + '" src="' + v.src + '" aria-label="' + esc(v.title) + '">' +
-      '<track kind="subtitles" srclang="' + v.srclang + '" label="' + esc(v.label) + '" src="' + v.vtt + '" default></video>' +
+      '<track kind="subtitles" srclang="' + v.srclang + '" label="' + esc(v.label) + '" src="' + v.vtt + '"></video>' +
       '<div class="vp-bar" role="toolbar" aria-label="' + esc(u.vpControls) + '">' +
-      '<button type="button" class="vp-btn vp-cc" data-vp-cc aria-controls="vid-' + id + '" aria-pressed="true">' + esc(u.vpCC) + '</button>' +
+      '<button type="button" class="vp-btn vp-cc" data-vp-cc aria-controls="vid-' + id + '" aria-pressed="false">' + esc(u.vpCC) + '</button>' +
       '<span class="vp-label">' + esc(u.vpSpeed) + '</span><div class="vp-speeds" role="group" aria-label="' + esc(u.vpSpeed) + '">' + speeds + '</div>' +
       '</div>' +
       '<p class="vp-fallback" hidden>' + esc(u.vpFallback) + ' <a href="' + v.src + '">' + esc(u.vpOpen) + '</a></p>' +
@@ -457,7 +457,7 @@ const DATA = /*__DATA__*/null;
   document.addEventListener('loadedmetadata', (e) => {
     if (e.target.tagName !== 'VIDEO') return;
     const tr = e.target.textTracks && e.target.textTracks[0];
-    if (tr) tr.mode = 'showing';
+    if (tr) tr.mode = 'hidden';
     const fig = e.target.closest('figure'); const cc = fig && fig.querySelector('[data-vp-cc]');
     if (cc) cc.setAttribute('aria-pressed', String(!!tr && tr.mode === 'showing'));
   }, true);

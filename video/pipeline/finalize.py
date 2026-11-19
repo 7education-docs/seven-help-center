@@ -66,6 +66,27 @@ def shift_vtt(raw: str, offset: float, intro_text: str, intro_dur: float) -> str
     return "\n".join(out) + "\n"
 
 
+
+BED = ROOT / "video" / "work" / "music" / "bed-raw.mp3"   # música generada (ElevenLabs), se repite en bucle
+BED_GAIN = 0.35      # ~ -9 dB: fondo suave
+FADE_V, FADE_A = 1.5, 2.5
+
+
+def add_bed(src: pathlib.Path, dst: pathlib.Path) -> None:
+    """Añade música de fondo suave bajo la narración y termina con un fundido (no corta en seco)."""
+    d = probe_duration(src)
+    fv, fa = max(0.0, d - FADE_V), max(0.0, d - FADE_A)
+    filt = (f"[0:v]fade=t=out:st={fv:.3f}:d={FADE_V}[v];"
+            "[0:a]asplit=2[na][sc];"
+            f"[1:a]volume={BED_GAIN}[mus];"
+            "[mus][sc]sidechaincompress=threshold=0.03:ratio=6:attack=10:release=350[duck];"
+            "[na][duck]amix=inputs=2:duration=first:normalize=0[mix];"
+            f"[mix]afade=t=out:st={fa:.3f}:d={FADE_A}[a]")
+    run(["ffmpeg", "-y", "-v", "error", "-i", str(src), "-stream_loop", "-1", "-i", str(BED),
+         "-filter_complex", filt, "-map", "[v]", "-map", "[a]", "-t", f"{d:.3f}",
+         "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-pix_fmt", "yuv420p", "-r", str(FPS),
+         "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(dst)])
+
 def process(file: str, lang: str, dir_key: str) -> None:
     texts = TEXTS[file][lang]
     title, subtitle = texts["title"], texts["subtitle"]
@@ -100,11 +121,13 @@ def process(file: str, lang: str, dir_key: str) -> None:
         "[2:a]aformat=sample_rates=48000:channel_layouts=mono[a1];"
         "[v0][a0][v1][a1]concat=n=2:v=1:a=1[v][a]"
     )
+    tmp_mp4 = work / "concat.mp4"
     run(["ffmpeg", "-y", "-v", "error",
          "-loop", "1", "-t", str(intro_dur), "-i", str(card), *audio_in, "-i", str(raw_mp4),
          "-filter_complex", filt, "-map", "[v]", "-map", "[a]",
          "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-pix_fmt", "yuv420p", "-r", str(FPS),
-         "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(out_mp4)])
+         "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(tmp_mp4)])
+    add_bed(tmp_mp4, out_mp4)
 
     intro_text = narr_text  # el subtítulo de la portada = la narración
     (out_dir / f"{file}.vtt").write_text(
