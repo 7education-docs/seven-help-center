@@ -45,23 +45,51 @@ SHOTS_NUM = pathlib.Path(__file__).resolve().parent / 'shots-num'
 LANG_KEY = {'es': 'es', 'pt-BR': 'pt'}
 
 
+def load_review() -> dict:
+    """key -> pasos (n) que muestra la captura, según la revisión (single/shots-num/review)."""
+    out = {}
+    for f in (SHOTS_NUM / 'review').glob('result*.json'):
+        for it in json.loads(f.read_text(encoding='utf-8')):
+            if not it.get('skip') and it.get('steps'):
+                out[it['key']] = sorted({st['n'] for st in it['steps']})
+    return out
+
+
 def apply_numbered(merged: dict) -> None:
-    """Cambia cada captura por su versión con números de paso (single/shots-num), solo donde existe.
+    """Cambia cada captura por su versión numerada (single/shots-num), donde existe, y
+    coloca cada captura dentro del paso que muestra (art.stepImg: {n: clave}).
     Las versiones numeradas se sirven como archivos: shots/<idioma>__<artículo>__<captura>.jpg."""
+    review = load_review()
     for loc, lk in LANG_KEY.items():
         n_done = 0
         for art in merged[loc]['articles']:
-            new_imgs = []
+            keys = []
             for name in art.get('img') or []:
+                if '__' in name:  # ya numerada en la versión publicada
+                    keys.append(name)
+                    continue
                 key = f"{lk}__{art['id']}__{name}"
                 if (SHOTS_NUM / f"{key}.jpg").exists():
                     merged[loc]['shots'][key] = f"shots/{key}.jpg"
                     merged[loc]['alt'][key] = merged[loc]['alt'].get(name, art.get('title', ''))
-                    new_imgs.append(key)
-                    n_done += 1
+                    keys.append(key)
                 else:
-                    new_imgs.append(name)
-            art['img'] = new_imgs
+                    keys.append(name)
+            step_img = {}
+            # Cada captura va en el paso más alto que muestra y aún no tiene captura (la pantalla
+            # muestra el resultado de ese paso). Se procesan primero las de paso más bajo.
+            numbered = [k for k in keys if '__' in k and review.get(k)]
+            n_done += sum(1 for k in keys if '__' in k)
+            for key in sorted(numbered, key=lambda k: max(review[k])):
+                for n in sorted(review[key], reverse=True):
+                    if str(n) not in step_img:
+                        step_img[str(n)] = key
+                        break
+            art['img'] = keys
+            if step_img:
+                art['stepImg'] = step_img
+            else:
+                art.pop('stepImg', None)
         print(f'  {loc}: {n_done} capturas numeradas')
     if os.environ.get('COPY_SHOTS'):
         dest = pathlib.Path(os.environ['COPY_SHOTS'])
