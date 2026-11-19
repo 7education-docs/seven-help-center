@@ -23,13 +23,8 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "button:has-text(\"Criar curso\")",
-          "ms": 1500
-        },
-        {
           "do": "wait",
-          "ms": 4000
+          "ms": 9000
         }
       ]
     },
@@ -38,17 +33,12 @@
       "say": "Você pode criar um curso do zero, importar um curso que já tem ou adotar um modelo pronto. Os modelos são unidades didáticas com seções e materiais, que você adapta ao seu grupo.",
       "actions": [
         {
-          "do": "highlight",
-          "selector": "button:has-text(\"Importar curso\")",
-          "ms": 1200
-        },
-        {
           "do": "click",
           "selector": "button[role=\"tab\"]:has-text(\"Modelos\")"
         },
         {
           "do": "wait",
-          "ms": 3500
+          "ms": 9000
         },
         {
           "do": "click",
@@ -56,7 +46,7 @@
         },
         {
           "do": "wait",
-          "ms": 1000
+          "ms": 1200
         }
       ]
     },
@@ -103,13 +93,13 @@
         },
         {
           "do": "wait",
-          "ms": 1000
+          "ms": 3500
         }
       ]
     },
     {
       "id": "passo-2",
-      "say": "No segundo passo, escolha o conteúdo inicial. Com Vazio, o curso começa com uma seção Geral, pronta para receber materiais. Depois clique em Seguinte.",
+      "say": "No segundo passo, escolha o conteúdo inicial. Vazio começa com uma seção Geral para você montar tudo; Todos os modelos traz unidades prontas; Copiar reaproveita um curso que você já tem; e Planejar com IA gera uma primeira proposta para revisar. Aqui escolhemos Vazio. Depois clique em Seguinte.",
       "actions": [
         {
           "do": "click",
@@ -125,12 +115,16 @@
           "step": ""
         },
         {
+          "do": "wait",
+          "ms": 6000
+        },
+        {
           "do": "click",
           "selector": "button:has-text(\"Vazio\")"
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 9000
         },
         {
           "do": "click",
@@ -138,7 +132,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 800
         }
       ]
     },
@@ -152,13 +146,8 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "button:text-is(\"Voltar\")",
-          "ms": 1200
-        },
-        {
           "do": "wait",
-          "ms": 2000
+          "ms": 5200
         },
         {
           "do": "click",
@@ -166,7 +155,7 @@
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 2000
         }
       ]
     },
@@ -176,7 +165,7 @@
       "actions": [
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 7000
         }
       ]
     }

@@ -23,13 +23,8 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "button:has-text(\"Crear curso\")",
-          "ms": 1500
-        },
-        {
           "do": "wait",
-          "ms": 4000
+          "ms": 9000
         }
       ]
     },
@@ -38,17 +33,12 @@
       "say": "Puedes crear un curso desde cero, importar uno que ya tienes o adoptar una plantilla. Las plantillas son unidades didácticas con secciones y materiales, que adaptas a tu grupo.",
       "actions": [
         {
-          "do": "highlight",
-          "selector": "button:has-text(\"Importar curso\")",
-          "ms": 1200
-        },
-        {
           "do": "click",
           "selector": "button[role=\"tab\"]:has-text(\"Plantillas\")"
         },
         {
           "do": "wait",
-          "ms": 3500
+          "ms": 9000
         },
         {
           "do": "click",
@@ -56,7 +46,7 @@
         },
         {
           "do": "wait",
-          "ms": 1000
+          "ms": 1200
         }
       ]
     },
@@ -103,13 +93,13 @@
         },
         {
           "do": "wait",
-          "ms": 1000
+          "ms": 3500
         }
       ]
     },
     {
       "id": "passo-2",
-      "say": "En el segundo paso eliges el contenido inicial. Con Vacío, el curso empieza con una sección General, lista para recibir materiales. Después pulsa Siguiente.",
+      "say": "En el segundo paso, elige el contenido inicial. Vacío empieza con una sección General para construirlo tú; Todas las plantillas trae unidades ya preparadas; Copiar reutiliza un curso que ya tienes; y Planificar con IA genera una primera propuesta para revisar. Aquí elegimos Vacío. Después pulsa Siguiente.",
       "actions": [
         {
           "do": "click",
@@ -125,12 +115,16 @@
           "step": ""
         },
         {
+          "do": "wait",
+          "ms": 6000
+        },
+        {
           "do": "click",
           "selector": "button:has-text(\"Vacío\")"
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 9000
         },
         {
           "do": "click",
@@ -138,7 +132,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 800
         }
       ]
     },
@@ -152,13 +146,8 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "button:text-is(\"Atrás\")",
-          "ms": 1200
-        },
-        {
           "do": "wait",
-          "ms": 2000
+          "ms": 5200
         },
         {
           "do": "click",
@@ -166,7 +155,7 @@
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 2000
         }
       ]
     },
@@ -176,7 +165,7 @@
       "actions": [
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 7000
         }
       ]
     }
