@@ -95,14 +95,14 @@ def page(lang):
     t = T[lang]; p = t['prefix']
     css = CSS.replace("url('assets/", f"url('{p}assets/") + LANG_CSS
     css += """
-.grid-prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:8px 0 48px}
+.grid-prods{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;padding:8px 0 48px}.grid-prods>*{flex:0 0 calc((100% - 32px) / 3);min-width:0}
 .grid-prods .prod{min-height:0;padding:20px 22px}
 .grid-prods .prod h2{font-size:21px;margin:2px 0 0}
 .grid-prods .prod p{font-size:15px;margin:0}
 .band{padding:56px 28px 50px}
 .band h1{font-size:clamp(46px,7vw,92px)}
-@media (max-width:900px){.grid-prods{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:560px){.grid-prods{grid-template-columns:1fr}}
+@media (max-width:900px){.grid-prods>*{flex-basis:calc((100% - 16px) / 2)}}
+@media (max-width:560px){.grid-prods>*{flex-basis:100%}}
 """
     lang_menu = ('<details class="lang-menu"><summary aria-label="' + H.escape(t['aria_lang']) + '">' + GLOBE + f'<span>{t["here_label"]}</span></summary><ul>'
                  + (f'<li><a href="./" lang="es"{" aria-current=\"true\"" if lang == "es" else ""}>Español</a></li>'
