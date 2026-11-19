@@ -21,7 +21,7 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from narrate import eleven_speech, probe_duration  # noqa: E402  (mismo narrador que el resto del pipeline)
+from narrate import eleven_speech, probe_duration, ELEVEN_VOICE_ES, SPEED_ES  # noqa: E402  (mismo narrador que el resto del pipeline)
 
 ROOT = HERE.parents[1]
 TEXTS = json.loads((HERE / "intro-texts.json").read_text(encoding="utf-8"))
@@ -81,19 +81,16 @@ def process(file: str, lang: str, dir_key: str) -> None:
     run(["node", str(HERE / "card.mjs"), str(card), BRAND[lang], title, subtitle],
         env={**os.environ, "NODE_PATH": os.environ.get("NODE_PATH", "")})
 
-    if lang == "pt":
-        narr_text = texts["narration"]  # introducción: qué se aprende en el vídeo, no el título
-        mp3, wav = work / "intro.mp3", work / "intro.wav"
-        if not wav.exists():  # la narración de la portada no cambia: se reutiliza si ya existe
-            eleven_speech(narr_text, mp3)
-            run(["ffmpeg", "-y", "-v", "error", "-i", str(mp3), "-ac", "1", "-ar", "48000", str(wav)])
-        intro_dur = round(max(MIN_INTRO, probe_duration(wav) + 0.5), 3)
-        audio_in = ["-i", str(wav)]
-        audio_chain = f"[1:a]atrim=0:{intro_dur},apad=whole_dur={intro_dur},aformat=sample_rates=48000:channel_layouts=mono[a0];"
-    else:
-        intro_dur = MIN_INTRO
-        audio_in = ["-f", "lavfi", "-t", str(intro_dur), "-i", "anullsrc=channel_layout=mono:sample_rate=48000"]
-        audio_chain = "[1:a]aformat=sample_rates=48000:channel_layouts=mono[a0];"
+    # introducción hablada en el idioma del vídeo (es: voz española; pt-BR: voz de Mariana M)
+    narr_text = texts["narration"]
+    mp3, wav = work / f"intro-{lang}.mp3", work / f"intro-{lang}.wav"
+    if not wav.exists():  # la narración de la portada no cambia: se reutiliza si ya existe
+        eleven_speech(narr_text, mp3, speed=(SPEED_ES if lang == "es" else None),
+                      voice=(ELEVEN_VOICE_ES if lang == "es" else None))
+        run(["ffmpeg", "-y", "-v", "error", "-i", str(mp3), "-ac", "1", "-ar", "48000", str(wav)])
+    intro_dur = round(max(MIN_INTRO, probe_duration(wav) + 0.5), 3)
+    audio_in = ["-i", str(wav)]
+    audio_chain = f"[1:a]atrim=0:{intro_dur},apad=whole_dur={intro_dur},aformat=sample_rates=48000:channel_layouts=mono[a0];"
 
     out_mp4 = out_dir / f"{file}.mp4"
     filt = (
@@ -109,7 +106,7 @@ def process(file: str, lang: str, dir_key: str) -> None:
          "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-pix_fmt", "yuv420p", "-r", str(FPS),
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(out_mp4)])
 
-    intro_text = texts.get("narration", title)  # el subtítulo de la portada = la narración
+    intro_text = narr_text  # el subtítulo de la portada = la narración
     (out_dir / f"{file}.vtt").write_text(
         shift_vtt(raw_vtt.read_text(encoding="utf-8"), intro_dur, intro_text, intro_dur), encoding="utf-8")
     run(["ffmpeg", "-y", "-v", "error", "-i", str(card), "-frames:v", "1", "-q:v", "3", str(out_dir / f"{file}.jpg")])

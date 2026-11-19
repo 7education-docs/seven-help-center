@@ -7,7 +7,8 @@
     },
     "es": {
       "title": "Crear una cita",
-      "subtitle": "Citas del curso"
+      "subtitle": "Citas del curso",
+      "narration": "En este vídeo vamos a aprender a crear una cita en tu curso, de principio a fin."
     }
   },
   "C-1": {
@@ -18,7 +19,8 @@
     },
     "es": {
       "title": "Pestañas de un curso",
-      "subtitle": "Cursos"
+      "subtitle": "Cursos",
+      "narration": "En este vídeo vamos a conocer las pestañas de un curso y para qué sirve cada una."
     }
   },
   "serie": {
@@ -29,7 +31,8 @@
     },
     "es": {
       "title": "Crear una serie de lecciones",
-      "subtitle": "Series de lecciones"
+      "subtitle": "Series de lecciones",
+      "narration": "En este vídeo vamos a aprender a crear una serie de lecciones, paso a paso."
     }
   },
   "tarea": {
@@ -40,7 +43,8 @@
     },
     "es": {
       "title": "Crear una tarea de corrección",
-      "subtitle": "Tareas de corrección y feedback"
+      "subtitle": "Tareas de corrección y feedback",
+      "narration": "En este vídeo vamos a aprender a crear una tarea de corrección con criterios de calificación."
     }
   },
   "asistente": {
@@ -51,7 +55,8 @@
     },
     "es": {
       "title": "Crear un asistente",
-      "subtitle": "Plantillas y asistentes"
+      "subtitle": "Plantillas y asistentes",
+      "narration": "En este vídeo vamos a aprender a crear un asistente con tus propias instrucciones."
     }
   },
   "documentos": {
@@ -62,7 +67,8 @@
     },
     "es": {
       "title": "Documentos",
-      "subtitle": "Biblioteca de documentos"
+      "subtitle": "Biblioteca de documentos",
+      "narration": "En este vídeo vamos a aprender a subir y encontrar documentos en la biblioteca."
     }
   },
   "fichas-interactivas": {
@@ -73,7 +79,8 @@
     },
     "es": {
       "title": "Crear una ficha interactiva",
-      "subtitle": "Fichas interactivas"
+      "subtitle": "Fichas interactivas",
+      "narration": "En este vídeo vamos a aprender a crear una ficha interactiva con ayuda de la inteligencia artificial."
     }
   },
   "ver-alumno": {
@@ -84,7 +91,8 @@
     },
     "es": {
       "title": "Qué ve el alumnado en mi curso",
-      "subtitle": "Vista de alumno"
+      "subtitle": "Vista de alumno",
+      "narration": "En este vídeo vamos a ver lo que el alumnado ve en tu curso."
     }
   }
 }

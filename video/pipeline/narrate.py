@@ -18,8 +18,10 @@ import urllib.request
 MODELS = pathlib.Path(__file__).resolve().parents[1] / "models"
 SPEED = 0.90      # Kokoro (español)
 SPEED_PT = 1.08   # ElevenLabs (portugués): ritmo ágil, sin pausas muertas
+SPEED_ES = 1.08   # ElevenLabs (español): mismo ritmo ágil
 
 ELEVEN_VOICE_PT = os.environ.get("ELEVEN_VOICE_PT", "0t7A9YvHlaUjp3Mon3X1")  # Mariana M (pt-BR)
+ELEVEN_VOICE_ES = os.environ.get("ELEVEN_VOICE_ES", "tTQzD8U9VSnJgfwC6HbY")  # voz española
 ELEVEN_MODEL = "eleven_multilingual_v2"
 ELEVEN_URL = "https://api.elevenlabs.io/v1/text-to-speech/{voice}?output_format=mp3_44100_128"
 
@@ -32,15 +34,17 @@ def probe_duration(path: pathlib.Path) -> float:
     return float(out)
 
 
-def eleven_speech(text: str, mp3_path: pathlib.Path) -> None:
+def eleven_speech(text: str, mp3_path: pathlib.Path, speed: float = None, voice: str = None) -> None:
+    speed = SPEED_PT if speed is None else speed
+    voice = ELEVEN_VOICE_PT if voice is None else voice
     body = json.dumps({
         "text": text,
         "model_id": ELEVEN_MODEL,
         "voice_settings": {"stability": 0.55, "similarity_boost": 0.75, "style": 0.0,
-                           "use_speaker_boost": True, "speed": SPEED_PT},
+                           "use_speaker_boost": True, "speed": speed},
     }).encode("utf-8")
     req = urllib.request.Request(
-        ELEVEN_URL.format(voice=ELEVEN_VOICE_PT), data=body, method="POST",
+        ELEVEN_URL.format(voice=voice), data=body, method="POST",
         headers={"Content-Type": "application/json", "Accept": "audio/mpeg"},
     )
     with urllib.request.urlopen(req, timeout=120) as resp:

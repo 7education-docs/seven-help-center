@@ -13,4 +13,7 @@ PUBLISHED="$PUBLISHED" python3 single/merge-published.py site/index.html seven-a
 # el helpdesk vive una carpeta más abajo: sus medios están en la raíz
 sed -i 's|"videos/|"../videos/|g; s|"shots/|"../shots/|g' seven-assistant/index.html
 cp single/home.html index.html
+# vídeos generados por build-single (PUBLIC_SITE) a la raíz, junto a las capturas
+cp -n site/videos/*.mp4 site/videos/*.jpg videos/ 2>/dev/null || true
+cp site/videos/*.mp4 site/videos/*.jpg videos/
 echo "✓ portada: index.html · helpdesk: seven-assistant/index.html ($(wc -c < seven-assistant/index.html) bytes)"
