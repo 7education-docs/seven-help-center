@@ -75,20 +75,33 @@ HOLD_END = 2.0   # segundos finales con negro, logotipo y música
 LOGO_WHITE = ROOT / "video" / "work" / "brand" / "logo-white.png"   # logotipo en blanco para el final en negro
 
 
+def speech_end(path: pathlib.Path) -> float:
+    """Instante en que termina la última locución (el silencio final empieza ahí)."""
+    d = probe_duration(path)
+    r = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-i", str(path), "-af",
+                        "silencedetect=noise=-35dB:d=0.35", "-f", "null", "-"],
+                       capture_output=True, text=True)
+    starts = [float(x) for x in re.findall(r"silence_start: ([0-9.]+)", r.stderr)]
+    ends = [float(x) for x in re.findall(r"silence_end: ([0-9.]+)", r.stderr)]
+    if len(starts) > len(ends):      # el último silencio llega hasta el final del vídeo
+        return starts[-1]
+    return max(0.0, d - 1.0)
+
+
 def add_bed(src: pathlib.Path, dst: pathlib.Path, intro_dur: float) -> None:
-    """Final: la imagen y el sonido se funden a negro y aparece el logotipo de Seven Education.
-    Música: baja suave al empezar, casi en silencio mientras se habla, y solo sube durante la transición a negro."""
-    d = probe_duration(src)
-    fv = max(0.0, d - FADE_V)                 # empieza el fundido a negro
-    r1, r2 = d - FADE_V, d - 0.5              # ventana de subida de la música (transición a negro)
-    logo_t = max(0.0, d - 2.2)                # el logotipo aparece hacia el final del fundido
-    vol = (f"if(lt(t,1),0.12,if(lt(t,3),0.12-0.108*(t-1)/2,if(lt(t,{r1:.3f}),0.012,"
-           f"if(lt(t,{r2:.3f}),0.012+0.688*(t-{r1:.3f})/{FADE_V - 0.5:.3f},0.7))))")
-    total = d + HOLD_END                     # tras el negro, 2 s más con logotipo y música
-    filt = (f"[0:v]fade=t=out:st={fv:.3f}:d={FADE_V},tpad=stop_mode=add:stop_duration={HOLD_END}:color=black[vf];"
+    """Final: cuando termina de hablar, la imagen y el sonido se funden a negro y aparece el logotipo.
+    La música sube solo durante esa transición. Después, HOLD_END segundos más de negro con logotipo y música."""
+    se = speech_end(src)
+    tr = se + 0.3                                 # pequeño respiro tras la última palabra
+    tr_end = tr + FADE_V                          # fin del fundido a negro
+    total = tr_end + HOLD_END
+    logo_t = max(0.0, tr_end - 0.6)
+    vol = (f"if(lt(t,1),0.12,if(lt(t,3),0.12-0.108*(t-1)/2,if(lt(t,{tr:.3f}),0.012,"
+           f"if(lt(t,{tr_end - 0.5:.3f}),0.012+0.688*(t-{tr:.3f})/{FADE_V - 0.5:.3f},0.7))))")
+    filt = (f"[0:v]fade=t=out:st={tr:.3f}:d={FADE_V},tpad=stop_mode=add:stop_duration=10:color=black[vf];"
             f"[2:v]format=rgba,scale=380:-1,fade=t=in:st={logo_t:.3f}:d=1.2:alpha=1[lg];"
             "[vf][lg]overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2[v];"
-            f"[0:a]apad=pad_dur={HOLD_END}[na];"
+            "[0:a]apad=pad_dur=10[na];"
             f"[1:a]volume='{vol}':eval=frame[mus];"
             "[na][mus]amix=inputs=2:duration=first:normalize=0[mix];"
             f"[mix]afade=t=out:st={total - 1.0:.3f}:d=1.0[a]")
@@ -97,6 +110,7 @@ def add_bed(src: pathlib.Path, dst: pathlib.Path, intro_dur: float) -> None:
          "-filter_complex", filt, "-map", "[v]", "-map", "[a]", "-t", f"{total:.3f}",
          "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-pix_fmt", "yuv420p", "-r", str(FPS),
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(dst)])
+    print(f"    final: fin de la voz {se:.2f} s · fundido {tr:.2f}–{tr_end:.2f} s · total {total:.2f} s")
 
 
 def process(file: str, lang: str, dir_key: str) -> None:
