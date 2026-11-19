@@ -96,7 +96,7 @@ def page(lang):
     css = CSS.replace("url('assets/", f"url('{p}assets/") + LANG_CSS
     css += """
 .grid-prods{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;padding:8px 0 48px}.grid-prods>*{flex:0 0 calc((100% - 32px) / 3);min-width:0}
-.grid-prods .prod{min-height:0;padding:20px 22px}
+.grid-prods .prod{min-height:236px;padding:20px 22px;display:flex;flex-direction:column}
 .grid-prods .prod h2{font-size:21px;margin:2px 0 0}
 .grid-prods .prod p{font-size:15px;margin:0}
 .band{padding:56px 28px 50px}
