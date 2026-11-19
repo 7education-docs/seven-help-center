@@ -1,0 +1,172 @@
+{
+  "lesson": "crear-curso",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Crear curso\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Un curso reúne en un solo lugar todo lo que trabajas con un grupo: las secciones con los temas, los materiales, las actividades y el código para que el alumnado entre.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Crear un curso",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Crear curso\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "modelos",
+      "say": "Puedes crear un curso desde cero, importar uno que ya tienes o adoptar una plantilla. Las plantillas son unidades didácticas con secciones y materiales, que adaptas a tu grupo.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Importar curso\")",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Plantillas\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        },
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Mis cursos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1000
+        }
+      ]
+    },
+    {
+      "id": "paso-1",
+      "say": "Para crear un curso, pulsa Crear curso. En el primer paso das nombre al curso, indicas la asignatura y la clase, y escribes una descripción.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Crear curso\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "caption",
+          "text": "1 · Datos básicos",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"]",
+          "text": "Matemáticas · 2.º ESO",
+          "delay": 60
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "highlight",
+          "selector": "input[placeholder=\" \"]",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "paso-2",
+      "say": "En el segundo paso eliges el contenido inicial: empezar vacío, usar una plantilla, copiar un curso existente o planificar con inteligencia artificial.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Siguiente\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "caption",
+          "text": "2 · Elegir contenido",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Todas las plantillas\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "paso-3",
+      "say": "En el último paso revisas los datos. Mientras no pulses Crear, no se crea nada, y puedes volver con Atrás para corregir lo que quieras.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Siguiente\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "caption",
+          "text": "3 · Revisar y crear",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:text-is(\"Atrás\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    },
+    {
+      "id": "cerrar",
+      "say": "Si cambias de idea, cierra el asistente. No se ha creado ningún curso y puedes volver cuando quieras.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    }
+  ]
+}

@@ -290,6 +290,7 @@ def apply_course_merge(merged: dict) -> None:
                 if k not in img:
                     img.append(k)
             keep['faqRelated'] = list(dict.fromkeys((keep.get('faqRelated') or []) + (src.get('faqRelated') or [])))
+        steps = _apply_guide_steps(loc, steps)
         keep.update(answer=G['answer'], example=G['example'], tips=G['tips'], steps=steps, img=img, stepImg=step_img)
         d['articles'] = [a for a in d['articles'] if a['id'] not in gone]
         d.setdefault('aliases', {})
@@ -344,3 +345,43 @@ def apply_rewrites(merged: dict) -> None:
                     art['tips'] = list(new['tips'])
                 n += 1
         print(f'  {loc}: {n} artículos reescritos')
+
+
+# Pasos de «Crear un curso» (10, como en la guía). Sustituyen a los textos de clics de la fusión;
+# las capturas siguen en los pasos 1, 2, 3, 5, 7 y 9.
+GUIDE_STEPS = {
+    'es': [
+        {'t': 'Abre Cursos y pulsa Crear curso', 'b': 'Es el punto de partida para cualquier curso nuevo. Lo que decidas en los pasos siguientes se puede ajustar después, así que no hace falta acertar a la primera.'},
+        {'t': 'Paso 1: Datos básicos', 'b': 'El nombre, la asignatura y la clase son lo que ves en tu lista de cursos y lo que el alumnado busca al entrar. Usa el formato que sigue tu centro, porque pronto tendrás varios cursos parecidos.'},
+        {'t': 'Paso 2: Elegir contenido', 'b': 'Vacío si quieres construir el curso tú; Todas las plantillas si partes de una unidad ya preparada; Copiar si quieres reutilizar un curso tuyo; Planificar con IA si quieres una primera propuesta que después revisas.'},
+        {'t': 'Paso 3: Revisar y crear', 'b': 'Compruebas los datos antes de crear el curso. Mientras no pulses Crear, no se guarda nada, así que puedes volver atrás para corregir cualquier dato.'},
+        {'t': 'Importar un curso que ya tienes', 'b': 'Si tienes un curso exportado, o un compañero te lo ha compartido, no hace falta rehacerlo: el botón Importar curso lo trae a tu lista.'},
+        {'t': 'Elige el archivo', 'b': 'Selecciona el archivo del curso que quieres traer. Si no se abre, comprueba que sea un curso exportado desde Seven Assistant.'},
+        {'t': 'Abre la pestaña Plantillas', 'b': 'Dentro de Cursos, Plantillas reúne unidades didácticas listas para adoptar. Filtra por país, materia, curso y tipo de centro para encontrar la que encaja con tu currículo.'},
+        {'t': 'Pulsa Adoptar', 'b': 'Se crea un curso nuevo con todos los bloques de la plantilla, que después puedes editar.'},
+        {'t': 'Confirma con Crear curso', 'b': 'Revisa la confirmación y pulsa Crear curso. Si lo prefieres, Ahora no cancela sin crear nada.'},
+        {'t': 'Adapta el curso', 'b': 'Cambia el nombre, la descripción y el contenido en Configuración y en las secciones. Una plantilla es un punto de partida: ajústala a tu grupo y a tu país.'},
+    ],
+    'pt-BR': [
+        {'t': 'Abra Cursos e clique em Criar curso', 'b': 'É o ponto de partida para qualquer curso novo. O que você decidir nos passos seguintes pode ser ajustado depois, então não precisa acertar de primeira.'},
+        {'t': 'Passo 1: Dados básicos', 'b': 'Nome, disciplina e turma são o que você vê na sua lista de cursos e o que o estudante procura ao entrar. Use o formato que a sua escola segue, porque logo você terá vários cursos parecidos.'},
+        {'t': 'Passo 2: Escolher conteúdo', 'b': 'Vazio se quiser montar o curso você mesmo; Todos os modelos se partir de uma unidade pronta; Copiar para reaproveitar um curso seu; Planejar com IA para receber uma primeira proposta que você revisa.'},
+        {'t': 'Passo 3: Revisar e criar', 'b': 'Confira os dados antes de criar. Enquanto você não clicar em Criar, nada é salvo, então pode voltar para corrigir qualquer informação.'},
+        {'t': 'Importar um curso que você já tem', 'b': 'Se você já tem um curso exportado, ou um colega o compartilhou, não precisa refazê-lo: o botão Importar curso o traz para a sua lista.'},
+        {'t': 'Escolha o arquivo', 'b': 'Selecione o arquivo do curso que quer trazer. Se ele não abrir, confirme que é um curso exportado do Seven Assistant.'},
+        {'t': 'Abra a aba Modelos', 'b': 'Em Cursos, a aba Modelos reúne unidades didáticas prontas para adotar. Filtre por país, disciplina, série e tipo de escola para achar a que combina com o seu currículo.'},
+        {'t': 'Clique em Adotar', 'b': 'É criado um curso novo com todos os blocos do modelo, que você pode editar depois.'},
+        {'t': 'Confirme com Criar curso', 'b': 'Revise a confirmação e clique em Criar curso. Se preferir, Agora não cancela sem criar nada.'},
+        {'t': 'Adapte o curso', 'b': 'Mude o nome, a descrição e o conteúdo em Definições e nas seções. O modelo é um ponto de partida: ajuste-o ao seu grupo e ao seu país.'},
+    ],
+}
+
+
+def _apply_guide_steps(loc, steps):
+    """Sustituye los pasos fusionados por los de GUIDE_STEPS (mismo número, mismas capturas)."""
+    new = GUIDE_STEPS.get(loc)
+    if new is None:
+        return steps
+    if len(new) != len(steps):
+        raise SystemExit(f"{loc}: GUIDE_STEPS tiene {len(new)} pasos y la fusión {len(steps)}")
+    return [dict(t=s['t'], b=s['b']) for s in new]

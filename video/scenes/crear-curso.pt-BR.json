@@ -1,0 +1,172 @@
+{
+  "lesson": "crear-curso",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Criar curso\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Um curso reúne, em um só lugar, tudo o que você trabalha com um grupo: as seções com os temas, os materiais, as atividades e o código para os estudantes entrarem.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Criar um curso",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Criar curso\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "modelos",
+      "say": "Você pode criar um curso do zero, importar um curso que já tem ou adotar um modelo pronto. Os modelos são unidades didáticas com seções e materiais, que você adapta ao seu grupo.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Importar curso\")",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Modelos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Os meus cursos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1000
+        }
+      ]
+    },
+    {
+      "id": "passo-1",
+      "say": "Para criar um curso, clique em Criar curso. No primeiro passo, dê um nome ao curso, indique a disciplina e a turma, e escreva uma descrição.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Criar curso\")"
+        },
+        {
+          "do": "caption",
+          "text": "1 · Dados básicos",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"]",
+          "text": "Matemática · 2.º ano",
+          "delay": 60
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Nome do curso",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "passo-2",
+      "say": "No segundo passo, escolha o conteúdo inicial: começar vazio, usar um modelo, copiar um curso existente ou pedir um planejamento com inteligência artificial.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · Escolher conteúdo",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Seguinte\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Todos os modelos\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "passo-3",
+      "say": "No último passo, revise os dados. Enquanto você não clicar em Criar, nada é criado, e pode voltar com Voltar para corrigir o que quiser.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Verificar e criar",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Seguinte\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "highlight",
+          "selector": "button:text-is(\"Voltar\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    },
+    {
+      "id": "fechar",
+      "say": "Se mudar de ideia, feche o assistente. Nenhum curso foi criado, e você pode voltar quando quiser.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    }
+  ]
+}
