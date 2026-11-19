@@ -98,7 +98,7 @@ def add_bed(src: pathlib.Path, dst: pathlib.Path, intro_dur: float) -> None:
     logo_t = tr + 0.2                             # el logotipo entra durante el fundido a negro
     vol = (f"if(lt(t,1),0.12,if(lt(t,3),0.12-0.108*(t-1)/2,if(lt(t,{tr:.3f}),0.012,"
            f"if(lt(t,{tr_end - 0.5:.3f}),0.012+0.688*(t-{tr:.3f})/{FADE_V - 0.5:.3f},0.7))))")
-    filt = (f"[0:v]fade=t=out:st={tr:.3f}:d={FADE_V},tpad=stop_mode=add:stop_duration=10:color=black[vf];"
+    filt = (f"[0:v]tpad=stop_mode=clone:stop_duration=10,fade=t=out:st={tr:.3f}:d={FADE_V}[vf];"
             f"[2:v]format=rgba,scale=380:-1,fade=t=in:st={logo_t:.3f}:d={FADE_V - 0.7:.3f}:alpha=1[lg];"
             "[vf][lg]overlay=x=(main_w-overlay_w)/2:y=(main_h-overlay_h)/2[v];"
             "[0:a]apad=pad_dur=10[na];"
