@@ -1,6 +1,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="claude:viewport-fit-sides" content="cover">
-<title>Help Center · Seven Assistant</title>
+<title>Centro de ayuda Seven Assistant</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <style>
 /* Color: azul marino de la marca como primario, rosa como acento. Tokens en :root; modo oscuro por preferencia o elección. */
@@ -314,22 +314,20 @@ const DATA = /*__DATA__*/null;
   /* ---------- Portada ---------- */
   function home(loc) {
     const d = D(loc), u = U(loc);
-    const PAL = ['#f43175', '#3168ff', '#21c2a2', '#fedd00', '#ff8c42', '#050559'];
-    const cats = d.categories.map((c, i) => '<a class="card cat" href="' + href(loc, 'cat-' + c.id) + '"><span class="dot" style="background:' + PAL[i % PAL.length] + '" aria-hidden="true"></span><h3>' + esc(c.name) + '</h3><p>' + esc(c.desc) + '</p></a>').join('');
-    const VIDS = ['participantes-citas', 'serie-de-lecciones', 'crear-asistente'];
-    const vids = VIDS.filter((id) => d.videos && d.videos[id]).map((id) => {
-      const v = d.videos[id];
-      return '<a class="vcard" href="' + href(loc, 'art-' + id) + '"><img src="' + esc(v.poster || '') + '" alt="" loading="lazy"><div class="vb"><h3>' + esc(v.title) + '</h3><small>' + esc(v.dur) + '</small></div></a>';
-    }).join('');
+    const byId = (id) => d.categories.find((c) => c.id === id);
+    const link = (id) => (byId(id) ? '<a href="' + href(loc, 'cat-' + id) + '">' + esc(byId(id).name) + '</a>' : '');
+    const stepCls = [
+      { c: '#f43175', ids: ['cursos-docentes'] },
+      { c: '#072ac8', ids: ['documentos', 'series', 'fichas'] },
+      { c: '#ff8c42', ids: ['cursos-estudiantes', 'conversaciones'] },
+      { c: '#21c2a2', ids: ['tareas', 'it'] },
+    ];
+    const cats = d.categories.map((c) => '<a class="card" href="' + href(loc, 'cat-' + c.id) + '"><h3>' + esc(c.name) + '</h3><p>' + esc(c.desc) + '</p></a>').join('');
     const popular = u.popular.map((id) => article(loc, id)).filter(Boolean).map((a) => '<li><a href="' + href(loc, 'art-' + a.id) + '"><strong>' + esc(a.title) + '</strong><small>' + esc(a.answer) + '</small></a></li>').join('');
-    return '<section class="band"><div class="band-in">' +
-      (u.kicker ? '<p class="kicker">' + esc(u.kicker) + '</p>' : '') +
-      '<h1 class="mega">' + esc(u.heroTitle) + '</h1><p class="band-lead">' + esc(u.heroText) + '</p>' +
-      '<form class="search" role="search" data-search-form><label class="sr" for="q-hero">' + esc(u.search) + '</label><input id="q-hero" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn primary" type="submit">' + esc(u.searchBtn) + '</button></form>' +
-      '</div></section>' +
-      '<main class="wrap home" id="main" tabindex="-1">' +
+    return '<main class="wrap home" id="main" tabindex="-1">' +
+      '<section class="hero">' + (u.kicker ? '<p class="kicker brand-kick">' + esc(u.kicker) + '</p>' : '') + '<h1>' + esc(u.heroTitle) + '<span class="accent">' + esc(u.heroAccent) + '</span></h1><p class="lead">' + esc(u.heroText) + '</p>' +
+      '<form class="search" role="search" data-search-form><label class="sr" for="q-hero">' + esc(u.search) + '</label><input id="q-hero" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn primary" type="submit">' + esc(u.searchBtn) + '</button></form>' + '</section>' +
       '<section class="section" aria-labelledby="cat-h"><div class="section-head"><h2 id="cat-h">' + esc(u.categories) + '</h2>' + (u.categoriesText ? '<p>' + esc(u.categoriesText) + '</p>' : '') + '</div><div class="grid">' + cats + '</div></section>' +
-      (vids ? '<section class="section" aria-labelledby="vid-h"><div class="section-head"><h2 id="vid-h">' + esc(u.featuredVideos) + '</h2></div><div class="vgrid">' + vids + '</div></section>' : '') +
       '<section class="section" aria-labelledby="pop-h"><div class="section-head"><h2 id="pop-h">' + esc(u.popularTitle) + '</h2></div><ul class="list cards cards-list">' + popular + '</ul></section>' +
       '</main>';
   }

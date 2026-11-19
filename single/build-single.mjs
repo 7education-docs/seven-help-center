@@ -329,8 +329,8 @@ const LANG_DIR = { es: 'es', 'pt-BR': 'pt-br' };
 const SRCLANG = { es: 'es', 'pt-BR': 'pt-BR' };
 const TRACK_LABEL = { es: 'Español', 'pt-BR': 'Português (Brasil)' };
 // Portada: titular de marketing y texto de beneficio (textos adaptados del díptico).
-Object.assign(UI.es, {"kicker": "", "heroTitle": "Help Center", "heroAccent": "De la primera idea a tu próxima clase", "heroText": "Descubre cómo crear materiales con IA, organizar tus cursos y compartirlos con tu alumnado en Seven Assistant."});
-Object.assign(UI['pt-BR'], {"kicker": "", "heroTitle": "Help Center", "heroAccent": "Da primeira ideia à sua próxima aula", "heroText": "Descubra como criar materiais com IA, organizar seus cursos e compartilhá-los com seus alunos no Seven Assistant."});
+Object.assign(UI.es, {"kicker": "", "heroTitle": "Centro de ayuda", "heroAccent": "De la primera idea a tu próxima clase", "heroText": "Descubre cómo crear materiales con IA, organizar tus cursos y compartirlos con tu alumnado en Seven Assistant."});
+Object.assign(UI['pt-BR'], {"kicker": "", "heroTitle": "Central de ajuda", "heroAccent": "Da primeira ideia à sua próxima aula", "heroText": "Descubra como criar materiais com IA, organizar seus cursos e compartilhá-los com seus alunos no Seven Assistant."});
 
 Object.assign(UI.es, { topics: 'Temas', exploreTopics: 'Explorar temas', quickLabel: 'Accesos rápidos', quick: [{ l: 'Crear un curso', id: 'crear-curso' }, { l: 'Invitar al alumnado', id: 'invitar-alumnado' }, { l: 'Subir un documento', id: 'subir-documento' }, { l: 'No puedo acceder', id: 'no-puedo-acceder' }] });
 Object.assign(UI['pt-BR'], { topics: 'Temas', exploreTopics: 'Explorar temas', quickLabel: 'Acessos rápidos', quick: [{ l: 'Criar um curso', id: 'crear-curso' }, { l: 'Convidar os alunos', id: 'invitar-alumnado' }, { l: 'Enviar um documento', id: 'subir-documento' }, { l: 'Não consigo acessar', id: 'no-puedo-acceder' }] });
