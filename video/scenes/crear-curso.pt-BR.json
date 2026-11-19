@@ -44,7 +44,7 @@
         },
         {
           "do": "click",
-          "selector": "button:has-text(\"Modelos\")"
+          "selector": "button[role=\"tab\"]:has-text(\"Modelos\")"
         },
         {
           "do": "wait",
@@ -52,7 +52,7 @@
         },
         {
           "do": "click",
-          "selector": "button:has-text(\"Os meus cursos\")"
+          "selector": "button[role=\"tab\"]:has-text(\"Os meus cursos\")"
         },
         {
           "do": "wait",
@@ -62,11 +62,15 @@
     },
     {
       "id": "passo-1",
-      "say": "Para criar um curso, clique em Criar curso. No primeiro passo, dê um nome ao curso, indique a disciplina e a turma, e escreva uma descrição.",
+      "say": "Para criar um curso, clique em Criar curso. Dê um nome ao curso, indique a disciplina e a turma, e escreva uma descrição. Aqui, por exemplo: Matemática, 8.º ano.",
       "actions": [
         {
           "do": "click",
           "selector": "button:has-text(\"Criar curso\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
         },
         {
           "do": "caption",
@@ -75,29 +79,46 @@
         },
         {
           "do": "type",
-          "selector": "input[placeholder=\" \"]",
-          "text": "Matemática · 2.º ano",
-          "delay": 60
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Matemática · 8.º ano",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=1",
+          "text": "Matemática",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=2",
+          "text": "8.º ano",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Curso de matemática para o 8.º ano",
+          "delay": 30
         },
         {
           "do": "wait",
-          "ms": 1500
-        },
-        {
-          "do": "highlight",
-          "selector": "text=Nome do curso",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 3000
+          "ms": 1000
         }
       ]
     },
     {
       "id": "passo-2",
-      "say": "No segundo passo, escolha o conteúdo inicial: começar vazio, usar um modelo, copiar um curso existente ou pedir um planejamento com inteligência artificial.",
+      "say": "No segundo passo, escolha o conteúdo inicial. Com Vazio, o curso começa com uma seção Geral, pronta para receber materiais. Depois clique em Seguinte.",
       "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Seguinte\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
         {
           "do": "caption",
           "text": "2 · Escolher conteúdo",
@@ -105,16 +126,43 @@
         },
         {
           "do": "click",
-          "selector": "button:has-text(\"Seguinte\")"
+          "selector": "button:has-text(\"Vazio\")"
         },
         {
           "do": "wait",
           "ms": 1500
         },
         {
+          "do": "click",
+          "selector": "button:has-text(\"Seguinte\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "passo-3",
+      "say": "No último passo, revise os dados. Se algo estiver errado, use Voltar antes de criar. Quando estiver tudo certo, clique em Criar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Verificar e criar",
+          "step": ""
+        },
+        {
           "do": "highlight",
-          "selector": "button:has-text(\"Todos os modelos\")",
-          "ms": 1500
+          "selector": "button:text-is(\"Voltar\")",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        },
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Criar\")"
         },
         {
           "do": "wait",
@@ -123,48 +171,12 @@
       ]
     },
     {
-      "id": "passo-3",
-      "say": "No último passo, revise os dados. Enquanto você não clicar em Criar, nada é criado, e pode voltar com Voltar para corrigir o que quiser.",
+      "id": "resultado",
+      "say": "Pronto: o curso foi criado e você já está na sua visão geral, com a seção Geral pronta para receber materiais.",
       "actions": [
         {
-          "do": "caption",
-          "text": "3 · Verificar e criar",
-          "step": ""
-        },
-        {
-          "do": "click",
-          "selector": "button:has-text(\"Seguinte\")"
-        },
-        {
           "do": "wait",
-          "ms": 1500
-        },
-        {
-          "do": "highlight",
-          "selector": "button:text-is(\"Voltar\")",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 4500
-        }
-      ]
-    },
-    {
-      "id": "fechar",
-      "say": "Se mudar de ideia, feche o assistente. Nenhum curso foi criado, e você pode voltar quando quiser.",
-      "actions": [
-        {
-          "do": "press",
-          "key": "Escape"
-        },
-        {
-          "do": "wait",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 3500
+          "ms": 4000
         }
       ]
     }

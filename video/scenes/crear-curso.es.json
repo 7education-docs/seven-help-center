@@ -61,8 +61,8 @@
       ]
     },
     {
-      "id": "paso-1",
-      "say": "Para crear un curso, pulsa Crear curso. En el primer paso das nombre al curso, indicas la asignatura y la clase, y escribes una descripción.",
+      "id": "passo-1",
+      "say": "Para crear un curso, pulsa Crear curso. Pon un nombre, indica la asignatura y la clase, y escribe una descripción. Aquí, por ejemplo: Matemáticas, 2.º ESO.",
       "actions": [
         {
           "do": "click",
@@ -79,28 +79,37 @@
         },
         {
           "do": "type",
-          "selector": "input[placeholder=\" \"]",
+          "selector": "input[placeholder=\" \"] >> nth=0",
           "text": "Matemáticas · 2.º ESO",
-          "delay": 60
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=1",
+          "text": "Matemáticas",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=2",
+          "text": "2.º ESO",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Curso de matemáticas para 2.º de ESO",
+          "delay": 30
         },
         {
           "do": "wait",
-          "ms": 1200
-        },
-        {
-          "do": "highlight",
-          "selector": "input[placeholder=\" \"]",
-          "ms": 1500
-        },
-        {
-          "do": "wait",
-          "ms": 3000
+          "ms": 1000
         }
       ]
     },
     {
-      "id": "paso-2",
-      "say": "En el segundo paso eliges el contenido inicial: empezar vacío, usar una plantilla, copiar un curso existente o planificar con inteligencia artificial.",
+      "id": "passo-2",
+      "say": "En el segundo paso eliges el contenido inicial. Con Vacío, el curso empieza con una sección General, lista para recibir materiales. Después pulsa Siguiente.",
       "actions": [
         {
           "do": "click",
@@ -108,7 +117,7 @@
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 1200
         },
         {
           "do": "caption",
@@ -116,28 +125,27 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "button:has-text(\"Todas las plantillas\")",
-          "ms": 1500
+          "do": "click",
+          "selector": "button:has-text(\"Vacío\")"
         },
         {
           "do": "wait",
-          "ms": 4000
-        }
-      ]
-    },
-    {
-      "id": "paso-3",
-      "say": "En el último paso revisas los datos. Mientras no pulses Crear, no se crea nada, y puedes volver con Atrás para corregir lo que quieras.",
-      "actions": [
+          "ms": 1500
+        },
         {
           "do": "click",
           "selector": "button:has-text(\"Siguiente\")"
         },
         {
           "do": "wait",
-          "ms": 1500
-        },
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "passo-3",
+      "say": "En el último paso revisas los datos. Si algo no está bien, usa Atrás antes de crear. Cuando todo esté correcto, pulsa Crear.",
+      "actions": [
         {
           "do": "caption",
           "text": "3 · Revisar y crear",
@@ -146,25 +154,29 @@
         {
           "do": "highlight",
           "selector": "button:text-is(\"Atrás\")",
-          "ms": 1500
+          "ms": 1200
         },
         {
           "do": "wait",
-          "ms": 4500
+          "ms": 2000
+        },
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Crear\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
         }
       ]
     },
     {
-      "id": "cerrar",
-      "say": "Si cambias de idea, cierra el asistente. No se ha creado ningún curso y puedes volver cuando quieras.",
+      "id": "resultado",
+      "say": "Listo: el curso está creado y ya estás en su vista general, con la sección General lista para recibir materiales.",
       "actions": [
         {
-          "do": "press",
-          "key": "Escape"
-        },
-        {
           "do": "wait",
-          "ms": 3500
+          "ms": 4000
         }
       ]
     }
