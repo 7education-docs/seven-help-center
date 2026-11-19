@@ -1,0 +1,505 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Centro de ayuda Seven Assistant</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<style>
+/* Color: azul marino de la marca como primario, rosa como acento. Tokens en :root; modo oscuro por preferencia o elección. */
+:root{
+  color-scheme: light;
+  --bg:#fffaf6; --surface:#ffffff; --fg:#1c1c1c; --muted:rgba(28,28,28,.72); --line:rgba(28,28,28,.12);
+  --primary:#f43175; --primary-ink:#ffffff; --accent:#f43175; --tint:#fde6f0;
+  --cyan:#21c2a2; --blue:#072ac8; --orange:#ff8c42; --ink:#1c1c1c; --ink-fg:#f5f5f5;
+  --display:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif; --body:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;
+  --radius:16px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  color-scheme: dark; --bg:#1c1c1c; --surface:#262626; --fg:#f5f5f5; --muted:rgba(255,250,246,.72); --line:rgba(255,250,246,.14);
+  --primary:#f43175; --primary-ink:#1c1c1c; --accent:#f43175; --tint:#3a1d2b; --ink:#141414; --ink-fg:#f5f5f5; } }
+:root[data-theme="dark"]{
+  color-scheme: dark; --bg:#1c1c1c; --surface:#262626; --fg:#f5f5f5; --muted:rgba(255,250,246,.72); --line:rgba(255,250,246,.14);
+  --primary:#f43175; --primary-ink:#1c1c1c; --accent:#f43175; --tint:#3a1d2b; --ink:#141414; --ink-fg:#f5f5f5; }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-top:0;padding-bottom:40px;min-width:0}
+h1,h2,h3{font-family:var(--display);line-height:1.2;margin:0 0 .5em;text-wrap:balance}
+h1{font-size:clamp(1.7rem,1.2rem + 2.2vw,2.5rem);font-weight:800}
+h2{font-size:clamp(1.2rem,1.05rem + .6vw,1.5rem);font-weight:700;margin-top:0}
+h3{font-size:1.02rem;font-weight:700;margin:0 0 .3em}
+p{margin:0 0 .9em}
+a{color:var(--primary)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:6px}
+.muted{color:var(--muted)}
+.wrap{max-width:1040px;margin:0 auto;min-width:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 .5em}
+.lead{font-size:1.05rem;color:var(--muted);max-width:62ch}
+.section{margin-top:2rem}
+.section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:6px 16px;margin-bottom:12px}
+.section-head p{margin:0;color:var(--muted)}
+
+/* Cabecera */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.product-tag{font-size:14px;font-weight:600;color:var(--muted);padding-left:14px;margin-left:14px;border-left:1px solid var(--line);white-space:nowrap}.docs-back{font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;margin-left:auto;margin-right:14px;white-space:nowrap}.docs-back:hover{color:var(--primary);text-decoration:underline}.top-row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding-block:10px;min-width:0}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);min-width:0}
+.brand-logo{height:40px;width:auto;flex:none;display:block}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand-logo{filter:invert(1) hue-rotate(180deg)}}
+:root[data-theme="dark"] .brand-logo{filter:invert(1) hue-rotate(180deg)}
+.foot-logo{height:22px;width:auto;display:block;margin-bottom:10px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .foot-logo{filter:invert(1)}}
+:root[data-theme="dark"] .foot-logo{filter:invert(1)}
+.brand b{display:block;font-family:var(--display);font-size:15px;line-height:1.1}
+.brand small{color:var(--muted);font-size:12px}
+.tools{display:flex;flex-wrap:nowrap;gap:8px;align-items:center;min-width:0}
+@media (max-width:640px){.tools{flex-wrap:wrap}}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.lang a{padding:5px 12px;border-radius:999px;font-size:14px;font-weight:600;text-decoration:none;color:var(--muted)}
+.lang a[aria-current="true"]{background:var(--bg);color:var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+form.search{display:flex;gap:6px;min-width:0;flex:1 1 320px;max-width:600px}
+form.search input{flex:1;min-width:0;min-height:42px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:0 14px;font:inherit}
+form.search input:focus{outline:3px solid var(--primary);outline-offset:1px}
+nav.main{border-top:1px solid var(--line)}
+nav.main ul{list-style:none;margin:0;padding:6px 0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.main a{display:block;padding:8px 12px;border-radius:999px;font-size:14px;font-weight:600;color:var(--fg);text-decoration:none;white-space:nowrap}
+nav.main a:hover{background:var(--surface)}
+
+/* Botones y tarjetas */
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--fg);font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.primary{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.btn.small{min-height:36px;padding:6px 12px;font-size:14px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;color:inherit;text-decoration:none;min-width:0}
+a.card:hover{border-color:var(--primary)}
+.card p{color:var(--muted);margin:0}
+.intent{border-left:4px solid var(--primary)}
+.count{font-size:12px;font-weight:700;color:var(--accent);margin-top:8px;display:block}
+.hero{padding-block:2rem 1rem}
+.hero form.search{max-width:none;margin-top:14px}
+.hero form.search input{min-height:52px;font-size:1rem}
+.list{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.list a{display:block;background:#ffffff;border:1px solid #ebe4df;border-left:6px solid var(--primary);border-radius:12px;padding:12px 14px;color:var(--fg);text-decoration:none;min-width:0;box-shadow:0 1px 2px rgba(30,30,30,.05)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .list a{background:#262626;border-color:#3a3a3a;box-shadow:none} }
+:root[data-theme="dark"] .list a{background:#262626;border-color:#3a3a3a;box-shadow:none}
+.list a:hover{border-color:var(--primary)}
+.list small{display:block;color:var(--muted)}
+.list .cat{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.chip{font-size:12px;font-weight:600;padding:2px 10px;border-radius:999px;background:var(--tint);color:var(--primary)}
+
+/* Crumbs y artículo */
+.crumbs ol{display:flex;flex-wrap:wrap;gap:4px 6px;list-style:none;margin:0;padding:14px 0 0;font-size:14px;color:var(--muted)}
+.crumbs li+li::before{content:"›";margin-right:6px}
+.crumbs a{color:var(--muted)}
+.article-head{padding-top:10px}
+.meta{font-size:14px;color:var(--muted);margin:0 0 12px}
+.answer{background:var(--tint);border-radius:var(--radius);padding:16px 18px;margin:12px 0 0}
+.answer b{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}
+.answer p{margin:0;font-size:1.05rem}
+.block{margin-top:1.6rem}
+figure{margin:0 0 14px}
+figure img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;display:grid;gap:10px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.step-item{position:relative;background:#ffffff;border:1px solid #ebe4df;border-radius:12px;padding:14px 16px 14px 56px;box-shadow:0 1px 2px rgba(30,30,30,.05);min-width:0}
+.step-n{position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-weight:700;font-size:14px}
+.step-item h3{margin-bottom:.2em}
+.step-item p{margin:0}.step-item figure.step-shot{margin:12px 0 0}.step-item figure.step-shot img{border-radius:10px}
+ol.steps li{counter-increment:s;position:relative;background:#ffffff;border:1px solid #ebe4df;border-radius:12px;padding:14px 16px 14px 56px;box-shadow:0 1px 2px rgba(30,30,30,.05);min-width:0}
+ol.steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-weight:700;font-size:14px}
+ol.steps h3{margin-bottom:.2em}
+ol.steps p{margin:0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .step-item,:root:not([data-theme="light"]) ol.steps li{background:#262626;border-color:#3a3a3a;box-shadow:none}}
+:root[data-theme="dark"] .step-item,:root[data-theme="dark"] ol.steps li{background:#262626;border-color:#3a3a3a;box-shadow:none}
+
+.tips{margin-top:1.4rem;background:var(--tint);border-radius:var(--radius);padding:16px 18px}.tips strong{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}.tips li{font-size:1.05rem}
+.tips ul{margin:.3em 0 0;padding-left:1.1em}
+.example{margin-top:1.4rem;border-left:3px solid var(--primary);padding:4px 0 4px 16px}.example strong{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--primary);margin-bottom:4px}.example p{margin:0;font-size:1.05rem}.example p+p{margin-top:.6em}
+.related{margin-top:2rem}
+.pager{margin-top:2rem}
+.site-footer{margin:4.5rem -16px -40px;background:#1c1c1c;color:#fffaf6;font-size:14px;line-height:1.5}.f-inner{padding:56px 64px;position:relative}.f-inner::before{content:"";position:absolute;left:64px;right:64px;top:0;border-top:1px solid rgba(255,250,246,.14)}.f-grid{display:grid;grid-template-columns:384px 167px 173px 153px 154px 1fr;align-items:start}.f-brand{display:block}.f-logo{display:block;width:136px;height:40px;margin-top:17px;filter:invert(1)}.f-social{display:flex;gap:12px;margin-top:80px;color:#fffaf6}.site-footer .f-social a{color:#fffaf6;display:inline-flex}.f-social svg{width:20px;height:20px}.f-copy{margin:16px 0 0;font-size:13px;line-height:18px;color:#fffaf6}.f-h{font-family:var(--body);font-size:14px;font-weight:600;color:#fffaf6;margin:10px 0 11px;line-height:16px}.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}.site-footer li{line-height:16px}.site-footer a{color:rgba(255,250,246,.48);text-decoration:none}.site-footer a:hover{color:#fffaf6}.f-cookies{background:none;border:0;padding:0;font:inherit;color:rgba(255,250,246,.48);cursor:pointer;line-height:16px}.f-cookies:hover{color:#fffaf6}@media (max-width:900px){.f-inner{padding:40px 24px 40px}.f-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 20px}.f-brand{grid-column:1/-1}.f-social{margin-top:28px}}
+.video-block video{width:100%;max-width:100%;height:auto;border-radius:14px;background:#000;display:block;aspect-ratio:16/9}.video-block figcaption{font-size:12px;color:var(--muted);margin-top:6px}.vp-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin-top:8px;padding:6px 8px;background:var(--surface);border:1px solid var(--line);border-radius:10px;font-size:12px;color:var(--muted)}.vp-btn{font:inherit;font-weight:600;font-size:12px;line-height:1.2;min-height:28px;padding:4px 9px;border-radius:7px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}.vp-btn[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:var(--primary-ink)}.vp-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}.vp-speeds{display:inline-flex;gap:4px;flex-wrap:wrap}.vp-narr{margin-left:auto;color:var(--muted)}.vp-fallback{color:var(--primary);margin:6px 0 0;font-size:12px}@media (max-width:600px){.vp-narr{margin-left:0;width:100%}}
+
+/* Cabecera: idioma y buscador a la misma altura */
+.lang{min-height:44px;align-items:center;gap:2px;padding:3px 4px 3px 8px}
+.lang svg{width:18px;height:18px;flex:none;color:var(--muted);margin-right:2px}
+.lang a{min-height:36px;display:inline-flex;align-items:center}
+form.search input{min-height:44px}
+form.search .btn{min-height:44px}
+.tools{align-items:center}
+/* Portada de marketing */
+.hero{position:relative;overflow:hidden;padding-block:2.2rem 1.4rem;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:auto -10% -55% 30%;height:120%;background:radial-gradient(closest-side,rgba(230,51,110,.22),transparent);z-index:-1;pointer-events:none}
+.hero::after{content:"";position:absolute;right:-6%;top:-20%;width:46%;height:90%;background:radial-gradient(closest-side,rgba(23,184,176,.18),transparent);z-index:-1;pointer-events:none}
+.hero h1{font-size:clamp(2rem,1.3rem + 3vw,3.3rem);font-weight:800;letter-spacing:-.01em;margin-bottom:.25em}
+.hero h1 .accent{display:block;color:var(--primary);font-size:clamp(1.2rem,1rem + .9vw,1.75rem);font-weight:700;line-height:1.3;margin-top:.35em;max-width:34ch}
+.hero .lead{font-size:1.1rem;max-width:58ch}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none}
+.pills li{font-size:13px;font-weight:600;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--muted)}
+.kicker.brand-kick{color:var(--primary)}
+.hsteps{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:0;padding:0}
+.step{list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:8px;transition:transform .18s ease,border-color .18s ease}
+.step:hover{transform:translateY(-3px);border-color:var(--step-c,var(--primary))}
+.step .num{width:34px;height:34px;border-radius:999px;background:var(--step-c);color:#fff;display:grid;place-items:center;font-weight:800;font-family:var(--display)}
+.step h3{margin:4px 0 0;font-size:1.08rem}
+.step p{color:var(--muted);margin:0;font-size:15px}
+.step .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.step .links a{font-size:13px;font-weight:600;color:var(--primary);text-decoration:none;padding:4px 10px;border-radius:999px;background:var(--tint)}
+.step .links a:hover{text-decoration:underline}
+.agent{background:var(--ink);color:var(--ink-fg);border-radius:20px;padding:22px;display:grid;gap:14px;grid-template-columns:1fr;position:relative;overflow:hidden}
+.agent::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,92,143,.45),transparent);pointer-events:none}
+.agent h2{color:#fff;margin:0}
+.agent p{margin:0;color:#d6d3da}
+.agent .rows{display:grid;gap:8px;margin-top:4px}
+.agent .rows div{display:grid;gap:2px;padding:10px 12px;border:1px solid #3a3a42;border-radius:12px;background:rgba(255,255,255,.03)}
+.agent .rows b{font-size:14px}
+.agent .rows b.c1{color:#f43175}.agent .rows b.c2{color:#5fe3d6}.agent .rows b.c3{color:#ffd23f}
+.agent .rows span{font-size:14px;color:#d6d3da}
+@media (min-width:760px){ .agent{grid-template-columns:1.1fr 1.4fr;align-items:center;padding:28px} }
+.demo{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;background:var(--primary);color:var(--primary-ink);border-radius:20px;padding:18px 22px;text-decoration:none;margin-top:18px}
+.demo strong{font-family:var(--display);font-size:1.15rem}
+.demo span{font-weight:600;opacity:.9}
+.card{transition:transform .18s ease,border-color .18s ease}
+a.card:hover{transform:translateY(-2px)}
+.cat-ico{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:var(--tint);color:var(--primary);margin-bottom:10px;font-weight:800;font-family:var(--display)}
+@media (prefers-reduced-motion: reduce){ .step,.card,a.card:hover{transition:none;transform:none} }
+/* Tarjetas de categoría: neutras, con contraste */
+.grid a.card{background:#ffffff;border-color:#ebe4df;border-left:6px solid var(--primary);box-shadow:0 1px 2px rgba(30,30,30,.05)}
+.grid a.card .count{color:var(--muted)}
+.grid a.card .cat-ico{background:var(--ink);color:#ffffff;border-radius:10px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .grid a.card{background:#262626;border-color:#3a3a3a;box-shadow:none} :root:not([data-theme="light"]) .grid a.card .cat-ico{background:#f5f5f5;color:#1c1c1c} }
+:root[data-theme="dark"] .grid a.card{background:#262626;border-color:#3a3a3a;box-shadow:none}
+:root[data-theme="dark"] .grid a.card .cat-ico{background:#f5f5f5;color:#1c1c1c}
+/* Artículos más consultados: mismas tarjetas neutras que las categorías */
+.list.cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:12px}
+.list.cards.cards-list{grid-template-columns:1fr;gap:10px}
+.list.cards a{background:#ffffff;border:1px solid #ebe4df;border-radius:var(--radius);padding:16px;box-shadow:0 1px 2px rgba(30,30,30,.05);transition:transform .18s ease,border-color .18s ease;height:100%}
+.list.cards a:hover{transform:translateY(-2px);border-color:var(--primary)}
+.list.cards a strong{display:block;font-family:var(--display);font-size:1.02rem;margin-bottom:.3em}
+.list.cards a small{color:var(--muted);font-size:14px}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .list.cards a{background:#262626;border-color:#3a3a3a;box-shadow:none} }
+:root[data-theme="dark"] .list.cards a{background:#262626;border-color:#3a3a3a;box-shadow:none}
+
+/* Alineación fija de buscador e idioma en la cabecera */
+.top-row{align-items:center}
+form.search{align-self:center;flex:1 1 320px;min-width:0;margin:0;max-width:600px}
+.tools{flex:1 1 auto;justify-content:flex-end;min-width:0}
+@media (min-width:641px){.tools form.search{flex:1 1 380px;max-width:600px}}
+.lang{flex:none;align-self:center;height:44px;box-sizing:border-box}
+
+/* Accesos rápidos y foco de página */
+.quick{margin:12px 0 0;font-size:14px;color:var(--muted);line-height:1.8}
+.quick a{color:var(--primary);font-weight:600;text-decoration:none}
+.quick a:hover{text-decoration:underline}
+main:focus{outline:none}
+
+/* Barra lateral de temas */
+.shell{display:grid;grid-template-columns:1fr;gap:18px;max-width:1040px;margin:0 auto;min-width:0}
+.shell > main{max-width:none;margin:0;min-width:0}
+.side{min-width:0}
+.side-d > summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);font-weight:700;margin:4px 0}
+.side-d > summary::-webkit-details-marker{display:none}
+.side-list{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:2px}
+.side-list a{display:block;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--fg);font-weight:600;font-size:15px}
+.side-list a:hover{background:var(--surface)}
+.side-list a[aria-current="page"]{background:var(--tint);color:var(--primary);box-shadow:inset 4px 0 0 var(--primary)}
+.side-sub{list-style:none;margin:2px 0 6px 12px;padding:0 0 0 10px;border-left:2px solid var(--line);display:grid;gap:2px}
+.side-sub a{font-weight:500;font-size:14px;color:var(--muted);padding:5px 10px}
+.side-sub a:hover{color:var(--primary)}
+@media (min-width:960px){
+  .shell{grid-template-columns:210px minmax(0,1fr);gap:36px;align-items:start;max-width:1040px}
+  .side{position:sticky;top:124px;max-height:calc(100vh - 140px);overflow:auto;padding-top:20px}
+  .side-d > summary{display:none}
+  .side-d{display:block}
+}
+
+/* Artículos más consultados: filas compactas */
+.list.cards.cards-list{gap:0;grid-template-columns:1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#ffffff}
+.list.cards.cards-list a{border:0;border-radius:0;border-bottom:1px solid var(--line);box-shadow:none;padding:12px 16px;background:transparent;height:auto;display:flex;flex-direction:column;gap:2px}
+.list.cards.cards-list li:last-child a{border-bottom:0}
+.list.cards.cards-list a:hover{transform:none;background:var(--surface);border-color:var(--line)}
+.list.cards.cards-list a strong{margin:0;font-size:15px;font-weight:600}
+.list.cards.cards-list a small{font-size:13px;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;max-width:100%}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .list.cards.cards-list{background:#262626;border-color:#3a3a3a} }
+:root[data-theme="dark"] .list.cards.cards-list{background:#262626;border-color:#3a3a3a}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}
+.tbl th,.tbl td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-family:var(--display);font-size:14px;color:var(--muted)}
+.tbl tr:last-child td{border-bottom:0}
+.band{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.6) 55%,rgba(0,0,0,.35) 100%),url('../assets/hero-classroom.jpg') center 40%/cover no-repeat;color:#fffaf6;margin:-8px -16px 0;padding:76px 24px 68px;border-radius:0 0 36px 36px}
+.band::before{display:none;content:"";position:absolute;width:820px;height:820px;right:-240px;top:-360px;background:radial-gradient(circle,rgba(244,49,117,.5),rgba(244,49,117,0) 62%);pointer-events:none}
+.band::after{display:none;content:"";position:absolute;width:620px;height:620px;left:-220px;bottom:-380px;background:radial-gradient(circle,rgba(71,61,254,.38),rgba(71,61,254,0) 62%);pointer-events:none}
+.band-in{position:relative;z-index:1;max-width:1120px;margin:0 auto}
+.band .kicker{color:#f43175;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;margin:0 0 14px}
+h1.mega{font-size:clamp(58px,9.5vw,124px);line-height:.92;letter-spacing:-.045em;font-weight:800;color:#fffaf6;margin:0 0 22px}
+.band-lead{font-size:clamp(18px,2vw,22px);color:rgba(255,250,246,.78);max-width:52ch;margin:0 0 30px}
+.band form.search{max-width:760px}
+.band form.search input{background:#fffaf6;color:#1c1c1c;border:0;min-height:60px;font-size:16px;padding:0 22px}
+.band form.search .btn,.band form.search button{min-height:60px;background:#f43175;color:#fff;border:0;font-weight:700;padding:0 26px}
+.cat{position:relative;padding:24px 24px 26px;transition:transform .18s ease,border-color .18s ease}
+a.cat:hover{transform:translateY(-3px);border-color:#1c1c1c}
+.cat .dot{display:block;width:46px;height:46px;border-radius:16px;margin-bottom:18px}
+.cat h3{font-size:21px;letter-spacing:-.01em}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.vcard{display:block;background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;color:inherit;text-decoration:none;transition:transform .18s ease}
+.vcard:hover{transform:translateY(-3px)}
+.vcard img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000}
+.vcard .vb{padding:16px 18px 18px}
+.vcard h3{font-size:17px;margin:0 0 4px;letter-spacing:-.01em}
+.vcard small{color:var(--muted);font-size:13px}
+.section-head h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.03em;font-weight:800}
+.faq-list{margin-top:1rem}.faq{border-top:1px solid var(--line);padding:4px 0}.faq:last-child{border-bottom:1px solid var(--line)}.faq summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:1.08rem;padding:14px 28px 14px 0;list-style:none;position:relative}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:'+';position:absolute;right:4px;top:10px;font-size:1.4rem;color:var(--primary)}.faq[open] summary::after{content:'–'}.faq-body{padding:0 0 18px}.faq-steps,.faq-tips{padding-left:22px;margin:.6em 0}.faq-steps li,.faq-tips li{margin:.35em 0}.faq figure{margin-top:12px}.lang-menu{position:relative;display:inline-block}.lang-menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--fg);font-weight:600;font-size:14px;white-space:nowrap}.lang-menu summary::-webkit-details-marker{display:none}.lang-menu summary svg{width:18px;height:18px;flex:none}.lang-menu summary::after{content:'';width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);margin-left:2px}.lang-menu[open] summary::after{transform:rotate(-135deg) translateY(-2px)}.lang-menu summary:focus-visible{outline:3px solid var(--primary);outline-offset:2px}.lang-menu ul{position:absolute;right:0;top:calc(100% + 8px);z-index:30;min-width:190px;margin:0;padding:6px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 30px rgba(28,28,28,.14)}.lang-menu li a{display:block;padding:10px 14px;border-radius:10px;color:var(--fg);text-decoration:none;font-weight:600;font-size:15px}.lang-menu li a:hover{background:var(--bg)}.lang-menu li a[aria-current="true"]{background:var(--tint);color:var(--primary)}</style>
+<div id="app"></div>
+<script>
+const DATA = /*__DATA__*/null;
+(function () {
+  'use strict';
+  const SEG = { es: 'es', 'pt-BR': 'pt-br' };
+  const app = document.getElementById('app');
+  const state = { query: '' };
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const norm = (s) => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const D = (loc) => DATA[loc];
+  const U = (loc) => DATA[loc].ui;
+  const parse = () => {
+    const h = decodeURIComponent(location.hash.replace(/^#/, '')) || 'es-home';
+    if (h.indexOf('pt-br-') === 0) return { loc: 'pt-BR', rest: h.slice(6) || 'home' };
+    if (h.indexOf('es-') === 0) return { loc: 'es', rest: h.slice(3) || 'home' };
+    return { loc: 'es', rest: 'home' };
+  };
+  const href = (loc, rest) => '#' + SEG[loc] + '-' + rest;
+  const article = (loc, id) => {
+    const d = D(loc); const a = d.articles.find((x) => x.id === id); if (a) return a;
+    const target = (d.aliases || {})[id]; return target ? d.articles.find((x) => x.id === target) : undefined;
+  };
+  const category = (loc, id) => D(loc).categories.find((c) => c.id === id);
+  const inCat = (loc, id) => D(loc).articles.filter((a) => a.cat === id);
+  const crumbs = (loc, items) => '<nav class="crumbs" aria-label="Ruta"><ol>' + [{ label: U(loc).home, href: href(loc, 'home') }].concat(items).map((it, i, arr) =>
+    i === arr.length - 1 || !it.href ? '<li aria-current="page">' + esc(it.label) + '</li>' : '<li><a href="' + it.href + '">' + esc(it.label) + '</a></li>').join('') + '</ol></nav>';
+
+  function header(loc, rest) {
+    const u = U(loc);
+    const langs = ['es', 'pt-BR'].map((l) => '<li><a href="' + href(l, rest) + '" lang="' + (l === 'es' ? 'es' : 'pt-BR') + '"' + (l === loc ? ' aria-current="true"' : '') + '>' + (l === 'es' ? 'Español' : 'Português') + '</a></li>').join('');
+    return '<header class="top"><div class="wrap"><div class="top-row">' +
+      '<a class="brand" href="' + href(loc, 'home') + '"><img class="brand-logo" src="__LOGO_ASSISTANT__" alt="Seven Assistant" height="40"></a>' +
+      '<a class="docs-back" href="' + (loc === 'pt-BR' ? '../pt-br/' : '../') + '">' + (loc === 'pt-BR' ? 'Todos os centros de ajuda' : 'Todos los centros de ayuda') + '</a><div class="tools">' + (rest === 'home' ? '' : '<form class="search" role="search" data-search-form><label class="sr" for="q-top">' + esc(u.search) + '</label><input id="q-top" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn small" type="submit">' + esc(u.searchBtn) + '</button></form>') +
+      '<details class="lang-menu"><summary aria-label="' + esc(u.language) + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg><span>' + (loc === 'pt-BR' ? 'Português' : 'Español') + '</span></summary><ul>' + langs + '</ul></details></div></div></div>' +
+      '</div></header>';
+  }
+  function footer(loc) {
+    const es = loc !== 'pt-BR';
+    return (es ? '<footer class="site-footer"><div class="f-inner"><div class="f-grid"><div class="f-brand"><a href="https://www.7education.com/" aria-label="Seven Education"><img class="f-logo" src="__LOGO_FOOT__" alt="Seven Education"></a><div class="f-social"><a href="https://www.linkedin.com/company/7education/" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></a><a href="https://instagram.com/seveneducation.es" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div><p class="f-copy">Copyright © Seven Education 2026</p></div><div class="f-col"><h3 class="f-h">A quién apoyamos</h3><ul><li><a href="https://www.7education.com/a-quienes-apoyamos/autoridades">Autoridades de escuelas</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-primaria">Escuelas de primaria</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-secundaria">Escuelas de secundaria</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-educacion-especial">Educación especial</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-infantil">Escuelas de infantil</a></li></ul></div><div class="f-col"><h3 class="f-h">Soluciones</h3><ul><li><a href="https://www.7education.com/soluciones/vision-general">Visión general</a></li><li><a href="https://www.7education.com/soluciones/comunicacion-escolar">Comunicación escolar</a></li><li><a href="https://www.7education.com/soluciones/gestion-del-aula">Gestión del aula</a></li><li><a href="https://www.7education.com/soluciones/gestion-del-aprendizaje">Gestión del aprendizaje</a></li><li><a href="https://www.7education.com/soluciones/administracion-del-centro">Administración del centro</a></li><li><a href="https://www.7education.com/soluciones/funcionalidades-ia">Funcionalidades IA</a></li></ul></div><div class="f-col"><h3 class="f-h">Recursos</h3><ul><li><a href="https://www.7education.com/blog">Seven Blog</a></li><li><a href="https://www.7education.com/recursos/eventos">Webinars y eventos</a></li></ul></div><div class="f-col"><h3 class="f-h">Sobre nosotros</h3><ul><li><a href="https://www.7education.com/sobre-nosotros">Sobre nosotros</a></li><li><a href="https://www.7education.com/equipo">Únete al equipo</a></li><li><a href="https://www.7education.com/noticias">Noticias y prensa</a></li></ul></div><div class="f-col"><h3 class="f-h">Legal</h3><ul><li><a href="https://www.7education.com/politica-de-privacidad">Privacidad</a></li><li><a href="https://www.7education.com/aviso-legal">Aviso legal</a></li><li><button type="button" class="f-cookies">Cookies</button></li></ul></div></div></div></footer>' : '<footer class="site-footer"><div class="f-inner"><div class="f-grid"><div class="f-brand"><a href="https://www.7education.com/" aria-label="Seven Education"><img class="f-logo" src="__LOGO_FOOT__" alt="Seven Education"></a><div class="f-social"><a href="https://www.linkedin.com/company/7education/" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></a><a href="https://instagram.com/seveneducation.es" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div><p class="f-copy">Copyright © Seven Education 2026</p></div><div class="f-col"><h3 class="f-h">A quem apoiamos</h3><ul><li><a href="https://www.7education.com/a-quienes-apoyamos/autoridades">Autoridades de escolas</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-primaria">Escolas de ensino fundamental</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-secundaria">Escolas de ensino médio</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-educacion-especial">Educação especial</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-infantil">Escolas de educação infantil</a></li></ul></div><div class="f-col"><h3 class="f-h">Soluções</h3><ul><li><a href="https://www.7education.com/soluciones/vision-general">Visão geral</a></li><li><a href="https://www.7education.com/soluciones/comunicacion-escolar">Comunicação escolar</a></li><li><a href="https://www.7education.com/soluciones/gestion-del-aula">Gestão da sala de aula</a></li><li><a href="https://www.7education.com/soluciones/gestion-del-aprendizaje">Gestão da aprendizagem</a></li><li><a href="https://www.7education.com/soluciones/administracion-del-centro">Administração da escola</a></li><li><a href="https://www.7education.com/soluciones/funcionalidades-ia">Funcionalidades de IA</a></li></ul></div><div class="f-col"><h3 class="f-h">Recursos</h3><ul><li><a href="https://www.7education.com/blog">Blog da Seven</a></li><li><a href="https://www.7education.com/recursos/eventos">Webinars e eventos</a></li></ul></div><div class="f-col"><h3 class="f-h">Sobre nós</h3><ul><li><a href="https://www.7education.com/sobre-nosotros">Sobre nós</a></li><li><a href="https://www.7education.com/equipo">Junte-se à equipe</a></li><li><a href="https://www.7education.com/noticias">Notícias e imprensa</a></li></ul></div><div class="f-col"><h3 class="f-h">Legal</h3><ul><li><a href="https://www.7education.com/politica-de-privacidade">Privacidade</a></li><li><a href="https://www.7education.com/aviso-legal">Aviso legal</a></li><li><button type="button" class="f-cookies">Cookies</button></li></ul></div></div></div></footer>');
+  }
+
+  /* ---------- Portada ---------- */
+  function home(loc) {
+    const d = D(loc), u = U(loc);
+    const byId = (id) => d.categories.find((c) => c.id === id);
+    const link = (id) => (byId(id) ? '<a href="' + href(loc, 'cat-' + id) + '">' + esc(byId(id).name) + '</a>' : '');
+    const stepCls = [
+      { c: '#f43175', ids: ['cursos-docentes'] },
+      { c: '#072ac8', ids: ['documentos', 'series', 'fichas'] },
+      { c: '#ff8c42', ids: ['cursos-estudiantes', 'conversaciones'] },
+      { c: '#21c2a2', ids: ['tareas', 'it'] },
+    ];
+    const cats = d.categories.map((c) => '<a class="card" href="' + href(loc, 'cat-' + c.id) + '"><h3>' + esc(c.name) + '</h3><p>' + esc(c.desc) + '</p></a>').join('');
+    const popular = u.popular.map((id) => article(loc, id)).filter(Boolean).map((a) => '<li><a href="' + href(loc, 'art-' + a.id) + '"><strong>' + esc(a.title) + '</strong><small>' + esc(a.answer) + '</small></a></li>').join('');
+    return '<main class="wrap home" id="main" tabindex="-1">' +
+      '<section class="hero">' + (u.kicker ? '<p class="kicker brand-kick">' + esc(u.kicker) + '</p>' : '') + '<h1>' + esc(u.heroTitle) + '<span class="accent">' + esc(u.heroAccent) + '</span></h1><p class="lead">' + esc(u.heroText) + '</p>' +
+      '<form class="search" role="search" data-search-form><label class="sr" for="q-hero">' + esc(u.search) + '</label><input id="q-hero" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn primary" type="submit">' + esc(u.searchBtn) + '</button></form>' + '</section>' +
+      '<section class="section" aria-labelledby="cat-h"><div class="section-head"><h2 id="cat-h">' + esc(u.categories) + '</h2>' + (u.categoriesText ? '<p>' + esc(u.categoriesText) + '</p>' : '') + '</div><div class="grid">' + cats + '</div></section>' +
+      '<section class="section" aria-labelledby="pop-h"><div class="section-head"><h2 id="pop-h">' + esc(u.popularTitle) + '</h2></div><ul class="list cards cards-list">' + popular + '</ul></section>' +
+      '</main>';
+  }
+
+  /* ---------- Preguntas frecuentes ---------- */
+  function faqView(loc) {
+    const c = category(loc, 'faq'); const u = U(loc), d = D(loc);
+    const items = inCat(loc, 'faq').map((a) => {
+      const figs = (a.img || []).filter((n) => d.shots[n]).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '" loading="lazy"></figure>').join('');
+      return '<details class="faq" id="q-' + esc(a.id) + '"><summary>' + esc(a.title) + '</summary><div class="faq-body"><p>' + esc(a.answer) + '</p>' +
+        (a.example ? '<p class="faq-ex"><strong>' + esc(u.example) + ': </strong>' + esc(a.example) + '</p>' : '') +
+        (a.steps && a.steps.length ? '<ol class="faq-steps">' + a.steps.map((st) => '<li><strong>' + esc(st.t) + '</strong> ' + esc(st.b) + '</li>').join('') + '</ol>' : '') +
+        (a.tips && a.tips.length ? '<ul class="faq-tips">' + a.tips.map((tp) => '<li>' + esc(tp) + '</li>').join('') + '</ul>' : '') + figs + '</div></details>';
+    }).join('');
+    return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name }]) +
+      '<section class="article-head"><h1>' + esc(c.name) + '</h1><p class="lead">' + esc(c.desc) + '</p></section>' +
+      '<section class="block faq-list">' + items + '</section></main>';
+  }
+
+  /* ---------- Categoría ---------- */
+  function categoryView(loc, id) {
+    if (id === 'faq') return faqView(loc);
+    const c = category(loc, id); if (!c) return notFound(loc);
+    const u = U(loc);
+    const item = (a) => '<li><a href="' + href(loc, 'art-' + a.id) + '"><strong>' + esc(a.title) + '</strong><small>' + esc(a.answer) + '</small></a></li>';
+    const groups = (id === 'cursos-docentes' && D(loc).courseGroups) ? D(loc).courseGroups.map((g, gi) => { const list = g.ids.map((x) => article(loc, x)).filter(Boolean).map(item).join(''); return list ? '<section class="block" id="g' + gi + '"><h2>' + esc(g.name) + '</h2><ul class="list">' + list + '</ul></section>' : ''; }).join('') : '';
+    const body = groups || ('<section class="block"><ul class="list">' + inCat(loc, id).map(item).join('') + '</ul></section>');
+    return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name }]) +
+      '<section class="article-head"><p class="kicker">' + esc(u.categoryWord) + '</p><h1>' + esc(c.name) + '</h1><p class="lead">' + esc(c.desc) + '</p></section>' +
+      body + '</main>';
+  }
+
+  /* ---------- Artículo ---------- */
+  function articleView(loc, id) {
+    const a = article(loc, id); if (!a) return notFound(loc);
+    const u = U(loc), c = category(loc, a.cat), d = D(loc);
+    const inStep = Object.values(a.stepImg || {}); const figs = (a.img || []).filter((n) => d.shots[n] && inStep.indexOf(n) < 0).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '"><figcaption>' + esc(d.alt[n] || '') + '</figcaption></figure>').join('');
+    const related = (a.related || []).map((r) => article(loc, r)).filter(Boolean).map((r) => '<li><a href="' + href(loc, 'art-' + r.id) + '">' + esc(r.title) + '</a></li>').join('');
+    const faqRel = (a.faqRelated || []).map((id) => article(loc, id)).filter(Boolean).map((f) => '<li><a href="' + href(loc, 'cat-faq~q-' + f.id) + '">' + esc(f.title) + '</a></li>').join('');
+    return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name, href: href(loc, 'cat-' + c.id) }, { label: a.title }]) +
+      '<article class="article-head"><h1>' + esc(a.title) + '</h1>' +
+      '<div class="answer"><b>' + esc(u.inSummary) + '</b><p>' + esc(a.answer) + '</p></div>' +
+      (a.example ? '<aside class="example"><strong>' + esc(u.example) + '</strong>' + a.example.split('\n\n').map((p) => '<p>' + esc(p) + '</p>').join('') + '</aside>' : '') +
+      (a.table ? '<section class="block"><div class="tbl-wrap"><table class="tbl"><thead><tr>' + a.table.head.map((x) => '<th scope="col">' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' + a.table.rows.map((r) => '<tr>' + r.map((x) => '<td>' + esc(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div></section>' : '') +
+      (d.videos && d.videos[a.id] && !d.videos[a.id].after ? videoBlock(d, a.id, u) : '') +
+      (a.steps && a.steps.length ? '<section class="block"><h2>' + esc(u.steps) + '</h2><div class="steps">' + a.steps.map((s, i) => '<div class="step-item"><span class="step-n" aria-hidden="true">' + (i + 1) + '</span><h3>' + esc(s.t) + '</h3><p>' + esc(s.b) + '</p>' + (a.stepImg && a.stepImg[i + 1] && d.shots[a.stepImg[i + 1]] ? '<figure class="step-shot"><img src="' + d.shots[a.stepImg[i + 1]] + '" alt="' + esc(d.alt[a.stepImg[i + 1]] || '') + '" loading="lazy"></figure>' : '') + '</div>').join('') + '</div></section>' : '') +
+      (figs ? '<div class="block">' + figs + '</div>' : '') +
+      (d.videos && d.videos[a.id] && d.videos[a.id].after ? videoBlock(d, a.id, u) : '') +
+      (a.tips && a.tips.length ? '<aside class="tips" aria-label="' + esc(u.tips) + '"><strong>' + esc(u.tips) + '</strong><ul>' + a.tips.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul></aside>' : '') +
+      (faqRel ? '<section class="related"><h2>' + esc(u.faqRelated) + '</h2><ul class="list">' + faqRel + '</ul></section>' : '') +
+      (related ? '<section class="related"><h2>' + esc(u.related) + '</h2><ul class="list">' + related + '</ul></section>' : '') +
+      '<p class="pager"><a class="btn" href="' + href(loc, 'cat-' + c.id) + '">' + esc(u.backTo) + ' ' + esc(c.name) + '</a></p>' +
+      '</article></main>';
+  }
+
+  /* ---------- Búsqueda ---------- */
+  const IDX = {};
+  function index(loc) {
+    if (IDX[loc]) return IDX[loc];
+    return (IDX[loc] = D(loc).articles.map((a) => ({ a: a, title: norm(a.title), kw: norm((a.keywords || []).join(' ')), text: norm(a.answer + ' ' + (a.steps || []).map((s) => s.t + ' ' + s.b).join(' ') + ' ' + (a.tips || []).join(' ')) })));
+  }
+  function runSearch(loc, q) {
+    const ts = norm(q).split(/\s+/).filter((t) => t.length >= 2);
+    if (!ts.length) return [];
+    return index(loc).map((e) => {
+      let score = 0;
+      for (const t of ts) {
+        if (e.title.indexOf(t) !== -1) score += e.title.indexOf(t) === 0 ? 8 : 6;
+        else if (e.kw.indexOf(t) !== -1) score += 4;
+        else if (e.text.indexOf(t) !== -1) score += 1;
+        else return null;
+      }
+      return { a: e.a, score: score };
+    }).filter(Boolean).sort((x, y) => y.score - x.score).slice(0, 30).map((x) => x.a);
+  }
+  function resultsHtml(loc) {
+    const u = U(loc);
+    if (state.query.trim().length < 2) return '<p class="muted">' + esc(u.searchIntro) + '</p>';
+    const hits = runSearch(loc, state.query);
+    if (!hits.length) return '<p class="muted"><strong>' + esc(u.noResults) + '</strong> ' + esc(u.noResultsHint) + '</p>';
+    return '<p class="muted">' + hits.length + ' ' + esc(hits.length === 1 ? u.resultWord : u.resultsWord) + '</p><ul class="list">' + hits.map((a) => '<li><a href="' + href(loc, 'art-' + a.id) + '"><span class="cat">' + esc(category(loc, a.cat).name) + '</span><strong>' + esc(a.title) + '</strong><small>' + esc(a.answer) + '</small></a></li>').join('') + '</ul>';
+  }
+  function search(loc) {
+    const u = U(loc);
+    return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: u.search }]) +
+      '<section class="article-head"><h1>' + esc(u.search) + '</h1>' +
+      '<form class="search" style="max-width:none" role="search" data-search-form><label class="sr" for="q-page">' + esc(u.search) + '</label>' +
+      '<input id="q-page" type="search" minlength="2" value="' + esc(state.query) + '" placeholder="' + esc(u.searchPh) + '" data-live><button class="btn primary" type="submit">' + esc(u.searchBtn) + '</button></form>' +
+      '<div id="results" aria-live="polite" style="margin-top:16px">' + resultsHtml(loc) + '</div></section></main>';
+  }
+  function notFound(loc) {
+    const u = U(loc);
+    return '<main class="wrap" id="main" tabindex="-1"><section class="article-head"><h1>' + esc(u.notFound) + '</h1><p class="lead">' + esc(u.notFoundText) + '</p><p><a class="btn primary" href="' + href(loc, 'home') + '">' + esc(u.home) + '</a></p></section></main>';
+  }
+
+  /* ---------- Enrutado y eventos ---------- */
+  function route(loc, rest) {
+    if (rest === 'home') return home(loc);
+    if (rest.indexOf('cat-') === 0) return categoryView(loc, rest.slice(4).split('~')[0]);
+    if (rest.indexOf('art-') === 0) { const aid = rest.slice(4); const al = (D(loc).aliases || {})[aid]; return articleView(loc, article(loc, aid) ? aid : (al || aid)); }
+    if (rest === 'search') return search(loc);
+    return notFound(loc);
+  }
+
+  /* ---------- Barra lateral de temas (categorías y artículos) ---------- */
+  function sideNav(loc, rest) {
+    const d = D(loc), u = U(loc);
+    let cur = null;
+    if (rest.indexOf('cat-') === 0) cur = rest.slice(4).split('~')[0];
+    else if (rest.indexOf('art-') === 0) { const a = article(loc, rest.slice(4)); if (a) cur = a.cat; }
+    const items = d.categories.map((c) => {
+      const on = c.id === cur;
+      let sub = '';
+      if (on && c.id === 'cursos-docentes' && d.courseGroups) {
+        sub = '<ul class="side-sub">' + d.courseGroups.map((g, gi) => '<li><a href="' + href(loc, 'cat-' + c.id + '~g' + gi) + '">' + esc(g.name) + '</a></li>').join('') + '</ul>';
+      }
+      return '<li><a href="' + href(loc, 'cat-' + c.id) + '"' + (on ? ' aria-current="page"' : '') + '>' + esc(c.name) + '</a>' + sub + '</li>';
+    }).join('');
+    return '<aside class="side" aria-label="' + esc(u.topics) + '"><details class="side-d"><summary>' + esc(u.exploreTopics) + '</summary><nav aria-label="' + esc(u.topics) + '"><ul class="side-list">' + items + '</ul></nav></details></aside>';
+  }
+  // Reproductor de vídeo tutorial: velocidad, CC, indicación de narración, póster y aviso si falla la carga.
+  function videoBlock(d, id, u) {
+    const v = d.videos[id];
+    const speeds = [0.75, 1, 1.25, 1.5].map((s) => '<button type="button" class="vp-btn vp-speed" data-vp-speed="' + s + '" aria-controls="vid-' + id + '" aria-pressed="' + (s === 1) + '">' + s + '×</button>').join('');
+    return '<section class="block video-block"><h2>' + esc(u.video) + '</h2><figure class="video">' +
+      '<video id="vid-' + id + '" controls playsinline preload="metadata" poster="' + esc(v.poster || '') + '" src="' + v.src + '" aria-label="' + esc(v.title) + '">' +
+      '<track kind="subtitles" srclang="' + v.srclang + '" label="' + esc(v.label) + '" src="' + v.vtt + '"></video>' +
+      '<div class="vp-bar" role="toolbar" aria-label="' + esc(u.vpControls) + '">' +
+      '<button type="button" class="vp-btn vp-cc" data-vp-cc aria-controls="vid-' + id + '" aria-pressed="false">' + esc(u.vpCC) + '</button>' +
+      '<span class="vp-label">' + esc(u.vpSpeed) + '</span><div class="vp-speeds" role="group" aria-label="' + esc(u.vpSpeed) + '">' + speeds + '</div>' +
+      '</div>' +
+      '<p class="vp-fallback" hidden>' + esc(u.vpFallback) + ' <a href="' + v.src + '">' + esc(u.vpOpen) + '</a></p>' +
+      '</figure></section>';
+  }
+  document.addEventListener('click', (e) => {
+    const sp = e.target.closest && e.target.closest('[data-vp-speed]');
+    if (sp) {
+      const vid = document.getElementById(sp.getAttribute('aria-controls'));
+      if (vid) vid.playbackRate = parseFloat(sp.getAttribute('data-vp-speed'));
+      sp.parentNode.querySelectorAll('[data-vp-speed]').forEach((b) => b.setAttribute('aria-pressed', String(b === sp)));
+      return;
+    }
+    const cc = e.target.closest && e.target.closest('[data-vp-cc]');
+    if (cc) {
+      const vid = document.getElementById(cc.getAttribute('aria-controls'));
+      const tr = vid && vid.textTracks && vid.textTracks[0];
+      if (tr) tr.mode = tr.mode === 'showing' ? 'hidden' : 'showing';
+      cc.setAttribute('aria-pressed', String(!!tr && tr.mode === 'showing'));
+    }
+  });
+  document.addEventListener('loadedmetadata', (e) => {
+    if (e.target.tagName !== 'VIDEO') return;
+    const tr = e.target.textTracks && e.target.textTracks[0];
+    if (tr) tr.mode = 'hidden';
+    const fig = e.target.closest('figure'); const cc = fig && fig.querySelector('[data-vp-cc]');
+    if (cc) cc.setAttribute('aria-pressed', String(!!tr && tr.mode === 'showing'));
+  }, true);
+  document.addEventListener('error', (e) => {
+    if (e.target.tagName !== 'VIDEO') return;
+    const fig = e.target.closest('figure'); const p = fig && fig.querySelector('.vp-fallback'); if (p) p.hidden = false;
+  }, true);
+  function render() {
+    const p = parse();
+    document.documentElement.lang = p.loc === 'es' ? 'es' : 'pt-BR';
+    const withSide = p.rest.indexOf('cat-') === 0 || p.rest.indexOf('art-') === 0;
+    const body = withSide ? '<div class="shell">' + sideNav(p.loc, p.rest) + route(p.loc, p.rest) + '</div>' : route(p.loc, p.rest);
+    app.innerHTML = '<p id="route-live" class="sr" aria-live="polite"></p>' + header(p.loc, p.rest) + body + footer(p.loc);
+    const det = app.querySelector('.side-d'); if (det) { if (window.matchMedia('(min-width: 960px)').matches) det.setAttribute('open', ''); else det.removeAttribute('open'); }
+    const gm = p.rest.match(/~g(\d+)$/);
+    const h1 = app.querySelector('h1'); const title = h1 ? (h1.querySelector('.accent') ? h1.firstChild.textContent : h1.textContent).trim() : '';
+    document.title = (title ? title + ' · ' : '') + 'Seven Assistant';
+    const live = document.getElementById('route-live'); if (live) live.textContent = title;
+    const main = app.querySelector('main'); if (main) main.focus({ preventScroll: true });
+    if (gm) { const gel = document.getElementById('g' + gm[1]); if (gel) gel.scrollIntoView({ block: 'start' }); }
+    const qm = p.rest.match(/~q-(.+)$/); if (qm) { const qel = document.getElementById('q-' + qm[1]); if (qel) { qel.open = true; qel.scrollIntoView({ block: 'start' }); } }
+  }
+  window.addEventListener('hashchange', () => { render(); if (!/~(g\d+|q-.+)$/.test(location.hash)) window.scrollTo(0, 0); });
+  document.addEventListener('submit', (e) => {
+    const f = e.target;
+    if (!f.matches || !f.matches('[data-search-form]')) return;
+    e.preventDefault();
+    const input = f.querySelector('input');
+    state.query = input ? input.value : '';
+    const p = parse();
+    const target = href(p.loc, 'search');
+    if (location.hash === target) render(); else location.hash = target;
+  });
+  document.addEventListener('input', (e) => {
+    if (!e.target.matches || !e.target.matches('[data-live]')) return;
+    state.query = e.target.value;
+    const box = document.getElementById('results');
+    if (box) box.innerHTML = resultsHtml(parse().loc);
+  });
+  render();
+})();
+</script>

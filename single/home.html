@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help Center · Seven Education</title>
+<meta name="description" content="Centros de ayuda y documentación de Seven Education: Seven Assistant y los centros de ayuda de Educamos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<style>
+/* Tokens de la marca (mismos que el centro de ayuda de Seven Assistant) */
+:root{color-scheme:light;--bg:#fffaf6;--surface:#ffffff;--fg:#1c1c1c;--muted:rgba(28,28,28,.72);--line:#ebe4df;--primary:#f43175;--primary-ink:#ffffff;--tint:#fde6f0;--display:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--body:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--radius:16px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1c1c1c;--surface:#262626;--fg:#f5f5f5;--muted:#b9b4bf;--line:#3a3a3a;--primary:#f43175;--primary-ink:#1c1c1c;--tint:#3a1d2b}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1c1c1c;--surface:#262626;--fg:#f5f5f5;--muted:#b9b4bf;--line:#3a3a3a;--primary:#f43175;--primary-ink:#1c1c1c;--tint:#3a1d2b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--body);min-width:0}
+a{color:var(--primary)}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header.top{border-bottom:1px solid var(--line)}
+.top-row{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.brand img{height:40px;width:auto;display:block}
+.top-nav{font-size:14px;font-weight:600;color:var(--muted)}
+h1,h2{font-family:var(--display);line-height:1.15;margin:0 0 .45em;text-wrap:balance}
+.hero{padding:56px 0 28px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin:0 0 .6em}
+.hero h1{font-size:clamp(34px,5vw,52px);letter-spacing:-.01em;margin-bottom:.3em}
+.lead{font-size:1.1rem;color:var(--muted);max-width:60ch;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;padding:12px 0 56px}
+.prod{position:relative;display:flex;flex-direction:column;gap:6px;min-height:200px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 22px 20px;color:inherit;text-decoration:none;box-shadow:0 1px 2px rgba(30,30,30,.05);transition:transform .18s ease,border-color .18s ease}
+a.prod:hover{transform:translateY(-2px);border-color:var(--primary)}
+.prod .country{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.prod h2{font-size:21px;margin:2px 0 0}
+.prod p{margin:0;color:var(--muted);font-size:15px}
+.prod .foot{margin-top:auto;padding-top:14px;font-size:14px;font-weight:700}
+a.prod .foot{color:var(--primary)}
+.prod.is-soon{opacity:.82;border-style:dashed;cursor:default}
+.chip{display:inline-block;align-self:flex-start;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--tint);color:var(--primary);margin-top:auto}
+.prod .foot,.chip{margin-top:auto}
+.prod.is-soon .foot{display:none}
+.prod.is-soon .chip{margin-top:14px}
+/* pie: mismo estilo que el centro de ayuda */
+.site-footer{margin:4.5rem 0 0;background:#1c1c1c;color:#fffaf6;font-size:14px;line-height:1.5}.f-inner{padding:56px 64px;position:relative}.f-inner::before{content:"";position:absolute;left:64px;right:64px;top:0;border-top:1px solid rgba(255,250,246,.14)}.f-grid{display:grid;grid-template-columns:384px 167px 173px 153px 154px 1fr;align-items:start}.f-brand{display:block}.f-logo{display:block;width:136px;height:40px;margin-top:17px;filter:invert(1)}.f-social{display:flex;gap:12px;margin-top:80px;color:#fffaf6}.site-footer .f-social a{color:#fffaf6;display:inline-flex}.f-social svg{width:20px;height:20px}.f-copy{margin:16px 0 0;font-size:13px;line-height:18px;color:#fffaf6}.f-h{font-family:var(--body);font-size:14px;font-weight:600;color:#fffaf6;margin:10px 0 11px;line-height:16px}.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}.site-footer li{line-height:16px}.site-footer a{color:rgba(255,250,246,.48);text-decoration:none}.site-footer a:hover{color:#fffaf6}.f-cookies{background:none;border:0;padding:0;font:inherit;color:rgba(255,250,246,.48);cursor:pointer;line-height:16px}.f-cookies:hover{color:#fffaf6}@media (max-width:900px){.f-inner{padding:40px 24px 40px}.f-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 20px}.f-brand{grid-column:1/-1}.f-social{margin-top:28px}}
+.band{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.72) 45%,rgba(0,0,0,.4) 100%),url('assets/hero-knowledge.jpg') center 40%/cover no-repeat;color:#fffaf6;margin:0 -24px;padding:84px 24px 76px;border-radius:0 0 36px 36px}
+.band::before{display:none;content:"";position:absolute;width:820px;height:820px;right:-240px;top:-360px;background:radial-gradient(circle,rgba(244,49,117,.5),rgba(244,49,117,0) 62%);pointer-events:none}
+.band::after{display:none;content:"";position:absolute;width:620px;height:620px;left:-220px;bottom:-380px;background:radial-gradient(circle,rgba(71,61,254,.38),rgba(71,61,254,0) 62%);pointer-events:none}
+.band-in{position:relative;z-index:1;max-width:1120px;margin:0 auto}
+.band .kicker{color:#ff8fb4;text-shadow:0 1px 8px rgba(0,0,0,.6);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;margin:0 0 14px}
+.band h1{font-size:clamp(58px,9.5vw,124px);line-height:.92;letter-spacing:-.045em;font-weight:800;color:#fffaf6;margin:0 0 22px}
+.band .lead{text-shadow:0 1px 10px rgba(0,0,0,.55);font-size:clamp(18px,2vw,22px);color:rgba(255,250,246,.78);max-width:52ch;margin:0}
+.grid{max-width:1120px;margin:0 auto}
+.prod-feature{grid-column:1/-1;min-height:0;padding:32px 36px;border-color:var(--primary)}
+.prod-feature h2{font-size:30px}
+.prod-feature p{max-width:64ch;font-size:16px}
+.prod-feature .foot{margin-top:14px}
+.soon-h{grid-column:1/-1;font-family:var(--body);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:24px 0 0}
+.grid-soon{grid-column:1/-1;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;padding:0 0 56px}
+.prod.is-soon{min-height:0;padding:16px 18px;border:1px solid var(--line);box-shadow:none;opacity:.8;gap:4px}
+.prod.is-soon h2{font-size:18px;margin:0}
+.prod.is-soon p{font-size:14px}
+.prod.is-soon .chip{margin-top:8px}
+@media (max-width:700px){.prod-feature{padding:24px 22px}.prod-feature h2{font-size:24px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap top-row">
+  <a class="brand" href="./"><img src="assets/logo-seven-education.png" alt="Seven Education" height="40"></a>
+  <nav class="top-nav" aria-label="Knowledge Hub"><span>Knowledge Hub</span></nav>
+</div></header>
+
+<main class="wrap" style="padding-top:0">
+  <section class="band" aria-labelledby="t"><div class="band-in">
+    <p class="kicker">Documentación de Seven Education</p>
+    <h1 id="t">Help Center</h1>
+    <p class="lead">Elige el producto para encontrar guías, vídeos y respuestas a las dudas más habituales.</p>
+  </div></section>
+  <section aria-label="Productos">
+    <div class="grid" id="products"></div>
+  </section>
+</main>
+
+<footer class="site-footer"><div class="f-inner"><div class="f-grid"><div class="f-brand"><a href="https://www.7education.com/" aria-label="Seven Education"><img class="f-logo" src="assets/logo-seven-education-footer.png" alt="Seven Education"></a><div class="f-social"><a href="https://www.linkedin.com/company/7education/" rel="noopener" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-4.9c0-1.17-.02-2.68-1.63-2.68-1.64 0-1.89 1.28-1.89 2.6V21h-4z"/></svg></a><a href="https://instagram.com/seveneducation.es" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a></div><p class="f-copy">Copyright © Seven Education 2026</p></div><div class="f-col"><h3 class="f-h">A quién apoyamos</h3><ul><li><a href="https://www.7education.com/a-quienes-apoyamos/autoridades">Autoridades de escuelas</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-primaria">Escuelas de primaria</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-secundaria">Escuelas de secundaria</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-educacion-especial">Educación especial</a></li><li><a href="https://www.7education.com/a-quienes-apoyamos/escuelas-de-infantil">Escuelas de infantil</a></li></ul></div><div class="f-col"><h3 class="f-h">Soluciones</h3><ul><li><a href="https://www.7education.com/soluciones/vision-general">Visión general</a></li><li><a href="https://www.7education.com/soluciones/comunicacion-escolar">Comunicación escolar</a></li><li><a href="https://www.7education.com/soluciones/gestion-del-aula">Gestión del aula</a></li><li><a href="https://www.7education.com/soluciones/gestion-del-aprendizaje">Gestión del aprendizaje</a></li><li><a href="https://www.7education.com/soluciones/administracion-del-centro">Administración del centro</a></li><li><a href="https://www.7education.com/soluciones/funcionalidades-ia">Funcionalidades IA</a></li></ul></div><div class="f-col"><h3 class="f-h">Recursos</h3><ul><li><a href="https://www.7education.com/blog">Seven Blog</a></li><li><a href="https://www.7education.com/recursos/eventos">Webinars y eventos</a></li></ul></div><div class="f-col"><h3 class="f-h">Sobre nosotros</h3><ul><li><a href="https://www.7education.com/sobre-nosotros">Sobre nosotros</a></li><li><a href="https://www.7education.com/equipo">Únete al equipo</a></li><li><a href="https://www.7education.com/noticias">Noticias y prensa</a></li></ul></div><div class="f-col"><h3 class="f-h">Legal</h3><ul><li><a href="https://www.7education.com/politica-de-privacidad">Privacidad</a></li><li><a href="https://www.7education.com/aviso-legal">Aviso legal</a></li><li><button type="button" class="f-cookies">Cookies</button></li></ul></div></div></div></footer>
+
+<script>
+  // Centros de ayuda. Para añadir uno: nueva entrada con su url. Mientras url sea null aparece en "Próximamente".
+  const PRODUCTS = [
+    { name: 'Seven Assistant', country: 'Todos los países', desc: 'Guías de inicio, cursos, conversaciones, documentos, series de lecciones, fichas, tareas de corrección y configuración.', url: 'seven-assistant/' },
+    { name: 'Educamos Brasil', country: 'Brasil', desc: 'Centro de ayuda de Educamos en Brasil.', url: null },
+    { name: 'Educamos Argentina', country: 'Argentina', desc: 'Centro de ayuda de Educamos en Argentina.', url: null },
+    { name: 'Educamos Chile', country: 'Chile', desc: 'Centro de ayuda de Educamos en Chile.', url: null },
+    { name: 'Educamos México', country: 'México', desc: 'Centro de ayuda de Educamos en México.', url: null }
+  ];
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const live = PRODUCTS.filter((p) => p.url), soon = PRODUCTS.filter((p) => !p.url);
+  const card = (p, feature) => '<a class="prod' + (feature ? ' prod-feature' : '') + '" href="' + esc(p.url) + '"><span class="country">' + esc(p.country) + '</span><h2>' + esc(p.name) + '</h2><p>' + esc(p.desc) + '</p><span class="foot">Abrir centro de ayuda →</span></a>';
+  const cardSoon = (p) => '<article class="prod is-soon" aria-label="' + esc(p.name) + ', próximamente"><span class="country">' + esc(p.country) + '</span><h2>' + esc(p.name) + '</h2><p>' + esc(p.desc) + '</p><span class="chip">Próximamente</span></article>';
+  const feature = live.length === 1;
+  document.getElementById('products').innerHTML = live.map((p) => card(p, feature)).join('') +
+    (soon.length ? '<h2 class="soon-h">Próximamente</h2><div class="grid-soon">' + soon.map(cardSoon).join('') + '</div>' : '');
+</script>
+</body>
+</html>

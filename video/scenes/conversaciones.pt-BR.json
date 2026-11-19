@@ -1,0 +1,84 @@
+{
+  "lesson": "conversaciones",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa"
+    },
+    {
+      "do": "waitFor",
+      "selector": "[aria-label=\"Conversaciones\"]"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Conversas é o ponto de partida. Você escreve o que precisa na caixa de mensagem e o assistente responde com material pronto para usar na aula.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "[aria-label=\"Conversaciones\"]",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "compositor",
+      "say": "Com o botão de mais, você pode adicionar fotos ou arquivos, usar a câmera ou filtrar seus documentos para que o assistente trabalhe com o seu próprio material.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 165,
+          "y": 342
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        }
+      ]
+    },
+    {
+      "id": "herramientas",
+      "say": "Ao lado da caixa há ferramentas como Smart, Serie de clases, Ficha de trabajo, H5P ou Corrección. Cada uma prepara um tipo de resultado diferente.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 293,
+          "y": 342
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        }
+      ]
+    },
+    {
+      "id": "historial",
+      "say": "Suas conversas ficam salvas na barra lateral, assim você pode retomá-las quando quiser.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "[aria-label=\"Abrir barra lateral\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "lesson": "tarea",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/feedback-tasks"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Editados recientemente"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Las tareas de corrección y feedback permiten que el asistente revise las entregas de tu alumnado con tus criterios. Así puedes revisar una de ejemplo.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Observa células de cebolla al microscopio",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "abrir",
+      "say": "Ábrela para ver la descripción, el documento de apoyo y los criterios de calificación.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Observa células de cebolla al microscopio >> nth=0"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Criterios de calificación"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Criterios de calificación",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        }
+      ]
+    },
+    {
+      "id": "criterios",
+      "say": "Cada criterio tiene sus puntos. El alumnado los ve al entregar, pero la solución modelo queda oculta para él.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Describe la forma y el orden de las células",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1100
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Explica para qué sirve el microscopio",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1100
+        }
+      ]
+    },
+    {
+      "id": "enlace",
+      "say": "Para repartirla, crea un enlace de acceso. El alumnado entra como invitado, solo con su nombre.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Enlaces de acceso",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "entregas",
+      "say": "Cuando entregan, la tabla muestra a cada estudiante con su mejor nota y con cada una de sus entregas.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Mejor rendimiento",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        }
+      ]
+    },
+    {
+      "id": "revisar",
+      "say": "Pulsa una nota para revisar la entrega: el texto del alumnado, la puntuación de cada criterio y el comentario que la justifica.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=\"10/10\" >> nth=-1"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Detalles:"
+        },
+        {
+          "do": "wait",
+          "ms": 4200
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Detalles:",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "cerrar",
+      "say": "Antes de dar la nota definitiva, comprueba que el comentario coincide con los criterios. Así el feedback también sirve de guía a tu alumnado.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "lesson": "C.1",
+  "baseUrl": "https://sevenai.es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/hsb-V2ulM_DGct0zMq5nmA"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Vista general\")"
+    }
+  ],
+  "locale": "es",
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "En esta guía recorremos las pestañas de un curso. Están en la parte superior, y la primera es la vista general.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Vista general\")",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    },
+    {
+      "id": "vista-general",
+      "say": "La vista general muestra la invitación con el código de inscripción y las secciones. Dentro de cada sección, el botón Añadir actividad o material despliega todos los tipos disponibles.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Invitar al alumnado",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Añadir actividad o material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 5000
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        }
+      ]
+    },
+    {
+      "id": "citas",
+      "say": "En Citas organizas las sesiones con fecha. Al pulsar Crear cita se abre el formulario con título, fecha, horario, lugar y nota.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Citas\")"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Crear cita\")"
+        },
+        {
+          "do": "wait",
+          "ms": 5500
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        }
+      ]
+    },
+    {
+      "id": "contenidos",
+      "say": "Contenidos compartidos reúne los materiales, las entregas, los enlaces y las notas. Puedes filtrarlos por tipo con un solo toque.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Contenidos compartidos\")"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Entrega\")"
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Todos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "participantes",
+      "say": "Participantes muestra quién forma parte del curso. Con Invitar a personas puedes invitar por código o por correo electrónico.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Participantes\")"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Invitar a personas\")"
+        },
+        {
+          "do": "wait",
+          "ms": 5500
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        }
+      ]
+    },
+    {
+      "id": "configuracion",
+      "say": "Configuración agrupa los ajustes del curso: el código de inscripción, la visualización y la inteligencia artificial.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Configuración\")"
+        },
+        {
+          "do": "click",
+          "selector": "text=\"Código de inscripción\""
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        },
+        {
+          "do": "click",
+          "selector": "text=\"IA en el curso\""
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    }
+  ]
+}

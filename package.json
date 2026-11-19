@@ -1,0 +1,13 @@
+{
+  "name": "seven-assistant-help-center",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Centro de ayuda público bilingüe (es / pt-BR) de Seven Assistant. Sitio estático generado sin dependencias.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:local": "HELP_BASE= node scripts/build.mjs",
+    "serve": "python3 -m http.server 8080 --directory dist",
+    "video:test": "video/pipeline/run.sh video/test/scenes-fixture.es.json video/test/out && video/pipeline/run.sh video/test/scenes-fixture.pt-BR.json video/test/out"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "lesson": "tarea",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/feedback-tasks"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Observe células de cebola ao microscópio"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "As tarefas de correção e feedback permitem que o assistente revise as entregas dos seus alunos com os seus critérios. Aqui tem um exemplo.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Observe células de cebola ao microscópio",
+          "ms": 1080
+        },
+        {
+          "do": "wait",
+          "ms": 825
+        },
+        {
+          "do": "wait",
+          "ms": 7261,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "abrir",
+      "say": "Abra a tarefa para ver a descrição, o documento de apoio e os critérios de avaliação.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Observe células de cebola ao microscópio >> nth=0"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Critérios de avaliação"
+        },
+        {
+          "do": "wait",
+          "ms": 495
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Critérios de avaliação",
+          "ms": 960
+        },
+        {
+          "do": "wait",
+          "ms": 495
+        },
+        {
+          "do": "wait",
+          "ms": 2363,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "criterios",
+      "say": "Cada critério tem a sua pontuação. Os alunos veem os critérios ao entregar, mas a solução modelo fica oculta para eles.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Descreva a forma e a ordem das células",
+          "ms": 960
+        },
+        {
+          "do": "wait",
+          "ms": 605
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Explique para que serve o microscópio",
+          "ms": 960
+        },
+        {
+          "do": "wait",
+          "ms": 605
+        },
+        {
+          "do": "wait",
+          "ms": 5119,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "enlace",
+      "say": "Para repartir a tarefa, crie um link de acesso. Os alunos entram como convidados, apenas com o nome.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Access links",
+          "ms": 1080
+        },
+        {
+          "do": "wait",
+          "ms": 825
+        },
+        {
+          "do": "wait",
+          "ms": 5065,
+          "pad": true
+        }
+      ]
+    }
+  ]
+}

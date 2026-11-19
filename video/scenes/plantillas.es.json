@@ -1,0 +1,121 @@
+{
+  "lesson": "plantillas",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/ai-agents"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Nuevo Plantilla\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Las plantillas son asistentes de IA que configuras una vez y reutilizas en tus clases. Aquí aparecen las que ya tienes creadas.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Guía de laboratorio · 1.º ESO",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "crear",
+      "say": "Con el botón de nueva plantilla abres el formulario de creación.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Nuevo Plantilla\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "nombre",
+      "say": "Ponle un nombre, por ejemplo, Asistente de prácticas de laboratorio, y elige cómo responde: dinámico o estándar.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "input:not([type=\"file\"]):not([type=\"hidden\"]) >> nth=0"
+        },
+        {
+          "do": "type",
+          "selector": "input:not([type=\"file\"]):not([type=\"hidden\"]) >> nth=0",
+          "text": "Asistente de prácticas de laboratorio",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Estándar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "herramientas",
+      "say": "En Herramientas decides qué puede hacer: crear imágenes, buscar en la web, gestionar la biblioteca o crear H5P.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Búsqueda web\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Crear H5P\")"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "instruccion",
+      "say": "La instrucción describe el papel del asistente, y los iniciadores de conversación son las primeras preguntas que verá quien lo use.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Iniciadores de conversación",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "say": "Como es una demostración, no la guardamos. Al guardarla, la plantilla queda disponible para iniciar chats.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    }
+  ]
+}

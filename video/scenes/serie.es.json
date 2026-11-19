@@ -1,0 +1,159 @@
+{
+  "lesson": "serie",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/lesson-series"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Editados recientemente"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Una serie de lecciones prepara un tema completo, sesión a sesión. Te enseño cómo crear una en menos de un minuto.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Crea una serie de lecciones",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        },
+        {
+          "do": "shot",
+          "name": "serie-1-lista"
+        }
+      ]
+    },
+    {
+      "id": "abrir",
+      "say": "Pulsa Crear y se abre el formulario.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "1 · Pulsa Crear",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Crear\"]"
+        },
+        {
+          "do": "waitFor",
+          "selector": "input[placeholder^=\"ej. Introducción\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "shot",
+          "name": "serie-2-formulario"
+        }
+      ]
+    },
+    {
+      "id": "tema",
+      "say": "Escribe el tema. Por ejemplo: la fotosíntesis, de la luz a la materia.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · Escribe el tema",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder^=\"ej. Introducción\"]",
+          "text": "La fotosíntesis: de la luz a la materia",
+          "delay": 45
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "datos",
+      "say": "Indica la asignatura, el curso y una descripción breve de los objetivos.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Asignatura, curso y objetivos",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"ej. Matemáticas\"]",
+          "text": "Biología y Geología",
+          "delay": 40
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"p. ej. 4.º de ESO\"]",
+          "text": "1.º de ESO",
+          "delay": 40
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Comprender cómo las plantas transforman la luz en energía química.",
+          "delay": 22
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "shot",
+          "name": "serie-3-completo"
+        }
+      ]
+    },
+    {
+      "id": "guardar",
+      "say": "Pulsa Crear de nuevo para guardarla. La serie aparece en la lista, lista para editar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "4 · Guárdala",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button[type=\"submit\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        },
+        {
+          "do": "shot",
+          "name": "serie-4-guardada"
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Ya la tienes. Desde la lista puedes abrirla, editarla o generarla con IA.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Serie creada",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    }
+  ]
+}

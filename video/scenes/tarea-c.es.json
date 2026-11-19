@@ -1,0 +1,99 @@
+{
+  "lesson": "tarea-c",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/feedback-tasks/165"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Enlaces de acceso"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "entregas",
+      "say": "Cuando el alumnado entrega, la tarea muestra a cada estudiante con su mejor nota y con cada una de sus entregas.",
+      "actions": [
+        {
+          "do": "scroll",
+          "selector": "text=Mejor rendimiento"
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Mejor rendimiento",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Lucía Martín",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 1000
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Marta Ruiz",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "revisar",
+      "say": "Pulsa una nota para revisar la entrega: el texto del alumnado, la puntuación de cada criterio y el comentario que la justifica.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=/5,5\\/10/ >> nth=0"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Detalles:"
+        },
+        {
+          "do": "wait",
+          "ms": 4200
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Detalles:",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "cerrar",
+      "say": "Antes de dar la nota final, comprueba que el comentario coincide con los criterios. Así el feedback también orienta a tu alumnado.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    }
+  ]
+}

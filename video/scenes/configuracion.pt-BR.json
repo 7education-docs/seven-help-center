@@ -1,0 +1,142 @@
+{
+  "lesson": "configuracion",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa"
+    },
+    {
+      "do": "waitFor",
+      "selector": "div[contenteditable=\"true\"]"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Configurações reúne os ajustes da sua conta. Abre-se pelo seu avatar, na parte inferior da barra lateral.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Configurações da conta",
+          "step": ""
+        },
+        {
+          "do": "clickAt",
+          "x": 44,
+          "y": 679
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "menu",
+      "say": "Nesse mesmo menu você encontra o idioma, as pastas compartilhadas e as suas tarefas.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Menu da conta",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Gerenciar pastas compartilhadas",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "geral",
+      "say": "Em Geral você escolhe o idioma da interface, o design e a voz do assistente. Veja a opção de idioma.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Idioma da interface",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "text=Configurações"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Português\")"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        },
+        {
+          "do": "shot",
+          "name": "configuracion-2-idioma"
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "secciones",
+      "say": "Pela lista da esquerda você alterna entre Notificações, Personalização, Memória ou Uso.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Outras opções",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "text=Notificações"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        },
+        {
+          "do": "click",
+          "selector": "text=Personalização"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "say": "Quando terminar, feche a janela e volte ao seu trabalho.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Pronto",
+          "step": ""
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "lesson": "documentos",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/documents"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Mi biblioteca"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Para añadir material a tu biblioteca, pulsa Contenido. Todo lo que subas aparece aquí, en Mi biblioteca.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:text-is(\"Contenido\")",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    },
+    {
+      "id": "menu",
+      "say": "Puedes subir archivos PDF o vídeo, o añadir una página web pegando su dirección.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Contenido\")"
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "highlight",
+          "selector": "[role=menuitem]:has-text(\"Subir archivos\")",
+          "ms": 1500
+        },
+        {
+          "do": "highlight",
+          "selector": "[role=menuitem]:has-text(\"Añadir página web\")",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 600
+        }
+      ]
+    },
+    {
+      "id": "url",
+      "say": "Vamos a añadir un artículo real de Wikipedia sobre el microscopio óptico. Escribe su dirección y pulsa Crear.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "[role=menuitem]:has-text(\"Añadir página web\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "input[type=url]"
+        },
+        {
+          "do": "wait",
+          "ms": 400
+        },
+        {
+          "do": "type",
+          "selector": "input[type=url]",
+          "text": "https://es.wikipedia.org/wiki/Microscopio_óptico",
+          "delay": 45
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "[role=dialog] button:text-is(\"Crear\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "proceso",
+      "say": "Seven prepara el documento. Mientras aparece Preparando, puedes seguir trabajando; cuando cambie a Listo, ya está disponible.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 2500
+        },
+        {
+          "do": "waitGone",
+          "selector": "text=Preparando…",
+          "timeout": 150000
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "listo",
+      "say": "Con el estado Listo, la IA ya puede usar el documento en tus chats y en tus series de lecciones.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Microscopio óptico - Wikipedia",
+          "ms": 2000
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "abrir",
+      "say": "Ábrelo para revisar el contenido. Desde aquí puedes editar el resumen o abrir la página original.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Microscopio óptico - Wikipedia"
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Editar resumen",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 600
+        }
+      ]
+    },
+    {
+      "id": "buscar",
+      "say": "Para encontrarlo después, escribe una palabra del nombre en el buscador de Mi biblioteca.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "input[placeholder=\"Buscar documentos…\"]"
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"Buscar documentos…\"]",
+          "text": "microscopio",
+          "delay": 90
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    }
+  ]
+}

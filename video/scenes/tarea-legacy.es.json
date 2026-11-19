@@ -1,0 +1,131 @@
+{
+  "lesson": "tarea",
+  "locale": "es",
+  "scenes": [
+    {
+      "id": "c01",
+      "say": "Las tareas de corrección y feedback permiten que el asistente revise las entregas de tu alumnado con tus criterios.",
+      "actions": []
+    },
+    {
+      "id": "c02",
+      "say": "Vamos a crear una desde cero.",
+      "actions": []
+    },
+    {
+      "id": "c03",
+      "say": "Escribe un título que el alumnado reconozca y una descripción clara: es lo que verá al entregar.",
+      "actions": []
+    },
+    {
+      "id": "c04",
+      "say": "La solución modelo te sirve de referencia para corregir. El alumnado no la ve.",
+      "actions": []
+    },
+    {
+      "id": "c05",
+      "say": "Añade cada criterio con sus puntos.",
+      "actions": []
+    },
+    {
+      "id": "c06",
+      "say": "Los tres suman 10 puntos.",
+      "actions": []
+    },
+    {
+      "id": "c07",
+      "say": "Adjunta el documento de tu biblioteca en el que se basa la tarea.",
+      "actions": []
+    },
+    {
+      "id": "c08",
+      "say": "Aquí, el artículo sobre la célula.",
+      "actions": []
+    },
+    {
+      "id": "c09",
+      "say": "Pulsa Crear. La tarea aparece en la lista, lista para usar.",
+      "actions": []
+    },
+    {
+      "id": "c10",
+      "say": "Ábrela para comprobar los criterios y el documento de apoyo.",
+      "actions": []
+    },
+    {
+      "id": "c11",
+      "say": "Para repartirla, crea un enlace de acceso.",
+      "actions": []
+    },
+    {
+      "id": "c12",
+      "say": "El alumnado entra como invitado, solo con su nombre.",
+      "actions": []
+    },
+    {
+      "id": "c13",
+      "say": "Tu alumnado abre el enlace de la tarea.",
+      "actions": []
+    },
+    {
+      "id": "c14",
+      "say": "No necesita cuenta: escribe su nombre y pulsa Continuar como invitado.",
+      "actions": []
+    },
+    {
+      "id": "c15",
+      "say": "Ve la descripción, el documento de apoyo y los criterios con sus puntos.",
+      "actions": []
+    },
+    {
+      "id": "c16",
+      "say": "La solución modelo no aparece.",
+      "actions": []
+    },
+    {
+      "id": "c17",
+      "say": "Escribe su respuesta. Antes de entregar puede pedir feedback, y tiene un intento para hacerlo.",
+      "actions": []
+    },
+    {
+      "id": "c18",
+      "say": "El feedback da una nota por criterio y explica cada puntuación.",
+      "actions": []
+    },
+    {
+      "id": "c19",
+      "say": "Así el alumnado sabe qué le falta antes de entregar.",
+      "actions": []
+    },
+    {
+      "id": "c20",
+      "say": "Cuando esté conforme, pulsa Enviar.",
+      "actions": []
+    },
+    {
+      "id": "c21",
+      "say": "La entrega queda registrada en la tarea.",
+      "actions": []
+    },
+    {
+      "id": "c22",
+      "say": "Cuando el alumnado entrega, la tarea muestra a cada estudiante con su mejor nota y con cada una de sus entregas.",
+      "actions": []
+    },
+    {
+      "id": "c23",
+      "say": "Pulsa una nota para revisar la entrega: el texto del alumnado, la puntuación de cada criterio y el comentario que la justifica.",
+      "actions": []
+    },
+    {
+      "id": "c24",
+      "say": "Antes de dar la nota final, comprueba que el comentario coincide con los criterios.",
+      "actions": []
+    },
+    {
+      "id": "c25",
+      "say": "Así el feedback también orienta a tu alumnado.",
+      "actions": []
+    }
+  ]
+}

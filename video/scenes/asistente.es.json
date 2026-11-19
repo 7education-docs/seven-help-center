@@ -1,0 +1,223 @@
+{
+  "lesson": "asistente",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/ai-agents"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Nuevo Plantilla\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Un asistente de IA es una plantilla que configuras una vez y usas en todas tus clases. Vamos a crear uno para el laboratorio.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Crea un asistente para tu clase",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 1800
+        },
+        {
+          "do": "shot",
+          "name": "asistente-1-lista"
+        }
+      ]
+    },
+    {
+      "id": "abrir",
+      "say": "Pulsa el botón de nueva plantilla.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "1 · Nueva plantilla",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Nuevo Plantilla\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "textarea[placeholder^=\"Eres un\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "shot",
+          "name": "asistente-2-formulario"
+        }
+      ]
+    },
+    {
+      "id": "nombre",
+      "say": "Ponle un nombre que se entienda al primer vistazo: Asistente de prácticas de laboratorio.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · Ponle un nombre",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input:not([type=\"file\"]):not([type=\"hidden\"]) >> nth=0",
+          "text": "Asistente de prácticas de laboratorio",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 600
+        }
+      ]
+    },
+    {
+      "id": "herramientas",
+      "say": "Elige qué puede hacer: buscar en la web, crear imágenes o crear H5P.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Elige herramientas",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Búsqueda web\")"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Crear H5P\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "shot",
+          "name": "asistente-3-herramientas"
+        }
+      ]
+    },
+    {
+      "id": "instruccion",
+      "say": "En la instrucción explicas cómo debe responder. Por ejemplo: da pistas, pero no soluciones completas.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "4 · Define cómo responde",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "textarea[placeholder^=\"Eres un\"]",
+          "text": "Da pistas y haz preguntas al alumnado, pero no des soluciones completas.",
+          "delay": 22
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "shot",
+          "name": "asistente-4-instruccion"
+        }
+      ]
+    },
+    {
+      "id": "guardar",
+      "say": "Pulsa Guardar. El asistente queda disponible para iniciar chats con él.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "5 · Guarda",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Guardar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        },
+        {
+          "do": "shot",
+          "name": "asistente-5-guardado"
+        }
+      ]
+    },
+    {
+      "id": "probar",
+      "say": "Antes de usarlo con tu clase, pruébalo. Si la respuesta es demasiado completa, vuelve a la instrucción y hazla más precisa.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Pruébalo con una pregunta",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": ".agents-item__content:has-text(\"Asistente de prácticas de laboratorio\") button[aria-label=\"Iniciar un chat con esta plantilla\"]"
+        },
+        {
+          "do": "waitFor",
+          "selector": "div[contenteditable=\"true\"]"
+        },
+        {
+          "do": "click",
+          "selector": "div[contenteditable=\"true\"]"
+        },
+        {
+          "do": "type",
+          "selector": "div[contenteditable=\"true\"]",
+          "text": "¿Cómo calculo el tamaño de una célula de cebolla con el microscopio?",
+          "delay": 30
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "[aria-label=\"Enviar mensaje\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 26000
+        },
+        {
+          "do": "shot",
+          "name": "asistente-6-prueba"
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Listo: ya puedes iniciar un chat con tu asistente siempre que lo necesites.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Asistente listo",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    }
+  ]
+}

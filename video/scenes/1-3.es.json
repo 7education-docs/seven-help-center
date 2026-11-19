@@ -1,0 +1,43 @@
+{
+  "lesson": "1.3",
+  "locale": "es",
+  "baseUrl": "https://sevenai.es",
+  "scenes": [
+    { "id": "inicio",
+      "say": "Bienvenida al recorrido por la interfaz. A la izquierda tienes la barra de navegación, con iconos para cada sección.",
+      "actions": [
+        { "do": "goto", "url": "/educa" },
+        { "do": "waitFor", "selector": "[aria-label=\"Cursos\"]" },
+        { "do": "highlight", "selector": "[aria-label=\"Cursos\"]", "ms": 1500 },
+        { "do": "wait", "ms": 1200 }
+      ] },
+    { "id": "cursos",
+      "say": "La sección Cursos reúne tus cursos. Aquí puedes crear un curso, unirte a uno o importarlo.",
+      "actions": [
+        { "do": "click", "selector": "[aria-label=\"Cursos\"]" },
+        { "do": "waitFor", "selector": "button:has-text(\"Crear curso\")" },
+        { "do": "highlight", "selector": "button:has-text(\"Crear curso\")", "ms": 1500 },
+        { "do": "wait", "ms": 1000 }
+      ] },
+    { "id": "biblioteca",
+      "say": "La Biblioteca guarda tus documentos, series de lecciones y fichas interactivas. Desde aquí también puedes generar contenido con inteligencia artificial.",
+      "actions": [
+        { "do": "click", "selector": "[aria-label=\"Biblioteca\"]" },
+        { "do": "waitFor", "selector": "text=Su biblioteca" },
+        { "do": "wait", "ms": 2000 }
+      ] },
+    { "id": "plantillas",
+      "say": "La sección Plantillas muestra asistentes de inteligencia artificial listos para usar en tus clases.",
+      "actions": [
+        { "do": "click", "selector": "[aria-label=\"Plantillas\"]" },
+        { "do": "waitFor", "selector": "text=Plantillas" },
+        { "do": "wait", "ms": 2000 }
+      ] },
+    { "id": "conversaciones",
+      "say": "Por último, Conversaciones es donde escribes tus preguntas. Puedes usar herramientas como serie de clases, ficha de trabajo o corrección.",
+      "actions": [
+        { "do": "click", "selector": "[aria-label=\"Conversaciones\"]" },
+        { "do": "wait", "ms": 2500 }
+      ] }
+  ]
+}

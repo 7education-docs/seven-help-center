@@ -1,0 +1,113 @@
+{
+  "lesson": "configuracion",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa"
+    },
+    {
+      "do": "waitFor",
+      "selector": "[aria-label=\"Conversaciones\"]"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Configuración reúne los ajustes de tu cuenta. Se abre desde tu avatar, en la parte inferior de la barra lateral.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 44,
+          "y": 679
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "menu",
+      "say": "En ese mismo menú encuentras el idioma, las carpetas compartidas y tus tareas.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Gestionar carpetas compartidas",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "general",
+      "say": "En General eliges el idioma de la interfaz, el diseño y la voz del asistente.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Configuración"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Español\")"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "secciones",
+      "say": "Desde la lista de la izquierda cambias entre Notificaciones, Personalización, Memoria o Uso.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Notificaciones"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        },
+        {
+          "do": "click",
+          "selector": "text=Personalización"
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    },
+    {
+      "id": "cierre",
+      "say": "Cuando termines, cierra la ventana y vuelve a tu trabajo.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    }
+  ]
+}

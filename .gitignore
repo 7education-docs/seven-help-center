@@ -1,0 +1,10 @@
+# Generados y locales del pipeline de vídeo (no se versionan)
+video/work/
+video/out/
+video/models/
+video/review/
+site/
+dist/
+node_modules/
+video/raw/
+__pycache__/

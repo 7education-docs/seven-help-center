@@ -1,0 +1,119 @@
+{
+  "lesson": "conversa",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa"
+    },
+    {
+      "do": "waitFor",
+      "selector": "div[contenteditable=\"true\"]"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Em Conversas você escreve o que precisa e o assistente responde na hora. Vamos testar com uma pergunta real para a sua aula.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Pergunte ao assistente",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "shot",
+          "name": "conversa-1-inicio"
+        }
+      ]
+    },
+    {
+      "id": "pregunta",
+      "say": "Escreva a pergunta com clareza. Por exemplo: explique em três frases a diferença entre célula procariota e eucariota, para alunos do 1.º ano.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "1 · Escreva a sua pergunta",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "div[contenteditable=\"true\"]"
+        },
+        {
+          "do": "type",
+          "selector": "div[contenteditable=\"true\"]",
+          "text": "Explique em três frases a diferença entre célula procariota e eucariota, para alunos do 1.º ano.",
+          "delay": 32
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "shot",
+          "name": "conversa-2-pregunta"
+        }
+      ]
+    },
+    {
+      "id": "respuesta",
+      "say": "Clique em enviar e aguarde alguns segundos. A resposta chega organizada, pronta para copiar para o seu material.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · Envie e receba a resposta",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "[aria-label=\"Enviar mensagem\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 24000
+        },
+        {
+          "do": "shot",
+          "name": "conversa-3-respuesta"
+        }
+      ]
+    },
+    {
+      "id": "herramientas",
+      "say": "Se quiser uma tarefa específica, escolha uma ferramenta no menu: ficha de trabalho, serie de aulas ou corrección.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Escolha uma ferramenta",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "[aria-label^=\"Selecionar ferramentas\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 2600
+        },
+        {
+          "do": "shot",
+          "name": "conversa-4-herramientas"
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 400
+        }
+      ]
+    }
+  ]
+}
