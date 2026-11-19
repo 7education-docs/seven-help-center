@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <style>
 /* Tokens de la marca (mismos que el centro de ayuda de Seven Assistant) */
-:root{color-scheme:light;--bg:#fffaf6;--surface:#ffffff;--fg:#1c1c1c;--muted:#5b5560;--line:#ebe4df;--primary:#f43175;--primary-ink:#ffffff;--tint:#fde6f0;--display:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--body:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--radius:16px}
+:root{color-scheme:light;--bg:#fffaf6;--surface:#ffffff;--fg:#1c1c1c;--muted:rgba(28,28,28,.72);--line:#ebe4df;--primary:#f43175;--primary-ink:#ffffff;--tint:#fde6f0;--display:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--body:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;--radius:16px}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1c1c1c;--surface:#262626;--fg:#f5f5f5;--muted:#b9b4bf;--line:#3a3a3a;--primary:#f43175;--primary-ink:#1c1c1c;--tint:#3a1d2b}}
 :root[data-theme="dark"]{color-scheme:dark;--bg:#1c1c1c;--surface:#262626;--fg:#f5f5f5;--muted:#b9b4bf;--line:#3a3a3a;--primary:#f43175;--primary-ink:#1c1c1c;--tint:#3a1d2b}
 *{box-sizing:border-box}
@@ -41,9 +41,9 @@ a.prod .foot{color:var(--primary)}
 .prod.is-soon .chip{margin-top:14px}
 /* pie: mismo estilo que el centro de ayuda */
 .site-footer{margin:4.5rem 0 0;background:#000;color:#fffaf6;padding:64px 0 26px;font-size:14px;line-height:1.5}.f-inner{max-width:1180px;margin:0 auto;padding:0 28px}.f-top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,250,246,.14)}.f-logo{height:36px;width:auto;display:block;filter:invert(1)}.f-social{display:flex;gap:10px}.f-social a{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,250,246,.2);color:#fffaf6}.f-social a:hover{border-color:#f43175;color:#f43175}.f-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:32px;padding:44px 0 8px}.f-h{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#f43175;margin:0 0 18px}.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}.site-footer a{color:rgba(255,250,246,.8);text-decoration:none}.site-footer a:hover{color:#fffaf6;text-decoration:underline}.f-bottom{margin-top:36px;padding-top:22px;border-top:1px solid rgba(255,250,246,.14);font-size:13px;color:rgba(255,250,246,.6)}@media (max-width:900px){.f-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}}@media (max-width:520px){.f-grid{grid-template-columns:1fr 1fr}.f-top{padding-bottom:28px}}
-.band{position:relative;overflow:hidden;background:#000;color:#fffaf6;margin:0 -24px;padding:84px 24px 76px;border-radius:0 0 36px 36px}
-.band::before{content:"";position:absolute;width:820px;height:820px;right:-240px;top:-360px;background:radial-gradient(circle,rgba(244,49,117,.5),rgba(244,49,117,0) 62%);pointer-events:none}
-.band::after{content:"";position:absolute;width:620px;height:620px;left:-220px;bottom:-380px;background:radial-gradient(circle,rgba(71,61,254,.38),rgba(71,61,254,0) 62%);pointer-events:none}
+.band{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(0,0,0,.88) 0%,rgba(0,0,0,.6) 55%,rgba(0,0,0,.35) 100%),url('assets/hero-classroom.jpg') center 40%/cover no-repeat;color:#fffaf6;margin:0 -24px;padding:84px 24px 76px;border-radius:0 0 36px 36px}
+.band::before{display:none;content:"";position:absolute;width:820px;height:820px;right:-240px;top:-360px;background:radial-gradient(circle,rgba(244,49,117,.5),rgba(244,49,117,0) 62%);pointer-events:none}
+.band::after{display:none;content:"";position:absolute;width:620px;height:620px;left:-220px;bottom:-380px;background:radial-gradient(circle,rgba(71,61,254,.38),rgba(71,61,254,0) 62%);pointer-events:none}
 .band-in{position:relative;z-index:1;max-width:1120px;margin:0 auto}
 .band .kicker{color:#f43175;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;margin:0 0 14px}
 .band h1{font-size:clamp(58px,9.5vw,124px);line-height:.92;letter-spacing:-.045em;font-weight:800;color:#fffaf6;margin:0 0 22px}
