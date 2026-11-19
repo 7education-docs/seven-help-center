@@ -39,7 +39,7 @@ a{color:var(--primary)}
 
 /* Cabecera */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
-.top-row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding-block:10px;min-width:0}
+.docs-back{font-size:14px;font-weight:600;color:var(--muted);text-decoration:none;margin-left:auto;margin-right:14px;white-space:nowrap}.docs-back:hover{color:var(--primary);text-decoration:underline}.top-row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;padding-block:10px;min-width:0}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);min-width:0}
 .brand-logo{height:40px;width:auto;flex:none;display:block}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand-logo{filter:invert(1) hue-rotate(180deg)}}
@@ -258,7 +258,7 @@ const DATA = /*__DATA__*/null;
     const langs = ['es', 'pt-BR'].map((l) => '<a href="' + href(l, rest) + '" lang="' + (l === 'es' ? 'es' : 'pt-BR') + '" aria-current="' + (l === loc) + '">' + (l === 'es' ? 'Español' : 'Português') + '</a>').join('');
     return '<header class="top"><div class="wrap"><div class="top-row">' +
       '<a class="brand" href="' + href(loc, 'home') + '"><img class="brand-logo" src="__LOGO_ASSISTANT__" alt="Seven Assistant" height="40"></a>' +
-      '<div class="tools">' + (rest === 'home' ? '' : '<form class="search" role="search" data-search-form><label class="sr" for="q-top">' + esc(u.search) + '</label><input id="q-top" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn small" type="submit">' + esc(u.searchBtn) + '</button></form>') +
+      '<a class="docs-back" href="../">' + (loc === 'pt-BR' ? 'Todos os centros de ajuda' : 'Todos los centros de ayuda') + '</a><div class="tools">' + (rest === 'home' ? '' : '<form class="search" role="search" data-search-form><label class="sr" for="q-top">' + esc(u.search) + '</label><input id="q-top" type="search" minlength="2" placeholder="' + esc(u.searchPh) + '" value="' + esc(state.query) + '"><button class="btn small" type="submit">' + esc(u.searchBtn) + '</button></form>') +
       '<div class="lang" role="group" aria-label="' + esc(u.language) + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>' + langs + '</div></div></div>' +
       '</div></header>';
   }
