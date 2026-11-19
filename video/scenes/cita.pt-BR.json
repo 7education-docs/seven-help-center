@@ -32,7 +32,7 @@
         },
         {
           "do": "wait",
-          "ms": 7161,
+          "ms": 411,
           "pad": true
         }
       ]
@@ -60,7 +60,7 @@
         },
         {
           "do": "wait",
-          "ms": 5055,
+          "ms": 906,
           "pad": true
         }
       ]
@@ -92,14 +92,14 @@
         },
         {
           "do": "wait",
-          "ms": 3293,
+          "ms": 360,
           "pad": true
         }
       ]
     },
     {
       "id": "titulo",
-      "say": "Escreva um título claro, por exemplo: Laboratório, observar células de cebola.",
+      "say": "Escreva um título claro, por exemplo: Laboratório, células vegetais.",
       "actions": [
         {
           "do": "caption",
@@ -109,17 +109,12 @@
         {
           "do": "type",
           "selector": "internal:label=\"Título\"s",
-          "text": "Laboratório: observar células de cebola",
+          "text": "Laboratório: células vegetais",
           "delay": 31
         },
         {
           "do": "wait",
           "ms": 275
-        },
-        {
-          "do": "wait",
-          "ms": 2820,
-          "pad": true
         }
       ]
     },
@@ -135,17 +130,17 @@
         {
           "do": "fill",
           "selector": "internal:label=\"Data\"s",
-          "value": "2026-11-25"
+          "value": "2026-11-27"
         },
         {
           "do": "fill",
           "selector": "internal:label=\"De\"s",
-          "value": "10:00"
+          "value": "12:30"
         },
         {
           "do": "fill",
           "selector": "internal:label=\"Até\"s",
-          "value": "11:00"
+          "value": "13:30"
         },
         {
           "do": "wait",
@@ -157,14 +152,14 @@
         },
         {
           "do": "wait",
-          "ms": 2368,
+          "ms": 315,
           "pad": true
         }
       ]
     },
     {
       "id": "local",
-      "say": "Indique o local, por exemplo Laboratório 2, e uma nota para os alunos.",
+      "say": "Indique o local, por exemplo Laboratório 1, e uma nota para os alunos.",
       "actions": [
         {
           "do": "caption",
@@ -174,13 +169,13 @@
         {
           "do": "type",
           "selector": "internal:label=\"Local (opcional)\"s",
-          "text": "Laboratório 2",
+          "text": "Laboratório 1",
           "delay": 35
         },
         {
           "do": "type",
           "selector": "textarea",
-          "text": "Levar microscópio e amostra de cebola.",
+          "text": "Levar lâminas e lupa.",
           "delay": 25
         },
         {
@@ -193,7 +188,7 @@
         },
         {
           "do": "wait",
-          "ms": 674,
+          "ms": 407,
           "pad": true
         }
       ]
@@ -223,24 +218,13 @@
         {
           "do": "shot",
           "name": "cita-5-guardada"
-        },
-        {
-          "do": "wait",
-          "ms": 3368,
-          "pad": true
         }
       ]
     },
     {
       "id": "final",
       "say": "Pronto. O seu curso fica organizado, e a turma sabe exatamente quando é cada encontro.",
-      "actions": [
-        {
-          "do": "wait",
-          "ms": 6798,
-          "pad": true
-        }
-      ]
+      "actions": []
     }
   ]
 }
