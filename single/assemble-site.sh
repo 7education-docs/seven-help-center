@@ -12,7 +12,7 @@ mkdir -p seven-assistant
 PUBLISHED="$PUBLISHED" python3 single/merge-published.py site/index.html seven-assistant/index.html >/dev/null
 # el helpdesk vive una carpeta más abajo: sus medios están en la raíz
 sed -i 's|"videos/|"../videos/|g; s|"shots/|"../shots/|g' seven-assistant/index.html
-cp single/home.html index.html
+python3 single/build-home.py >/dev/null
 # vídeos generados por build-single (PUBLIC_SITE) a la raíz, junto a las capturas
 cp -n site/videos/*.mp4 site/videos/*.jpg videos/ 2>/dev/null || true
 cp site/videos/*.mp4 site/videos/*.jpg videos/
