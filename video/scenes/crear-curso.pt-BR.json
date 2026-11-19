@@ -1,0 +1,173 @@
+{
+  "lesson": "crear-curso",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Criar curso\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Um curso reúne, em um só lugar, tudo o que você trabalha com um grupo: as seções com os temas, os materiais, as atividades e o código para os estudantes entrarem.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Criar um curso",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 9000
+        }
+      ]
+    },
+    {
+      "id": "modelos",
+      "say": "Você pode criar um curso do zero, importar um curso que já tem ou adotar um modelo pronto. Os modelos são unidades didáticas com seções e materiais, que você adapta ao seu grupo.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Modelos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 9000
+        },
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Os meus cursos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "passo-1",
+      "say": "Para criar um curso, clique em Criar curso. Dê um nome ao curso, indique a disciplina e a turma, e escreva uma descrição. Aqui, por exemplo: Matemática, 8.º ano.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Criar curso\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "caption",
+          "text": "1 · Dados básicos",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Matemática · 8.º ano",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=1",
+          "text": "Matemática",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=2",
+          "text": "8.º ano",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Curso de matemática para o 8.º ano",
+          "delay": 30
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    },
+    {
+      "id": "passo-2",
+      "say": "No segundo passo, escolha o conteúdo inicial. Vazio começa com uma seção Geral para você montar tudo; Todos os modelos traz unidades prontas; Copiar reaproveita um curso que você já tem; e Planejar com IA gera uma primeira proposta para revisar. Aqui escolhemos Vazio. Depois clique em Seguinte.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Seguinte\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "caption",
+          "text": "2 · Escolher conteúdo",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 6000
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Vazio\")"
+        },
+        {
+          "do": "wait",
+          "ms": 9000
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Seguinte\")"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "passo-3",
+      "say": "No último passo, revise os dados. Se algo estiver errado, use Voltar antes de criar. Quando estiver tudo certo, clique em Criar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Verificar e criar",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 5200
+        },
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Criar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "resultado",
+      "say": "Pronto: o curso foi criado e você já está na sua visão geral, com a seção Geral pronta para receber materiais.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 7000
+        }
+      ]
+    }
+  ]
+}

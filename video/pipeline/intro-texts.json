@@ -94,5 +94,17 @@
       "subtitle": "Vista de alumno",
       "narration": "En este vídeo vamos a ver lo que el alumnado ve en tu curso."
     }
+  },
+  "crear-curso": {
+    "pt": {
+      "title": "Criar um curso",
+      "subtitle": "Cursos",
+      "narration": "Neste vídeo, você vai ver o que é um curso e como criá-lo, do primeiro passo até a revisão."
+    },
+    "es": {
+      "title": "Crear un curso",
+      "subtitle": "Cursos",
+      "narration": "En este vídeo vas a ver qué es un curso y cómo crearlo, desde el primer paso hasta la revisión."
+    }
   }
 }
