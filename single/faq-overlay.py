@@ -10,7 +10,7 @@ con los números del nuevo artículo: ver faq-prepare.py.
 import copy
 
 FAQ_IDS = ['no-encuentro-seccion', 'no-puedo-acceder', 'beta', 'idioma-no-cambia',
-           'alumnado-no-entra', 'codigo-filtrado', 'respuesta-no-correcta']
+           'alumnado-no-entra', 'codigo-filtrado', 'respuesta-no-correcta', 'plantillas-vs-asistentes']
 FAQ_LINKS = {
     'que-es': ['no-puedo-acceder', 'no-encuentro-seccion'],
     'idioma': ['idioma-no-cambia'],
@@ -21,6 +21,9 @@ FAQ_LINKS = {
     'crear-curso': ['beta'],
     'menu-de-cuenta': ['no-encuentro-seccion'],
     'configuracion-del-curso': ['codigo-filtrado'],
+    'crear-asistente': ['plantillas-vs-asistentes'],
+    'plantillas-de-curso': ['plantillas-vs-asistentes'],
+    'plantilla-nombrar': ['plantillas-vs-asistentes'],
 }
 MERGED = {'que-es': 'barra-lateral'}   # id que absorbe -> id que desaparece
 TITLES = {'es': 'Qué es Seven Assistant y cómo moverte por la barra lateral',
