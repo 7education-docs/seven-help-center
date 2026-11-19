@@ -108,7 +108,7 @@ REWRITES = {
         'steps': [
             {'t': 'Escolher Agente de IA', 'b': 'Está entre os tipos de atividade da seção. Use-o quando a mesma dúvida se repete e você quer oferecer apoio permanente sobre aquele tema.'},
             {'t': 'Escrever o título', 'b': 'Dê um nome que diga em que o agente ajuda, para os estudantes saberem quando recorrer a ele. "Ajudante da célula" já informa o tema logo de início.'},
-            {'t': 'Escrever as instruções', 'b': 'É o campo que define como o agente se comporta. Diga o que ele deve fazer e, principalmente, o que não deve entregar, por exemplo: "Responda com dicas e perguntas. Não dê a solução completa dos exercícios."'},
+            {'t': 'Escrever as instruções', 'b': 'É o campo que define como o agente se comporta. Diga o que ele deve fazer e, principalmente, o que não deve entregar, como a solução completa dos exercícios.'},
             {'t': 'Adicionar', 'b': 'O agente aparece na seção. Antes de liberá-lo para a turma, faça uma pergunta como um estudante faria para conferir se a resposta segue as instruções.'},
         ],
         'tips': ['Se o agente der a solução completa, a instrução está permissiva demais: reescreva-a deixando claro o que ele não deve fazer.'],
@@ -268,7 +268,6 @@ REWRITES = {
             {'t': 'Idioma', 'b': 'Escolha o idioma da interface. A mudança vale para a sua conta, então cada pessoa ajusta o próprio idioma.'},
         ],
         'tips': ['Os textos que você escreve permanecem no idioma em que foram criados.'],
-        'example': 'Você trabalha em português e uma colega de Madrid usa a mesma ferramenta. Cada um muda o idioma na própria conta: os menus aparecem no idioma de cada um, e os cursos continuam no idioma em que foram criados.',
     },
     'menu-de-cuenta': {
         'answer': 'O menu da conta fica no avatar, embaixo à esquerda, com as suas iniciais. Dali você acessa Configurações, troca o idioma, gerencia tarefas e pastas compartilhadas, consulta as novidades e a ajuda e encerra a sessão. Use-o para ajustar a sua conta e para sair quando estiver em um computador que não é seu.',
@@ -308,7 +307,6 @@ REWRITES = {
             {'t': 'Revisar todo ano', 'b': 'Ao fechar o ano letivo, revise os nomes e ajuste-os para o seguinte, para que o padrão continue valendo.'},
         ],
         'tips': ['Documente a convenção em um único lugar e compartilhe com a coordenação.'],
-        'example': 'Em uma escola com cinco professores de Matemática, todos usam o formato "Matemática · 8.º ano · 2026". Assim a coordenação vê de relance qual curso corresponde a cada turma e não se criam cursos repetidos.',
     },
     'seguridad-datos': {
         'answer': 'Esta ajuda resume o que o Seven Assistant declara sobre os dados: hospedagem na Alemanha, conformidade com o RGPD, nenhum treinamento da IA com os dados da sua escola e certificações ISO 27001, 9001 e 14001. Ela também lista as perguntas que a escola precisa responder e os cuidados conforme o país. Use este artigo ao avaliar a ferramenta com a direção, a coordenação ou o jurídico.',
@@ -330,7 +328,6 @@ REWRITES = {
             {'t': 'Conferir o menu da conta', 'b': 'Configurações, Idioma e pastas compartilhadas ficam no avatar, embaixo à esquerda. Ajustes gerais da conta não estão dentro de nenhum curso.'},
         ],
         'tips': ['Procure pelo nome exato da ação no buscador da ajuda, porque ela pode ter mudado de lugar.'],
-        'example': 'Você quer criar uma série de aulas e não a encontra em Cursos. As séries são criadas a partir da Biblioteca, então é lá que você a cria.',
     },
     'codigo-filtrado': {
         'answer': 'Se um código ou link de inscrição chegou a pessoas que não deveriam entrar, gere um novo código e desative o link público quando ele não for mais necessário. Faça isso quando o código foi compartilhado fora da turma ou quando um link público continua ativo depois do fim do curso. Assim, só entra quem faz parte da sua turma.',
@@ -420,7 +417,6 @@ REWRITES = {
             {'t': 'Idioma', 'b': 'Vem como Espanhol por padrão. Mude se a série for para uma turma que estuda em outro idioma.'},
             {'t': 'Descrição', 'b': 'Registre os objetivos e o conteúdo da série. Quanto mais concreta a descrição, mais a série se encaixa na turma.'},
         ],
-        'example': 'Para uma série de "Introdução ao cálculo integral", você preenche Tema, Disciplina "Matemática", Curso "1.º ano do ensino médio" e, na Descrição, escreve que a turma já conhece derivadas. Com esses dados a série sai no nível certo, e depois você a encontra por disciplina.',
     },
     'serie-ajustar': {
         'answer': 'Ajustar uma série de aulas é modificar uma série que você já tem para que ela se encaixe na sua turma. Use quando a primeira versão tiver mais sessões do que você consegue dar, quando o nível não for o da sua turma ou quando a avaliação não coincidir com o seu planejamento. Peça as mudanças em uma conversa e revise a progressão antes de guardar a versão final.',
@@ -439,7 +435,6 @@ REWRITES = {
             {'t': 'Definir níveis com a sua escala', 'b': 'Os níveis devem seguir a escala que você ou a sua escola usa. A Referência traz escalas por país para conferir a correspondência.'},
         ],
         'tips': ['"Argumenta com pelo menos duas evidências" é observável; "boa redação" não é.'],
-        'example': 'Em vez de "boa argumentação", o critério diz "Apresenta pelo menos duas evidências que sustentem a tese". Ao corrigir, a evidência está ou não está, e ao devolver o trabalho você aponta exatamente o que falta.',
     },
     'tarea-calibrar': {
         'answer': 'Calibrar é corrigir alguns trabalhos de níveis diferentes e compará-los com a proposta de correção antes de corrigir a turma inteira. Assim os critérios passam a significar a mesma coisa para você e para quem mais corrige a mesma tarefa. Faça isso logo depois de escrever os critérios, antes de corrigir muitos trabalhos seguidos.',
@@ -470,7 +465,6 @@ REWRITES = {
             {'t': 'Usar em um curso', 'b': 'Adicione a ficha à seção certa do curso como Ficha de trabalho, depois de revisada. Assim, o que os estudantes recebem já passou pela sua conferência.'},
         ],
         'tips': ['Se você levar bem mais tempo do que levaria um estudante, a ficha provavelmente está difícil demais.'],
-        'example': 'Você gera uma ficha de "Porcentagem" para o 7.º ano. Ao resolver o exercício 3, percebe que o enunciado pede um cálculo que ainda não foi explicado em aula. Troca por um exercício parecido antes de compartilhar.',
     },
     'plantilla-nombrar': {
         'answer': 'Dar bons nomes aos seus assistentes serve para encontrá-los rapidamente quando você tem vários. Use um padrão com tipo de tarefa e nível, para saber na hora para que cada um serve. Isso vale sobretudo se você compartilha os assistentes com outros docentes ou se criou um para uma tarefa que se repete todo trimestre.',
@@ -479,7 +473,6 @@ REWRITES = {
             {'t': 'Descrever para que serve', 'b': 'Acrescente uma frase no próprio assistente explicando o uso dele. Ela ajuda você e outros docentes a usá-lo corretamente meses depois.'},
             {'t': 'Revisar a cada trimestre', 'b': 'Retire os assistentes que você não usa mais, para a lista continuar útil. Um nome sem uso só atrapalha na hora de procurar.'},
         ],
-        'example': 'Você tem um assistente que corrige redações do 6.º ano e outro que prepara guias de laboratório para o ensino médio. Com os nomes "Redação · 6.º ano" e "Guia de laboratório · ensino médio" você sabe qual usar sem abrir nenhum.',
     },
     'configuracion-cuenta': {
         'answer': 'Configurações reúne os ajustes gerais da sua conta, e não os de um curso específico. Use quando quiser revisar os seus dados ou mudar algo que vale para toda a conta. Para mudar algo de um curso, como o código de inscrição, use as Definições desse curso.',
@@ -489,7 +482,6 @@ REWRITES = {
             {'t': 'Voltar ao trabalho', 'b': 'Ao terminar, volte para Conversas ou Cursos e retome o que estava fazendo.'},
         ],
         'tips': ['Não confunda Configurações da conta (avatar) com Definições do curso (dentro de Cursos).'],
-        'example': 'Se quer trocar o código de inscrição de um curso, isso fica nas definições desse curso. Se quer mudar o idioma da interface ou os seus dados, isso fica no menu da conta.',
     },
     'agregar-material-archivo': {
         'answer': 'Um material com arquivo é uma peça que o estudante pode abrir dentro da seção do curso, como um PDF, uma apresentação ou qualquer documento que você já tenha. Use para deixar os recursos da aula onde os estudantes os procuram, por exemplo uma ficha de apoio junto da atividade. Se preferir, deixe-o oculto até o dia da aula.',
@@ -556,7 +548,7 @@ REWRITES = {
         'example': 'Uma professora termina o curso do 9.º ano em dezembro. Ela exporta uma cópia no formato do Moodle (.mbz), guarda o arquivo na pasta da escola e, se precisar do curso no Moodle no ano seguinte, importa o arquivo lá.',
     },
     'enlace-y-nota': {
-        'answer': 'Um link e uma nota são materiais leves dentro da seção: o link leva a uma página da web com um título, e a nota é um texto breve que o estudante lê sem abrir mais nada. Use o link para indicar uma referência que deve ser consultada, e a nota para lembrar uma fórmula, um aviso ou um prazo sem criar uma atividade.',
+        'answer': 'Um link e uma nota são materiais leves dentro da seção: o link leva a uma página da web com um título, e a nota é um texto breve que o estudante lê sem abrir mais nada. Use o link para indicar uma referência que deve ser consultada, e a nota para lembrar uma fórmula, um aviso ou um prazo sem criar uma atividade. Por serem leves, eles ajudam a manter a seção organizada sem transformar cada referência em uma atividade.',
         'steps': [
             {'t': 'Link (título e endereço)', 'b': 'Use para referências externas que o estudante precisa consultar. Escreva um título que diga o que é a página, para ele saber o que vai encontrar antes de abrir.'},
             {'t': 'Nota', 'b': 'Serve para o que o estudante precisa lembrar, como uma fórmula ou um aviso. Seja breve, porque a nota é lida direto na seção.'},
