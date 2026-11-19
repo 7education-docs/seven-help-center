@@ -94,6 +94,16 @@ def footer(lang):
 def page(lang):
     t = T[lang]; p = t['prefix']
     css = CSS.replace("url('assets/", f"url('{p}assets/") + LANG_CSS
+    css += """
+.grid-prods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:8px 0 48px}
+.grid-prods .prod{min-height:0;padding:20px 22px}
+.grid-prods .prod h2{font-size:21px;margin:2px 0 0}
+.grid-prods .prod p{font-size:15px;margin:0}
+.band{padding:56px 28px 50px}
+.band h1{font-size:clamp(46px,7vw,92px)}
+@media (max-width:900px){.grid-prods{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid-prods{grid-template-columns:1fr}}
+"""
     lang_menu = ('<details class="lang-menu"><summary aria-label="' + H.escape(t['aria_lang']) + '">' + GLOBE + f'<span>{t["here_label"]}</span></summary><ul>'
                  + (f'<li><a href="./" lang="es"{" aria-current=\"true\"" if lang == "es" else ""}>Español</a></li>'
                     if lang == 'es' else '<li><a href="../" lang="es">Español</a></li>')
@@ -101,16 +111,14 @@ def page(lang):
                     else f'<li><a href="./" lang="pt-BR" aria-current="true">Português</a></li>')
                  + '</ul></details>')
     cards = ''
-    live = [n for n, c, k in PRODUCTS if k == 'sa']
-    feature = True
-    cards += (f'<a class="prod prod-feature" href="{t["sa_url"]}"><span class="country">{H.escape(t["country_all"])}</span>'
-              f'<h2>Seven Assistant</h2><p>{H.escape(t["sa_desc"])}</p><span class="foot">{H.escape(t["cta"])}</span></a>')
-    soon = ''
-    for name, country, kind in PRODUCTS[1:]:
-        c = t['countries'][country]
-        soon += (f'<article class="prod is-soon" aria-label="{H.escape(name)}, {H.escape(t["soon"].lower())}"><span class="country">{H.escape(c)}</span>'
-                 f'<h2>{H.escape(name)}</h2><p>{H.escape(t["ed"][country])}</p><span class="chip">{H.escape(t["soon"])}</span></article>')
-    cards += f'<h2 class="soon-h">{H.escape(t["soon_h"])}</h2><div class="grid-soon">{soon}</div>'
+    for name, country, kind in PRODUCTS:
+        if kind == 'sa':
+            cards += (f'<a class="prod" href="{t["sa_url"]}"><span class="country">{H.escape(t["country_all"])}</span>'
+                      f'<h2>Seven Assistant</h2><p>{H.escape(t["sa_desc"])}</p><span class="foot">{H.escape(t["cta"])}</span></a>')
+        else:
+            c = t['countries'][country]
+            cards += (f'<article class="prod is-soon" aria-label="{H.escape(name)}, {H.escape(t["soon"].lower())}"><span class="country">{H.escape(c)}</span>'
+                      f'<h2>{H.escape(name)}</h2><p>{H.escape(t["ed"][country])}</p><span class="chip">{H.escape(t["soon"])}</span></article>')
     return f'''<!doctype html>
 <html lang="{t['lang']}">
 <head>
@@ -135,7 +143,7 @@ def page(lang):
     <p class="lead">{H.escape(t['lead'])}</p>
   </div></section>
   <section aria-label="{H.escape('Productos' if lang == 'es' else 'Produtos')}">
-    <div class="grid" id="products">{cards}</div>
+    <div class="grid-prods" id="products">{cards}</div>
   </section>
 </main>
 
