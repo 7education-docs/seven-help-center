@@ -15,7 +15,7 @@
   "scenes": [
     {
       "id": "inicio",
-      "say": "Un curso reúne en un solo lugar todo lo que trabajas con un grupo: las secciones con los temas, los materiales, las actividades y el código para que el alumnado entre.",
+      "say": "Un curso reúne en un solo lugar lo que trabajas con un grupo. Para crear uno, pulsa Crear curso.",
       "actions": [
         {
           "do": "caption",
@@ -23,36 +23,19 @@
           "step": ""
         },
         {
-          "do": "wait",
-          "ms": 9000
-        }
-      ]
-    },
-    {
-      "id": "modelos",
-      "say": "Puedes crear un curso desde cero, importar uno que ya tienes o adoptar una plantilla. Las plantillas son unidades didácticas con secciones y materiales, que adaptas a tu grupo.",
-      "actions": [
-        {
-          "do": "click",
-          "selector": "button[role=\"tab\"]:has-text(\"Plantillas\")"
+          "do": "highlight",
+          "selector": "button:has-text(\"Crear curso\")",
+          "ms": 2000
         },
         {
           "do": "wait",
-          "ms": 9000
-        },
-        {
-          "do": "click",
-          "selector": "button[role=\"tab\"]:has-text(\"Mis cursos\")"
-        },
-        {
-          "do": "wait",
-          "ms": 1200
+          "ms": 5000
         }
       ]
     },
     {
       "id": "passo-1",
-      "say": "Para crear un curso, pulsa Crear curso. Pon un nombre, indica la asignatura y la clase, y escribe una descripción. Aquí, por ejemplo: Matemáticas, 2.º ESO.",
+      "say": "Pon un nombre, indica la asignatura y el curso. Es lo que ven en la lista de cursos y lo que el alumnado busca al entrar.",
       "actions": [
         {
           "do": "click",
@@ -71,35 +54,29 @@
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=0",
           "text": "Matemáticas · 2.º ESO",
-          "delay": 45
+          "delay": 40
         },
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=1",
           "text": "Matemáticas",
-          "delay": 45
+          "delay": 40
         },
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=2",
           "text": "2.º ESO",
-          "delay": 45
-        },
-        {
-          "do": "type",
-          "selector": "textarea",
-          "text": "Curso de matemáticas para 2.º de ESO",
-          "delay": 30
+          "delay": 40
         },
         {
           "do": "wait",
-          "ms": 3500
+          "ms": 4000
         }
       ]
     },
     {
-      "id": "passo-2",
-      "say": "En el segundo paso, elige el contenido inicial. Vacío empieza con una sección General para construirlo tú; Todas las plantillas trae unidades ya preparadas; Copiar reutiliza un curso que ya tienes; y Planificar con IA genera una primera propuesta para revisar. Aquí elegimos Vacío. Después pulsa Siguiente.",
+      "id": "opcoes",
+      "say": "En el segundo paso eliges el contenido inicial. Vacío empieza con una sección General para montarlo tú. Todas las plantillas trae unidades ya preparadas. Copiar reutiliza parte de un curso que ya tienes.",
       "actions": [
         {
           "do": "click",
@@ -115,31 +92,98 @@
           "step": ""
         },
         {
-          "do": "wait",
-          "ms": 6000
+          "do": "highlight",
+          "selector": "button:has-text(\"Vacío\")",
+          "ms": 2200
         },
+        {
+          "do": "wait",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Todas las plantillas\")",
+          "ms": 2200
+        },
+        {
+          "do": "wait",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Copiar\")",
+          "ms": 2200
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "planear-ia",
+      "say": "Planificar con IA es la opción más útil cuando necesitas una primera versión. Describe el tema, los objetivos y la duración, y la IA monta las secciones.",
+      "actions": [
         {
           "do": "click",
-          "selector": "button:has-text(\"Vacío\")"
+          "selector": "button:has-text(\"Planificar con IA\")"
         },
         {
           "do": "wait",
-          "ms": 9000
+          "ms": 1500
         },
+        {
+          "do": "caption",
+          "text": "Planificar con IA",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "textarea >> nth=0",
+          "text": "Fracciones para 6.º curso, ocho semanas, con ejercicios y un examen.",
+          "delay": 25
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "plano",
+      "say": "Pulsa Crear plan y la IA monta las secciones. Todo empieza como borrador: el alumnado solo lo ve cuando lo publicas.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Crear plan\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Creando el plan"
+        },
+        {
+          "do": "waitGone",
+          "selector": "text=Creando el plan",
+          "timeout": 150000
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "passo-3",
+      "say": "Revisa los datos y crea el curso. Aparece con las secciones del plan, listas para revisar.",
+      "actions": [
         {
           "do": "click",
           "selector": "button:has-text(\"Siguiente\")"
         },
         {
           "do": "wait",
-          "ms": 800
-        }
-      ]
-    },
-    {
-      "id": "passo-3",
-      "say": "En el último paso revisas los datos. Si algo no está bien, usa Atrás antes de crear. Cuando todo esté correcto, pulsa Crear.",
-      "actions": [
+          "ms": 1200
+        },
         {
           "do": "caption",
           "text": "3 · Revisar y crear",
@@ -147,7 +191,7 @@
         },
         {
           "do": "wait",
-          "ms": 5200
+          "ms": 2000
         },
         {
           "do": "click",
@@ -155,17 +199,17 @@
         },
         {
           "do": "wait",
-          "ms": 2000
+          "ms": 4000
         }
       ]
     },
     {
       "id": "resultado",
-      "say": "Listo: el curso está creado y ya estás en su vista general, con la sección General lista para recibir materiales.",
+      "say": "Al abrir el curso, verás los borradores de IA en la vista general. Revísalos y publícalos cuando estén listos.",
       "actions": [
         {
           "do": "wait",
-          "ms": 7000
+          "ms": 6000
         }
       ]
     }

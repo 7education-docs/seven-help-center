@@ -5,188 +5,133 @@
   "setup": [
     {
       "do": "goto",
-      "url": "/educa/library/lesson-series"
-    },
-    {
-      "do": "type",
-      "selector": "input[type=\"search\"]",
-      "text": "fotossíntese",
-      "delay": 50
+      "url": "/educa/library"
     },
     {
       "do": "waitFor",
-      "selector": "text=Séries de lições"
+      "selector": "text=Série de lições"
     },
     {
-      "do": "wait",
-      "ms": 1000
+      "do": "click",
+      "selector": "text=Série de lições"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Gerar com IA\")"
     }
   ],
   "scenes": [
     {
       "id": "inicio",
-      "say": "Uma série de aulas prepara um tema completo, sessão por sessão. Vou mostrar como criar uma em menos de um minuto.",
+      "say": "Uma série de lições planeja um tema completo: as sessões, a progressão e a avaliação. Para não começar do zero, use Gerar com IA.",
       "actions": [
         {
           "do": "caption",
-          "text": "Crie uma série de aulas",
+          "text": "Gerar com IA",
           "step": ""
         },
         {
-          "do": "wait",
-          "ms": 990
-        },
-        {
-          "do": "shot",
-          "name": "serie-1-lista"
+          "do": "highlight",
+          "selector": "button:has-text(\"Gerar com IA\")",
+          "ms": 2200
         },
         {
           "do": "wait",
-          "ms": 6383,
-          "pad": true
-        }
-      ]
-    },
-    {
-      "id": "abrir",
-      "say": "Clique em Criar e o formulário se abre.",
-      "actions": [
-        {
-          "do": "caption",
-          "text": "1 · Clique em Criar",
-          "step": ""
-        },
-        {
-          "do": "click",
-          "selector": "role=button[name=\"Criar\"]"
-        },
-        {
-          "do": "waitFor",
-          "selector": "input[placeholder^=\"e.g. Introduction\"]"
-        },
-        {
-          "do": "wait",
-          "ms": 440
-        },
-        {
-          "do": "shot",
-          "name": "serie-2-formulario"
-        },
-        {
-          "do": "wait",
-          "ms": 1071,
-          "pad": true
+          "ms": 6000
         }
       ]
     },
     {
       "id": "tema",
-      "say": "Escreva o tema. Por exemplo: a fotossíntese, da luz à matéria.",
+      "say": "O formulário pede o tema, a disciplina e o nível. Quanto mais contexto der, mais ajustada fica a série.",
       "actions": [
         {
-          "do": "caption",
-          "text": "2 · Escreva o tema",
-          "step": ""
+          "do": "click",
+          "selector": "button:has-text(\"Gerar com IA\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
         },
         {
           "do": "type",
-          "selector": "input[placeholder^=\"e.g. Introduction\"]",
-          "text": "A fotossíntese: da luz à matéria",
-          "delay": 31
+          "selector": "input[placeholder=\"e.g. The Industrial Revolution\"]",
+          "text": "Níveis de organização dos seres vivos",
+          "delay": 35
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"e.g. History\"]",
+          "text": "Ciências da Natureza",
+          "delay": 35
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"e.g. 9th Grade\"]",
+          "text": "7.º ano",
+          "delay": 35
         },
         {
           "do": "wait",
-          "ms": 275
-        },
-        {
-          "do": "wait",
-          "ms": 2625,
-          "pad": true
+          "ms": 4000
         }
       ]
     },
     {
-      "id": "datos",
-      "say": "Indique a disciplina, o ano e uma descrição breve dos objetivos.",
+      "id": "estrutura",
+      "say": "Escolha o número de lições. Assim a série já sai com o tamanho que cabe no seu trimestre.",
       "actions": [
         {
-          "do": "caption",
-          "text": "3 · Disciplina, ano e objetivos",
-          "step": ""
+          "do": "click",
+          "selector": "input[placeholder=\"e.g. 4\"]"
+        },
+        {
+          "do": "press",
+          "key": "Control+a"
+        },
+        {
+          "do": "press",
+          "key": "Backspace"
         },
         {
           "do": "type",
-          "selector": "input[placeholder=\"e.g. Mathematics\"]",
-          "text": "Biologia",
-          "delay": 28
+          "selector": "input[placeholder=\"e.g. 4\"]",
+          "text": "6",
+          "delay": 60
         },
         {
-          "do": "type",
-          "selector": "input[placeholder=\"e.g. 10th Grade\"]",
-          "text": "1.º ano",
-          "delay": 28
-        },
+          "do": "wait",
+          "ms": 5000
+        }
+      ]
+    },
+    {
+      "id": "objetivos",
+      "say": "Os objetivos dizem o que o estudante deve conseguir ao final. A IA organiza as sessões para chegar até eles.",
+      "actions": [
         {
           "do": "type",
-          "selector": "textarea",
-          "text": "Entender como as plantas transformam a luz em energia química.",
+          "selector": "textarea[placeholder^=\"e.g. Learners\"]",
+          "text": "Explicar os níveis de organização, da célula ao organismo.",
           "delay": 25
         },
         {
           "do": "wait",
-          "ms": 385
-        },
-        {
-          "do": "shot",
-          "name": "serie-3-completo"
+          "ms": 5000
         }
       ]
     },
     {
-      "id": "guardar",
-      "say": "Clique em Criar outra vez para salvar. A série aparece na lista, pronta para editar.",
+      "id": "gerar",
+      "say": "Clique em Generate Series. A IA leva alguns minutos e, quando termina, a série aparece na sua biblioteca, com as lições para revisar.",
       "actions": [
-        {
-          "do": "caption",
-          "text": "4 · Salve",
-          "step": ""
-        },
         {
           "do": "click",
-          "selector": "button[type=\"submit\"]"
+          "selector": "button:has-text(\"Generate Series\")"
         },
         {
           "do": "wait",
-          "ms": 1210
-        },
-        {
-          "do": "shot",
-          "name": "serie-4-guardada"
-        },
-        {
-          "do": "wait",
-          "ms": 3644,
-          "pad": true
-        }
-      ]
-    },
-    {
-      "id": "final",
-      "say": "Pronto. Da lista você pode abrir, editar ou gerar a série com IA.",
-      "actions": [
-        {
-          "do": "caption",
-          "text": "Série criada",
-          "step": ""
-        },
-        {
-          "do": "wait",
-          "ms": 1100
-        },
-        {
-          "do": "wait",
-          "ms": 3001,
-          "pad": true
+          "ms": 4000
         }
       ]
     }

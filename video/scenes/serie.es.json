@@ -5,153 +5,133 @@
   "setup": [
     {
       "do": "goto",
-      "url": "/educa/library/lesson-series"
+      "url": "/educa/library"
     },
     {
       "do": "waitFor",
-      "selector": "text=Editados recientemente"
+      "selector": "text=\"Serie de lecciones\""
+    },
+    {
+      "do": "click",
+      "selector": "text=\"Serie de lecciones\""
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Generar con IA\")"
     }
   ],
   "scenes": [
     {
       "id": "inicio",
-      "say": "Una serie de lecciones prepara un tema completo, sesión a sesión. Te enseño cómo crear una en menos de un minuto.",
+      "say": "Una serie de lecciones planifica un tema completo: las sesiones, la progresión y la evaluación. Para no empezar desde cero, usa Generar con IA.",
       "actions": [
         {
           "do": "caption",
-          "text": "Crea una serie de lecciones",
+          "text": "Generar con IA",
           "step": ""
         },
         {
-          "do": "wait",
-          "ms": 1800
-        },
-        {
-          "do": "shot",
-          "name": "serie-1-lista"
-        }
-      ]
-    },
-    {
-      "id": "abrir",
-      "say": "Pulsa Crear y se abre el formulario.",
-      "actions": [
-        {
-          "do": "caption",
-          "text": "1 · Pulsa Crear",
-          "step": ""
-        },
-        {
-          "do": "click",
-          "selector": "role=button[name=\"Crear\"]"
-        },
-        {
-          "do": "waitFor",
-          "selector": "input[placeholder^=\"ej. Introducción\"]"
+          "do": "highlight",
+          "selector": "button:has-text(\"Generar con IA\")",
+          "ms": 2200
         },
         {
           "do": "wait",
-          "ms": 800
-        },
-        {
-          "do": "shot",
-          "name": "serie-2-formulario"
+          "ms": 6000
         }
       ]
     },
     {
       "id": "tema",
-      "say": "Escribe el tema. Por ejemplo: la fotosíntesis, de la luz a la materia.",
+      "say": "El formulario pide el tema, la asignatura y el curso. Cuanto más contexto des, más ajustada queda la serie.",
       "actions": [
-        {
-          "do": "caption",
-          "text": "2 · Escribe el tema",
-          "step": ""
-        },
-        {
-          "do": "type",
-          "selector": "input[placeholder^=\"ej. Introducción\"]",
-          "text": "La fotosíntesis: de la luz a la materia",
-          "delay": 45
-        },
-        {
-          "do": "wait",
-          "ms": 500
-        }
-      ]
-    },
-    {
-      "id": "datos",
-      "say": "Indica la asignatura, el curso y una descripción breve de los objetivos.",
-      "actions": [
-        {
-          "do": "caption",
-          "text": "3 · Asignatura, curso y objetivos",
-          "step": ""
-        },
-        {
-          "do": "type",
-          "selector": "input[placeholder=\"ej. Matemáticas\"]",
-          "text": "Biología y Geología",
-          "delay": 40
-        },
-        {
-          "do": "type",
-          "selector": "input[placeholder=\"p. ej. 4.º de ESO\"]",
-          "text": "1.º de ESO",
-          "delay": 40
-        },
-        {
-          "do": "type",
-          "selector": "textarea",
-          "text": "Comprender cómo las plantas transforman la luz en energía química.",
-          "delay": 22
-        },
-        {
-          "do": "wait",
-          "ms": 700
-        },
-        {
-          "do": "shot",
-          "name": "serie-3-completo"
-        }
-      ]
-    },
-    {
-      "id": "guardar",
-      "say": "Pulsa Crear de nuevo para guardarla. La serie aparece en la lista, lista para editar.",
-      "actions": [
-        {
-          "do": "caption",
-          "text": "4 · Guárdala",
-          "step": ""
-        },
         {
           "do": "click",
-          "selector": "button[type=\"submit\"]"
+          "selector": "button:has-text(\"Generar con IA\")"
         },
         {
           "do": "wait",
-          "ms": 2200
+          "ms": 1500
         },
         {
-          "do": "shot",
-          "name": "serie-4-guardada"
+          "do": "type",
+          "selector": "input[placeholder^=\"ej. La Revolución\"]",
+          "text": "La fotosíntesis: de la luz a la materia",
+          "delay": 35
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"ej. Historia\"]",
+          "text": "Ciencias Naturales",
+          "delay": 35
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"p. ej. 3.º de ESO\"]",
+          "text": "2.º de ESO",
+          "delay": 35
+        },
+        {
+          "do": "wait",
+          "ms": 4000
         }
       ]
     },
     {
-      "id": "final",
-      "say": "Ya la tienes. Desde la lista puedes abrirla, editarla o generarla con IA.",
+      "id": "estrutura",
+      "say": "Elige el número de lecciones. Así la serie sale con el tamaño que cabe en tu trimestre.",
       "actions": [
         {
-          "do": "caption",
-          "text": "Serie creada",
-          "step": ""
+          "do": "click",
+          "selector": "input[placeholder=\"ej. 4\"]"
+        },
+        {
+          "do": "press",
+          "key": "Control+a"
+        },
+        {
+          "do": "press",
+          "key": "Backspace"
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"ej. 4\"]",
+          "text": "6",
+          "delay": 60
         },
         {
           "do": "wait",
-          "ms": 2000
+          "ms": 5000
+        }
+      ]
+    },
+    {
+      "id": "objetivos",
+      "say": "Los objetivos indican lo que el alumnado debe conseguir al final. La IA organiza las sesiones para llegar hasta ellos.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "textarea[placeholder^=\"ej. Los alumnos\"]",
+          "text": "Explicar cómo transforman las plantas la luz en materia.",
+          "delay": 25
+        },
+        {
+          "do": "wait",
+          "ms": 5000
+        }
+      ]
+    },
+    {
+      "id": "gerar",
+      "say": "Pulsa Generar serie y la IA crea la serie. Cuando termine, aparece en tu biblioteca, con las lecciones listas para revisar.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Generar serie\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
         }
       ]
     }
