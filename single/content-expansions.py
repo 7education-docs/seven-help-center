@@ -236,7 +236,7 @@ def apply_content_overlay(merged: dict) -> None:
 # ---------------------------------------------------------------------------
 GUIDE = {
     'es': dict(
-        answer="Un curso es el espacio donde reúnes todo lo que trabajas con un grupo de alumnos: las secciones con los temas, los materiales, las actividades, las citas y el código para que el alumnado entre. Sirve para tener cada asignatura organizada en un único lugar, en lugar de repartirla entre carpetas, correos y chats. Puedes empezar un curso desde cero con el asistente, importar uno que ya tienes o adoptar una plantilla; los pasos recogen las tres formas.",
+        answer="Un curso reúne en un solo lugar lo que trabajas con un grupo: temas, materiales, actividades, citas y el código de entrada. Sirve para no repartir una asignatura entre carpetas, correos y chats. Puedes empezar desde cero, importar un curso que ya tienes o adoptar una plantilla.",
         example="En el colegio, un curso bien montado sirve para tres cosas: preparar una asignatura una sola vez y reutilizarla cada año, mantener el mismo formato de nombres en todo el departamento para encontrar cada curso sin preguntar, y que cada alumno llegue a su grupo desde el primer día con el código de su clase.",
         tips=["Usa un nombre que identifique grupo y asignatura, por ejemplo \"Matemáticas · 2.º secundaria\".",
               "Antes de la primera clase, abre el curso con \"Ver como estudiante\" para comprobar qué ve el alumnado.",
@@ -249,7 +249,7 @@ GUIDE = {
             dict(t="Paso 3: Revisar y crear", b="Revisa los datos. Atrás te permite corregir algo antes de pulsar Crear."),
         ]),
     'pt-BR': dict(
-        answer="Um curso é o espaço onde você reúne tudo o que trabalha com um grupo de estudantes: as seções com os temas, os materiais, as atividades, os compromissos e o código para que os estudantes entrem. Serve para ter cada disciplina organizada em um só lugar, em vez de espalhá-la entre pastas, e-mails e conversas. Você pode começar um curso do zero com o assistente, importar um que já tem ou adotar um modelo; os passos reúnem as três formas.",
+        answer="Um curso reúne em um só lugar o que você trabalha com uma turma: temas, materiais, atividades, compromissos e o código de entrada. Serve para não espalhar uma disciplina entre pastas, e-mails e conversas. Você pode começar do zero, importar um curso que já tem ou adotar um modelo.",
         example="Na escola, um curso bem montado serve para três coisas: preparar uma disciplina uma vez só e reutilizá-la todo ano, manter o mesmo padrão de nomes em todo o departamento para encontrar cada curso sem perguntar, e fazer com que cada estudante chegue ao seu grupo desde o primeiro dia, com o código da sua turma.",
         tips=["Use um nome que identifique turma e disciplina, por exemplo \"Matemática · 8.º ano\".",
               "Antes da primeira aula, abra o curso com \"Ver como aluno\" para conferir o que os estudantes veem.",
