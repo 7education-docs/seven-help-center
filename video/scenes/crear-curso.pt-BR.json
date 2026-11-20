@@ -15,7 +15,7 @@
   "scenes": [
     {
       "id": "inicio",
-      "say": "Um curso reúne, em um só lugar, tudo o que você trabalha com um grupo: as seções com os temas, os materiais, as atividades e o código para os estudantes entrarem.",
+      "say": "Um curso reúne, em um só lugar, o que você trabalha com um grupo.",
       "actions": [
         {
           "do": "caption",
@@ -23,50 +23,58 @@
           "step": ""
         },
         {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "criar-hl",
+      "say": "Para criar um, clique em Criar curso.",
+      "actions": [
+        {
           "do": "highlight",
           "selector": "button:has-text(\"Criar curso\")",
-          "ms": 2000
+          "ms": 2600
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 400
+        }
+      ]
+    },
+    {
+      "id": "importar-hl",
+      "say": "Você também pode importar um curso que já tem, com o botão Importar curso.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Importar curso\")",
+          "ms": 2800
+        },
+        {
+          "do": "wait",
+          "ms": 400
         }
       ]
     },
     {
       "id": "modelos",
-      "say": "Você pode criar um curso do zero, importar um curso que já tem com o botão Importar curso, ou adotar um modelo pronto. Os modelos são unidades didáticas com seções e materiais, que você adapta ao seu grupo.",
+      "say": "Ou adotar um modelo pronto. Os modelos são unidades didáticas com seções e materiais, que você adapta ao seu grupo.",
       "actions": [
-        {
-          "do": "highlight",
-          "selector": "button:has-text(\"Importar curso\")",
-          "ms": 2400
-        },
-        {
-          "do": "wait",
-          "ms": 1200
-        },
         {
           "do": "click",
           "selector": "button[role=\"tab\"]:has-text(\"Modelos\")"
         },
         {
           "do": "wait",
-          "ms": 4000
-        },
-        {
-          "do": "click",
-          "selector": "button[role=\"tab\"]:has-text(\"Os meus cursos\")"
-        },
-        {
-          "do": "wait",
-          "ms": 800
+          "ms": 3200
         }
       ]
     },
     {
       "id": "passo-1",
-      "say": "Para criar um curso, clique em Criar curso. Dê um nome, indique a disciplina e a turma, e escreva uma descrição. Aqui, por exemplo: Matemática, 8.º ano.",
+      "say": "Dê um nome ao curso.",
       "actions": [
         {
           "do": "click",
@@ -74,7 +82,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 900
         },
         {
           "do": "caption",
@@ -85,20 +93,40 @@
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=0",
           "text": "Matemática · 8.º ano",
-          "delay": 40
+          "delay": 35
         },
+        {
+          "do": "wait",
+          "ms": 300
+        }
+      ]
+    },
+    {
+      "id": "passo-1b",
+      "say": "Indique a disciplina e a turma.",
+      "actions": [
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=1",
           "text": "Matemática",
-          "delay": 40
+          "delay": 35
         },
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=2",
           "text": "8.º ano",
-          "delay": 40
+          "delay": 35
         },
+        {
+          "do": "wait",
+          "ms": 300
+        }
+      ]
+    },
+    {
+      "id": "passo-1c",
+      "say": "Escreva uma descrição, por exemplo: Matemática, 8.º ano.",
+      "actions": [
         {
           "do": "type",
           "selector": "textarea >> nth=0",
@@ -107,7 +135,7 @@
         },
         {
           "do": "wait",
-          "ms": 3000
+          "ms": 800
         }
       ]
     },
@@ -121,7 +149,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 900
         },
         {
           "do": "caption",
@@ -134,12 +162,12 @@
         },
         {
           "do": "wait",
-          "ms": 3500
+          "ms": 1500
         }
       ]
     },
     {
-      "id": "modelos-2",
+      "id": "todos",
       "say": "Todos os modelos traz unidades prontas, para adaptar em vez de começar do zero.",
       "actions": [
         {
@@ -148,27 +176,28 @@
         },
         {
           "do": "wait",
-          "ms": 4500
+          "ms": 3000
         }
       ]
     },
     {
       "id": "copiar",
-      "say": "Copiar reaproveita um curso que você já tem, com as mesmas seções e materiais.",
+      "say": "Copiar reaproveita um curso que você já tem.",
       "actions": [
         {
-          "do": "click",
-          "selector": "button:has-text(\"Copiar\")"
+          "do": "highlight",
+          "selector": "button:has-text(\"Copiar\")",
+          "ms": 2600
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 400
         }
       ]
     },
     {
-      "id": "planear-ia",
-      "say": "Planear com IA é a opção de mais valor: descreva o tema, os objetivos e a duração, e a IA monta as seções. Tudo começa como rascunho para você revisar.",
+      "id": "ia-hl",
+      "say": "Planear com IA é a opção de mais valor.",
       "actions": [
         {
           "do": "click",
@@ -176,13 +205,19 @@
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 900
         },
         {
           "do": "caption",
           "text": "Planear com IA",
           "step": ""
-        },
+        }
+      ]
+    },
+    {
+      "id": "ia-texto",
+      "say": "Descreva o tema, os objetivos e a duração, e a IA monta as seções.",
+      "actions": [
         {
           "do": "type",
           "selector": "textarea >> nth=0",
@@ -191,11 +226,21 @@
         },
         {
           "do": "wait",
-          "ms": 1500
-        },
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "ia-criar",
+      "say": "Clique em Criar plano.",
+      "actions": [
         {
           "do": "click",
           "selector": "button:has-text(\"Criar plano\")"
+        },
+        {
+          "do": "wait",
+          "ms": 600
         }
       ]
     },
@@ -214,13 +259,13 @@
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 3000
         }
       ]
     },
     {
       "id": "passo-3",
-      "say": "No último passo, revise os dados. Se algo estiver errado, use Voltar antes de criar. Quando estiver tudo certo, clique em Criar.",
+      "say": "Revise os dados e clique em Criar.",
       "actions": [
         {
           "do": "click",
@@ -228,7 +273,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 900
         },
         {
           "do": "caption",
@@ -237,7 +282,7 @@
         },
         {
           "do": "wait",
-          "ms": 2000
+          "ms": 1500
         },
         {
           "do": "click",
@@ -245,17 +290,17 @@
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 3000
         }
       ]
     },
     {
       "id": "resultado",
-      "say": "Pronto: o curso foi criado com os rascunhos de IA na visão geral. Revise cada um antes de publicar.",
+      "say": "Ao abrir o curso, verá os rascunhos de IA na visão geral. Revise-os e publique quando estiverem prontos.",
       "actions": [
         {
           "do": "wait",
-          "ms": 6000
+          "ms": 5000
         }
       ]
     }
