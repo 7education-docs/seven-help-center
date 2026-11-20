@@ -1,0 +1,249 @@
+{
+  "lesson": "fichas-interactivas",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/worksheets/create"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Crear hoja de trabajo"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "La ficha interactiva se crea en tres pasos: contexto, fuentes y análisis con ajuste. Así se genera una ficha real a partir de un documento de tu biblioteca.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Configuración, fuentes y análisis en tres pasos",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "contexto",
+      "say": "En el contexto escribes el tema, la asignatura y el nivel escolar. Cuanto más concreto sea el tema, más ajustada será la ficha.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder^=\"p. ej. Suma\"]",
+          "text": "La célula: estructuras de la célula animal y vegetal",
+          "delay": 30
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"p. ej. Matemáticas\"]",
+          "text": "Biología y Geología",
+          "delay": 30
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"p. ej. 1.º de ESO\"]",
+          "text": "1.º de ESO",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        }
+      ]
+    },
+    {
+      "id": "tipo",
+      "say": "Elige el tipo de ficha: prueba corta, hoja de ejercicios, material de apoyo o examen. Aquí, una hoja de ejercicios.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Hoja de ejercicios\")"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        }
+      ]
+    },
+    {
+      "id": "fuentes",
+      "say": "En fuentes añades los documentos de tu biblioteca. Aquí, el documento de la célula que subimos de la Wikipedia.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 1201,
+          "y": 44
+        },
+        {
+          "do": "waitFor",
+          "selector": "button:has-text(\"Desde la biblioteca\")"
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Desde la biblioteca\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "[role=dialog] tr:has-text(\"Célula - Wikipedia, la enciclopedia libre.md\")"
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        },
+        {
+          "do": "click",
+          "selector": "[role=dialog] tr:has-text(\"Célula - Wikipedia, la enciclopedia libre.md\")"
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        },
+        {
+          "do": "click",
+          "selector": "[role=dialog] button:text-is(\"Confirmar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "analisis",
+      "say": "La IA revisa el documento y te muestra la calidad de las fuentes, lo que falta y la estructura que va a generar.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 1201,
+          "y": 44
+        },
+        {
+          "do": "wait",
+          "ms": 26000
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Calidad de las fuentes"
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Calidad de las fuentes",
+          "ms": 1700
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Estructura planificada",
+          "ms": 1700
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "ajuste",
+      "say": "Antes de generar, puedes revisar el plan: cada bloque se puede quitar o cambiar. Después, la ficha se puede editar bloque a bloque.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Estructura planificada",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "generar",
+      "say": "Pulsa Generar. La hoja tarda unos minutos; cuando termina, aparecen los textos, las preguntas y las respuestas correctas para el profesorado.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 1207,
+          "y": 44
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Generando hoja de trabajo"
+        },
+        {
+          "do": "waitGone",
+          "selector": "text=Generando hoja de trabajo",
+          "timeout": 170000
+        },
+        {
+          "do": "waitGone",
+          "selector": "text=Comprobando las respuestas",
+          "timeout": 170000
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "resultado",
+      "say": "La ficha se compone de bloques: un texto para leer y ejercicios de selección y de verdadero o falso, con la respuesta marcada.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Lee el texto",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "scroll",
+          "selector": "text=Orgánulo exclusivo"
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Orgánulo exclusivo",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Revísala antes de usarla con tu grupo. Puedes editar cualquier bloque, añadir otros y guardar el resultado en tu biblioteca.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Bloque\")",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    }
+  ]
+}

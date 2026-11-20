@@ -1,0 +1,246 @@
+{
+  "lesson": "fichas-interactivas",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/worksheets/create"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Criar ficha de trabalho"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Você cria a ficha interativa em três passos: contexto, fontes e análise com ajuste. Assim você gera uma ficha real a partir de um documento da sua biblioteca.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Configuração, fontes e análise em três passos",
+          "ms": 1080
+        },
+        {
+          "do": "wait",
+          "ms": 825
+        }
+      ]
+    },
+    {
+      "id": "contexto",
+      "say": "No contexto escreve o tema, a disciplina e o ano escolar. O idioma define a língua de toda a ficha: escolha Português.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder^=\"p. ex. Adição\"]",
+          "text": "Microscópio óptico: partes e uso",
+          "delay": 25
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"p. ex. Matemática\"]",
+          "text": "Biologia e Geologia",
+          "delay": 25
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"p. ex. 6.º ano\"]",
+          "text": "7.º ano",
+          "delay": 28
+        },
+        {
+          "do": "select",
+          "selector": "select:has(option[value=\"pt\"])",
+          "value": "pt"
+        },
+        {
+          "do": "wait",
+          "ms": 440
+        }
+      ]
+    },
+    {
+      "id": "tipo",
+      "say": "Escolha o tipo de ficha: miniteste, ficha de exercícios, material de apoio ou teste de avaliação. Aqui, uma ficha de exercícios.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Ficha de exercícios\")"
+        },
+        {
+          "do": "wait",
+          "ms": 495
+        }
+      ]
+    },
+    {
+      "id": "fontes",
+      "say": "Em fontes, adiciona documentos da sua biblioteca. Aqui, o artigo da Wikipédia sobre o microscópio óptico que enviámos.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 1201,
+          "y": 44
+        },
+        {
+          "do": "waitFor",
+          "selector": "button:has-text(\"Da biblioteca\")"
+        },
+        {
+          "do": "wait",
+          "ms": 385
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Da biblioteca\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "[role=dialog] tr:has-text(\"Microscópio óptico – Wikipédia\")"
+        },
+        {
+          "do": "wait",
+          "ms": 275
+        },
+        {
+          "do": "click",
+          "selector": "[role=dialog] tr:has-text(\"Microscópio óptico – Wikipédia\")"
+        },
+        {
+          "do": "wait",
+          "ms": 275
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Confirmar\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 825
+        }
+      ]
+    },
+    {
+      "id": "analisis",
+      "say": "A IA revê o documento e mostra a qualidade das fontes, o que falta e a estrutura que vai gerar.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 1201,
+          "y": 44
+        },
+        {
+          "do": "wait",
+          "ms": 26000
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Qualidade das fontes"
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Qualidade das fontes",
+          "ms": 1020
+        },
+        {
+          "do": "wait",
+          "ms": 660
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Estrutura planeada",
+          "ms": 1020
+        },
+        {
+          "do": "wait",
+          "ms": 825
+        }
+      ],
+      "speed": 7.5
+    },
+    {
+      "id": "ajuste",
+      "say": "Antes de gerar, pode rever o plano. Cada bloco pode ser retirado ou alterado, e depois a ficha é editável bloco a bloco.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Estrutura planeada",
+          "ms": 900
+        },
+        {
+          "do": "wait",
+          "ms": 1100
+        }
+      ]
+    },
+    {
+      "id": "gerar",
+      "say": "Clique em Gerar. A folha demora alguns minutos; quando termina, aparecem os textos, as perguntas e as respostas corretas para o professor.",
+      "actions": [
+        {
+          "do": "clickAt",
+          "x": 1207,
+          "y": 44
+        },
+        {
+          "do": "wait",
+          "ms": 150000
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Biologia e Geologia"
+        },
+        {
+          "do": "wait",
+          "ms": 1100
+        }
+      ],
+      "speed": 8.0
+    },
+    {
+      "id": "resultado",
+      "say": "A ficha tem blocos: textos para ler e exercícios. Antes de a distribuir, revise as soluções: a verificação indica quando uma resposta precisa de confirmação.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Bloco >> nth=0",
+          "ms": 960
+        },
+        {
+          "do": "wait",
+          "ms": 770
+        },
+        {
+          "do": "scroll",
+          "selector": "text=Bloco >> nth=2"
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Bloco >> nth=2",
+          "ms": 960
+        },
+        {
+          "do": "wait",
+          "ms": 1320
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Revise a ficha antes de usar com a turma. Pode editar qualquer bloco, acrescentar outros e salvar o resultado na sua biblioteca.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Biologia e Geologia",
+          "ms": 960
+        },
+        {
+          "do": "wait",
+          "ms": 825
+        }
+      ]
+    }
+  ]
+}

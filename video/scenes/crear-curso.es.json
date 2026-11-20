@@ -1,0 +1,173 @@
+{
+  "lesson": "crear-curso",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Crear curso\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Un curso reúne en un solo lugar todo lo que trabajas con un grupo: las secciones con los temas, los materiales, las actividades y el código para que el alumnado entre.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Crear un curso",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 9000
+        }
+      ]
+    },
+    {
+      "id": "modelos",
+      "say": "Puedes crear un curso desde cero, importar uno que ya tienes o adoptar una plantilla. Las plantillas son unidades didácticas con secciones y materiales, que adaptas a tu grupo.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Plantillas\")"
+        },
+        {
+          "do": "wait",
+          "ms": 9000
+        },
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Mis cursos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "passo-1",
+      "say": "Para crear un curso, pulsa Crear curso. Pon un nombre, indica la asignatura y la clase, y escribe una descripción. Aquí, por ejemplo: Matemáticas, 2.º ESO.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Crear curso\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "caption",
+          "text": "1 · Datos básicos",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Matemáticas · 2.º ESO",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=1",
+          "text": "Matemáticas",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=2",
+          "text": "2.º ESO",
+          "delay": 45
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Curso de matemáticas para 2.º de ESO",
+          "delay": 30
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    },
+    {
+      "id": "passo-2",
+      "say": "En el segundo paso, elige el contenido inicial. Vacío empieza con una sección General para construirlo tú; Todas las plantillas trae unidades ya preparadas; Copiar reutiliza un curso que ya tienes; y Planificar con IA genera una primera propuesta para revisar. Aquí elegimos Vacío. Después pulsa Siguiente.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Siguiente\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "caption",
+          "text": "2 · Elegir contenido",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 6000
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Vacío\")"
+        },
+        {
+          "do": "wait",
+          "ms": 9000
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Siguiente\")"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "passo-3",
+      "say": "En el último paso revisas los datos. Si algo no está bien, usa Atrás antes de crear. Cuando todo esté correcto, pulsa Crear.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "3 · Revisar y crear",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 5200
+        },
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Crear\")"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "resultado",
+      "say": "Listo: el curso está creado y ya estás en su vista general, con la sección General lista para recibir materiales.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 7000
+        }
+      ]
+    }
+  ]
+}

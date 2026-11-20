@@ -1,0 +1,124 @@
+{
+  "lesson": "tareas-feedback",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/library/feedback-tasks"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:text-is(\"Crear\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "As tarefas de correção e feedback permitem que o assistente revise os trabalhos dos seus alunos com os critérios que você define.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Editados recientemente",
+          "ms": 1500
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "crear",
+      "say": "Clique em Criar para abrir a tarefa. Você começa pelo título e pela descrição, que o aluno verá ao entregar.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Crear\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"Título de la tarea\"]",
+          "text": "Redacción: niveles de organización",
+          "delay": 45
+        },
+        {
+          "do": "click",
+          "selector": "[placeholder^=\"Descripción de la tarea\"]"
+        },
+        {
+          "do": "type",
+          "selector": "[placeholder^=\"Descripción de la tarea\"]",
+          "text": "Escribe un texto explicando los niveles de organización de los seres vivos.",
+          "delay": 30
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    },
+    {
+      "id": "rigor",
+      "say": "O rigor da avaliação define se a correção é indulgente, equilibrada ou rigorosa. Escolha a que combina com o seu critério.",
+      "actions": [
+        {
+          "do": "select",
+          "selector": "select:has(option:text-is(\"Estricto\"))",
+          "value": "Estricto"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "select",
+          "selector": "select:has(option:text-is(\"Estricto\"))",
+          "value": "Equilibrado"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        }
+      ]
+    },
+    {
+      "id": "criterios",
+      "say": "Com Adicionar critério você cria cada critério com a sua descrição e os seus pontos, de 0,5 a 1000.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Criterios de calificación",
+          "ms": 1500
+        },
+        {
+          "do": "clickAt",
+          "x": 1048,
+          "y": 580
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "cerrar",
+      "say": "Você pode salvar a tarefa, compartilhá-la com seus alunos ou editá-la depois pela lista.",
+      "actions": [
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "lesson": "cita",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/9LFW6daqyOEv6a08FKD5mQ"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Compromissos\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Vamos criar um compromisso no seu curso, do início ao fim. Assim a turma sabe sempre quando é a próxima aula ou o próximo laboratório.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "",
+          "text": "Criar um compromisso"
+        },
+        {
+          "do": "wait",
+          "ms": 1210
+        },
+        {
+          "do": "shot",
+          "name": "cita-0-inicio"
+        },
+        {
+          "do": "wait",
+          "ms": 411,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "aba",
+      "say": "Primeiro, abra a aba Compromissos. Aqui ficam todos os compromissos do curso, os passados e os futuros.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "1 ·",
+          "text": "Abra a aba Compromissos"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Compromissos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 880
+        },
+        {
+          "do": "shot",
+          "name": "cita-1-pestana"
+        },
+        {
+          "do": "wait",
+          "ms": 906,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "criar",
+      "say": "Toque em Criar compromisso. Abre-se o formulário, com poucos campos para preencher.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "2 ·",
+          "text": "Clique em Criar compromisso"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Criar compromisso\")"
+        },
+        {
+          "do": "waitFor",
+          "selector": "internal:label=\"Título\"s"
+        },
+        {
+          "do": "wait",
+          "ms": 495
+        },
+        {
+          "do": "shot",
+          "name": "cita-2-formulario"
+        },
+        {
+          "do": "wait",
+          "ms": 360,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "titulo",
+      "say": "Escreva um título claro, por exemplo: Laboratório, células vegetais.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "3 ·",
+          "text": "Escreva o título"
+        },
+        {
+          "do": "type",
+          "selector": "internal:label=\"Título\"s",
+          "text": "Laboratório: células vegetais",
+          "delay": 31
+        },
+        {
+          "do": "wait",
+          "ms": 275
+        }
+      ]
+    },
+    {
+      "id": "data",
+      "say": "Escolha a data. Depois defina a hora de início em De e a hora de término em Até.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "4 ·",
+          "text": "Escolha a data e o horário"
+        },
+        {
+          "do": "fill",
+          "selector": "internal:label=\"Data\"s",
+          "value": "2026-11-27"
+        },
+        {
+          "do": "fill",
+          "selector": "internal:label=\"De\"s",
+          "value": "12:30"
+        },
+        {
+          "do": "fill",
+          "selector": "internal:label=\"Até\"s",
+          "value": "13:30"
+        },
+        {
+          "do": "wait",
+          "ms": 385
+        },
+        {
+          "do": "shot",
+          "name": "cita-3-fecha"
+        },
+        {
+          "do": "wait",
+          "ms": 315,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "local",
+      "say": "Indique o local, por exemplo Laboratório 1, e uma nota para os alunos.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "5 ·",
+          "text": "Indique o local e uma nota"
+        },
+        {
+          "do": "type",
+          "selector": "internal:label=\"Local (opcional)\"s",
+          "text": "Laboratório 1",
+          "delay": 35
+        },
+        {
+          "do": "type",
+          "selector": "textarea",
+          "text": "Levar lâminas e lupa.",
+          "delay": 25
+        },
+        {
+          "do": "wait",
+          "ms": 330
+        },
+        {
+          "do": "shot",
+          "name": "cita-4-completo"
+        },
+        {
+          "do": "wait",
+          "ms": 407,
+          "pad": true
+        }
+      ]
+    },
+    {
+      "id": "guardar",
+      "say": "Clique em Guardar. O compromisso aparece na lista, pronto para os alunos verem.",
+      "actions": [
+        {
+          "do": "caption",
+          "step": "6 ·",
+          "text": "Clique em Guardar"
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Guardar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 990
+        },
+        {
+          "do": "caption",
+          "step": "",
+          "text": "Compromisso criado"
+        },
+        {
+          "do": "shot",
+          "name": "cita-5-guardada"
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Pronto. O seu curso fica organizado, e a turma sabe exatamente quando é cada encontro.",
+      "actions": []
+    }
+  ]
+}

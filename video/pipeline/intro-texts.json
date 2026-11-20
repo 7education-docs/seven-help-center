@@ -1,0 +1,182 @@
+{
+  "cita": {
+    "pt": {
+      "title": "Criar um compromisso",
+      "subtitle": "Compromissos do curso",
+      "narration": "Neste vídeo, você vai aprender a organizar as aulas do seu curso com compromissos."
+    },
+    "es": {
+      "title": "Crear una cita",
+      "subtitle": "Citas del curso",
+      "narration": "En este vídeo vamos a aprender a crear una cita en tu curso, de principio a fin."
+    }
+  },
+  "C-1": {
+    "pt": {
+      "title": "Abas de um curso",
+      "subtitle": "Cursos",
+      "narration": "Neste vídeo, vamos conhecer as abas de um curso e para que serve cada uma delas."
+    },
+    "es": {
+      "title": "Pestañas de un curso",
+      "subtitle": "Cursos",
+      "narration": "En este vídeo vamos a conocer las pestañas de un curso y para qué sirve cada una."
+    }
+  },
+  "serie": {
+    "pt": {
+      "title": "Criar uma série de aulas",
+      "subtitle": "Séries de aulas",
+      "narration": "Neste vídeo, vamos aprender a criar uma série de aulas, passo a passo."
+    },
+    "es": {
+      "title": "Crear una serie de lecciones",
+      "subtitle": "Series de lecciones",
+      "narration": "En este vídeo vamos a aprender a crear una serie de lecciones, paso a paso."
+    }
+  },
+  "tarea": {
+    "pt": {
+      "title": "Criar uma tarefa de correção",
+      "subtitle": "Tarefas de correção e feedback",
+      "narration": "Neste vídeo, vamos aprender a criar uma tarefa de correção com critérios de avaliação."
+    },
+    "es": {
+      "title": "Crear una tarea de corrección",
+      "subtitle": "Tareas de corrección y feedback",
+      "narration": "En este vídeo vamos a aprender a crear una tarea de corrección con criterios de calificación."
+    }
+  },
+  "asistente": {
+    "pt": {
+      "title": "Criar um assistente",
+      "subtitle": "Modelos e assistentes",
+      "narration": "Neste vídeo, vamos aprender a criar um assistente com as suas próprias instruções."
+    },
+    "es": {
+      "title": "Crear un asistente",
+      "subtitle": "Plantillas y asistentes",
+      "narration": "En este vídeo vamos a aprender a crear un asistente con tus propias instrucciones."
+    }
+  },
+  "documentos": {
+    "pt": {
+      "title": "Documentos",
+      "subtitle": "Biblioteca de documentos",
+      "narration": "Neste vídeo, vamos aprender a enviar e a encontrar documentos na biblioteca."
+    },
+    "es": {
+      "title": "Documentos",
+      "subtitle": "Biblioteca de documentos",
+      "narration": "En este vídeo vamos a aprender a subir y encontrar documentos en la biblioteca."
+    }
+  },
+  "fichas-interactivas": {
+    "pt": {
+      "title": "Criar uma ficha interativa",
+      "subtitle": "Fichas interativas",
+      "narration": "Neste vídeo, vamos aprender a criar uma ficha interativa com a ajuda da inteligência artificial."
+    },
+    "es": {
+      "title": "Crear una ficha interactiva",
+      "subtitle": "Fichas interactivas",
+      "narration": "En este vídeo vamos a aprender a crear una ficha interactiva con ayuda de la inteligencia artificial."
+    }
+  },
+  "ver-alumno": {
+    "pt": {
+      "title": "O que o aluno vê no meu curso",
+      "subtitle": "Vista do aluno",
+      "narration": "Neste vídeo, vamos ver o que o aluno vê no seu curso."
+    },
+    "es": {
+      "title": "Qué ve el alumnado en mi curso",
+      "subtitle": "Vista de alumno",
+      "narration": "En este vídeo vamos a ver lo que el alumnado ve en tu curso."
+    }
+  },
+  "crear-curso": {
+    "pt": {
+      "title": "Criar um curso",
+      "subtitle": "Cursos",
+      "narration": "Neste vídeo, você vai ver o que é um curso e como criá-lo, do primeiro passo até a revisão."
+    },
+    "es": {
+      "title": "Crear un curso",
+      "subtitle": "Cursos",
+      "narration": "En este vídeo vas a ver qué es un curso y cómo crearlo, desde el primer paso hasta la revisión."
+    }
+  },
+  "secciones": {
+    "pt": {
+      "title": "Organizar o curso",
+      "subtitle": "Seções, atividades e materiais",
+      "narration": "Neste vídeo, você vai ver como organizar o curso em seções e o que pode adicionar em cada uma."
+    },
+    "es": {
+      "title": "Organizar el curso",
+      "subtitle": "Secciones, actividades y materiales",
+      "narration": "En este vídeo vas a ver cómo organizar el curso en secciones y qué puedes añadir en cada una."
+    }
+  },
+  "material-archivo": {
+    "pt": {
+      "title": "Adicionar um material",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver o que é um material com arquivo e para que serve."
+    },
+    "es": {
+      "title": "Añadir un material",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver qué es un material con archivo y para qué sirve."
+    }
+  },
+  "texto-lectura": {
+    "pt": {
+      "title": "Escrever um material de leitura",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver como escrever uma leitura direto na plataforma."
+    },
+    "es": {
+      "title": "Escribir un material de lectura",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver cómo escribir una lectura directamente en la plataforma."
+    }
+  },
+  "entrega-archivo": {
+    "pt": {
+      "title": "Criar uma entrega",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver para que serve uma entrega e como preenchê-la."
+    },
+    "es": {
+      "title": "Crear una entrega",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver para qué sirve una entrega y cómo rellenarla."
+    }
+  },
+  "tarea-comentarios": {
+    "pt": {
+      "title": "Tarefa com feedback",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver como usar uma tarefa para corrigir e devolver comentários."
+    },
+    "es": {
+      "title": "Tarea con comentarios",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver cómo usar una tarea para corregir y devolver comentarios."
+    }
+  },
+  "agente-ia": {
+    "pt": {
+      "title": "Criar um agente de IA",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver como criar um agente de IA para o estudante."
+    },
+    "es": {
+      "title": "Crear un agente de IA",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver cómo crear un agente de IA para el alumnado."
+    }
+  }
+}

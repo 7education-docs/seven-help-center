@@ -1,0 +1,96 @@
+{
+  "lesson": "material-archivo",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Crear curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemáticas · 2.º ESO\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Añadir actividad o material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Material es un archivo que el alumnado puede abrir dentro de la sección: un PDF, una presentación o un vídeo. Úsalo para lo que el alumnado debe consultar, sin entregar nada.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Añadir actividad o material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Material\"):not(:has-text(\"Texto\")):not(:has-text(\"Añadir\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "subir",
+      "say": "Puedes subir el archivo desde tu ordenador o elegir uno que ya tienes en la biblioteca.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Subir archivo\")",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 6000
+        }
+      ]
+    },
+    {
+      "id": "titulo",
+      "say": "Ponle un título que diga el contenido. Por ejemplo, «Ficha de apoyo: partes de la célula» es más claro que «Doc1».",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Ficha de apoyo: partes de la célula",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    },
+    {
+      "id": "fin",
+      "say": "Al pulsar Añadir, el material aparece en la sección. Si todavía no quieres que lo vea, déjalo oculto.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Atrás\")"
+        },
+        {
+          "do": "wait",
+          "ms": 5000
+        }
+      ]
+    }
+  ]
+}

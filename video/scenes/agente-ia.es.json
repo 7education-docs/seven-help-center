@@ -1,0 +1,97 @@
+{
+  "lesson": "agente-ia",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Crear curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemáticas · 2.º ESO\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Añadir actividad o material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Agente de IA es un asistente para el alumnado fuera de clase, con tus instrucciones. Responde siguiendo las reglas que escribas.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Añadir actividad o material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Agente de IA\"):not(:has-text(\"Añadir\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    },
+    {
+      "id": "titulo",
+      "say": "Ponle un nombre que diga en qué ayuda, por ejemplo «Ayudante de la célula».",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Ayudante de la célula",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "instrucciones",
+      "say": "En las instrucciones escribe qué debe hacer y, sobre todo, qué no debe entregar: pistas y preguntas, no la solución completa.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "textarea >> nth=0",
+          "text": "Responde con pistas y preguntas. No des la solución completa de los ejercicios.",
+          "delay": 25
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "fin",
+      "say": "Antes de compartirlo, haz una pregunta como la haría un alumno y comprueba la respuesta.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Atrás\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    }
+  ]
+}

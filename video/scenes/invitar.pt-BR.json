@@ -1,0 +1,89 @@
+{
+  "lesson": "invitar",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses/9LFW6daqyOEv6a08FKD5mQ"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Vista geral\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "inicio",
+      "say": "Seus alunos entram no curso em poucos segundos, sem precisar procurar nada. Vou mostrar as duas formas de convidar: com o código ou com o link.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Convide os seus alunos",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "shot",
+          "name": "invitar-1-tarjeta"
+        }
+      ]
+    },
+    {
+      "id": "codigo",
+      "say": "No cartão de convite está o código de inscrição. Clique em Copiar código e ele já fica pronto para enviar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "1 · Copie o código de inscrição",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "[aria-label=\"Copiar código\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 1400
+        },
+        {
+          "do": "shot",
+          "name": "invitar-2-codigo"
+        }
+      ]
+    },
+    {
+      "id": "enlace",
+      "say": "Também dá para compartilhar o link de inscrição. Quem abrir o link pode entrar sem conta, só com o nome.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "2 · Ou compartilhe o link",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 2200
+        }
+      ]
+    },
+    {
+      "id": "final",
+      "say": "Pronto. Envie o código para a turma e o curso se preenche assim que todos entrarem. Se precisar, é possível gerar um código novo a qualquer momento.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "A turma já pode entrar",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "_nota": "PLANTILLA. No grabar hasta validar cada selector y etiqueta en la cuenta demo. Renombrar a <lección>.<idioma>.json, p. ej. 1-1.es.json (lección 1.1).",
+  "lesson": "X.X",
+  "locale": "es",
+  "baseUrl": "https://sevenai.es",
+  "login": {
+    "path": "/login",
+    "userSelector": "VALIDAR: input del usuario",
+    "passSelector": "VALIDAR: input de la contraseña",
+    "submitSelector": "VALIDAR: botón de entrar",
+    "successSelector": "VALIDAR: elemento visible solo con sesión iniciada"
+  },
+  "scenes": [
+    {
+      "id": "bienvenida",
+      "say": "Bienvenida. Texto de la narración para esta escena.",
+      "actions": [
+        { "do": "goto", "url": "/" },
+        { "do": "wait", "ms": 800 }
+      ]
+    }
+  ]
+}

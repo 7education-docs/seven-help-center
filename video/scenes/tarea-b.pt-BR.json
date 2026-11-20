@@ -1,0 +1,166 @@
+{
+  "lesson": "tarea-b",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "https://sevenai.es/feedback/access/9878920d-7b33-4943-9f0a-7c03255d9939"
+    },
+    {
+      "do": "waitFor",
+      "selector": "text=Continuar como invitado"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "entrada",
+      "say": "O seu aluno abre o link da tarefa. Não precisa de conta: escreve o nome e clica em Continuar como invitado.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"]",
+          "text": "Ana Souza",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Continuar como invitado\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    },
+    {
+      "id": "tarea",
+      "say": "Vê a descrição, o documento de apoio e os critérios com os seus pontos. A solução modelo não aparece.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "text=Criterios de calificación"
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Documentos",
+          "ms": 1400
+        },
+        {
+          "do": "wait",
+          "ms": 900
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Criterios de calificación",
+          "ms": 1600
+        },
+        {
+          "do": "wait",
+          "ms": 1600
+        }
+      ]
+    },
+    {
+      "id": "respuesta",
+      "say": "Escreve a resposta. Antes de entregar, pode pedir feedback; tem uma tentativa para o fazer.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "textarea[placeholder^=\"Escriba\"]",
+          "text": "Vejo células coladas umas às outras, com forma de quadrado e bem organizadas. Cada uma tem uma linha por fora, que é a parede celular. Não consegui ver o núcleo porque é muito pequeno.",
+          "delay": 14
+        },
+        {
+          "do": "wait",
+          "ms": 700
+        },
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Obtener feedback\"] >> nth=0"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Obtener feedback\"]"
+        },
+        {
+          "do": "wait",
+          "ms": 42000
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Intento #1"
+        },
+        {
+          "do": "scroll",
+          "selector": "text=Su historial de entregas"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "resultado",
+      "say": "O feedback dá uma nota por critério e explica cada pontuação. Assim, o aluno vê o que lhe falta antes de entregar.",
+      "actions": [
+        {
+          "do": "scroll",
+          "selector": "text=Detalles:"
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Detalles:",
+          "ms": 1800
+        },
+        {
+          "do": "wait",
+          "ms": 3800
+        }
+      ]
+    },
+    {
+      "id": "enviar",
+      "say": "Quando estiver satisfeito, clica em Enviar. A entrega fica registada na tarefa.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "role=button[name=\"Enviar\"] >> nth=0"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "role=dialog >> role=button[name=\"Enviar\"]"
+        },
+        {
+          "do": "waitFor",
+          "selector": "text=Ha entregado la tarea"
+        },
+        {
+          "do": "wait",
+          "ms": 2000
+        }
+      ]
+    }
+  ]
+}
