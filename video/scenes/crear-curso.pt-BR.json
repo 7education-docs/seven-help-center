@@ -289,6 +289,14 @@
           "selector": "button:text-is(\"Criar\")"
         },
         {
+          "do": "waitFor",
+          "selector": "text=Convidar alunos"
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        },
+        {
           "do": "wait",
           "ms": 3000
         }
