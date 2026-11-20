@@ -100,7 +100,7 @@
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=0",
-          "text": "Matemática · 8.º ano",
+          "text": "Matemática · 7.º ano",
           "delay": 35
         },
         {
