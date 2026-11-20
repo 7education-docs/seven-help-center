@@ -9,11 +9,11 @@
     },
     {
       "do": "waitFor",
-      "selector": "text=Série de lições"
+      "selector": "text=\"Série de lições\""
     },
     {
       "do": "click",
-      "selector": "text=Série de lições"
+      "selector": "text=\"Série de lições\""
     },
     {
       "do": "waitFor",
@@ -23,7 +23,7 @@
   "scenes": [
     {
       "id": "inicio",
-      "say": "Há duas formas de criar uma série de lições. Criar monta a série à mão, lição por lição. Gerar com IA cria a série inteira a partir de um tema.",
+      "say": "Há duas formas de criar uma série de lições.",
       "actions": [
         {
           "do": "caption",
@@ -31,28 +31,44 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "role=button[name=\"Criar\"]",
-          "ms": 2000
-        },
-        {
           "do": "wait",
-          "ms": 1200
-        },
-        {
-          "do": "highlight",
-          "selector": "button:has-text(\"Gerar com IA\")",
-          "ms": 2200
-        },
-        {
-          "do": "wait",
-          "ms": 2500
+          "ms": 3000
         }
       ]
     },
     {
-      "id": "criar",
-      "say": "Com Criar, você preenche o tema, a disciplina e a descrição. A série nasce vazia, e você acrescenta cada lição à mão. Use essa forma quando já tem o plano pronto.",
+      "id": "criar-hl",
+      "say": "Criar monta a série à mão, lição por lição.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "role=button[name=\"Criar\"]",
+          "ms": 3000
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "gerar-hl",
+      "say": "Gerar com IA cria a série inteira a partir de um tema.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Gerar com IA\")",
+          "ms": 3000
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "criar-abrir",
+      "say": "Com Criar, você preenche o tema, a disciplina e a descrição.",
       "actions": [
         {
           "do": "click",
@@ -60,7 +76,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 900
         },
         {
           "do": "caption",
@@ -75,16 +91,32 @@
         },
         {
           "do": "wait",
-          "ms": 800
-        },
+          "ms": 600
+        }
+      ]
+    },
+    {
+      "id": "criar-desc",
+      "say": "A série nasce vazia, e você acrescenta cada lição à mão.",
+      "actions": [
         {
           "do": "highlight",
           "selector": "textarea[placeholder^=\"Briefly describe\"]",
-          "ms": 2000
+          "ms": 3000
         },
         {
           "do": "wait",
-          "ms": 2500
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "criar-fim",
+      "say": "Use essa forma quando já tem o plano pronto.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 800
         },
         {
           "do": "press",
@@ -92,7 +124,7 @@
         },
         {
           "do": "wait",
-          "ms": 800
+          "ms": 1200
         }
       ]
     },
@@ -106,7 +138,7 @@
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 900
         },
         {
           "do": "caption",
@@ -115,17 +147,17 @@
         },
         {
           "do": "wait",
-          "ms": 1000
+          "ms": 2200
         }
       ]
     },
     {
-      "id": "tema",
-      "say": "O formulário pede o tema, a disciplina e o nível. Quanto mais contexto der, mais ajustada fica a série.",
+      "id": "tema-a",
+      "say": "O formulário pede o tema e a disciplina.",
       "actions": [
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 300
         },
         {
           "do": "type",
@@ -133,6 +165,16 @@
           "text": "Níveis de organização dos seres vivos",
           "delay": 35
         },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "tema-b",
+      "say": "Quanto mais contexto der, mais ajustada fica a série.",
+      "actions": [
         {
           "do": "type",
           "selector": "input[placeholder=\"e.g. History\"]",
@@ -147,7 +189,7 @@
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 800
         }
       ]
     },
@@ -175,13 +217,13 @@
         },
         {
           "do": "wait",
-          "ms": 5000
+          "ms": 1500
         }
       ]
     },
     {
       "id": "objetivos",
-      "say": "Os objetivos dizem o que o estudante deve conseguir ao final. A IA organiza as sessões para chegar até eles.",
+      "say": "Os objetivos dizem o que o estudante deve conseguir ao final.",
       "actions": [
         {
           "do": "type",
@@ -191,18 +233,28 @@
         },
         {
           "do": "wait",
-          "ms": 5000
+          "ms": 800
         }
       ]
     },
     {
-      "id": "gerar",
-      "say": "Clique em Generate Series. A IA leva alguns minutos e, quando termina, a série aparece na sua biblioteca, com as lições para revisar.",
+      "id": "gerar-a",
+      "say": "Clique em Generate Series.",
       "actions": [
         {
           "do": "click",
           "selector": "button:has-text(\"Generate Series\")"
         },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "gerar-b",
+      "say": "A IA leva alguns minutos e, quando termina, a série aparece na sua biblioteca, com as lições para revisar.",
+      "actions": [
         {
           "do": "wait",
           "ms": 4000

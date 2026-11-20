@@ -23,7 +23,7 @@
   "scenes": [
     {
       "id": "inicio",
-      "say": "Hay dos formas de crear una serie de lecciones. Crear la monta a mano, lección por lección. Generar con IA crea la serie completa a partir de un tema.",
+      "say": "Hay dos formas de crear una serie de lecciones.",
       "actions": [
         {
           "do": "caption",
@@ -31,28 +31,44 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "role=button[name=\"Crear\"]",
-          "ms": 2000
-        },
-        {
           "do": "wait",
-          "ms": 1200
-        },
-        {
-          "do": "highlight",
-          "selector": "button:has-text(\"Generar con IA\")",
-          "ms": 2200
-        },
-        {
-          "do": "wait",
-          "ms": 2500
+          "ms": 3000
         }
       ]
     },
     {
-      "id": "criar",
-      "say": "Con Crear, rellenas el tema, la asignatura y la descripción. La serie nace vacía y añades cada lección tú. Úsala cuando ya tienes el plan.",
+      "id": "criar-hl",
+      "say": "Crear la monta a mano, lección por lección.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "role=button[name=\"Crear\"]",
+          "ms": 3000
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "gerar-hl",
+      "say": "Generar con IA crea la serie completa a partir de un tema.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Generar con IA\")",
+          "ms": 3000
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "criar-abrir",
+      "say": "Con Crear, rellenas el tema, la asignatura y la descripción.",
       "actions": [
         {
           "do": "click",
@@ -60,7 +76,7 @@
         },
         {
           "do": "wait",
-          "ms": 1200
+          "ms": 900
         },
         {
           "do": "caption",
@@ -75,16 +91,32 @@
         },
         {
           "do": "wait",
-          "ms": 800
-        },
+          "ms": 600
+        }
+      ]
+    },
+    {
+      "id": "criar-desc",
+      "say": "La serie nace vacía, y añades cada lección tú.",
+      "actions": [
         {
           "do": "highlight",
           "selector": "textarea[placeholder^=\"Describa brevemente\"]",
-          "ms": 2000
+          "ms": 3000
         },
         {
           "do": "wait",
-          "ms": 2500
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "criar-fim",
+      "say": "Úsala cuando ya tienes el plan.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 800
         },
         {
           "do": "press",
@@ -92,7 +124,7 @@
         },
         {
           "do": "wait",
-          "ms": 800
+          "ms": 1200
         }
       ]
     },
@@ -106,7 +138,7 @@
         },
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 900
         },
         {
           "do": "caption",
@@ -115,17 +147,17 @@
         },
         {
           "do": "wait",
-          "ms": 1000
+          "ms": 2200
         }
       ]
     },
     {
-      "id": "tema",
-      "say": "El formulario pide el tema, la asignatura y el curso. Cuanto más contexto des, más ajustada queda la serie.",
+      "id": "tema-a",
+      "say": "El formulario pide el tema y la asignatura.",
       "actions": [
         {
           "do": "wait",
-          "ms": 1500
+          "ms": 300
         },
         {
           "do": "type",
@@ -133,6 +165,16 @@
           "text": "La fotosíntesis: de la luz a la materia",
           "delay": 35
         },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "tema-b",
+      "say": "Cuanto más contexto des, más ajustada queda la serie.",
+      "actions": [
         {
           "do": "type",
           "selector": "input[placeholder=\"ej. Historia\"]",
@@ -147,7 +189,7 @@
         },
         {
           "do": "wait",
-          "ms": 4000
+          "ms": 800
         }
       ]
     },
@@ -175,13 +217,13 @@
         },
         {
           "do": "wait",
-          "ms": 5000
+          "ms": 1500
         }
       ]
     },
     {
       "id": "objetivos",
-      "say": "Los objetivos indican lo que el alumnado debe conseguir al final. La IA organiza las sesiones para llegar hasta ellos.",
+      "say": "Los objetivos indican lo que el alumnado debe conseguir al final.",
       "actions": [
         {
           "do": "type",
@@ -191,18 +233,28 @@
         },
         {
           "do": "wait",
-          "ms": 5000
+          "ms": 800
         }
       ]
     },
     {
-      "id": "gerar",
-      "say": "Pulsa Generar serie y la IA crea la serie. Cuando termine, aparece en tu biblioteca, con las lecciones listas para revisar.",
+      "id": "gerar-a",
+      "say": "Pulsa Generar serie.",
       "actions": [
         {
           "do": "click",
           "selector": "button:has-text(\"Generar serie\")"
         },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "gerar-b",
+      "say": "Cuando termine, la serie aparece en tu biblioteca, con las lecciones listas para revisar.",
+      "actions": [
         {
           "do": "wait",
           "ms": 4000
