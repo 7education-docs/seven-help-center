@@ -38,7 +38,7 @@
     },
     {
       "id": "criar-hl",
-      "say": "Criar monta a série à mão, lição por lição.",
+      "say": "Com Criar, você monta a série à mão, lição por lição.",
       "actions": [
         {
           "do": "highlight",

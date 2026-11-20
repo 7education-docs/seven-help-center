@@ -38,7 +38,7 @@
     },
     {
       "id": "criar-hl",
-      "say": "Crear la monta a mano, lección por lección.",
+      "say": "Con Crear armas la serie a mano, lección por lección.",
       "actions": [
         {
           "do": "highlight",
