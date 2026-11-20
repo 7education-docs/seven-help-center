@@ -15,7 +15,7 @@
   "scenes": [
     {
       "id": "inicio",
-      "say": "Um curso reúne em um só lugar o que você trabalha com uma turma. Para criar um, clique em Criar curso.",
+      "say": "Um curso reúne, em um só lugar, tudo o que você trabalha com um grupo: as seções com os temas, os materiais, as atividades e o código para os estudantes entrarem.",
       "actions": [
         {
           "do": "caption",
@@ -29,13 +29,44 @@
         },
         {
           "do": "wait",
-          "ms": 5000
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "modelos",
+      "say": "Você pode criar um curso do zero, importar um curso que já tem com o botão Importar curso, ou adotar um modelo pronto. Os modelos são unidades didáticas com seções e materiais, que você adapta ao seu grupo.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Importar curso\")",
+          "ms": 2400
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Modelos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        },
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Os meus cursos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 800
         }
       ]
     },
     {
       "id": "passo-1",
-      "say": "Dê um nome, indique a disciplina e a turma. É o que você vê na lista de cursos e o que o estudante procura ao entrar.",
+      "say": "Para criar um curso, clique em Criar curso. Dê um nome, indique a disciplina e a turma, e escreva uma descrição. Aqui, por exemplo: Matemática, 8.º ano.",
       "actions": [
         {
           "do": "click",
@@ -53,30 +84,36 @@
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=0",
-          "text": "Ciências · 7.º ano",
+          "text": "Matemática · 8.º ano",
           "delay": 40
         },
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=1",
-          "text": "Ciências",
+          "text": "Matemática",
           "delay": 40
         },
         {
           "do": "type",
           "selector": "input[placeholder=\" \"] >> nth=2",
-          "text": "7.º ano",
+          "text": "8.º ano",
           "delay": 40
         },
         {
+          "do": "type",
+          "selector": "textarea >> nth=0",
+          "text": "Curso de matemática para o 8.º ano",
+          "delay": 30
+        },
+        {
           "do": "wait",
-          "ms": 4000
+          "ms": 3000
         }
       ]
     },
     {
-      "id": "opcoes",
-      "say": "No segundo passo, escolha o conteúdo inicial. Vazio começa com uma seção Geral para você montar tudo. Todos os modelos traz unidades prontas. Copiar parte de um curso que você já tem.",
+      "id": "vazio",
+      "say": "No segundo passo, escolha o conteúdo inicial. Vazio começa com uma seção Geral para você montar tudo.",
       "actions": [
         {
           "do": "click",
@@ -92,37 +129,46 @@
           "step": ""
         },
         {
-          "do": "highlight",
-          "selector": "button:has-text(\"Vazio\")",
-          "ms": 2200
+          "do": "click",
+          "selector": "button:has-text(\"Vazio\")"
         },
         {
           "do": "wait",
-          "ms": 2600
-        },
+          "ms": 3500
+        }
+      ]
+    },
+    {
+      "id": "modelos-2",
+      "say": "Todos os modelos traz unidades prontas, para adaptar em vez de começar do zero.",
+      "actions": [
         {
-          "do": "highlight",
-          "selector": "button:has-text(\"Todos os modelos\")",
-          "ms": 2200
-        },
-        {
-          "do": "wait",
-          "ms": 2600
-        },
-        {
-          "do": "highlight",
-          "selector": "button:has-text(\"Copiar\")",
-          "ms": 2200
+          "do": "click",
+          "selector": "button:has-text(\"Todos os modelos\")"
         },
         {
           "do": "wait",
-          "ms": 3000
+          "ms": 4500
+        }
+      ]
+    },
+    {
+      "id": "copiar",
+      "say": "Copiar reaproveita um curso que você já tem, com as mesmas seções e materiais.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Copiar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
         }
       ]
     },
     {
       "id": "planear-ia",
-      "say": "Planear com IA é a opção mais útil quando precisa de uma primeira versão. Descreva o tema, os objetivos e a duração, e a IA monta as seções.",
+      "say": "Planear com IA é a opção de mais valor: descreva o tema, os objetivos e a duração, e a IA monta as seções. Tudo começa como rascunho para você revisar.",
       "actions": [
         {
           "do": "click",
@@ -145,14 +191,8 @@
         },
         {
           "do": "wait",
-          "ms": 2500
-        }
-      ]
-    },
-    {
-      "id": "plano",
-      "say": "Clique em Criar plano e a IA monta as seções. Tudo começa como rascunho: os alunos só veem o conteúdo depois que você publicar.",
-      "actions": [
+          "ms": 1500
+        },
         {
           "do": "click",
           "selector": "button:has-text(\"Criar plano\")"
@@ -174,7 +214,7 @@
     },
     {
       "id": "passo-3",
-      "say": "Revise os dados e crie o curso. Ele aparece com as seções do plano, prontas para você revisar.",
+      "say": "No último passo, revise os dados. Se algo estiver errado, use Voltar antes de criar. Quando estiver tudo certo, clique em Criar.",
       "actions": [
         {
           "do": "click",
@@ -205,7 +245,7 @@
     },
     {
       "id": "resultado",
-      "say": "Ao abrir o curso, verá os rascunhos de IA na visão geral. Revise-os e publique quando estiverem prontos.",
+      "say": "Pronto: o curso foi criado com os rascunhos de IA na visão geral. Revise cada um antes de publicar.",
       "actions": [
         {
           "do": "wait",
