@@ -1,0 +1,102 @@
+{
+  "lesson": "entrega-archivo",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Criar curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemática · 8.º ano\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Adicionar atividade ou material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Entrega é o trabalho que o estudante envia como arquivo, até uma data. Use quando precisa receber o trabalho para corrigir.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Adicionar atividade ou material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Entrega\"):not(:has-text(\"Adicionar\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "enunciado",
+      "say": "No enunciado diga o que deve ser feito e o que deve ser comparado. Um enunciado claro evita dúvidas na última hora.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Trabalho: célula animal e célula vegetal",
+          "delay": 40
+        },
+        {
+          "do": "type",
+          "selector": "textarea >> nth=0",
+          "text": "Desenhe as duas células e compare a parede celular, o cloroplasto e o vacúolo.",
+          "delay": 25
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "bloqueio",
+      "say": "Com data limite, você pode bloquear a IA até essa data, para que o trabalho seja feito pelo próprio estudante.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Bloquear a IA",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 6000
+        }
+      ]
+    },
+    {
+      "id": "fim",
+      "say": "Ao pulsar Adicionar, a entrega aparece na seção.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Voltar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    }
+  ]
+}

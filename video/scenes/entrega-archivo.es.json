@@ -1,0 +1,102 @@
+{
+  "lesson": "entrega-archivo",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Crear curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemáticas · 2.º ESO\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Añadir actividad o material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Entrega es el trabajo que el alumnado sube como archivo, hasta una fecha. Úsala cuando necesitas recibir el trabajo para corregirlo.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Añadir actividad o material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Entrega\"):not(:has-text(\"Añadir\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "enunciado",
+      "say": "En el enunciado indica qué debe hacer y qué debe comparar. Un enunciado claro evita dudas de última hora.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Trabajo: célula animal y célula vegetal",
+          "delay": 40
+        },
+        {
+          "do": "type",
+          "selector": "textarea >> nth=0",
+          "text": "Dibuja las dos células y compara la pared celular, el cloroplasto y la vacuola.",
+          "delay": 25
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "bloqueo",
+      "say": "Con fecha límite puedes bloquear la IA hasta ese día, para que el trabajo lo haga el propio alumnado.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "text=Bloquear la IA",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 6000
+        }
+      ]
+    },
+    {
+      "id": "fin",
+      "say": "Al pulsar Añadir, la entrega aparece en la sección.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Atrás\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    }
+  ]
+}

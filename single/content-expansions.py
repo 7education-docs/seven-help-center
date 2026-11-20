@@ -671,3 +671,56 @@ MERGE_TEXT['pt-BR']['configuracion-del-curso'].update({
 _REL_SECCIONES = ['agregar-material-archivo', 'texto-material', 'enlace-y-nota', 'entrega', 'tarea-con-comentarios', 'agente-de-ia']
 MERGE_TEXT['es']['secciones']['related'] = list(_REL_SECCIONES)
 MERGE_TEXT['pt-BR']['secciones']['related'] = list(_REL_SECCIONES)
+
+
+# Limpieza de categorías: "Cuenta y configuración" se elimina (no aporta). "Para centros" se elimina salvo
+# seguridad y privacidad, que pasa a preguntas frecuentes.
+DROP_CATEGORIES = ['configuracion', 'it']
+MOVE_TO_FAQ = ['seguridad-datos']
+
+
+def apply_category_cleanup(merged: dict) -> None:
+    for loc in ('es', 'pt-BR'):
+        d = merged[loc]
+        gone = {a['id'] for a in d['articles'] if a['cat'] in DROP_CATEGORIES and a['id'] not in MOVE_TO_FAQ}
+        for a in d['articles']:
+            if a['id'] in MOVE_TO_FAQ:
+                a['cat'] = 'faq'
+        d['articles'] = [a for a in d['articles'] if a['id'] not in gone]
+        d['categories'] = [c for c in d['categories'] if c['id'] not in DROP_CATEGORIES]
+        for a in d['articles']:
+            for field in ('related', 'faqRelated'):
+                if a.get(field):
+                    a[field] = [i for i in a[field] if i not in gone]
+            if a.get('id') and a.get('related') is not None:
+                pass
+        for field in ('popular',):
+            pass
+        ui = d.get('ui') or {}
+        if ui.get('popular'):
+            ui['popular'] = [i for i in ui['popular'] if i not in gone]
+        for g in d.get('courseGroups') or []:
+            g['ids'] = [i for i in g['ids'] if i not in gone]
+
+
+# Configuración del curso: una captura por sección, con el número de su entrada del menú lateral.
+# Los títulos de los pasos son los nombres que aparecen en la plataforma.
+_CFG_PT_KEYS = [f'pt__configuracion-del-curso__pt-cfg-{n}-numerada' for n in range(1, 7)]
+_CFG_PT_TITLES = ['Geral', 'Capa', 'Apresentação', 'Código de adesão', 'IA no curso', 'Exportação']
+for _i, _t in enumerate(_CFG_PT_TITLES):
+    MERGE_TEXT['pt-BR']['configuracion-del-curso']['steps'][_i]['t'] = _t
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['stepImg'] = {str(_i + 1): k for _i, k in enumerate(_CFG_PT_KEYS)}
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['img'] = list(_CFG_PT_KEYS)
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['shots'] = {
+    k: f'Configurações do curso, passo {_i + 1}: {_CFG_PT_TITLES[_i]}' for _i, k in enumerate(_CFG_PT_KEYS)}
+
+
+# Configuración del curso (español): una captura por sección, numerada con su entrada del menú lateral.
+_CFG_ES_KEYS = [f'es__configuracion-del-curso__es-cfg-{n}-numerada' for n in range(1, 7)]
+_CFG_ES_TITLES = ['General', 'Portada', 'Visualización', 'Código de inscripción', 'IA en el curso', 'Exportación']
+for _i, _t in enumerate(_CFG_ES_TITLES):
+    MERGE_TEXT['es']['configuracion-del-curso']['steps'][_i]['t'] = _t
+MERGE_TEXT['es']['configuracion-del-curso']['stepImg'] = {str(_i + 1): k for _i, k in enumerate(_CFG_ES_KEYS)}
+MERGE_TEXT['es']['configuracion-del-curso']['img'] = list(_CFG_ES_KEYS)
+MERGE_TEXT['es']['configuracion-del-curso']['shots'] = {
+    k: f'Configuración del curso, paso {_i + 1}: {_CFG_ES_TITLES[_i]}' for _i, k in enumerate(_CFG_ES_KEYS)}

@@ -1,0 +1,91 @@
+{
+  "lesson": "texto-lectura",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Crear curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemáticas · 2.º ESO\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Añadir actividad o material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Texto es una lectura escrita directamente en la plataforma, en su propia página. Úsalo cuando quieres explicar un tema con calma, sin depender de un archivo.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Añadir actividad o material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Texto\"):not(:has-text(\"Añadir\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    },
+    {
+      "id": "titulo",
+      "say": "Ponle un título que anuncie la lectura, como «Lectura: la teoría celular».",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Lectura: la teoría celular",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 5000
+        }
+      ]
+    },
+    {
+      "id": "editor",
+      "say": "El editor permite títulos, negrita, listas e insertar gráficos. Usa los títulos para dividir el texto: el alumnado se orienta mejor y vuelve a un apartado cuando lo necesita.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 8000
+        }
+      ]
+    },
+    {
+      "id": "fin",
+      "say": "Al pulsar Añadir, la lectura aparece en la sección con el tipo Texto.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Atrás\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    }
+  ]
+}
