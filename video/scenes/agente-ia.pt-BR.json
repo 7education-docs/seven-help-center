@@ -1,0 +1,97 @@
+{
+  "lesson": "agente-ia",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Criar curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemática · 8.º ano\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Adicionar atividade ou material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Agente de IA é um assistente para o estudante fora da aula, com as suas instruções. Ele responde seguindo as regras que você escrever.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Adicionar atividade ou material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Agente de IA\"):not(:has-text(\"Adicionar\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    },
+    {
+      "id": "titulo",
+      "say": "Dê um nome que diga em que ajuda, por exemplo 'Ajudante da célula'.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Ajudante da célula",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "instrucciones",
+      "say": "Nas instruções, diga o que ele deve fazer e, sobretudo, o que não deve entregar: dicas e perguntas, e não a solução completa.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "textarea >> nth=0",
+          "text": "Responda com dicas e perguntas. Não dê a solução completa dos exercícios.",
+          "delay": 25
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "fim",
+      "say": "Antes de compartilhar, faça uma pergunta como um estudante faria e confira a resposta.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Voltar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    }
+  ]
+}

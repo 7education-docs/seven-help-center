@@ -1,0 +1,80 @@
+{
+  "lesson": "tarea-comentarios",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Crear curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemáticas · 2.º ESO\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Añadir actividad o material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Tarea con comentarios es un trabajo que corriges y al que devuelves comentarios, no solo una nota. Puedes usar una tarea que ya creaste en la biblioteca.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Añadir actividad o material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Tarea con comentarios\"):not(:has-text(\"Añadir\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 3000
+        }
+      ]
+    },
+    {
+      "id": "biblioteca",
+      "say": "La biblioteca muestra las tareas que ya tienes. Eliges una y el curso recibe una copia: los cambios posteriores en la biblioteca no alteran el curso.",
+      "actions": [
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Tarea con comentarios\") >> nth=0",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 8000
+        }
+      ]
+    },
+    {
+      "id": "fin",
+      "say": "Para ver cómo corregir y devolver comentarios, consulta el artículo de tareas de corrección.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Atrás\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    }
+  ]
+}

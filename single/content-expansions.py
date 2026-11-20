@@ -236,7 +236,7 @@ def apply_content_overlay(merged: dict) -> None:
 # ---------------------------------------------------------------------------
 GUIDE = {
     'es': dict(
-        answer="Un curso es el espacio donde reúnes todo lo que trabajas con un grupo de alumnos: las secciones con los temas, los materiales, las actividades, las citas y el código para que el alumnado entre. Sirve para tener cada asignatura organizada en un único lugar, en lugar de repartirla entre carpetas, correos y chats. Puedes empezar un curso desde cero con el asistente, importar uno que ya tienes o adoptar una plantilla; los pasos recogen las tres formas.",
+        answer="Un curso reúne en un solo lugar lo que trabajas con un grupo: temas, materiales, actividades, citas y el código de entrada. Sirve para no repartir una asignatura entre carpetas, correos y chats. Puedes empezar desde cero, importar un curso que ya tienes o adoptar una plantilla.",
         example="En el colegio, un curso bien montado sirve para tres cosas: preparar una asignatura una sola vez y reutilizarla cada año, mantener el mismo formato de nombres en todo el departamento para encontrar cada curso sin preguntar, y que cada alumno llegue a su grupo desde el primer día con el código de su clase.",
         tips=["Usa un nombre que identifique grupo y asignatura, por ejemplo \"Matemáticas · 2.º secundaria\".",
               "Antes de la primera clase, abre el curso con \"Ver como estudiante\" para comprobar qué ve el alumnado.",
@@ -249,7 +249,7 @@ GUIDE = {
             dict(t="Paso 3: Revisar y crear", b="Revisa los datos. Atrás te permite corregir algo antes de pulsar Crear."),
         ]),
     'pt-BR': dict(
-        answer="Um curso é o espaço onde você reúne tudo o que trabalha com um grupo de estudantes: as seções com os temas, os materiais, as atividades, os compromissos e o código para que os estudantes entrem. Serve para ter cada disciplina organizada em um só lugar, em vez de espalhá-la entre pastas, e-mails e conversas. Você pode começar um curso do zero com o assistente, importar um que já tem ou adotar um modelo; os passos reúnem as três formas.",
+        answer="Um curso reúne em um só lugar o que você trabalha com uma turma: temas, materiais, atividades, compromissos e o código de entrada. Serve para não espalhar uma disciplina entre pastas, e-mails e conversas. Você pode começar do zero, importar um curso que já tem ou adotar um modelo.",
         example="Na escola, um curso bem montado serve para três coisas: preparar uma disciplina uma vez só e reutilizá-la todo ano, manter o mesmo padrão de nomes em todo o departamento para encontrar cada curso sem perguntar, e fazer com que cada estudante chegue ao seu grupo desde o primeiro dia, com o código da sua turma.",
         tips=["Use um nome que identifique turma e disciplina, por exemplo \"Matemática · 8.º ano\".",
               "Antes da primeira aula, abra o curso com \"Ver como aluno\" para conferir o que os estudantes veem.",
@@ -385,3 +385,373 @@ def _apply_guide_steps(loc, steps):
     if len(new) != len(steps):
         raise SystemExit(f"{loc}: GUIDE_STEPS tiene {len(new)} pasos y la fusión {len(steps)}")
     return [dict(t=s['t'], b=s['b']) for s in new]
+
+
+# ---------------------------------------------------------------------------
+# Reorganización de Cursos: artículos que se funden en otro (su contenido pasa al nuevo).
+#  - secciones absorbe actividades y tipo de actividad: pasos, capturas y enlaces van juntos.
+#  - configuración del curso absorbe la vista del curso: es un ajuste de Visualización.
+# Los textos finales (TEXT) sustituyen a los pasos fusionados; el número de pasos debe coincidir.
+# ---------------------------------------------------------------------------
+MERGE_SPECS = {
+    'secciones': {'absorb': ['actividades', 'tipo-de-actividad'], 'steps': True, 'steps_from': ['actividades']},
+    'configuracion-del-curso': {'absorb': ['vistas-del-curso', 'ia-alumnado', 'exportar-curso'], 'steps': False, 'images': False},
+}
+MERGE_TEXT = {
+    'es': {
+        'secciones': {
+            'title': 'Organizar el curso: secciones, actividades y materiales',
+            'answer': 'Una sección es un bloque del curso, como una unidad o un trimestre, y es donde reúnes lo que trabajas con el alumnado: materiales, actividades y entregas. Sirve para que el curso se lea en orden y para que cada tema tenga su sitio. Úsala al montar el curso: crea una sección por tema y, dentro de cada una, añade lo que el alumnado tiene que ver o hacer.',
+            'example': 'En un curso de Historia creas una sección por tema: «Revolución industrial», «Imperialismo» y «Primera Guerra Mundial». Dentro de cada una pones el texto explicativo, un enlace a un documental, la ficha para practicar y la entrega del trabajo, y el alumnado sabe en qué bloque está cada cosa.',
+            'tips': ['Pon un nombre que describa el bloque: «La célula, unidad de los seres vivos» informa mejor que «Tema 1».'],
+            'steps': [
+                {'t': 'Localiza las secciones', 'b': 'Cada tarjeta numerada es un bloque del curso. Así ves de un vistazo qué temas tienes creados y cuánto contenido tiene cada uno.'},
+                {'t': 'Añade una sección', 'b': 'Crea una sección por cada tema nuevo. Es mejor tener varias cortas que una larga: el alumnado sabe dónde buscar cada cosa.'},
+                {'t': 'Gestiona una sección', 'b': 'Desde el menú (…) de cada sección accedes a sus opciones. Revísalas al reorganizar el curso al empezar un trimestre.'},
+                {'t': 'Pulsa Añadir actividad o material', 'b': 'Dentro de la sección, este botón es la puerta de entrada a todo lo que el alumnado ve o hace. Úsalo en la sección del tema correspondiente para que la actividad quede junto a su contenido.'},
+                {'t': 'Elige el tipo', 'b': 'Material, Texto, Enlace, Nota, Ficha de trabajo, Tarea con comentarios, Entrega, Unidad didáctica, Agente de IA y Crear con IA. Elige según lo que quieres que el alumnado haga después: leer, practicar, entregar o recibir una devolutiva.'},
+                {'t': 'Completa el formulario', 'b': 'Cada tipo tiene su propio formulario. La actividad aparece en la sección cuando pulsas «Añadir»; ponle un título que el alumnado entienda sin contexto.'},
+                {'t': 'Quiero que lean o vean algo', 'b': 'Material o Texto. Para contenido que el alumnado consulta antes o después de la clase: apuntes, vídeos o lecturas. Lo explicamos en «Añadir un material con archivo» y «Escribir un material de lectura».'},
+                {'t': 'Quiero que practiquen', 'b': 'Ficha de trabajo. Para ejercicios que el alumnado resuelve por su cuenta y que luego repasas en clase.'},
+                {'t': 'Quiero que me entreguen un archivo', 'b': 'Entrega. Para recibir un trabajo, un PDF o un documento, con fecha límite. Consulta «Crear una entrega».'},
+                {'t': 'Quiero devolutiva sobre su trabajo', 'b': 'Tarea con comentarios. Para corregir y devolver comentarios sobre un trabajo, y no solo recibirlo. Consulta «Añadir una tarea con comentarios a un curso».'},
+                {'t': 'Quiero un asistente para sus dudas', 'b': 'Agente de IA, con instrucciones claras. Resuelve dudas fuera de clase; las instrucciones deciden si da pistas o soluciones, así que define bien ese límite.'},
+            ],
+        },
+        'configuracion-del-curso': {
+            'answer': 'La pestaña Configuración reúne los ajustes del curso: general, portada, visualización, código de inscripción, IA, exportación y archivado. Sirve para dejar el curso listo para tu grupo y revisarlo al empezar cada trimestre o al cerrar el curso.',
+            'example': 'Al empezar el trimestre cambias la visualización a Lista con vista previa, para que el alumnado vea de un vistazo de qué trata cada material. Al terminar el curso, lo exportas como copia de seguridad y lo archivas.',
+            'steps': [
+                {'t': 'General', 'b': 'Nombre, Asignatura, Clase o curso escolar y Descripción. Son los datos que identifican el curso en tu lista y en la del centro, así que mantenlos con el formato que acordéis. Pulsa «Aplicar cambios» para guardarlos.'},
+                {'t': 'Portada', 'b': 'La imagen que se ve en el curso, en la lista de cursos y en la página de inscripción. Una portada reconocible ayuda a encontrar el curso correcto entre varios.'},
+                {'t': 'Visualización', 'b': 'Aquí eliges cómo ve el alumnado las secciones y los contenidos. Lista es la más compacta, útil con muchos contenidos. Lista con vista previa muestra las primeras líneas de cada uno y suele ser la más clara. Mosaicos muestra cada sección como tarjetas, bien para materiales visuales. Secciones como mosaicos da a cada sección su propia página. «Contenido anterior y siguiente» enlaza cada contenido con el anterior y el siguiente.'},
+                {'t': 'Código de inscripción', 'b': 'El código, el enlace público (desactivado por defecto) y «Generar nuevo código». Genera un código nuevo si se ha compartido fuera de la clase, y desactiva el enlace público cuando termine la inscripción.'},
+                {'t': 'IA en el curso', 'b': 'Qué puede hacer el alumnado con la IA. Antes de decidir, lee el artículo «IA para el alumnado y el Tutor de IA».'},
+                {'t': 'Exportación y archivado', 'b': 'Exportar el curso o archivarlo y salir. Antes de archivar, revisa que no lo necesitas para otro grupo, y haz una copia de seguridad si quieres conservarlo.'},
+            ],
+        },
+    },
+    'pt-BR': {
+        'secciones': {
+            'title': 'Organizar o curso: seções, atividades e materiais',
+            'answer': 'Uma seção é um bloco do curso, como uma unidade ou um trimestre, e é onde você reúne o que trabalha com o estudante: materiais, atividades e entregas. Serve para o curso ser lido em ordem e para cada tema ter o seu lugar. Use ao montar o curso: crie uma seção por tema e, dentro de cada uma, acrescente o que o estudante precisa ver ou fazer.',
+            'example': 'Em um curso de História, você cria uma seção por tema: "Revolução Industrial", "Imperialismo" e "Primeira Guerra Mundial". Dentro de cada uma coloca o texto explicativo, um link para um documentário, a ficha de prática e a entrega do trabalho, e o estudante sabe em que bloco está cada coisa.',
+            'tips': ['Dê um nome que descreva o bloco: "A célula, unidade dos seres vivos" informa melhor do que "Tema 1".'],
+            'steps': [
+                {'t': 'Localize as seções', 'b': 'Cada cartão numerado é um bloco do curso. Você vê de relance quais temas já criou e quanto conteúdo cada um tem.'},
+                {'t': 'Adicione uma seção', 'b': 'Crie uma seção para cada tema novo. Várias seções curtas são melhores do que uma longa: o estudante sabe onde procurar cada coisa.'},
+                {'t': 'Gerencie uma seção', 'b': 'Pelo menu (…) de cada seção você acessa as suas opções. Revise-as ao reorganizar o curso no início de um trimestre.'},
+                {'t': 'Clique em Adicionar atividade ou material', 'b': 'Dentro da seção, este botão é a porta de entrada para tudo o que o estudante vê ou faz. Use-o na seção do tema correspondente, para que a atividade fique junto do seu conteúdo.'},
+                {'t': 'Escolha o tipo', 'b': 'Material, Texto, Link, Nota, Ficha de trabalho, Tarefa com comentários, Entrega, Unidade didática, Agente de IA e Criar com IA. Escolha pelo que você quer que o estudante faça depois: ler, praticar, entregar ou receber uma devolutiva.'},
+                {'t': 'Preencha o formulário', 'b': 'Cada tipo tem o seu formulário. A atividade aparece na seção quando você clica em Adicionar; dê a ela um título que o estudante entenda sem contexto.'},
+                {'t': 'Quero que leiam ou vejam algo', 'b': 'Material ou Texto. Para conteúdo que o estudante consulta antes ou depois da aula: anotações, vídeos ou leituras. Veja "Adicionar um material com arquivo" e "Escrever um material de leitura".'},
+                {'t': 'Quero que pratiquem', 'b': 'Ficha de trabalho. Para exercícios que o estudante resolve por conta própria e que você revisa depois em aula.'},
+                {'t': 'Quero que me entreguem um arquivo', 'b': 'Entrega. Para receber um trabalho, um PDF ou um documento, com prazo. Veja "Criar uma entrega".'},
+                {'t': 'Quero uma devolutiva sobre o trabalho', 'b': 'Tarefa com comentários. Para corrigir e devolver comentários sobre um trabalho, e não só recebê-lo. Veja "Adicionar uma tarefa com comentários a um curso".'},
+                {'t': 'Quero um assistente para as dúvidas', 'b': 'Agente de IA, com instruções claras. Responde dúvidas fora da aula; as instruções definem se ele dá pistas ou soluções, então defina bem esse limite.'},
+            ],
+        },
+        'configuracion-del-curso': {
+            'answer': 'A aba Definições reúne os ajustes do curso: geral, capa, visualização, código de inscrição, IA, exportação e arquivamento. Serve para deixar o curso pronto para a sua turma e revisá-lo ao começar cada trimestre ou ao encerrar o curso.',
+            'example': 'No início do trimestre você muda a visualização para Lista com visualização prévia, para o estudante ver de relance do que trata cada material. Ao terminar o curso, você o exporta como cópia de segurança e o arquiva.',
+            'steps': [
+                {'t': 'Geral', 'b': 'Nome, Disciplina, Turma ou série e Descrição. São os dados que identificam o curso na sua lista e na da escola, então mantenha-os no formato combinado. Clique em "Aplicar alterações" para salvá-los.'},
+                {'t': 'Capa', 'b': 'A imagem que aparece no curso, na lista de cursos e na página de inscrição. Uma capa reconhecível ajuda a achar o curso certo entre vários.'},
+                {'t': 'Visualização', 'b': 'Aqui você escolhe como o estudante vê as seções e os conteúdos. Lista é a mais compacta, útil com muitos conteúdos. Lista com visualização prévia mostra as primeiras linhas de cada um e costuma ser a mais clara. Mosaicos mostra cada seção como cartões, bom para materiais visuais. Seções como mosaicos dá a cada seção a sua própria página. "Conteúdo anterior e seguinte" liga cada conteúdo ao anterior e ao seguinte.'},
+                {'t': 'Código de inscrição', 'b': 'O código, o link público (desativado por padrão) e "Gerar novo código". Gere um código novo se ele tiver sido compartilhado fora da turma, e desative o link público quando a inscrição terminar.'},
+                {'t': 'IA no curso', 'b': 'O que o estudante pode fazer com a IA. Antes de decidir, leia o artigo "IA para o estudante e o Tutor de IA".'},
+                {'t': 'Exportação e arquivamento', 'b': 'Exportar o curso ou arquivá-lo e sair. Antes de arquivar, confira se você não precisa dele para outra turma, e faça uma cópia de segurança se quiser guardá-lo.'},
+            ],
+        },
+    },
+}
+
+
+def apply_article_merges(merged: dict) -> None:
+    """Funde los artículos de MERGE_SPECS en su principal y aplica los textos finales (MERGE_TEXT)."""
+    for loc in ('es', 'pt-BR'):
+        d = merged[loc]
+        arts = {a['id']: a for a in d['articles']}
+        for keep_id, spec in MERGE_SPECS.items():
+            keep = arts.get(keep_id)
+            gone = [i for i in spec['absorb'] if i in arts]
+            if keep is None or not gone:
+                continue
+            steps = list(keep.get('steps') or [])
+            img = list(keep.get('img') or [])
+            step_img = dict(keep.get('stepImg') or {})
+            for gid in gone:
+                src = arts[gid]
+                if spec['steps'] and gid in spec.get('steps_from', gone):
+                    base = len(steps)
+                    for i, st in enumerate(src.get('steps') or []):
+                        steps.append({'t': st['t'], 'b': st['b']})
+                        k = (src.get('stepImg') or {}).get(str(i + 1))
+                        if k:
+                            step_img[str(base + i + 1)] = k
+                if spec.get('images', True):
+                    for k in src.get('img') or []:
+                        if k not in img:
+                            img.append(k)
+            keep['steps'] = steps
+            keep['img'] = img
+            keep['stepImg'] = step_img
+            d['articles'] = [a for a in d['articles'] if a['id'] not in gone]
+            arts = {a['id']: a for a in d['articles']}
+            d.setdefault('aliases', {})
+            for gid in gone:
+                d['aliases'][gid] = keep_id
+            for a in d['articles']:
+                for field in ('related', 'faqRelated'):
+                    if a.get(field):
+                        a[field] = [i for i in dict.fromkeys(keep_id if i in gone else i for i in a[field]) if i != a['id']]
+            for g in d.get('courseGroups') or []:
+                g['ids'] = [i for i in g['ids'] if i not in gone]
+        # textos finales
+        for keep_id, txt in MERGE_TEXT.get(loc, {}).items():
+            art = arts.get(keep_id)
+            if art is None:
+                continue
+            if 'steps' in txt:
+                if len(txt['steps']) != len(art.get('steps') or []):
+                    raise SystemExit(f"{loc} · {keep_id}: {len(txt['steps'])} pasos de texto y {len(art.get('steps') or [])} en el artículo")
+                art['steps'] = [dict(t=s['t'], b=s['b']) for s in txt['steps']]
+            for key in ('title', 'answer', 'example', 'tips'):
+                if key in txt:
+                    art[key] = txt[key]
+            if 'related' in txt:
+                art['related'] = list(txt['related'])
+            if 'stepImg' in txt:
+                art['stepImg'] = dict(txt['stepImg'])
+            if 'img' in txt:
+                art['img'] = list(txt['img'])
+            for k, alt in (txt.get('shots') or {}).items():
+                merged[loc].setdefault('shots', {})[k] = f'shots/{k}.jpg'
+                merged[loc].setdefault('alt', {})[k] = alt
+
+MERGE_TEXT['es']['crear-curso'] = {
+    'example': 'Un departamento de Matemáticas tiene tres grupos de 2.º de ESO. Uno de sus docentes prepara el curso del primer grupo, con sus secciones y materiales, y crea un curso para cada uno de los otros dos grupos con el mismo formato de nombre. Cada grupo entra con su propio código, y el departamento sabe siempre cuál es el curso de cada clase.',
+}
+MERGE_TEXT['pt-BR']['crear-curso'] = {
+    'example': 'Um departamento de Matemática tem três turmas do 8.º ano. Um dos docentes prepara o curso da primeira turma, com as seções e os materiais, e cria um curso para cada uma das outras duas, com o mesmo padrão de nome. Cada turma entra com o seu próprio código, e o departamento sabe sempre qual é o curso de cada turma.',
+}
+
+
+# Sección «Organizar el curso»: 6 pasos reales. Los tipos de actividad se explican dentro del paso 5.
+# Capturas: el paso 4 muestra la vista de la sección con los pasos 1 a 4; el paso 5, el menú de tipos.
+MERGE_TEXT['es']['secciones'] = {
+    'title': 'Organizar el curso: secciones, actividades y materiales',
+    'answer': 'Una sección es un bloque del curso, como una unidad o un trimestre, y es donde reúnes lo que trabajas con el alumnado: materiales, actividades y entregas. Sirve para que el curso se lea en orden y para que cada tema tenga su sitio. Úsala al montar el curso: crea una sección por tema y, dentro de cada una, añade lo que el alumnado tiene que ver o hacer.',
+    'example': 'En un curso de Historia creas una sección por tema: «Revolución industrial», «Imperialismo» y «Primera Guerra Mundial». Dentro de cada una pones el texto explicativo, un enlace a un documental, la ficha para practicar y la entrega del trabajo, y el alumnado sabe en qué bloque está cada cosa.',
+    'tips': ['Pon un nombre que describa el bloque: «La célula, unidad de los seres vivos» informa mejor que «Tema 1».'],
+    'steps': [
+        {'t': 'Localiza las secciones', 'b': 'Cada tarjeta numerada es un bloque del curso. Así ves de un vistazo qué temas tienes creados y cuánto contenido tiene cada uno.'},
+        {'t': 'Pulsa Añadir sección', 'b': 'Crea una sección por cada tema nuevo, al final de la lista. Es mejor tener varias cortas que una larga: el alumnado sabe dónde buscar cada cosa.'},
+        {'t': 'Gestiona una sección', 'b': 'Desde el menú (…) de cada sección accedes a sus opciones. Revísalas al reorganizar el curso al empezar un trimestre.'},
+        {'t': 'Pulsa Añadir actividad o material', 'b': 'Dentro de la sección, este botón abre todo lo que puedes añadir. Úsalo en la sección del tema correspondiente, para que cada actividad quede junto a su contenido.'},
+        {'t': 'Elige el tipo', 'b': 'Material: un archivo (PDF, vídeo o cuestionario H5P) para que el alumnado lo consulte antes o después de la clase. Texto: una lectura en su propia página, para explicar un tema con calma. Ficha de trabajo: ejercicios que el alumnado resuelve por su cuenta y que luego repasas en clase. Tarea con comentarios: un trabajo que corriges y al que devuelves comentarios, no solo una nota. Entrega: un archivo que el alumnado sube antes de una fecha límite. Unidad didáctica: un bloque completo, listo para adoptar. Agente de IA: un asistente al que el alumnado pregunta fuera de clase, con tus instrucciones. Enlace: una página web con su título. Nota: un texto breve que se lee sin abrir nada más. Crear con IA: la IA redacta un borrador a partir de tu descripción.'},
+        {'t': 'Completa el formulario', 'b': 'Cada tipo tiene su propio formulario. La actividad aparece en la sección cuando pulsas «Añadir»; ponle un título que el alumnado entienda sin contexto.'},
+    ],
+    'stepImg': {'4': 'es__secciones__es-secciones-numerada', '5': 'es__secciones__es-tipo-menu-numerada'},
+    'img': ['es__secciones__es-secciones-numerada', 'es__secciones__es-tipo-menu-numerada'],
+    'shots': {
+        'es__secciones__es-secciones-numerada': 'Vista de la sección con los pasos 1 a 4: tarjeta de la sección, Añadir sección, menú de la sección y Añadir actividad o material',
+        'es__secciones__es-tipo-menu-numerada': 'Menú de tipos de actividad al pulsar Añadir actividad o material',
+    },
+}
+MERGE_TEXT['pt-BR']['secciones'] = {
+    'title': 'Organizar o curso: seções, atividades e materiais',
+    'answer': 'Uma seção é um bloco do curso, como uma unidade ou um trimestre, e é onde você reúne o que trabalha com o estudante: materiais, atividades e entregas. Serve para o curso ser lido em ordem e para cada tema ter o seu lugar. Use ao montar o curso: crie uma seção por tema e, dentro de cada uma, acrescente o que o estudante precisa ver ou fazer.',
+    'example': 'Em um curso de História, você cria uma seção por tema: "Revolução Industrial", "Imperialismo" e "Primeira Guerra Mundial". Dentro de cada uma coloca o texto explicativo, um link para um documentário, a ficha de prática e a entrega do trabalho, e o estudante sabe em que bloco está cada coisa.',
+    'tips': ['Dê um nome que descreva o bloco: "A célula, unidade dos seres vivos" informa melhor do que "Tema 1".'],
+    'steps': [
+        {'t': 'Localize as seções', 'b': 'Cada cartão numerado é um bloco do curso. Você vê de relance quais temas já criou e quanto conteúdo cada um tem.'},
+        {'t': 'Clique em Adicionar secção', 'b': 'Crie uma seção para cada tema novo, no fim da lista. Várias seções curtas são melhores do que uma longa: o estudante sabe onde procurar cada coisa.'},
+        {'t': 'Gerencie uma seção', 'b': 'Pelo menu (…) de cada seção você acessa as opções dela. Revise-as ao reorganizar o curso no início de um trimestre.'},
+        {'t': 'Clique em Adicionar atividade ou material', 'b': 'Dentro da seção, este botão abre tudo o que você pode acrescentar. Use-o na seção do tema correspondente, para que a atividade fique junto do seu conteúdo.'},
+        {'t': 'Escolha o tipo', 'b': 'Material: um arquivo (PDF, vídeo ou questionário H5P) para o estudante consultar antes ou depois da aula. Texto: uma leitura em página própria, para explicar um tema com calma. Ficha de trabalho: exercícios que o estudante resolve sozinho e que você revisa depois na aula. Tarefa com feedback: um trabalho que você corrige e ao qual devolve comentários, não só uma nota. Entrega: um arquivo que o estudante envia antes de um prazo. Unidade didática: um bloco completo, pronto para adotar. Agente de IA: um assistente que o estudante consulta fora da aula, com as suas instruções. Ligação: uma página da web com título. Nota: um texto curto que se lê sem abrir mais nada. Criar com IA: a IA escreve um rascunho a partir da sua descrição.'},
+        {'t': 'Preencha o formulário', 'b': 'Cada tipo tem o seu formulário. A atividade aparece na seção quando você clica em Adicionar; dê a ela um título que o estudante entenda sem contexto.'},
+    ],
+    'stepImg': {'4': 'pt__secciones__pt-secciones-numerada', '5': 'pt__secciones__pt-tipo-menu-numerada'},
+    'img': ['pt__secciones__pt-secciones-numerada', 'pt__secciones__pt-tipo-menu-numerada'],
+    'shots': {
+        'pt__secciones__pt-secciones-numerada': 'Vista da seção com os passos 1 a 4: cartão da seção, Adicionar secção, menu da seção e Adicionar atividade ou material',
+        'pt__secciones__pt-tipo-menu-numerada': 'Menu de tipos de atividade ao clicar em Adicionar atividade ou material',
+    },
+}
+
+
+# --- Grupos de la categoría Cursos (orden: crear, organizar, materiales, participantes, configuración) ---
+COURSE_GROUPS = {
+    'es': [
+        ('Crear el curso', ['crear-curso', 'que-es-un-curso-ayuda']),
+        ('Organizar el contenido', ['secciones', 'visibilidad-entradas', 'contenidos-compartidos']),
+        ('Materiales y entregas', ['agregar-material-archivo', 'texto-material', 'enlace-y-nota', 'entrega', 'tarea-con-comentarios', 'agente-de-ia']),
+        ('Participantes y citas', ['invitar-alumnado', 'participantes-permisos', 'unirse-curso', 'participantes-citas']),
+        ('Configuración', ['configuracion-del-curso']),
+    ],
+    'pt-BR': [
+        ('Criar o curso', ['crear-curso', 'que-es-un-curso-ayuda']),
+        ('Organizar o conteúdo', ['secciones', 'visibilidad-entradas', 'contenidos-compartidos']),
+        ('Materiais e entregas', ['agregar-material-archivo', 'texto-material', 'enlace-y-nota', 'entrega', 'tarea-con-comentarios', 'agente-de-ia']),
+        ('Participantes e compromissos', ['invitar-alumnado', 'participantes-permisos', 'unirse-curso', 'participantes-citas']),
+        ('Configuração', ['configuracion-del-curso']),
+    ],
+}
+
+
+def apply_course_groups(merged: dict) -> None:
+    for loc, groups in COURSE_GROUPS.items():
+        d = merged[loc]
+        ids = {a['id'] for a in d['articles']}
+        out = []
+        for name, items in groups:
+            present = [i for i in items if i in ids]
+            if present:
+                out.append({'name': name, 'ids': present})
+        d['courseGroups'] = out
+
+
+# Viñetas en los pasos (línea de cabecera + líneas que empiezan por "• ")
+MERGE_TEXT['es']['secciones']['steps'][4]['b'] = (
+    'Cada tipo sirve para algo distinto:\n'
+    '• Material: un archivo (PDF, vídeo o cuestionario H5P) que el alumnado consulta antes o después de la clase.\n'
+    '• Texto: una lectura en su propia página, para explicar un tema con calma.\n'
+    '• Ficha de trabajo: ejercicios que el alumnado resuelve por su cuenta y que repasas luego en clase.\n'
+    '• Tarea con comentarios: un trabajo que corriges y al que devuelves comentarios, no solo una nota.\n'
+    '• Entrega: un archivo que el alumnado sube antes de una fecha límite.\n'
+    '• Unidad didáctica: un bloque completo, listo para adoptar.\n'
+    '• Agente de IA: un asistente para el alumnado fuera de clase, con tus instrucciones.\n'
+    '• Enlace: una página web con su título.\n'
+    '• Nota: un texto breve que se lee sin abrir nada más.\n'
+    '• Crear con IA: la IA redacta un borrador a partir de tu descripción.')
+MERGE_TEXT['pt-BR']['secciones']['steps'][4]['b'] = (
+    'Cada tipo serve para uma coisa diferente:\n'
+    '• Material: um arquivo (PDF, vídeo ou questionário H5P) que o estudante consulta antes ou depois da aula.\n'
+    '• Texto: uma leitura em página própria, para explicar um tema com calma.\n'
+    '• Ficha de trabalho: exercícios que o estudante resolve sozinho e que você revisa depois na aula.\n'
+    '• Tarefa com feedback: um trabalho que você corrige e ao qual devolve comentários, não só uma nota.\n'
+    '• Entrega: um arquivo que o estudante envia antes de um prazo.\n'
+    '• Unidade didática: um bloco completo, pronto para adotar.\n'
+    '• Agente de IA: um assistente para o estudante fora da aula, com as suas instruções.\n'
+    '• Ligação: uma página da web com título.\n'
+    '• Nota: um texto curto que se lê sem abrir mais nada.\n'
+    '• Criar com IA: a IA escreve um rascunho a partir da sua descrição.')
+
+# Configuración del curso: IA y exportación explicados aquí, con viñetas (6 pasos, mismas capturas).
+MERGE_TEXT['es']['configuracion-del-curso'].update({
+    'title': 'Configuración del curso',
+    'answer': 'La pestaña Configuración reúne todos los ajustes del curso: los datos, la portada, cómo se ve el curso, el código de inscripción, la IA para el alumnado y la exportación o el archivado. Sirve para dejar el curso listo para tu grupo y revisarlo al empezar cada trimestre o al cerrar el curso.',
+    'example': 'Al empezar el trimestre cambias la visualización a Lista con vista previa, para que el alumnado vea de un vistazo de qué trata cada material. Al terminar el curso lo exportas como copia de seguridad y lo archivas.',
+    'steps': [
+        {'t': 'General', 'b': 'Nombre, Asignatura, Clase o curso escolar y Descripción. Son los datos que identifican el curso en tu lista y en la del centro.\n• Pulsa «Aplicar cambios» para guardarlos.\n• Mantén el mismo formato de nombre en todo el departamento.'},
+        {'t': 'Portada', 'b': 'La imagen que se ve en el curso, en la lista de cursos y en la página de inscripción.\n• Una portada reconocible ayuda a encontrar el curso correcto entre varios.'},
+        {'t': 'Visualización', 'b': 'Cómo ve el alumnado las secciones y los contenidos.\n• Lista: la más compacta, útil con muchos contenidos.\n• Lista con vista previa: muestra las primeras líneas de cada contenido. Suele ser la más clara.\n• Mosaicos: cada sección se muestra como tarjetas, bien para materiales visuales.\n• Secciones como mosaicos: cada sección tiene su propia página.\n• «Contenido anterior y siguiente»: enlaza cada contenido con el anterior y el siguiente.'},
+        {'t': 'Código de inscripción', 'b': 'El código, el enlace público y «Generar nuevo código».\n• El enlace público viene desactivado por defecto.\n• Genera un código nuevo si se ha compartido fuera de la clase.\n• Desactiva el enlace público cuando termine la inscripción.'},
+        {'t': 'IA para el alumnado', 'b': 'Decide si el alumnado puede usar la IA del curso y cómo responde.\n• «IA para el alumnado»: enciende o apaga la IA. Apágala en semanas de examen.\n• Tutor de IA (por defecto): da pistas y hace preguntas, sin soluciones completas.\n• Solo contenidos del curso: responde solo con el material del curso. Libre: también responde fuera del curso.\n• Generar imágenes y Búsqueda web vienen desactivadas; Adjuntar archivos, activada.\n• «Mensajes por estudiante y día»: 50 por defecto.\n• IA para invitados: se aplica a quien entró con el enlace público. Viene desactivada.\n• Pausar la IA: al final de la página, para cortarla de forma temporal, por ejemplo en un examen.'},
+        {'t': 'Exportación y archivado', 'b': 'Lo último del curso: exportar o archivar.\n• Exportar: copia completa en ZIP, IMS Common Cartridge o copia de seguridad de Moodle (.mbz).\n• Archivar: el curso sale de tu lista. Antes, revisa que no lo necesitas para otro grupo.\n• «Eliminar curso» no aparece en los pasos normales: no tiene vuelta atrás.'},
+    ],
+})
+MERGE_TEXT['pt-BR']['configuracion-del-curso'].update({
+    'title': 'Configurações do curso',
+    'answer': 'A aba Definições reúne todos os ajustes do curso: os dados, a capa, como o curso aparece, o código de inscrição, a IA para o estudante e a exportação ou o arquivamento. Serve para deixar o curso pronto para a sua turma e revisá-lo no início de cada trimestre ou ao encerrar o curso.',
+    'example': 'No início do trimestre você muda a visualização para Lista com visualização prévia, para o estudante ver de relance do que trata cada material. Ao terminar o curso, você o exporta como cópia de segurança e o arquiva.',
+    'steps': [
+        {'t': 'Geral', 'b': 'Nome, Disciplina, Turma ou série e Descrição. São os dados que identificam o curso na sua lista e na da escola.\n• Clique em "Aplicar alterações" para salvá-los.\n• Mantenha o mesmo formato de nome em todo o departamento.'},
+        {'t': 'Capa', 'b': 'A imagem que aparece no curso, na lista de cursos e na página de inscrição.\n• Uma capa reconhecível ajuda a achar o curso certo entre vários.'},
+        {'t': 'Visualização', 'b': 'Como o estudante vê as seções e os conteúdos.\n• Lista: a mais compacta, útil com muitos conteúdos.\n• Lista com visualização prévia: mostra as primeiras linhas de cada conteúdo. Costuma ser a mais clara.\n• Mosaicos: cada seção aparece como cartões, bom para materiais visuais.\n• Seções como mosaicos: cada seção tem a sua própria página.\n• "Conteúdo anterior e seguinte": liga cada conteúdo ao anterior e ao seguinte.'},
+        {'t': 'Código de inscrição', 'b': 'O código, o link público e "Gerar novo código".\n• O link público vem desativado por padrão.\n• Gere um código novo se ele tiver sido compartilhado fora da turma.\n• Desative o link público quando a inscrição terminar.'},
+        {'t': 'IA para o estudante', 'b': 'Decide se o estudante pode usar a IA do curso e como ela responde.\n• "IA para o estudante": liga ou desliga a IA. Desligue-a em semanas de prova.\n• Tutor de IA (padrão): dá pistas e faz perguntas, sem soluções completas.\n• Somente conteúdos do curso: responde só com o material do curso. Livre: responde também fora do curso.\n• Gerar imagens e Busca na web vêm desativadas; Anexar arquivos, ativada.\n• "Mensagens por estudante e dia": 50 por padrão.\n• IA para convidados: vale para quem entrou pelo link público. Vem desativada.\n• Pausar a IA: no fim da página, para cortá-la temporariamente, por exemplo durante uma prova.'},
+        {'t': 'Exportação e arquivamento', 'b': 'O último passo do curso: exportar ou arquivar.\n• Exportar: cópia completa em ZIP, IMS Common Cartridge ou cópia de segurança do Moodle (.mbz).\n• Arquivar: o curso sai da sua lista. Antes, confira se você não precisa dele para outra turma.\n• "Excluir curso" não aparece nos passos normais: não tem volta.'},
+    ],
+})
+
+
+# Artículos relacionados de Organizar el curso: los de actividades y materiales.
+_REL_SECCIONES = ['agregar-material-archivo', 'texto-material', 'enlace-y-nota', 'entrega', 'tarea-con-comentarios', 'agente-de-ia']
+MERGE_TEXT['es']['secciones']['related'] = list(_REL_SECCIONES)
+MERGE_TEXT['pt-BR']['secciones']['related'] = list(_REL_SECCIONES)
+
+
+# Limpieza de categorías: "Cuenta y configuración" se elimina (no aporta). "Para centros" se elimina salvo
+# seguridad y privacidad, que pasa a preguntas frecuentes.
+DROP_CATEGORIES = ['configuracion', 'it']
+MOVE_TO_FAQ = ['seguridad-datos']
+
+
+def apply_category_cleanup(merged: dict) -> None:
+    for loc in ('es', 'pt-BR'):
+        d = merged[loc]
+        gone = {a['id'] for a in d['articles'] if a['cat'] in DROP_CATEGORIES and a['id'] not in MOVE_TO_FAQ}
+        for a in d['articles']:
+            if a['id'] in MOVE_TO_FAQ:
+                a['cat'] = 'faq'
+        d['articles'] = [a for a in d['articles'] if a['id'] not in gone]
+        d['categories'] = [c for c in d['categories'] if c['id'] not in DROP_CATEGORIES]
+        for a in d['articles']:
+            for field in ('related', 'faqRelated'):
+                if a.get(field):
+                    a[field] = [i for i in a[field] if i not in gone]
+            if a.get('id') and a.get('related') is not None:
+                pass
+        for field in ('popular',):
+            pass
+        ui = d.get('ui') or {}
+        if ui.get('popular'):
+            ui['popular'] = [i for i in ui['popular'] if i not in gone]
+        for g in d.get('courseGroups') or []:
+            g['ids'] = [i for i in g['ids'] if i not in gone]
+
+
+# Configuración del curso: una captura por sección, con el número de su entrada del menú lateral.
+# Los títulos de los pasos son los nombres que aparecen en la plataforma.
+_CFG_PT_KEYS = [f'pt__configuracion-del-curso__pt-cfg-{n}-numerada' for n in range(1, 7)]
+_CFG_PT_TITLES = ['Geral', 'Capa', 'Apresentação', 'Código de adesão', 'IA no curso', 'Exportação']
+for _i, _t in enumerate(_CFG_PT_TITLES):
+    MERGE_TEXT['pt-BR']['configuracion-del-curso']['steps'][_i]['t'] = _t
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['stepImg'] = {str(_i + 1): k for _i, k in enumerate(_CFG_PT_KEYS)}
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['img'] = list(_CFG_PT_KEYS)
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['shots'] = {
+    k: f'Configurações do curso, passo {_i + 1}: {_CFG_PT_TITLES[_i]}' for _i, k in enumerate(_CFG_PT_KEYS)}
+
+
+# Configuración del curso (español): una captura por sección, numerada con su entrada del menú lateral.
+_CFG_ES_KEYS = [f'es__configuracion-del-curso__es-cfg-{n}-numerada' for n in range(1, 7)]
+_CFG_ES_TITLES = ['General', 'Portada', 'Visualización', 'Código de inscripción', 'IA en el curso', 'Exportación']
+for _i, _t in enumerate(_CFG_ES_TITLES):
+    MERGE_TEXT['es']['configuracion-del-curso']['steps'][_i]['t'] = _t
+MERGE_TEXT['es']['configuracion-del-curso']['stepImg'] = {str(_i + 1): k for _i, k in enumerate(_CFG_ES_KEYS)}
+MERGE_TEXT['es']['configuracion-del-curso']['img'] = list(_CFG_ES_KEYS)
+MERGE_TEXT['es']['configuracion-del-curso']['shots'] = {
+    k: f'Configuración del curso, paso {_i + 1}: {_CFG_ES_TITLES[_i]}' for _i, k in enumerate(_CFG_ES_KEYS)}
+
+
+# Citas (español): capturas nuevas con datos en español (sin citas en portugués).
+_CITAS_ES_A = 'es__participantes-citas__es-citas-pestana-numerada'
+_CITAS_ES_B = 'es__participantes-citas__es-citas-formulario-numerada'
+MERGE_TEXT['es']['participantes-citas'] = {
+    'stepImg': {'2': _CITAS_ES_A, '4': _CITAS_ES_B},
+    'img': [_CITAS_ES_A, _CITAS_ES_B],
+    'shots': {
+        _CITAS_ES_A: 'Pestaña Citas con los pasos 1 y 2: la pestaña y el botón Crear cita',
+        _CITAS_ES_B: 'Formulario de cita con los pasos 3 y 4: los datos y el botón Guardar',
+    },
+}
+
+
+def apply_link_fix(merged: dict) -> None:
+    """Relacionados y FAQ relacionadas apuntan a artículos existentes (redirigiendo los fusionados)."""
+    for loc in ('es', 'pt-BR'):
+        d = merged[loc]
+        ids = {a['id'] for a in d['articles']}
+        al = d.get('aliases') or {}
+        for a in d['articles']:
+            for field in ('related', 'faqRelated'):
+                if not a.get(field):
+                    continue
+                fixed = []
+                for r in a[field]:
+                    r2 = al.get(r, r)
+                    if r2 in ids and r2 != a['id'] and r2 not in fixed:
+                        fixed.append(r2)
+                a[field] = fixed

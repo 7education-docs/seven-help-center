@@ -106,5 +106,77 @@
       "subtitle": "Cursos",
       "narration": "En este vídeo vas a ver qué es un curso y cómo crearlo, desde el primer paso hasta la revisión."
     }
+  },
+  "secciones": {
+    "pt": {
+      "title": "Organizar o curso",
+      "subtitle": "Seções, atividades e materiais",
+      "narration": "Neste vídeo, você vai ver como organizar o curso em seções e o que pode adicionar em cada uma."
+    },
+    "es": {
+      "title": "Organizar el curso",
+      "subtitle": "Secciones, actividades y materiales",
+      "narration": "En este vídeo vas a ver cómo organizar el curso en secciones y qué puedes añadir en cada una."
+    }
+  },
+  "material-archivo": {
+    "pt": {
+      "title": "Adicionar um material",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver o que é um material com arquivo e para que serve."
+    },
+    "es": {
+      "title": "Añadir un material",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver qué es un material con archivo y para qué sirve."
+    }
+  },
+  "texto-lectura": {
+    "pt": {
+      "title": "Escrever um material de leitura",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver como escrever uma leitura direto na plataforma."
+    },
+    "es": {
+      "title": "Escribir un material de lectura",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver cómo escribir una lectura directamente en la plataforma."
+    }
+  },
+  "entrega-archivo": {
+    "pt": {
+      "title": "Criar uma entrega",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver para que serve uma entrega e como preenchê-la."
+    },
+    "es": {
+      "title": "Crear una entrega",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver para qué sirve una entrega y cómo rellenarla."
+    }
+  },
+  "tarea-comentarios": {
+    "pt": {
+      "title": "Tarefa com feedback",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver como usar uma tarefa para corrigir e devolver comentários."
+    },
+    "es": {
+      "title": "Tarea con comentarios",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver cómo usar una tarea para corregir y devolver comentarios."
+    }
+  },
+  "agente-ia": {
+    "pt": {
+      "title": "Criar um agente de IA",
+      "subtitle": "Materiais e entregas",
+      "narration": "Neste vídeo, você vai ver como criar um agente de IA para o estudante."
+    },
+    "es": {
+      "title": "Crear un agente de IA",
+      "subtitle": "Materiales y entregas",
+      "narration": "En este vídeo vas a ver cómo crear un agente de IA para el alumnado."
+    }
   }
 }

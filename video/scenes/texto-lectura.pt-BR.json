@@ -1,0 +1,91 @@
+{
+  "lesson": "texto-lectura",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Criar curso\")"
+    },
+    {
+      "do": "click",
+      "selector": "h3:has-text(\"Matemática · 8.º ano\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Adicionar atividade ou material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "tipo",
+      "say": "Texto é uma leitura escrita direto na plataforma, em página própria. Use quando quiser explicar um tema com calma, sem depender de um arquivo.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Adicionar atividade ou material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Texto\"):not(:has-text(\"Adicionar\"))"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "wait",
+          "ms": 3500
+        }
+      ]
+    },
+    {
+      "id": "titulo",
+      "say": "Dê um título que anuncie a leitura, como 'Leitura: a teoria celular'.",
+      "actions": [
+        {
+          "do": "type",
+          "selector": "input[placeholder=\" \"] >> nth=0",
+          "text": "Leitura: a teoria celular",
+          "delay": 40
+        },
+        {
+          "do": "wait",
+          "ms": 5000
+        }
+      ]
+    },
+    {
+      "id": "editor",
+      "say": "O editor permite títulos, negrito, listas e gráficos. Use títulos para dividir o texto: o estudante se orienta melhor e volta a um trecho quando precisa.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 8000
+        }
+      ]
+    },
+    {
+      "id": "fim",
+      "say": "Ao pulsar Adicionar, a leitura aparece na seção com o tipo Texto.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Voltar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "lesson": "secciones",
+  "baseUrl": "https://sevenai.es",
+  "locale": "pt-BR",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "h3.ui-card__title"
+    },
+    {
+      "do": "click",
+      "selector": "h3.ui-card__title:has-text(\"Matemática · 8.º ano\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Adicionar atividade ou material\" )"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "secciones",
+      "say": "Um curso se organiza em seções. Cada seção é um bloco, como uma unidade ou um trimestre, e tem o seu número e a sua lista de conteúdos.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Seções",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "text=Geral",
+          "ms": 2000
+        },
+        {
+          "do": "wait",
+          "ms": 8000
+        }
+      ]
+    },
+    {
+      "id": "adicionar-seccao",
+      "say": "Para criar uma seção nova, use Adicionar secção, no fim da lista. Crie uma seção por tema: é mais fácil para o estudante encontrar cada coisa.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Adicionar seção",
+          "step": ""
+        },
+        {
+          "do": "scroll",
+          "selector": "button:has-text(\"Adicionar secção\")"
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Adicionar secção\")",
+          "ms": 2400
+        },
+        {
+          "do": "wait",
+          "ms": 6500
+        }
+      ]
+    },
+    {
+      "id": "adicionar-atividade",
+      "say": "Dentro de cada seção, Adicionar atividade ou material abre tudo o que você pode acrescentar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Adicionar atividade ou material",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Adicionar atividade ou material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    },
+    {
+      "id": "tipos-1",
+      "say": "Material é um arquivo, um vídeo ou um questionário H5P, para o estudante consultar. Texto é uma leitura em página própria. Ficha de trabalho são exercícios que o estudante resolve sozinho.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Tipos de atividade",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Material\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Texto\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Ficha de trabalho\")",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "tipos-2",
+      "say": "Tarefa com feedback é um trabalho que você corrige e devolve comentado. Entrega é um arquivo que o estudante envia até um prazo. Unidade didática é um bloco completo, pronto para adotar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Tipos de atividade",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Tarefa com feedback\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Entrega\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Unidade didática\")",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "tipos-3",
+      "say": "Agente de IA é um assistente para o estudante fora da aula, com as suas instruções. Ligação leva a uma página da web. Nota é um texto curto que se lê na seção. Criar com IA escreve um rascunho a partir da sua descrição.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Tipos de atividade",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Agente de IA\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Ligação\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Nota\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Criar com IA\")",
+          "ms": 2600
+        }
+      ]
+    },
+    {
+      "id": "cancelar",
+      "say": "Cada tipo pede só o que precisa. Para não criar nada agora, clique em Cancelar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Cancelar",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Cancelar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "resultado",
+      "say": "Depois de adicionar, o conteúdo aparece dentro da seção, junto com o restante do curso.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    }
+  ]
+}
