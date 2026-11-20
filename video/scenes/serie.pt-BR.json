@@ -23,12 +23,21 @@
   "scenes": [
     {
       "id": "inicio",
-      "say": "Uma série de lições planeja um tema completo: as sessões, a progressão e a avaliação. Para não começar do zero, use Gerar com IA.",
+      "say": "Há duas formas de criar uma série de lições. Criar monta a série à mão, lição por lição. Gerar com IA cria a série inteira a partir de um tema.",
       "actions": [
         {
           "do": "caption",
-          "text": "Gerar com IA",
+          "text": "Duas formas de criar",
           "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:text-is(\"Criar\")",
+          "ms": 2000
+        },
+        {
+          "do": "wait",
+          "ms": 1200
         },
         {
           "do": "highlight",
@@ -37,7 +46,76 @@
         },
         {
           "do": "wait",
-          "ms": 6000
+          "ms": 2500
+        }
+      ]
+    },
+    {
+      "id": "criar",
+      "say": "Com Criar, você preenche o tema, a disciplina e a descrição. A série nasce vazia, e você acrescenta cada lição à mão. Use essa forma quando já tem o plano pronto.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:text-is(\"Criar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1200
+        },
+        {
+          "do": "caption",
+          "text": "Criar: a série começa vazia",
+          "step": ""
+        },
+        {
+          "do": "type",
+          "selector": "input[placeholder=\"e.g. Introduction to Integral Calculus\"]",
+          "text": "Níveis de organização dos seres vivos",
+          "delay": 35
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        },
+        {
+          "do": "highlight",
+          "selector": "textarea[placeholder^=\"Briefly describe\"]",
+          "ms": 2000
+        },
+        {
+          "do": "wait",
+          "ms": 2500
+        },
+        {
+          "do": "press",
+          "key": "Escape"
+        },
+        {
+          "do": "wait",
+          "ms": 800
+        }
+      ]
+    },
+    {
+      "id": "gerar-ia",
+      "say": "Para não começar do zero, use Gerar com IA: a IA cria as lições com a progressão e a avaliação, e você revisa depois.",
+      "actions": [
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Gerar com IA\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
+        },
+        {
+          "do": "caption",
+          "text": "Gerar com IA",
+          "step": ""
+        },
+        {
+          "do": "wait",
+          "ms": 1000
         }
       ]
     },
@@ -45,10 +123,6 @@
       "id": "tema",
       "say": "O formulário pede o tema, a disciplina e o nível. Quanto mais contexto der, mais ajustada fica a série.",
       "actions": [
-        {
-          "do": "click",
-          "selector": "button:has-text(\"Gerar com IA\")"
-        },
         {
           "do": "wait",
           "ms": 1500
