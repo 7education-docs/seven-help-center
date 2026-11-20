@@ -724,3 +724,34 @@ MERGE_TEXT['es']['configuracion-del-curso']['stepImg'] = {str(_i + 1): k for _i,
 MERGE_TEXT['es']['configuracion-del-curso']['img'] = list(_CFG_ES_KEYS)
 MERGE_TEXT['es']['configuracion-del-curso']['shots'] = {
     k: f'Configuración del curso, paso {_i + 1}: {_CFG_ES_TITLES[_i]}' for _i, k in enumerate(_CFG_ES_KEYS)}
+
+
+# Citas (español): capturas nuevas con datos en español (sin citas en portugués).
+_CITAS_ES_A = 'es__participantes-citas__es-citas-pestana-numerada'
+_CITAS_ES_B = 'es__participantes-citas__es-citas-formulario-numerada'
+MERGE_TEXT['es']['participantes-citas'] = {
+    'stepImg': {'2': _CITAS_ES_A, '4': _CITAS_ES_B},
+    'img': [_CITAS_ES_A, _CITAS_ES_B],
+    'shots': {
+        _CITAS_ES_A: 'Pestaña Citas con los pasos 1 y 2: la pestaña y el botón Crear cita',
+        _CITAS_ES_B: 'Formulario de cita con los pasos 3 y 4: los datos y el botón Guardar',
+    },
+}
+
+
+def apply_link_fix(merged: dict) -> None:
+    """Relacionados y FAQ relacionadas apuntan a artículos existentes (redirigiendo los fusionados)."""
+    for loc in ('es', 'pt-BR'):
+        d = merged[loc]
+        ids = {a['id'] for a in d['articles']}
+        al = d.get('aliases') or {}
+        for a in d['articles']:
+            for field in ('related', 'faqRelated'):
+                if not a.get(field):
+                    continue
+                fixed = []
+                for r in a[field]:
+                    r2 = al.get(r, r)
+                    if r2 in ids and r2 != a['id'] and r2 not in fixed:
+                        fixed.append(r2)
+                a[field] = fixed
