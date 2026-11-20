@@ -69,6 +69,14 @@
         {
           "do": "wait",
           "ms": 3200
+        },
+        {
+          "do": "click",
+          "selector": "button[role=\"tab\"]:has-text(\"Os meus cursos\")"
+        },
+        {
+          "do": "wait",
+          "ms": 1500
         }
       ]
     },
