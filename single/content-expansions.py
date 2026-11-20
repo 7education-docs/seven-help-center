@@ -394,7 +394,7 @@ def _apply_guide_steps(loc, steps):
 # Los textos finales (TEXT) sustituyen a los pasos fusionados; el número de pasos debe coincidir.
 # ---------------------------------------------------------------------------
 MERGE_SPECS = {
-    'secciones': {'absorb': ['actividades', 'tipo-de-actividad'], 'steps': True},
+    'secciones': {'absorb': ['actividades', 'tipo-de-actividad'], 'steps': True, 'steps_from': ['actividades']},
     'configuracion-del-curso': {'absorb': ['vistas-del-curso'], 'steps': False},
 }
 MERGE_TEXT = {
@@ -482,7 +482,7 @@ def apply_article_merges(merged: dict) -> None:
             step_img = dict(keep.get('stepImg') or {})
             for gid in gone:
                 src = arts[gid]
-                if spec['steps']:
+                if spec['steps'] and gid in spec.get('steps_from', gone):
                     base = len(steps)
                     for i, st in enumerate(src.get('steps') or []):
                         steps.append({'t': st['t'], 'b': st['b']})
@@ -518,10 +518,61 @@ def apply_article_merges(merged: dict) -> None:
             for key in ('title', 'answer', 'example', 'tips'):
                 if key in txt:
                     art[key] = txt[key]
+            if 'stepImg' in txt:
+                art['stepImg'] = dict(txt['stepImg'])
+            if 'img' in txt:
+                art['img'] = list(txt['img'])
+            for k, alt in (txt.get('shots') or {}).items():
+                merged[loc].setdefault('shots', {})[k] = f'shots/{k}.jpg'
+                merged[loc].setdefault('alt', {})[k] = alt
 
 MERGE_TEXT['es']['crear-curso'] = {
     'example': 'Un departamento de Matemáticas tiene tres grupos de 2.º de ESO. Uno de sus docentes prepara el curso del primer grupo, con sus secciones y materiales, y crea un curso para cada uno de los otros dos grupos con el mismo formato de nombre. Cada grupo entra con su propio código, y el departamento sabe siempre cuál es el curso de cada clase.',
 }
 MERGE_TEXT['pt-BR']['crear-curso'] = {
     'example': 'Um departamento de Matemática tem três turmas do 8.º ano. Um dos docentes prepara o curso da primeira turma, com as seções e os materiais, e cria um curso para cada uma das outras duas, com o mesmo padrão de nome. Cada turma entra com o seu próprio código, e o departamento sabe sempre qual é o curso de cada turma.',
+}
+
+
+# Sección «Organizar el curso»: 6 pasos reales. Los tipos de actividad se explican dentro del paso 5.
+# Capturas: el paso 4 muestra la vista de la sección con los pasos 1 a 4; el paso 5, el menú de tipos.
+MERGE_TEXT['es']['secciones'] = {
+    'title': 'Organizar el curso: secciones, actividades y materiales',
+    'answer': 'Una sección es un bloque del curso, como una unidad o un trimestre, y es donde reúnes lo que trabajas con el alumnado: materiales, actividades y entregas. Sirve para que el curso se lea en orden y para que cada tema tenga su sitio. Úsala al montar el curso: crea una sección por tema y, dentro de cada una, añade lo que el alumnado tiene que ver o hacer.',
+    'example': 'En un curso de Historia creas una sección por tema: «Revolución industrial», «Imperialismo» y «Primera Guerra Mundial». Dentro de cada una pones el texto explicativo, un enlace a un documental, la ficha para practicar y la entrega del trabajo, y el alumnado sabe en qué bloque está cada cosa.',
+    'tips': ['Pon un nombre que describa el bloque: «La célula, unidad de los seres vivos» informa mejor que «Tema 1».'],
+    'steps': [
+        {'t': 'Localiza las secciones', 'b': 'Cada tarjeta numerada es un bloque del curso. Así ves de un vistazo qué temas tienes creados y cuánto contenido tiene cada uno.'},
+        {'t': 'Pulsa Añadir sección', 'b': 'Crea una sección por cada tema nuevo, al final de la lista. Es mejor tener varias cortas que una larga: el alumnado sabe dónde buscar cada cosa.'},
+        {'t': 'Gestiona una sección', 'b': 'Desde el menú (…) de cada sección accedes a sus opciones. Revísalas al reorganizar el curso al empezar un trimestre.'},
+        {'t': 'Pulsa Añadir actividad o material', 'b': 'Dentro de la sección, este botón abre todo lo que puedes añadir. Úsalo en la sección del tema correspondiente, para que cada actividad quede junto a su contenido.'},
+        {'t': 'Elige el tipo', 'b': 'Material: un archivo (PDF, vídeo o cuestionario H5P) para que el alumnado lo consulte antes o después de la clase. Texto: una lectura en su propia página, para explicar un tema con calma. Ficha de trabajo: ejercicios que el alumnado resuelve por su cuenta y que luego repasas en clase. Tarea con comentarios: un trabajo que corriges y al que devuelves comentarios, no solo una nota. Entrega: un archivo que el alumnado sube antes de una fecha límite. Unidad didáctica: un bloque completo, listo para adoptar. Agente de IA: un asistente al que el alumnado pregunta fuera de clase, con tus instrucciones. Enlace: una página web con su título. Nota: un texto breve que se lee sin abrir nada más. Crear con IA: la IA redacta un borrador a partir de tu descripción.'},
+        {'t': 'Completa el formulario', 'b': 'Cada tipo tiene su propio formulario. La actividad aparece en la sección cuando pulsas «Añadir»; ponle un título que el alumnado entienda sin contexto.'},
+    ],
+    'stepImg': {'4': 'es__secciones__es-secciones-numerada', '5': 'es__secciones__es-tipo-menu-numerada'},
+    'img': ['es__secciones__es-secciones-numerada', 'es__secciones__es-tipo-menu-numerada'],
+    'shots': {
+        'es__secciones__es-secciones-numerada': 'Vista de la sección con los pasos 1 a 4: tarjeta de la sección, Añadir sección, menú de la sección y Añadir actividad o material',
+        'es__secciones__es-tipo-menu-numerada': 'Menú de tipos de actividad al pulsar Añadir actividad o material',
+    },
+}
+MERGE_TEXT['pt-BR']['secciones'] = {
+    'title': 'Organizar o curso: seções, atividades e materiais',
+    'answer': 'Uma seção é um bloco do curso, como uma unidade ou um trimestre, e é onde você reúne o que trabalha com o estudante: materiais, atividades e entregas. Serve para o curso ser lido em ordem e para cada tema ter o seu lugar. Use ao montar o curso: crie uma seção por tema e, dentro de cada uma, acrescente o que o estudante precisa ver ou fazer.',
+    'example': 'Em um curso de História, você cria uma seção por tema: "Revolução Industrial", "Imperialismo" e "Primeira Guerra Mundial". Dentro de cada uma coloca o texto explicativo, um link para um documentário, a ficha de prática e a entrega do trabalho, e o estudante sabe em que bloco está cada coisa.',
+    'tips': ['Dê um nome que descreva o bloco: "A célula, unidade dos seres vivos" informa melhor do que "Tema 1".'],
+    'steps': [
+        {'t': 'Localize as seções', 'b': 'Cada cartão numerado é um bloco do curso. Você vê de relance quais temas já criou e quanto conteúdo cada um tem.'},
+        {'t': 'Clique em Adicionar secção', 'b': 'Crie uma seção para cada tema novo, no fim da lista. Várias seções curtas são melhores do que uma longa: o estudante sabe onde procurar cada coisa.'},
+        {'t': 'Gerencie uma seção', 'b': 'Pelo menu (…) de cada seção você acessa as opções dela. Revise-as ao reorganizar o curso no início de um trimestre.'},
+        {'t': 'Clique em Adicionar atividade ou material', 'b': 'Dentro da seção, este botão abre tudo o que você pode acrescentar. Use-o na seção do tema correspondente, para que a atividade fique junto do seu conteúdo.'},
+        {'t': 'Escolha o tipo', 'b': 'Material: um arquivo (PDF, vídeo ou questionário H5P) para o estudante consultar antes ou depois da aula. Texto: uma leitura em página própria, para explicar um tema com calma. Ficha de trabalho: exercícios que o estudante resolve sozinho e que você revisa depois na aula. Tarefa com feedback: um trabalho que você corrige e ao qual devolve comentários, não só uma nota. Entrega: um arquivo que o estudante envia antes de um prazo. Unidade didática: um bloco completo, pronto para adotar. Agente de IA: um assistente que o estudante consulta fora da aula, com as suas instruções. Ligação: uma página da web com título. Nota: um texto curto que se lê sem abrir mais nada. Criar com IA: a IA escreve um rascunho a partir da sua descrição.'},
+        {'t': 'Preencha o formulário', 'b': 'Cada tipo tem o seu formulário. A atividade aparece na seção quando você clica em Adicionar; dê a ela um título que o estudante entenda sem contexto.'},
+    ],
+    'stepImg': {'4': 'pt__secciones__pt-secciones-numerada', '5': 'pt__secciones__pt-tipo-menu-numerada'},
+    'img': ['pt__secciones__pt-secciones-numerada', 'pt__secciones__pt-tipo-menu-numerada'],
+    'shots': {
+        'pt__secciones__pt-secciones-numerada': 'Vista da seção com os passos 1 a 4: cartão da seção, Adicionar secção, menu da seção e Adicionar atividade ou material',
+        'pt__secciones__pt-tipo-menu-numerada': 'Menu de tipos de atividade ao clicar em Adicionar atividade ou material',
+    },
 }

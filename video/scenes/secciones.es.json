@@ -1,0 +1,208 @@
+{
+  "lesson": "secciones",
+  "baseUrl": "https://sevenai.es",
+  "locale": "es",
+  "setup": [
+    {
+      "do": "goto",
+      "url": "/educa/courses"
+    },
+    {
+      "do": "waitFor",
+      "selector": "h3.ui-card__title"
+    },
+    {
+      "do": "click",
+      "selector": "h3.ui-card__title:has-text(\"Matemáticas · 2.º ESO\")"
+    },
+    {
+      "do": "waitFor",
+      "selector": "button:has-text(\"Añadir actividad o material\")"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "secciones",
+      "say": "Un curso se organiza en secciones. Cada sección es un bloque, como una unidad o un trimestre, y tiene su número y su lista de contenidos.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Secciones",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "text=General",
+          "ms": 2000
+        },
+        {
+          "do": "wait",
+          "ms": 8000
+        }
+      ]
+    },
+    {
+      "id": "adicionar-seccao",
+      "say": "Para crear una sección nueva, usa Añadir sección, al final de la lista. Crea una sección por tema: así el alumnado encuentra cada cosa más fácilmente.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Añadir sección",
+          "step": ""
+        },
+        {
+          "do": "scroll",
+          "selector": "button:has-text(\"Añadir sección\")"
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Añadir sección\")",
+          "ms": 2400
+        },
+        {
+          "do": "wait",
+          "ms": 6500
+        }
+      ]
+    },
+    {
+      "id": "adicionar-atividade",
+      "say": "Dentro de cada sección, Añadir actividad o material abre todo lo que puedes añadir.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Añadir actividad o material",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Añadir actividad o material\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    },
+    {
+      "id": "tipos-1",
+      "say": "Material es un archivo, un vídeo o un cuestionario H5P, para que el alumnado lo consulte. Texto es una lectura en su propia página. Ficha de trabajo son ejercicios que el alumnado resuelve por su cuenta.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Tipos de actividad",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Material\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Texto\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Ficha de trabajo\")",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "tipos-2",
+      "say": "Tarea con comentarios es un trabajo que corriges y al que devuelves comentarios. Entrega es un archivo que el alumnado sube antes de una fecha límite. Unidad didáctica es un bloque completo, listo para adoptar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Tipos de actividad",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Tarea con comentarios\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Entrega\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Unidad didáctica\")",
+          "ms": 2600
+        },
+        {
+          "do": "wait",
+          "ms": 500
+        }
+      ]
+    },
+    {
+      "id": "tipos-3",
+      "say": "Agente de IA es un asistente para el alumnado fuera de clase, con tus instrucciones. Enlace lleva a una página web. Nota es un texto breve que se lee en la sección. Crear con IA redacta un borrador a partir de tu descripción.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Tipos de actividad",
+          "step": ""
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Agente de IA\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Enlace\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Nota\")",
+          "ms": 2600
+        },
+        {
+          "do": "highlight",
+          "selector": "button:has-text(\"Crear con IA\")",
+          "ms": 2600
+        }
+      ]
+    },
+    {
+      "id": "cancelar",
+      "say": "Cada tipo pide solo lo que necesita. Para no crear nada ahora, pulsa Cancelar.",
+      "actions": [
+        {
+          "do": "caption",
+          "text": "Cancelar",
+          "step": ""
+        },
+        {
+          "do": "click",
+          "selector": "button:has-text(\"Cancelar\")"
+        },
+        {
+          "do": "wait",
+          "ms": 4000
+        }
+      ]
+    },
+    {
+      "id": "resultado",
+      "say": "Cuando lo añades, el contenido aparece dentro de la sección, junto al resto del curso.",
+      "actions": [
+        {
+          "do": "wait",
+          "ms": 4500
+        }
+      ]
+    }
+  ]
+}

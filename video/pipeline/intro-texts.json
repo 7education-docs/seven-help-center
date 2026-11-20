@@ -106,5 +106,17 @@
       "subtitle": "Cursos",
       "narration": "En este vídeo vas a ver qué es un curso y cómo crearlo, desde el primer paso hasta la revisión."
     }
+  },
+  "secciones": {
+    "pt": {
+      "title": "Organizar o curso",
+      "subtitle": "Seções, atividades e materiais",
+      "narration": "Neste vídeo, você vai ver como organizar o curso em seções e o que pode adicionar em cada uma."
+    },
+    "es": {
+      "title": "Organizar el curso",
+      "subtitle": "Secciones, actividades y materiales",
+      "narration": "En este vídeo vas a ver cómo organizar el curso en secciones y qué puedes añadir en cada una."
+    }
   }
 }

@@ -7,6 +7,7 @@ export const VIDEO_FOR_ARTICLE = {
   'tarea-correccion-biblioteca': { file: 'tarea', label: { es: 'Crear una tarea de corrección', pt: 'Criar uma tarefa de correção' } },
   'crear-asistente': { file: 'asistente', label: { es: 'Crear un asistente', pt: 'Criar um assistente' } },
   'crear-curso': { file: 'crear-curso', label: { es: 'Crear un curso', pt: 'Criar um curso' } },
+  'secciones': { file: 'secciones', label: { es: 'Organizar el curso', pt: 'Organizar o curso' } },
   'que-es-un-curso-ayuda': { file: 'C-1', label: { es: 'Pestañas de un curso', pt: 'Abas de um curso' } },
   'subir-documento': { file: 'documentos', label: { es: 'Documentos', pt: 'Documentos' } },
   'ficha-interactiva': { file: 'fichas-interactivas', label: { es: 'Crear una ficha interactiva', pt: 'Criar uma ficha interativa' } },
