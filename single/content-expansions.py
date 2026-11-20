@@ -395,7 +395,7 @@ def _apply_guide_steps(loc, steps):
 # ---------------------------------------------------------------------------
 MERGE_SPECS = {
     'secciones': {'absorb': ['actividades', 'tipo-de-actividad'], 'steps': True, 'steps_from': ['actividades']},
-    'configuracion-del-curso': {'absorb': ['vistas-del-curso'], 'steps': False},
+    'configuracion-del-curso': {'absorb': ['vistas-del-curso', 'ia-alumnado', 'exportar-curso'], 'steps': False, 'images': False},
 }
 MERGE_TEXT = {
     'es': {
@@ -489,9 +489,10 @@ def apply_article_merges(merged: dict) -> None:
                         k = (src.get('stepImg') or {}).get(str(i + 1))
                         if k:
                             step_img[str(base + i + 1)] = k
-                for k in src.get('img') or []:
-                    if k not in img:
-                        img.append(k)
+                if spec.get('images', True):
+                    for k in src.get('img') or []:
+                        if k not in img:
+                            img.append(k)
             keep['steps'] = steps
             keep['img'] = img
             keep['stepImg'] = step_img
@@ -576,3 +577,89 @@ MERGE_TEXT['pt-BR']['secciones'] = {
         'pt__secciones__pt-tipo-menu-numerada': 'Menu de tipos de atividade ao clicar em Adicionar atividade ou material',
     },
 }
+
+
+# --- Grupos de la categoría Cursos (orden: crear, organizar, materiales, participantes, configuración) ---
+COURSE_GROUPS = {
+    'es': [
+        ('Crear el curso', ['crear-curso', 'que-es-un-curso-ayuda']),
+        ('Organizar el contenido', ['secciones', 'visibilidad-entradas', 'contenidos-compartidos']),
+        ('Materiales y entregas', ['agregar-material-archivo', 'texto-material', 'enlace-y-nota', 'entrega', 'tarea-con-comentarios', 'agente-de-ia']),
+        ('Participantes y citas', ['invitar-alumnado', 'participantes-permisos', 'unirse-curso', 'participantes-citas']),
+        ('Configuración', ['configuracion-del-curso']),
+    ],
+    'pt-BR': [
+        ('Criar o curso', ['crear-curso', 'que-es-un-curso-ayuda']),
+        ('Organizar o conteúdo', ['secciones', 'visibilidad-entradas', 'contenidos-compartidos']),
+        ('Materiais e entregas', ['agregar-material-archivo', 'texto-material', 'enlace-y-nota', 'entrega', 'tarea-con-comentarios', 'agente-de-ia']),
+        ('Participantes e compromissos', ['invitar-alumnado', 'participantes-permisos', 'unirse-curso', 'participantes-citas']),
+        ('Configuração', ['configuracion-del-curso']),
+    ],
+}
+
+
+def apply_course_groups(merged: dict) -> None:
+    for loc, groups in COURSE_GROUPS.items():
+        d = merged[loc]
+        ids = {a['id'] for a in d['articles']}
+        out = []
+        for name, items in groups:
+            present = [i for i in items if i in ids]
+            if present:
+                out.append({'name': name, 'ids': present})
+        d['courseGroups'] = out
+
+
+# Viñetas en los pasos (línea de cabecera + líneas que empiezan por "• ")
+MERGE_TEXT['es']['secciones']['steps'][4]['b'] = (
+    'Cada tipo sirve para algo distinto:\n'
+    '• Material: un archivo (PDF, vídeo o cuestionario H5P) que el alumnado consulta antes o después de la clase.\n'
+    '• Texto: una lectura en su propia página, para explicar un tema con calma.\n'
+    '• Ficha de trabajo: ejercicios que el alumnado resuelve por su cuenta y que repasas luego en clase.\n'
+    '• Tarea con comentarios: un trabajo que corriges y al que devuelves comentarios, no solo una nota.\n'
+    '• Entrega: un archivo que el alumnado sube antes de una fecha límite.\n'
+    '• Unidad didáctica: un bloque completo, listo para adoptar.\n'
+    '• Agente de IA: un asistente para el alumnado fuera de clase, con tus instrucciones.\n'
+    '• Enlace: una página web con su título.\n'
+    '• Nota: un texto breve que se lee sin abrir nada más.\n'
+    '• Crear con IA: la IA redacta un borrador a partir de tu descripción.')
+MERGE_TEXT['pt-BR']['secciones']['steps'][4]['b'] = (
+    'Cada tipo serve para uma coisa diferente:\n'
+    '• Material: um arquivo (PDF, vídeo ou questionário H5P) que o estudante consulta antes ou depois da aula.\n'
+    '• Texto: uma leitura em página própria, para explicar um tema com calma.\n'
+    '• Ficha de trabalho: exercícios que o estudante resolve sozinho e que você revisa depois na aula.\n'
+    '• Tarefa com feedback: um trabalho que você corrige e ao qual devolve comentários, não só uma nota.\n'
+    '• Entrega: um arquivo que o estudante envia antes de um prazo.\n'
+    '• Unidade didática: um bloco completo, pronto para adotar.\n'
+    '• Agente de IA: um assistente para o estudante fora da aula, com as suas instruções.\n'
+    '• Ligação: uma página da web com título.\n'
+    '• Nota: um texto curto que se lê sem abrir mais nada.\n'
+    '• Criar com IA: a IA escreve um rascunho a partir da sua descrição.')
+
+# Configuración del curso: IA y exportación explicados aquí, con viñetas (6 pasos, mismas capturas).
+MERGE_TEXT['es']['configuracion-del-curso'].update({
+    'title': 'Configuración del curso',
+    'answer': 'La pestaña Configuración reúne todos los ajustes del curso: los datos, la portada, cómo se ve el curso, el código de inscripción, la IA para el alumnado y la exportación o el archivado. Sirve para dejar el curso listo para tu grupo y revisarlo al empezar cada trimestre o al cerrar el curso.',
+    'example': 'Al empezar el trimestre cambias la visualización a Lista con vista previa, para que el alumnado vea de un vistazo de qué trata cada material. Al terminar el curso lo exportas como copia de seguridad y lo archivas.',
+    'steps': [
+        {'t': 'General', 'b': 'Nombre, Asignatura, Clase o curso escolar y Descripción. Son los datos que identifican el curso en tu lista y en la del centro.\n• Pulsa «Aplicar cambios» para guardarlos.\n• Mantén el mismo formato de nombre en todo el departamento.'},
+        {'t': 'Portada', 'b': 'La imagen que se ve en el curso, en la lista de cursos y en la página de inscripción.\n• Una portada reconocible ayuda a encontrar el curso correcto entre varios.'},
+        {'t': 'Visualización', 'b': 'Cómo ve el alumnado las secciones y los contenidos.\n• Lista: la más compacta, útil con muchos contenidos.\n• Lista con vista previa: muestra las primeras líneas de cada contenido. Suele ser la más clara.\n• Mosaicos: cada sección se muestra como tarjetas, bien para materiales visuales.\n• Secciones como mosaicos: cada sección tiene su propia página.\n• «Contenido anterior y siguiente»: enlaza cada contenido con el anterior y el siguiente.'},
+        {'t': 'Código de inscripción', 'b': 'El código, el enlace público y «Generar nuevo código».\n• El enlace público viene desactivado por defecto.\n• Genera un código nuevo si se ha compartido fuera de la clase.\n• Desactiva el enlace público cuando termine la inscripción.'},
+        {'t': 'IA para el alumnado', 'b': 'Decide si el alumnado puede usar la IA del curso y cómo responde.\n• «IA para el alumnado»: enciende o apaga la IA. Apágala en semanas de examen.\n• Tutor de IA (por defecto): da pistas y hace preguntas, sin soluciones completas.\n• Solo contenidos del curso: responde solo con el material del curso. Libre: también responde fuera del curso.\n• Generar imágenes y Búsqueda web vienen desactivadas; Adjuntar archivos, activada.\n• «Mensajes por estudiante y día»: 50 por defecto.\n• IA para invitados: se aplica a quien entró con el enlace público. Viene desactivada.\n• Pausar la IA: al final de la página, para cortarla de forma temporal, por ejemplo en un examen.'},
+        {'t': 'Exportación y archivado', 'b': 'Lo último del curso: exportar o archivar.\n• Exportar: copia completa en ZIP, IMS Common Cartridge o copia de seguridad de Moodle (.mbz).\n• Archivar: el curso sale de tu lista. Antes, revisa que no lo necesitas para otro grupo.\n• «Eliminar curso» no aparece en los pasos normales: no tiene vuelta atrás.'},
+    ],
+})
+MERGE_TEXT['pt-BR']['configuracion-del-curso'].update({
+    'title': 'Configurações do curso',
+    'answer': 'A aba Definições reúne todos os ajustes do curso: os dados, a capa, como o curso aparece, o código de inscrição, a IA para o estudante e a exportação ou o arquivamento. Serve para deixar o curso pronto para a sua turma e revisá-lo no início de cada trimestre ou ao encerrar o curso.',
+    'example': 'No início do trimestre você muda a visualização para Lista com visualização prévia, para o estudante ver de relance do que trata cada material. Ao terminar o curso, você o exporta como cópia de segurança e o arquiva.',
+    'steps': [
+        {'t': 'Geral', 'b': 'Nome, Disciplina, Turma ou série e Descrição. São os dados que identificam o curso na sua lista e na da escola.\n• Clique em "Aplicar alterações" para salvá-los.\n• Mantenha o mesmo formato de nome em todo o departamento.'},
+        {'t': 'Capa', 'b': 'A imagem que aparece no curso, na lista de cursos e na página de inscrição.\n• Uma capa reconhecível ajuda a achar o curso certo entre vários.'},
+        {'t': 'Visualização', 'b': 'Como o estudante vê as seções e os conteúdos.\n• Lista: a mais compacta, útil com muitos conteúdos.\n• Lista com visualização prévia: mostra as primeiras linhas de cada conteúdo. Costuma ser a mais clara.\n• Mosaicos: cada seção aparece como cartões, bom para materiais visuais.\n• Seções como mosaicos: cada seção tem a sua própria página.\n• "Conteúdo anterior e seguinte": liga cada conteúdo ao anterior e ao seguinte.'},
+        {'t': 'Código de inscrição', 'b': 'O código, o link público e "Gerar novo código".\n• O link público vem desativado por padrão.\n• Gere um código novo se ele tiver sido compartilhado fora da turma.\n• Desative o link público quando a inscrição terminar.'},
+        {'t': 'IA para o estudante', 'b': 'Decide se o estudante pode usar a IA do curso e como ela responde.\n• "IA para o estudante": liga ou desliga a IA. Desligue-a em semanas de prova.\n• Tutor de IA (padrão): dá pistas e faz perguntas, sem soluções completas.\n• Somente conteúdos do curso: responde só com o material do curso. Livre: responde também fora do curso.\n• Gerar imagens e Busca na web vêm desativadas; Anexar arquivos, ativada.\n• "Mensagens por estudante e dia": 50 por padrão.\n• IA para convidados: vale para quem entrou pelo link público. Vem desativada.\n• Pausar a IA: no fim da página, para cortá-la temporariamente, por exemplo durante uma prova.'},
+        {'t': 'Exportação e arquivamento', 'b': 'O último passo do curso: exportar ou arquivar.\n• Exportar: cópia completa em ZIP, IMS Common Cartridge ou cópia de segurança do Moodle (.mbz).\n• Arquivar: o curso sai da sua lista. Antes, confira se você não precisa dele para outra turma.\n• "Excluir curso" não aparece nos passos normais: não tem volta.'},
+    ],
+})

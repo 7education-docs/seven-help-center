@@ -49,6 +49,7 @@ def main() -> None:
     apply_numbered(merged)
     content.apply_course_merge(merged)
     content.apply_article_merges(merged)
+    content.apply_course_groups(merged)
     ser = json.dumps(merged, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     open(out_path, 'w', encoding='utf-8').write(built[:bs] + ser + built[be:])
     print(f'✓ {out_path}: datos de artículos de la versión publicada + plantilla y vídeos nuevos')

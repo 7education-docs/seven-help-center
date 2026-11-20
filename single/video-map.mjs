@@ -2,7 +2,7 @@
 // file = nombre base en video/review/<es|pt-br>/. Los casos de uso sustituyen a los recorridos en su artículo.
 export const VIDEO_FOR_ARTICLE = {
   // Consulta rápida: los pasos van primero y el vídeo después (after: true).
-  'participantes-citas': { file: 'cita', after: true, label: { es: 'Crear una cita', pt: 'Criar um compromisso' } },
+  'participantes-citas': { file: 'cita', label: { es: 'Crear una cita', pt: 'Criar um compromisso' } },
   'serie-de-lecciones': { file: 'serie', label: { es: 'Crear una serie de lecciones', pt: 'Criar uma série de aulas' } },
   'tarea-correccion-biblioteca': { file: 'tarea', label: { es: 'Crear una tarea de corrección', pt: 'Criar uma tarefa de correção' } },
   'crear-asistente': { file: 'asistente', label: { es: 'Crear un asistente', pt: 'Criar um assistente' } },
