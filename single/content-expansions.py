@@ -519,6 +519,8 @@ def apply_article_merges(merged: dict) -> None:
             for key in ('title', 'answer', 'example', 'tips'):
                 if key in txt:
                     art[key] = txt[key]
+            if 'related' in txt:
+                art['related'] = list(txt['related'])
             if 'stepImg' in txt:
                 art['stepImg'] = dict(txt['stepImg'])
             if 'img' in txt:
@@ -663,3 +665,9 @@ MERGE_TEXT['pt-BR']['configuracion-del-curso'].update({
         {'t': 'Exportação e arquivamento', 'b': 'O último passo do curso: exportar ou arquivar.\n• Exportar: cópia completa em ZIP, IMS Common Cartridge ou cópia de segurança do Moodle (.mbz).\n• Arquivar: o curso sai da sua lista. Antes, confira se você não precisa dele para outra turma.\n• "Excluir curso" não aparece nos passos normais: não tem volta.'},
     ],
 })
+
+
+# Artículos relacionados de Organizar el curso: los de actividades y materiales.
+_REL_SECCIONES = ['agregar-material-archivo', 'texto-material', 'enlace-y-nota', 'entrega', 'tarea-con-comentarios', 'agente-de-ia']
+MERGE_TEXT['es']['secciones']['related'] = list(_REL_SECCIONES)
+MERGE_TEXT['pt-BR']['secciones']['related'] = list(_REL_SECCIONES)
