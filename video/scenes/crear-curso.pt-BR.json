@@ -196,7 +196,13 @@
         {
           "do": "click",
           "selector": "button:has-text(\"Criar plano\")"
-        },
+        }
+      ]
+    },
+    {
+      "id": "plano",
+      "say": "A IA monta as seções em poucos segundos, cada uma com os seus conteúdos. Revise o plano antes de criar o curso.",
+      "actions": [
         {
           "do": "waitFor",
           "selector": "text=A criar o plano"
