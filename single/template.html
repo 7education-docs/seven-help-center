@@ -349,7 +349,7 @@ const DATA = /*__DATA__*/null;
   function articleView(loc, id) {
     const a = article(loc, id); if (!a) return notFound(loc);
     const u = U(loc), c = category(loc, a.cat), d = D(loc);
-    const inStep = Object.values(a.stepImg || {}); const figs = (a.img || []).filter((n) => d.shots[n] && inStep.indexOf(n) < 0).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '"><figcaption>' + esc(d.alt[n] || '') + '</figcaption></figure>').join('');
+    const inStep = Object.values(a.stepImg || {}).concat((a.sections || []).map((x) => x.i).filter(Boolean)); const figs = (a.img || []).filter((n) => d.shots[n] && inStep.indexOf(n) < 0).map((n) => '<figure><img src="' + d.shots[n] + '" alt="' + esc(d.alt[n] || a.title) + '"><figcaption>' + esc(d.alt[n] || '') + '</figcaption></figure>').join('');
     const related = (a.related || []).map((r) => article(loc, r)).filter(Boolean).map((r) => '<li><a href="' + href(loc, 'art-' + r.id) + '">' + esc(r.title) + '</a></li>').join('');
     const faqRel = (a.faqRelated || []).map((id) => article(loc, id)).filter(Boolean).map((f) => '<li><a href="' + href(loc, 'cat-faq~q-' + f.id) + '">' + esc(f.title) + '</a></li>').join('');
     return '<main class="wrap" id="main" tabindex="-1">' + crumbs(loc, [{ label: c.name, href: href(loc, 'cat-' + c.id) }, { label: a.title }]) +
@@ -359,7 +359,7 @@ const DATA = /*__DATA__*/null;
       (a.table ? '<section class="block"><div class="tbl-wrap"><table class="tbl"><thead><tr>' + a.table.head.map((x) => '<th scope="col">' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' + a.table.rows.map((r) => '<tr>' + r.map((x) => '<td>' + esc(x) + '</td>').join('') + '</tr>').join('') + '</tbody></table></div></section>' : '') +
       (d.videos && d.videos[a.id] && !d.videos[a.id].after ? videoBlock(d, a.id, u) : '') +
       (a.steps && a.steps.length ? '<section class="block"><h2>' + esc(u.steps) + '</h2><div class="steps">' + a.steps.map((s, i) => '<div class="step-item"><span class="step-n" aria-hidden="true">' + (i + 1) + '</span><h3>' + esc(s.t) + '</h3>' + stepBody(s.b) + '' + (a.stepImg && a.stepImg[i + 1] && d.shots[a.stepImg[i + 1]] ? '<figure class="step-shot"><img src="' + d.shots[a.stepImg[i + 1]] + '" alt="' + esc(d.alt[a.stepImg[i + 1]] || '') + '" loading="lazy"></figure>' : '') + '</div>').join('') + '</div></section>' : '') +
-      (a.sections && a.sections.length ? a.sections.map((x) => '<section class="block"><h2>' + esc(x.h) + '</h2>' + stepBody(x.b) + '</section>').join('') : '') +
+      (a.sections && a.sections.length ? a.sections.map((x) => '<section class="block"><h2>' + esc(x.h) + '</h2>' + stepBody(x.b) + (x.i && d.shots[x.i] ? '<figure><img src="' + d.shots[x.i] + '" alt="' + esc(d.alt[x.i] || x.h) + '"><figcaption>' + esc(d.alt[x.i] || '') + '</figcaption></figure>' : '') + '</section>').join('') : '') +
       (figs ? '<div class="block">' + figs + '</div>' : '') +
       (d.videos && d.videos[a.id] && d.videos[a.id].after ? videoBlock(d, a.id, u) : '') +
       (a.tips && a.tips.length ? '<aside class="tips" aria-label="' + esc(u.tips) + '"><strong>' + esc(u.tips) + '</strong><ul>' + a.tips.map((t) => '<li>' + esc(t) + '</li>').join('') + '</ul></aside>' : '') +

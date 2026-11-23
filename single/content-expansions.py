@@ -1233,3 +1233,10 @@ MERGE_TEXT['pt-BR']['que-es']['sections'] = [{'h': 'O que você pode fazer',
  {'h': 'Menu da conta',
   'b': 'Fica no avatar, embaixo à esquerda. Dali você acessa Configurações, troca o idioma e gerencia as pastas compartilhadas, e é também a opção para sair em um computador que '
        'não é seu.'}]
+
+# La captura de la barra lateral va dentro de su apartado
+for _lang, _key in (('es', 'es__que-es__inicio'), ('pt-BR', 'pt__que-es__pt-inicio')):
+    for _sec in MERGE_TEXT[_lang]['que-es']['sections']:
+        if _sec['h'] in ('Cómo moverte por la barra lateral', 'Como se mover pela barra lateral'):
+            _sec['i'] = _key
+    MERGE_TEXT[_lang]['que-es']['img'] = [_key]
