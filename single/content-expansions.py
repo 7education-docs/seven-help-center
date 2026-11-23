@@ -915,3 +915,40 @@ _pt_pv = MERGE_TEXT['pt-BR'].setdefault('plantillas-vs-asistentes', {})
 _pt_pv['img'] = ['pt-plantillas-asistentes-recorte']
 _pt_pv['stepImg'] = {'2': 'pt-plantillas-asistentes-recorte'}
 _pt_pv.setdefault('shots', {})['pt-plantillas-asistentes-recorte'] = 'Lista de modelos, con los assistentes de prática de laboratório'
+
+
+# Más capturas, misma cantidad en ambos idiomas (revisión final)
+# Tarea con comentarios: selector de la biblioteca (paso 3) y tarea elegida (paso 4), más la vista general
+PT_TAREA_STEPS = [{'t': 'Adicionar atividade ou material', 'b': 'Confirme em qual seção você está antes de continuar, porque é nela que a tarefa vai aparecer.'}, {'t': 'Escolher Tarefa com feedback', 'b': 'Selecione esse tipo para indicar que a atividade será devolvida com feedback. O título da janela mostra a seção de destino, e vale conferi-lo antes de seguir.'}, {'t': 'Escolher da biblioteca', 'b': 'Aqui aparecem as tarefas que você já criou na Biblioteca. Se aparecer "Sua biblioteca ainda não tem nada desse tipo", crie primeiro a tarefa de correção.'}, {'t': 'Selecionar e adicionar', 'b': 'A tarefa entra na seção com o seu tipo, e o curso fica com a cópia. Se você ajustar a tarefa na Biblioteca depois, lembre-se de que a mudança não chega ao curso sozinha.'}]
+MERGE_TEXT['pt-BR'].setdefault('tarea-con-comentarios', {})
+MERGE_TEXT['pt-BR']['tarea-con-comentarios']['steps'] = PT_TAREA_STEPS
+MERGE_TEXT['pt-BR']['tarea-con-comentarios']['img'] = ['pt-tarea-elegir-biblioteca', 'pt-tarea-elegida', 'pt-bio-vista-general-con-tarea']
+MERGE_TEXT['pt-BR']['tarea-con-comentarios']['stepImg'] = {'3': 'pt-tarea-elegir-biblioteca', '4': 'pt-tarea-elegida'}
+MERGE_TEXT['pt-BR']['tarea-con-comentarios']['shots'] = {
+    'pt-tarea-elegir-biblioteca': 'Janela Adicionar a «Geral» com a lista Escolher da biblioteca e as tarefas criadas',
+    'pt-tarea-elegida': 'Mesma janela com a tarefa escolhida marcada e o botão Adicionar',
+    'pt-bio-vista-general-con-tarea': 'Visão geral do curso com a tarefa com feedback na seção',
+}
+MERGE_TEXT['es']['tarea-con-comentarios']['img'] = ['es__tarea-con-comentarios__tarea-elegir-biblioteca', 'es__tarea-con-comentarios__tarea-elegida', 'bio-vista-general-con-tarea']
+MERGE_TEXT['es']['tarea-con-comentarios']['stepImg'] = {'3': 'es__tarea-con-comentarios__tarea-elegir-biblioteca', '4': 'es__tarea-con-comentarios__tarea-elegida'}
+# Citas: pestaña, formulario y cita guardada en ambos idiomas
+_CITAS_ES_GUARDADA = 'es__participantes-citas__es-cita-guardada'
+MERGE_TEXT['es']['participantes-citas']['img'] = [_CITAS_ES_A, _CITAS_ES_B, _CITAS_ES_GUARDADA]
+MERGE_TEXT['es']['participantes-citas']['shots'][_CITAS_ES_GUARDADA] = 'La cita guardada aparece en la lista de próximos'
+MERGE_TEXT['pt-BR'].setdefault('participantes-citas', {})
+MERGE_TEXT['pt-BR']['participantes-citas']['img'] = ['pt__participantes-citas__pt-cita-pestana', 'pt__participantes-citas__pt-cita-formulario', 'pt__participantes-citas__pt-cita-guardada']
+MERGE_TEXT['pt-BR']['participantes-citas']['stepImg'] = {'2': 'pt__participantes-citas__pt-cita-pestana', '4': 'pt__participantes-citas__pt-cita-formulario'}
+MERGE_TEXT['pt-BR']['participantes-citas']['shots'] = {
+    'pt__participantes-citas__pt-cita-pestana': 'Separador Citas do curso com o botão Criar cita no passo 2',
+    'pt__participantes-citas__pt-cita-formulario': 'Formulário Criar cita com os campos e o botão Guardar no passo 4',
+    'pt__participantes-citas__pt-cita-guardada': 'A cita guardada aparece na lista de próximos',
+}
+# Plantillas vs asistentes: la biblioteca de plantillas en español; en portugués, el formulario de creación del asistente
+MERGE_TEXT['es']['plantillas-vs-asistentes']['img'] = ['es__plantillas-vs-asistentes__plantillas-asistentes', 'es__plantillas-vs-asistentes__plantillas-curso']
+MERGE_TEXT['es']['plantillas-vs-asistentes']['stepImg'] = {'1': 'es__plantillas-vs-asistentes__plantillas-curso', '2': 'es__plantillas-vs-asistentes__plantillas-asistentes'}
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['img'] = ['pt-plantillas-asistentes-recorte', 'pt__crear-asistente__pt-asistente-formulario']
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['stepImg'] = {'2': 'pt-plantillas-asistentes-recorte'}
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['shots'] = {
+    'pt-plantillas-asistentes-recorte': 'Lista de modelos com dois assistentes de práticas de laboratório',
+    'pt__crear-asistente__pt-asistente-formulario': 'Formulário Criar modelo: nome, ferramentas e instrução',
+}
