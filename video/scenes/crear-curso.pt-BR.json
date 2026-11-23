@@ -284,11 +284,6 @@
           "ms": 900
         },
         {
-          "do": "caption",
-          "text": "3 · Verificar e criar",
-          "step": ""
-        },
-        {
           "do": "wait",
           "ms": 1500
         },
