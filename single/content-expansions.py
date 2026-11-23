@@ -581,6 +581,10 @@ MERGE_TEXT['pt-BR']['serie-de-lecciones'] = {
     ],
     'stepImg': {'2': 'pt__serie-de-lecciones__pt-serie-lista', '4': 'pt__serie-de-lecciones__pt-serie-completo'},
     'img': ['pt__serie-de-lecciones__pt-serie-lista', 'pt__serie-de-lecciones__pt-serie-completo'],
+    'shots': {
+        'pt__serie-de-lecciones__pt-serie-lista': 'Biblioteca de séries de lições com os passos 1 e 2: o ícone da Biblioteca e o botão Criar',
+        'pt__serie-de-lecciones__pt-serie-completo': 'Formulário Criar série de lições com os passos 1 a 4: título, tema e botão Criar',
+    },
 }
 MERGE_TEXT['pt-BR']['serie-campos'] = {
     'stepImg': {'4': 'pt__serie-campos__pt-serie-formulario-completo'},
