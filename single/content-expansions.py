@@ -888,3 +888,30 @@ MERGE_TEXT['pt-BR'].setdefault('que-es', {})
 MERGE_TEXT['pt-BR']['que-es']['img'] = ['pt__que-es__pt-inicio']
 MERGE_TEXT['pt-BR']['que-es']['stepImg'] = {'7': 'pt__que-es__pt-inicio'}
 MERGE_TEXT['pt-BR']['que-es']['shots'] = {'pt__que-es__pt-inicio': 'Início do assistente com a barra lateral: conversas, cursos, biblioteca, administração e o perfil no passo 7'}
+
+# Paridad final de capturas (mismo número en español y portugués)
+# Crear asistente: el estado guardado en portugués (sin nombres en español)
+_pt_ca = MERGE_TEXT['pt-BR'].setdefault('crear-asistente', {})
+_pt_ca['img'] = ['pt__crear-asistente__pt-asistente-formulario', 'pt-asistente-guardado']
+_pt_ca['stepImg'] = {'4': 'pt__crear-asistente__pt-asistente-formulario', '5': 'pt-asistente-guardado'}
+_pt_ca.setdefault('shots', {})['pt-asistente-guardado'] = 'Lista de modelos com o assistente guardado, com o nome, a descrição e os botões de ação'
+# Ficha interactiva: la pantalla de fuentes en portugués
+_pt_fi = MERGE_TEXT['pt-BR'].setdefault('ficha-interactiva', {})
+_pt_fi['img'] = ['pt__ficha-interactiva__pt-ficha-paso1', 'pt-ficha-paso2-fuentes']
+_pt_fi['stepImg'] = {'4': 'pt__ficha-interactiva__pt-ficha-paso1', '2': 'pt-ficha-paso2-fuentes'}
+_pt_fi.setdefault('shots', {})['pt-ficha-paso2-fuentes'] = 'Segundo passo de Criar ficha de trabalho, com a área para escolher documentos fonte da biblioteca'
+# Tarea con comentarios: el español se queda con la vista general, igual que el portugués
+MERGE_TEXT['es'].setdefault('tarea-con-comentarios', {})
+MERGE_TEXT['es']['tarea-con-comentarios']['img'] = ['bio-vista-general-con-tarea']
+MERGE_TEXT['es']['tarea-con-comentarios']['stepImg'] = {}
+# Plantillas: la lista de modelos en portugués (recorte sin el modelo en español)
+_pt_pn = MERGE_TEXT['pt-BR'].setdefault('plantilla-nombrar', {})
+_pt_pn['img'] = ['pt-plantillas-asistentes-recorte']
+_pt_pn.setdefault('shots', {})['pt-plantillas-asistentes-recorte'] = 'Lista de modelos com dois assistentes de laboratório, cada um com o nome, a descrição e a etiqueta Criar H5P'
+MERGE_TEXT['es'].setdefault('plantillas-vs-asistentes', {})
+MERGE_TEXT['es']['plantillas-vs-asistentes']['img'] = ['es__plantillas-vs-asistentes__plantillas-asistentes']
+MERGE_TEXT['es']['plantillas-vs-asistentes']['stepImg'] = {'2': 'es__plantillas-vs-asistentes__plantillas-asistentes'}
+_pt_pv = MERGE_TEXT['pt-BR'].setdefault('plantillas-vs-asistentes', {})
+_pt_pv['img'] = ['pt-plantillas-asistentes-recorte']
+_pt_pv['stepImg'] = {'2': 'pt-plantillas-asistentes-recorte'}
+_pt_pv.setdefault('shots', {})['pt-plantillas-asistentes-recorte'] = 'Lista de modelos, con los assistentes de prática de laboratório'
