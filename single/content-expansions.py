@@ -526,6 +526,8 @@ def apply_article_merges(merged: dict) -> None:
                 art['stepImg'] = dict(txt['stepImg'])
             if 'img' in txt:
                 art['img'] = list(txt['img'])
+            if 'sections' in txt:
+                art['sections'] = [dict(x) for x in txt['sections']]
             for k, alt in (txt.get('shots') or {}).items():
                 merged[loc].setdefault('shots', {})[k] = f'shots/{k}.jpg'
                 merged[loc].setdefault('alt', {})[k] = alt
@@ -546,7 +548,7 @@ MERGE_TEXT['pt-BR']['serie-de-lecciones'] = {
 }
 MERGE_TEXT['es']['serie-de-lecciones'] = {
     'title': 'Crear una serie de lecciones',
-    'answer': 'Una serie de lecciones es una secuencia de sesiones sobre un tema, con su progresión y su evaluación. Sirve para planificar un tema completo de una vez, en lugar de preparar cada clase por separado, y para ajustarla y reutilizarla el año siguiente.',
+    'answer': 'Una serie de lecciones es una secuencia de sesiones sobre un tema, con su progresión y su evaluación. Sirve para planificar un tema completo de una vez, en lugar de preparar cada clase por separado, y para reutilizarla el año siguiente.',
     'example': "Para una serie de 'Introducción al cálculo integral' rellenas Tema, Asignatura 'Matemáticas', Curso '1.º de bachillerato' y, en Descripción, indicas que el alumnado ya conoce las derivadas. Con esos datos la serie sale a su nivel y después la encuentras por asignatura.",
     'tips': ['Describe las sesiones y la evaluación en la Descripción: así la serie sirve para programar.'],
     'steps': [
@@ -554,15 +556,17 @@ MERGE_TEXT['es']['serie-de-lecciones'] = {
         {'t': 'Pulsa Crear', 'b': 'Crear abre el formulario. La serie nace vacía y añades cada lección tú. Si quieres que la IA la genere entera, usa Generar con IA.'},
         {'t': 'Rellena el formulario', 'b': 'Tema es obligatorio. Asignatura, Curso e Idioma ayudan a encontrar la serie y a adaptarla al grupo. En la Descripción indicas las sesiones y la evaluación.'},
         {'t': 'Pulsa Crear', 'b': 'La serie aparece en tu lista. Ábrela cuando quieras revisar o ajustar sus sesiones.'},
-        {'t': 'Qué significa cada campo', 'b': 'Tema: el tema de la serie, obligatorio. Asignatura y Curso: sirven para encontrarla después por asignatura o curso. Idioma: el idioma en que se genera el contenido. Descripción: cuanto más concreta, mejor encaja la serie con tu grupo.'},
-        {'t': 'Ajustar una serie', 'b': 'Cuando la primera versión no encaja (más sesiones de las que das, otro nivel o otra evaluación), pide los cambios en una conversación, de uno en uno, y revisa la progresión antes de guardar la versión final.'},
+    ],
+    'sections': [
+        {'h': 'Qué significa cada campo', 'b': 'Tema: el tema de la serie, obligatorio. Asignatura y Curso: sirven para encontrarla después por asignatura o curso. Idioma: el idioma en que se genera el contenido. Descripción: cuanto más concreta, mejor encaja la serie con tu grupo.'},
+        {'h': 'Ajustar una serie', 'b': 'Cuando la primera versión no encaja (más sesiones de las que das, otro nivel o otra evaluación), pide los cambios en una conversación, de uno en uno, y revisa la progresión antes de guardar la versión final.'},
     ],
     'stepImg': {'2': 'es__serie-de-lecciones__es-serie-lista', '4': 'es__serie-de-lecciones__es-serie-completo'},
     'img': ['es__serie-de-lecciones__es-serie-lista', 'es__serie-de-lecciones__es-serie-completo'],
 }
 MERGE_TEXT['pt-BR']['serie-de-lecciones'] = {
     'title': 'Criar uma série de aulas',
-    'answer': 'Uma série de aulas é uma sequência de sessões sobre um tema, criada na Biblioteca para planejar um conjunto de aulas de uma vez. Serve para planejar o tema inteiro antes de começar, e para ajustá-la e reutilizá-la no ano seguinte.',
+    'answer': 'Uma série de aulas é uma sequência de sessões sobre um tema, criada na Biblioteca para planejar um conjunto de aulas de uma vez. Serve para planejar o tema inteiro antes de começar, e para reutilizá-la no ano seguinte.',
     'example': "Para uma série de 'Introdução ao cálculo integral', você preenche Tema, Disciplina 'Matemática', Curso '1.º ano do ensino médio' e, na Descrição, escreve que a turma já conhece derivadas. Com esses dados a série sai no nível certo, e depois você a encontra por disciplina.",
     'tips': ['Descreva as sessões e a avaliação na Descrição: assim a série serve para programar.'],
     'steps': [
@@ -570,8 +574,10 @@ MERGE_TEXT['pt-BR']['serie-de-lecciones'] = {
         {'t': 'Clique em Criar', 'b': 'Criar abre o formulário. A série nasce vazia e você acrescenta cada lição. Se quiser que a IA gere tudo, use Gerar com IA.'},
         {'t': 'Preencha o formulário', 'b': 'Tema é obrigatório. Disciplina, Curso e Idioma ajudam a encontrar a série e a adaptá-la à turma. Na Descrição, indique as sessões e a avaliação.'},
         {'t': 'Clique em Criar', 'b': 'A série aparece na sua lista. Abra-a quando quiser revisar ou ajustar as sessões.'},
-        {'t': 'O que significa cada campo', 'b': 'Tema: o tema da série, obrigatório. Disciplina e Curso: ajudam a encontrá-la depois por disciplina ou curso. Idioma: o idioma em que o conteúdo é gerado. Descrição: quanto mais concreta, melhor a série se encaixa na sua turma.'},
-        {'t': 'Ajustar uma série', 'b': 'Quando a primeira versão não encaixa (mais sessões do que você dá, outro nível ou outra avaliação), peça as mudanças em uma conversa, uma de cada vez, e revise a progressão antes de guardar a versão final.'},
+    ],
+    'sections': [
+        {'h': 'O que significa cada campo', 'b': 'Tema: o tema da série, obrigatório. Disciplina e Curso: ajudam a encontrá-la depois por disciplina ou curso. Idioma: o idioma em que o conteúdo é gerado. Descrição: quanto mais concreta, melhor a série se encaixa na sua turma.'},
+        {'h': 'Ajustar uma série', 'b': 'Quando a primeira versão não encaixa (mais sessões do que você dá, outro nível ou outra avaliação), peça as mudanças em uma conversa, uma de cada vez, e revise a progressão antes de guardar a versão final.'},
     ],
     'stepImg': {'2': 'pt__serie-de-lecciones__pt-serie-lista', '4': 'pt__serie-de-lecciones__pt-serie-completo'},
     'img': ['pt__serie-de-lecciones__pt-serie-lista', 'pt__serie-de-lecciones__pt-serie-completo'],
