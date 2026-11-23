@@ -537,6 +537,14 @@ MERGE_TEXT['es']['crear-curso'] = {
 }
 MERGE_TEXT['pt-BR']['crear-curso'] = {
     'example': 'Um departamento de Matemática tem três turmas do 8.º ano. Um dos docentes prepara o curso da primeira turma, com as seções e os materiais, e cria um curso para cada uma das outras duas, com o mesmo padrão de nome. Cada turma entra com o seu próprio código, e o departamento sabe sempre qual é o curso de cada turma.',
+    'stepImg': {'1': 'pt__crear-curso__pt-cursos-lista', '2': 'pt__crear-curso__pt-curso-crear-paso1', '3': 'pt__crear-curso__pt-curso-crear-paso2', '5': 'pt__importar-curso__pt-cursos-lista'},
+    'img': ['pt__crear-curso__pt-cursos-lista', 'pt__crear-curso__pt-curso-crear-paso1', 'pt__crear-curso__pt-curso-crear-paso2', 'pt__importar-curso__pt-cursos-lista'],
+    'shots': {
+        'pt__crear-curso__pt-cursos-lista': 'Lista de cursos com o botão Criar curso (passo 1) e Importar curso',
+        'pt__crear-curso__pt-curso-crear-paso1': 'Formulário Criar curso com o passo 1: dados básicos',
+        'pt__crear-curso__pt-curso-crear-paso2': 'Passo 2 de Criar curso: escolher conteúdo, com a aba Vazio',
+        'pt__importar-curso__pt-cursos-lista': 'Lista de cursos com o botão Importar curso',
+    },
 }
 MERGE_TEXT['pt-BR']['serie-de-lecciones'] = {
     'stepImg': {'2': 'pt__serie-de-lecciones__pt-serie-lista', '4': 'pt__serie-de-lecciones__pt-serie-completo'},
