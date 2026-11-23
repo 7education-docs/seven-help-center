@@ -825,3 +825,30 @@ def apply_link_fix(merged: dict) -> None:
                     if r2 in ids and r2 != a['id'] and r2 not in fixed:
                         fixed.append(r2)
                 a[field] = fixed
+
+
+# Capturas en portugués equivalentes a las españolas (misma pantalla y mismo paso numerado).
+def _pt_shots(article, mapping, alts):
+    MERGE_TEXT['pt-BR'].setdefault(article, {})
+    MERGE_TEXT['pt-BR'][article]['img'] = list(mapping.values())
+    MERGE_TEXT['pt-BR'][article]['stepImg'] = {str(k): v for k, v in mapping.items()}
+    MERGE_TEXT['pt-BR'][article]['shots'] = {v: alts[v] for v in mapping.values()}
+
+_pt_shots('buscar-contenido', {1: 'pt__buscar-contenido__pt-biblioteca'},
+          {'pt__buscar-contenido__pt-biblioteca': 'Biblioteca com a pesquisa de todo o conteúdo no passo 1'})
+_pt_shots('beta', {1: 'pt__beta__pt-menu-cuenta'},
+          {'pt__beta__pt-menu-cuenta': 'Menu da conta com o item O que há de novo no passo 1'})
+_pt_shots('idioma-no-cambia', {1: 'pt__idioma-no-cambia__pt-menu-idioma'},
+          {'pt__idioma-no-cambia__pt-menu-idioma': 'Menu da conta com a opção Idioma e a lista de idiomas'})
+_pt_shots('unirse-curso', {1: 'pt__unirse-curso__pt-unirse-dialogo'},
+          {'pt__unirse-curso__pt-unirse-dialogo': 'Diálogo Aderir a um curso com o campo do código de adesão no passo 1'})
+_pt_shots('subir-documento', {1: 'pt__subir-documento__pt-biblioteca-inicio', 2: 'pt__subir-documento__pt-biblioteca-documentos'},
+          {'pt__subir-documento__pt-biblioteca-inicio': 'Biblioteca com o cartão Carregar documento no passo 1',
+           'pt__subir-documento__pt-biblioteca-documentos': 'Minha biblioteca com o botão Conteúdo e a pesquisa de documentos nos passos 1 e 2'})
+
+_pt_shots('tarea-correccion-biblioteca', {1: 'pt__tarea-correccion-biblioteca__pt-tarea-lista', 5: 'pt__tarea-correccion-biblioteca__pt-tarea-formulario'},
+          {'pt__tarea-correccion-biblioteca__pt-tarea-lista': 'Lista de Tarefas de correção e feedback com o botão Criar no passo 1',
+           'pt__tarea-correccion-biblioteca__pt-tarea-formulario': 'Formulário Criar tarefa de feedback com título, descrição, solução modelo e botão Criar'})
+MERGE_TEXT['pt-BR'].setdefault('tarea-calibrar', {})
+MERGE_TEXT['pt-BR']['tarea-calibrar']['img'] = ['pt-tarea-lista']
+MERGE_TEXT['pt-BR']['tarea-calibrar']['shots'] = {'pt-tarea-lista': 'Lista de Tarefas de correção e feedback com as tarefas criadas'}
