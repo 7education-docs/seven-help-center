@@ -852,3 +852,39 @@ _pt_shots('tarea-correccion-biblioteca', {1: 'pt__tarea-correccion-biblioteca__p
 MERGE_TEXT['pt-BR'].setdefault('tarea-calibrar', {})
 MERGE_TEXT['pt-BR']['tarea-calibrar']['img'] = ['pt-tarea-lista']
 MERGE_TEXT['pt-BR']['tarea-calibrar']['shots'] = {'pt-tarea-lista': 'Lista de Tarefas de correção e feedback com as tarefas criadas'}
+
+# Conversas e ferramentas: capturas em portugués equivalentes às espanholas
+MERGE_TEXT['pt-BR'].setdefault('hacer-pregunta', {})
+MERGE_TEXT['pt-BR']['hacer-pregunta']['img'] = ['pt__hacer-pregunta__pt-conversa-inicio', 'pt-conversa-respuesta']
+MERGE_TEXT['pt-BR']['hacer-pregunta']['stepImg'] = {'3': 'pt__hacer-pregunta__pt-conversa-inicio'}
+MERGE_TEXT['pt-BR']['hacer-pregunta']['shots'] = {'pt__hacer-pregunta__pt-conversa-inicio': 'Tela inicial do chat com o campo de pergunta, o botão de ferramentas e o botão de enviar', 'pt-conversa-respuesta': 'Resposta do assistente na conversa'}
+MERGE_TEXT['pt-BR'].setdefault('conversacion-contexto', {})
+MERGE_TEXT['pt-BR']['conversacion-contexto']['img'] = ['pt-conversaciones']
+MERGE_TEXT['pt-BR']['conversacion-contexto']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['conversacion-contexto']['shots'] = {'pt-conversaciones': 'Lista de conversas com a conversa criada'}
+MERGE_TEXT['pt-BR'].setdefault('respuesta-no-correcta', {})
+MERGE_TEXT['pt-BR']['respuesta-no-correcta']['img'] = ['pt-conversaciones']
+MERGE_TEXT['pt-BR']['respuesta-no-correcta']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['respuesta-no-correcta']['shots'] = {'pt-conversaciones': 'Lista de conversas com a conversa criada'}
+MERGE_TEXT['pt-BR'].setdefault('conversacion-modos', {})
+MERGE_TEXT['pt-BR']['conversacion-modos']['img'] = ['pt__conversacion-modos__pt-modos']
+MERGE_TEXT['pt-BR']['conversacion-modos']['stepImg'] = {'2': 'pt__conversacion-modos__pt-modos'}
+MERGE_TEXT['pt-BR']['conversacion-modos']['shots'] = {'pt__conversacion-modos__pt-modos': 'Lista de modos de conversa com Dinâmico, Padrão e as ferramentas'}
+MERGE_TEXT['pt-BR'].setdefault('herramientas-asistente', {})
+MERGE_TEXT['pt-BR']['herramientas-asistente']['img'] = ['pt__herramientas-asistente__pt-herramientas', 'pt__herramientas-asistente__pt-modos']
+MERGE_TEXT['pt-BR']['herramientas-asistente']['stepImg'] = {'4': 'pt__herramientas-asistente__pt-herramientas', '3': 'pt__herramientas-asistente__pt-modos'}
+MERGE_TEXT['pt-BR']['herramientas-asistente']['shots'] = {'pt__herramientas-asistente__pt-herramientas': 'Menu de ferramentas do assistente com Gerir biblioteca e Criar H5P', 'pt__herramientas-asistente__pt-modos': 'Modos de conversa com o seletor de ferramentas e o botão de ferramentas'}
+_CHAT_PT_OK = True
+
+# Citas: misma pareja de capturas que en español (sin la de cita guardada)
+MERGE_TEXT['pt-BR'].setdefault('participantes-citas', {})
+MERGE_TEXT['pt-BR']['participantes-citas']['img'] = ['pt__participantes-citas__pt-cita-pestana', 'pt__participantes-citas__pt-cita-formulario']
+MERGE_TEXT['pt-BR']['participantes-citas']['stepImg'] = {'2': 'pt__participantes-citas__pt-cita-pestana', '4': 'pt__participantes-citas__pt-cita-formulario'}
+MERGE_TEXT['pt-BR']['participantes-citas']['shots'] = {
+    'pt__participantes-citas__pt-cita-pestana': 'Separador Citas do curso com o botão Criar cita no passo 2',
+    'pt__participantes-citas__pt-cita-formulario': 'Formulário Criar cita com os campos e o botão Guardar no passo 4'}
+# Qué es: pantalla de inicio con la barra lateral numerada (paso 7 en la versión española)
+MERGE_TEXT['pt-BR'].setdefault('que-es', {})
+MERGE_TEXT['pt-BR']['que-es']['img'] = ['pt__que-es__pt-inicio']
+MERGE_TEXT['pt-BR']['que-es']['stepImg'] = {'7': 'pt__que-es__pt-inicio'}
+MERGE_TEXT['pt-BR']['que-es']['shots'] = {'pt__que-es__pt-inicio': 'Início do assistente com a barra lateral: conversas, cursos, biblioteca, administração e o perfil no passo 7'}
