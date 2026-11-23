@@ -535,6 +535,10 @@ def apply_article_merges(merged: dict) -> None:
 MERGE_TEXT['es']['crear-curso'] = {
     'example': 'Un departamento de Matemáticas tiene tres grupos de 2.º de ESO. Uno de sus docentes prepara el curso del primer grupo, con sus secciones y materiales, y crea un curso para cada uno de los otros dos grupos con el mismo formato de nombre. Cada grupo entra con su propio código, y el departamento sabe siempre cuál es el curso de cada clase.',
 }
+MERGE_TEXT['es']['crear-curso'] = {
+    'stepImg': {'1': 'es__crear-curso__cursos-lista', '2': 'es__crear-curso__curso-crear-paso1', '3': 'es__crear-curso__curso-crear-paso2', '5': 'es__importar-curso__cursos-lista'},
+    'img': ['es__crear-curso__cursos-lista', 'es__crear-curso__curso-crear-paso1', 'es__crear-curso__curso-crear-paso2', 'es__importar-curso__cursos-lista'],
+}
 MERGE_TEXT['pt-BR']['crear-curso'] = {
     'example': 'Um departamento de Matemática tem três turmas do 8.º ano. Um dos docentes prepara o curso da primeira turma, com as seções e os materiais, e cria um curso para cada uma das outras duas, com o mesmo padrão de nome. Cada turma entra com o seu próprio código, e o departamento sabe sempre qual é o curso de cada turma.',
     'stepImg': {'1': 'pt__crear-curso__pt-cursos-lista', '2': 'pt__crear-curso__pt-curso-crear-paso1', '3': 'pt__crear-curso__pt-curso-crear-paso2', '5': 'pt__importar-curso__pt-cursos-lista'},
