@@ -535,6 +535,21 @@ MERGE_TEXT['es']['crear-curso'] = {
 MERGE_TEXT['pt-BR']['crear-curso'] = {
     'example': 'Um departamento de Matemática tem três turmas do 8.º ano. Um dos docentes prepara o curso da primeira turma, com as seções e os materiais, e cria um curso para cada uma das outras duas, com o mesmo padrão de nome. Cada turma entra com o seu próprio código, e o departamento sabe sempre qual é o curso de cada turma.',
 }
+MERGE_TEXT['pt-BR']['serie-de-lecciones'] = {
+    'stepImg': {'2': 'pt__serie-de-lecciones__pt-serie-lista', '4': 'pt__serie-de-lecciones__pt-serie-completo'},
+    'img': ['pt__serie-de-lecciones__pt-serie-lista', 'pt__serie-de-lecciones__pt-serie-completo'],
+    'shots': {
+        'pt__serie-de-lecciones__pt-serie-lista': 'Biblioteca de séries de lições com os passos 1 e 2: o ícone da Biblioteca e o botão Criar',
+        'pt__serie-de-lecciones__pt-serie-completo': 'Formulário Criar série de lições com os passos 1 a 4: título, tema e botão Criar',
+    },
+}
+MERGE_TEXT['pt-BR']['serie-campos'] = {
+    'stepImg': {'4': 'pt__serie-campos__pt-serie-formulario-completo'},
+    'img': ['pt__serie-campos__pt-serie-formulario-completo'],
+    'shots': {
+        'pt__serie-campos__pt-serie-formulario-completo': 'Formulário Criar série de lições com o passo 4: botão Criar',
+    },
+}
 
 
 # Sección «Organizar el curso»: 6 pasos reales. Los tipos de actividad se explican dentro del paso 5.
