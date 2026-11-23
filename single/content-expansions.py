@@ -952,3 +952,10 @@ MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['shots'] = {
     'pt-plantillas-asistentes-recorte': 'Lista de modelos com dois assistentes de práticas de laboratório',
     'pt__crear-asistente__pt-asistente-formulario': 'Formulário Criar modelo: nome, ferramentas e instrução',
 }
+
+# Revisión de paridad: la misma pantalla de inicio de conversaciones en ambos idiomas
+for _art in ('conversacion-contexto', 'respuesta-no-correcta'):
+    _pt_c = MERGE_TEXT['pt-BR'].setdefault(_art, {})
+    _pt_c['img'] = ['pt__hacer-pregunta__pt-conversa-inicio']
+    _pt_c['stepImg'] = {}
+    _pt_c['shots'] = {'pt__hacer-pregunta__pt-conversa-inicio': 'Pantalla de inicio de conversaciones con el cuadro de mensaje y las herramientas'}
