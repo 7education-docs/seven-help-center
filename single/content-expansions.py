@@ -959,3 +959,22 @@ for _art in ('conversacion-contexto', 'respuesta-no-correcta'):
     _pt_c['img'] = ['pt__hacer-pregunta__pt-conversa-inicio']
     _pt_c['stepImg'] = {}
     _pt_c['shots'] = {'pt__hacer-pregunta__pt-conversa-inicio': 'Pantalla de inicio de conversaciones con el cuadro de mensaje y las herramientas'}
+
+# Plantillas: los modelos de prueba se han borrado y cada cuenta tiene dos modelos en su idioma
+MERGE_TEXT['es'].setdefault('plantilla-nombrar', {})
+MERGE_TEXT['es']['plantilla-nombrar']['img'] = ['es-plantillas-lista-nueva']
+MERGE_TEXT['es']['plantilla-nombrar'].setdefault('shots', {})['es-plantillas-lista-nueva'] = 'Lista de Plantillas con dos asistentes creados: Redacción · 1.º ESO y Guía de laboratorio · bachillerato'
+MERGE_TEXT['pt-BR'].setdefault('plantilla-nombrar', {})
+MERGE_TEXT['pt-BR']['plantilla-nombrar']['img'] = ['pt-plantillas-lista-nueva']
+MERGE_TEXT['pt-BR']['plantilla-nombrar'].setdefault('shots', {})['pt-plantillas-lista-nueva'] = 'Lista de Modelos com dois assistentes criados: Redação · 6.º ano e Guia de laboratório · ensino médio'
+MERGE_TEXT['es']['plantillas-vs-asistentes']['img'] = ['es-plantillas-lista-nueva', 'es__plantillas-vs-asistentes__plantillas-curso']
+MERGE_TEXT['es']['plantillas-vs-asistentes']['stepImg'] = {'1': 'es__plantillas-vs-asistentes__plantillas-curso', '2': 'es-plantillas-lista-nueva'}
+MERGE_TEXT['es']['plantillas-vs-asistentes'].setdefault('shots', {})['es-plantillas-lista-nueva'] = 'Lista de Plantillas con los asistentes creados'
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['img'] = ['pt-plantillas-lista-nueva', 'pt__crear-asistente__pt-asistente-formulario']
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['stepImg'] = {'2': 'pt-plantillas-lista-nueva'}
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes'].setdefault('shots', {})['pt-plantillas-lista-nueva'] = 'Lista de Modelos com os assistentes criados'
+# Crear asistente: captura de la lista tras guardar, en cada idioma
+MERGE_TEXT['pt-BR'].setdefault('crear-asistente', {})
+MERGE_TEXT['pt-BR']['crear-asistente']['img'] = ['pt__crear-asistente__pt-asistente-formulario', 'pt__crear-asistente__pt-asistente-guardado']
+MERGE_TEXT['pt-BR']['crear-asistente']['stepImg'] = {'4': 'pt__crear-asistente__pt-asistente-formulario', '5': 'pt__crear-asistente__pt-asistente-guardado'}
+MERGE_TEXT['pt-BR']['crear-asistente'].setdefault('shots', {})['pt__crear-asistente__pt-asistente-guardado'] = 'Lista de Modelos com o assistente criado e o ícone de chat no passo 5'
