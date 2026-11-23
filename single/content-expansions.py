@@ -514,7 +514,7 @@ def apply_article_merges(merged: dict) -> None:
             if art is None:
                 continue
             if 'steps' in txt:
-                if len(txt['steps']) < len(art.get('steps') or []):
+                if txt['steps'] and len(txt['steps']) < len(art.get('steps') or []):
                     raise SystemExit(f"{loc} · {keep_id}: {len(txt['steps'])} pasos de texto y {len(art.get('steps') or [])} en el artículo")
                 art['steps'] = [dict(t=s['t'], b=s['b']) for s in txt['steps']]
             for key in ('title', 'answer', 'example', 'tips'):
@@ -978,3 +978,258 @@ MERGE_TEXT['pt-BR'].setdefault('crear-asistente', {})
 MERGE_TEXT['pt-BR']['crear-asistente']['img'] = ['pt__crear-asistente__pt-asistente-formulario', 'pt__crear-asistente__pt-asistente-guardado']
 MERGE_TEXT['pt-BR']['crear-asistente']['stepImg'] = {'4': 'pt__crear-asistente__pt-asistente-formulario', '5': 'pt__crear-asistente__pt-asistente-guardado'}
 MERGE_TEXT['pt-BR']['crear-asistente'].setdefault('shots', {})['pt__crear-asistente__pt-asistente-guardado'] = 'Lista de Modelos com o assistente criado e o ícone de chat no passo 5'
+
+# Explicaciones que no son pasos: apartados en lugar de pasos numerados
+MERGE_TEXT['es'].setdefault('que-es-un-curso-ayuda', {})
+MERGE_TEXT['es']['que-es-un-curso-ayuda']['steps'] = []
+MERGE_TEXT['es']['que-es-un-curso-ayuda']['stepImg'] = {}
+MERGE_TEXT['es']['que-es-un-curso-ayuda']['sections'] = [{'h': 'Invitar al alumnado',
+  'b': 'Aquí tienes el código de inscripción con un botón para copiarlo. Es la forma más rápida de que el grupo entre el primer día, sin tener que buscar el curso.'},
+ {'h': 'Próxima cita', 'b': 'Muestra la siguiente sesión del curso. Te recuerda qué toca en la próxima clase; si no aparece ninguna, el curso aún no tiene sesiones planificadas.'},
+ {'h': 'Secciones',
+  'b': 'Cada sección agrupa un bloque del curso, como una unidad o un trimestre. Ábrela para ver sus materiales y actividades; el número de entradas te dice cuánto contenido '
+       'tiene cada bloque.'},
+ {'h': 'Entradas ocultas',
+  'b': 'Una entrada marcada como «Oculto» no la ve el alumnado. Úsalo para preparar material antes de publicarlo, o para dejar lista la semana siguiente sin que se vea todavía.'},
+ {'h': 'Pestañas del curso',
+  'b': 'Vista general, Citas, Contenidos compartidos, Participantes y Configuración. Cada pestaña responde a una tarea distinta: planificar, revisar materiales, gestionar el '
+       'grupo o ajustar el curso. «Ver como estudiante» está arriba a la derecha.'}]
+MERGE_TEXT['es'].setdefault('unirse-curso', {})
+MERGE_TEXT['es']['unirse-curso']['steps'] = []
+MERGE_TEXT['es']['unirse-curso']['stepImg'] = {}
+MERGE_TEXT['es']['unirse-curso']['sections'] = [{'h': 'Con código y cuenta',
+  'b': 'Es la opción habitual en el centro: inicia sesión, entra en Cursos, pulsa «Unirse a un curso» y escribe el código que te dio tu docente. No tienes que escribir tu nombre, '
+       'porque se usa el de tu cuenta.'},
+ {'h': 'Con el enlace, sin cuenta',
+  'b': 'Útil si todavía no tienes cuenta o si el curso es puntual. Abre el enlace, escribe tu nombre y la primera letra de tu apellido, y pulsa «Unirse a un curso». Tu docente te '
+       'verá en la lista de participantes.'},
+ {'h': 'Con una invitación por correo',
+  'b': 'Abre la invitación que llegó a tu correo y acepta con la cuenta a la que llegó. Si no la encuentras, pide a tu docente que la envíe de nuevo.'}]
+MERGE_TEXT['es'].setdefault('configuracion-del-curso', {})
+MERGE_TEXT['es']['configuracion-del-curso']['steps'] = []
+MERGE_TEXT['es']['configuracion-del-curso']['stepImg'] = {}
+MERGE_TEXT['es']['configuracion-del-curso']['sections'] = [{'h': 'General',
+  'b': 'Nombre, Asignatura, Clase o curso escolar y Descripción. Son los datos que identifican el curso en tu lista y en la del centro.\n'
+       '• Pulsa «Aplicar cambios» para guardarlos.\n'
+       '• Mantén el mismo formato de nombre en todo el departamento.'},
+ {'h': 'Portada',
+  'b': 'La imagen que se ve en el curso, en la lista de cursos y en la página de inscripción.\n• Una portada reconocible ayuda a encontrar el curso correcto entre varios.'},
+ {'h': 'Visualización',
+  'b': 'Cómo ve el alumnado las secciones y los contenidos.\n'
+       '• Lista: la más compacta, útil con muchos contenidos.\n'
+       '• Lista con vista previa: muestra las primeras líneas de cada contenido. Suele ser la más clara.\n'
+       '• Mosaicos: cada sección se muestra como tarjetas, bien para materiales visuales.\n'
+       '• Secciones como mosaicos: cada sección tiene su propia página.\n'
+       '• «Contenido anterior y siguiente»: enlaza cada contenido con el anterior y el siguiente.'},
+ {'h': 'Código de inscripción',
+  'b': 'El código, el enlace público y «Generar nuevo código».\n'
+       '• El enlace público viene desactivado por defecto.\n'
+       '• Genera un código nuevo si se ha compartido fuera de la clase.\n'
+       '• Desactiva el enlace público cuando termine la inscripción.'},
+ {'h': 'IA en el curso',
+  'b': 'Decide si el alumnado puede usar la IA del curso y cómo responde.\n'
+       '• «IA para el alumnado»: enciende o apaga la IA. Apágala en semanas de examen.\n'
+       '• Tutor de IA (por defecto): da pistas y hace preguntas, sin soluciones completas.\n'
+       '• Solo contenidos del curso: responde solo con el material del curso. Libre: también responde fuera del curso.\n'
+       '• Generar imágenes y Búsqueda web vienen desactivadas; Adjuntar archivos, activada.\n'
+       '• «Mensajes por estudiante y día»: 50 por defecto.\n'
+       '• IA para invitados: se aplica a quien entró con el enlace público. Viene desactivada.\n'
+       '• Pausar la IA: al final de la página, para cortarla de forma temporal, por ejemplo en un examen.'},
+ {'h': 'Exportación',
+  'b': 'Lo último del curso: exportar o archivar.\n'
+       '• Exportar: copia completa en ZIP, IMS Common Cartridge o copia de seguridad de Moodle (.mbz).\n'
+       '• Archivar: el curso sale de tu lista. Antes, revisa que no lo necesitas para otro grupo.\n'
+       '• «Eliminar curso» no aparece en los pasos normales: no tiene vuelta atrás.'}]
+MERGE_TEXT['es'].setdefault('plantillas-vs-asistentes', {})
+MERGE_TEXT['es']['plantillas-vs-asistentes']['steps'] = []
+MERGE_TEXT['es']['plantillas-vs-asistentes']['stepImg'] = {}
+MERGE_TEXT['es']['plantillas-vs-asistentes']['sections'] = [{'h': 'Plantillas de curso', 'b': 'Están en Cursos, en la pestaña Plantillas. Sirven para empezar una unidad sin construirla desde cero; después la adaptas a tu grupo.'},
+ {'h': 'Asistentes de IA',
+  'b': 'Están en Plantillas (icono de estrellas). Sirven para las tareas que repites: el asistente aplica siempre tus instrucciones, así que el resultado sale con tu criterio.'}]
+MERGE_TEXT['es'].setdefault('seguridad-datos', {})
+MERGE_TEXT['es']['seguridad-datos']['steps'] = []
+MERGE_TEXT['es']['seguridad-datos']['stepImg'] = {}
+MERGE_TEXT['es']['seguridad-datos']['sections'] = [{'h': 'Lo que garantizamos',
+  'b': 'Datos alojados en Alemania, cumplimiento del RGPD y ninguna IA entrenada con tus datos. Certificaciones ISO 27001, 9001 y 14001. Son los puntos que un centro suele '
+       'preguntar antes de usar una herramienta con datos del alumnado.'},
+ {'h': 'Preguntas que debes poder responder',
+  'b': '¿Dónde se alojan los datos? ¿Quién puede acceder? ¿Cómo se protegen? ¿Cómo se eliminan? ¿Qué datos personales se tratan? Si tienes estas respuestas claras, puedes '
+       'explicar el uso a familias y dirección sin improvisar.'},
+ {'h': 'Documentación oficial',
+  'b': 'Para la documentación completa, solicítala a través de 7education.com indicando el nombre de tu centro. Pídela antes de la reunión con la dirección, no después.'},
+ {'h': 'Minimiza los datos de alumnos',
+  'b': 'Usa identificadores internos en lugar de nombres completos cuando sea posible. Así, si un documento sale del centro, no expone a nadie.'},
+ {'h': 'Cumplimiento local',
+  'b': 'Brasil (LGPD), México (LFPDPPP) y Chile (su normativa de datos personales, en actualización) tienen requisitos propios. Si tu centro está en esos países, consulta con el '
+       'área jurídica.'}]
+MERGE_TEXT['es'].setdefault('beta', {})
+MERGE_TEXT['es']['beta']['steps'] = []
+MERGE_TEXT['es']['beta']['stepImg'] = {}
+MERGE_TEXT['es']['beta']['sections'] = [{'h': 'Qué hacer',
+  'b': 'Si algo no coincide con esta ayuda, revisa la versión de la ayuda y las novedades desde el menú de cuenta. Así sabes si el cambio es reciente o si el artículo está '
+       'desactualizado, y puedes reportarlo con esa información.'}]
+MERGE_TEXT['es'].setdefault('ficha-densidad', {})
+MERGE_TEXT['es']['ficha-densidad']['steps'] = []
+MERGE_TEXT['es']['ficha-densidad']['stepImg'] = {}
+MERGE_TEXT['es']['ficha-densidad']['sections'] = [{'h': 'Extensión',
+  'b': 'En Contexto: Prueba corta, Hoja de ejercicios, Material de apoyo o Examen. Debajo, el número de páginas (1 página por defecto). Una prueba corta y un material de apoyo '
+       'necesitan extensiones muy distintas.'},
+ {'h': 'Número de ejercicios',
+  'b': 'Automático por defecto. Desactiva el conmutador para elegir el número; el texto indica el tiempo aproximado. Así calculas si la ficha cabe en tu sesión antes de '
+       'generarla.'},
+ {'h': 'Densidad de texto',
+  'b': 'Compacto, Equilibrado (por defecto) o Detallado. Compacto cabe en menos papel y va bien para repasar; Detallado es mejor para quien necesita más explicación.'}]
+MERGE_TEXT['es'].setdefault('invitar-alumnado', {})
+MERGE_TEXT['es']['invitar-alumnado']['steps'] = []
+MERGE_TEXT['es']['invitar-alumnado']['stepImg'] = {}
+MERGE_TEXT['es']['invitar-alumnado']['sections'] = [{'h': 'Código de inscripción (con cuenta)',
+  'b': 'Copia el código en la vista general (tarjeta «Invitar al alumnado») o en Configuración → Código de inscripción. El alumnado, con sesión iniciada, lo escribe en Cursos → '
+       '«Unirse a un curso». No pide nombre: usa el de su cuenta. Es la opción recomendada cuando el alumnado tiene cuenta.'},
+ {'h': 'Enlace público (sin cuenta)',
+  'b': 'En Configuración → Código de inscripción, activa «Enlace público de inscripción» y comparte el enlace. El alumnado lo abre, escribe su nombre y la primera letra de su '
+       'apellido, y pulsa «Unirse a un curso». Úsalo para actividades puntuales o para personas sin cuenta.'},
+ {'h': 'Invitación por correo (con cuenta)',
+  'b': 'En Participantes, pulsa «Invitar a personas», elige «Invitar por correo electrónico», escribe el correo y el rol, y pulsa Invitar. La persona acepta con su cuenta; '
+       'mientras tanto aparece como «Invitado». Sirve para añadir a alguien concreto, como un colaborador.'}]
+MERGE_TEXT['pt-BR'].setdefault('que-es-un-curso-ayuda', {})
+MERGE_TEXT['pt-BR']['que-es-un-curso-ayuda']['steps'] = []
+MERGE_TEXT['pt-BR']['que-es-un-curso-ayuda']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['que-es-un-curso-ayuda']['sections'] = [{'h': 'Convidar alunos',
+  'b': 'O código de inscrição aparece aqui, com botão para copiá-lo, para você passá-lo à turma sem procurá-lo em outro lugar. O link "Ir para os participantes" leva à lista de '
+       'quem já entrou.'},
+ {'h': 'Próximo encontro',
+  'b': 'Mostra a próxima sessão marcada no curso, para você lembrar o que vem em seguida. Se não houver nenhuma, aparece "Nenhum encontro previsto" e você pode marcá-la em '
+       'Compromissos.'},
+ {'h': 'Seções',
+  'b': 'O conteúdo do curso se organiza em blocos. Cada seção informa a quantidade de entradas, e o menu (…) reúne as opções dela, enquanto os materiais e atividades ficam '
+       'dentro.'},
+ {'h': 'Entradas ocultas',
+  'b': 'Uma entrada marcada como "Oculto" não aparece para os estudantes. Use essa marcação para montar o conteúdo com antecedência e publicá-lo no dia certo.'},
+ {'h': 'Abas do curso',
+  'b': 'Visão geral, Compromissos, Conteúdos compartilhados, Participantes e Definições ficam no topo. "Ver como aluno" aparece no alto à direita e mostra o curso como o '
+       'estudante o vê.'}]
+MERGE_TEXT['pt-BR'].setdefault('unirse-curso', {})
+MERGE_TEXT['pt-BR']['unirse-curso']['steps'] = []
+MERGE_TEXT['pt-BR']['unirse-curso']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['unirse-curso']['sections'] = [{'h': 'Com código e conta', 'b': 'Use este caminho quando o estudante já tem conta no Seven Assistant. O nome que aparece no curso é o da conta, então não é preciso digitá-lo.'},
+ {'h': 'Com o link, sem conta',
+  'b': 'Serve para quem ainda não tem conta. Depois de entrar, o estudante aparece na lista de participantes do curso, e o docente o identifica por esse nome.'},
+ {'h': 'Com um convite por e-mail', 'b': 'É preciso aceitar o convite com a conta à qual ele foi enviado. Se não encontrar o convite, peça ao docente que o envie de novo.'}]
+MERGE_TEXT['pt-BR'].setdefault('configuracion-del-curso', {})
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['steps'] = []
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['configuracion-del-curso']['sections'] = [{'h': 'Geral',
+  'b': 'Nome, Disciplina, Turma ou série e Descrição. São os dados que identificam o curso na sua lista e na da escola.\n'
+       '• Clique em "Aplicar alterações" para salvá-los.\n'
+       '• Mantenha o mesmo formato de nome em todo o departamento.'},
+ {'h': 'Capa', 'b': 'A imagem que aparece no curso, na lista de cursos e na página de inscrição.\n• Uma capa reconhecível ajuda a achar o curso certo entre vários.'},
+ {'h': 'Apresentação',
+  'b': 'Como o estudante vê as seções e os conteúdos.\n'
+       '• Lista: a mais compacta, útil com muitos conteúdos.\n'
+       '• Lista com visualização prévia: mostra as primeiras linhas de cada conteúdo. Costuma ser a mais clara.\n'
+       '• Mosaicos: cada seção aparece como cartões, bom para materiais visuais.\n'
+       '• Seções como mosaicos: cada seção tem a sua própria página.\n'
+       '• "Conteúdo anterior e seguinte": liga cada conteúdo ao anterior e ao seguinte.'},
+ {'h': 'Código de adesão',
+  'b': 'O código, o link público e "Gerar novo código".\n'
+       '• O link público vem desativado por padrão.\n'
+       '• Gere um código novo se ele tiver sido compartilhado fora da turma.\n'
+       '• Desative o link público quando a inscrição terminar.'},
+ {'h': 'IA no curso',
+  'b': 'Decide se o estudante pode usar a IA do curso e como ela responde.\n'
+       '• "IA para o estudante": liga ou desliga a IA. Desligue-a em semanas de prova.\n'
+       '• Tutor de IA (padrão): dá pistas e faz perguntas, sem soluções completas.\n'
+       '• Somente conteúdos do curso: responde só com o material do curso. Livre: responde também fora do curso.\n'
+       '• Gerar imagens e Busca na web vêm desativadas; Anexar arquivos, ativada.\n'
+       '• "Mensagens por estudante e dia": 50 por padrão.\n'
+       '• IA para convidados: vale para quem entrou pelo link público. Vem desativada.\n'
+       '• Pausar a IA: no fim da página, para cortá-la temporariamente, por exemplo durante uma prova.'},
+ {'h': 'Exportação',
+  'b': 'O último passo do curso: exportar ou arquivar.\n'
+       '• Exportar: cópia completa em ZIP, IMS Common Cartridge ou cópia de segurança do Moodle (.mbz).\n'
+       '• Arquivar: o curso sai da sua lista. Antes, confira se você não precisa dele para outra turma.\n'
+       '• "Excluir curso" não aparece nos passos normais: não tem volta.'}]
+MERGE_TEXT['pt-BR'].setdefault('plantillas-vs-asistentes', {})
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['steps'] = []
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['plantillas-vs-asistentes']['sections'] = [{'h': 'Modelos de curso', 'b': 'Ficam dentro de Cursos, na aba Modelos. São unidades prontas que você adota e depois adapta à sua turma.'},
+ {'h': 'Assistentes de IA', 'b': 'Ficam em Modelos, na barra lateral (ícone de estrelas). Seguem as instruções que você escreve e servem para tarefas que se repetem.'}]
+MERGE_TEXT['pt-BR'].setdefault('seguridad-datos', {})
+MERGE_TEXT['pt-BR']['seguridad-datos']['steps'] = []
+MERGE_TEXT['pt-BR']['seguridad-datos']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['seguridad-datos']['sections'] = [{'h': 'O que é garantido',
+  'b': 'São as garantias informadas pelo fornecedor: dados hospedados na Alemanha, conformidade com o RGPD, nenhum treinamento da IA com os seus dados e as certificações ISO '
+       '27001, 9001 e 14001. Use-as como ponto de partida para a avaliação, e não como conclusão.'},
+ {'h': 'Perguntas que você precisa responder',
+  'b': 'Antes de usar a ferramenta com estudantes, a escola deve saber onde os dados ficam, quem pode acessá-los, como são protegidos e eliminados e quais dados pessoais são '
+       'tratados. As respostas podem ser registradas como base da decisão.'},
+ {'h': 'Documentação oficial',
+  'b': 'Para a documentação completa, solicite-a em 7education.com informando o nome da sua escola. Assim a avaliação se apoia no documento, e não só nesta ajuda.'},
+ {'h': 'Minimizar os dados dos estudantes', 'b': 'Use identificadores internos, em vez de nomes completos, sempre que for possível. Assim há menos dado pessoal para proteger.'},
+ {'h': 'Conformidade local',
+  'b': 'Brasil (LGPD), México (LFPDPPP) e Chile, cuja legislação de dados pessoais está em atualização, têm exigências próprias. Consulte o jurídico da sua escola antes de '
+       'decidir.'}]
+MERGE_TEXT['pt-BR'].setdefault('beta', {})
+MERGE_TEXT['pt-BR']['beta']['steps'] = []
+MERGE_TEXT['pt-BR']['beta']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['beta']['sections'] = [{'h': 'O que fazer',
+  'b': 'Procure a ação pelo nome no buscador da ajuda ou veja as novidades no menu da conta. Assim você consegue localizar a função mesmo depois de uma mudança.'}]
+MERGE_TEXT['pt-BR'].setdefault('ficha-densidad', {})
+MERGE_TEXT['pt-BR']['ficha-densidad']['steps'] = []
+MERGE_TEXT['pt-BR']['ficha-densidad']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['ficha-densidad']['sections'] = [{'h': 'Extensão',
+  'b': 'Escolha entre Miniteste, Ficha de exercícios, Material de apoio ou Teste de avaliação. Também defina o número de páginas, que vem com 1 página por padrão.'},
+ {'h': 'Número de exercícios', 'b': 'Vem automático por padrão. Desative a opção para escolher a quantidade, e confira o tempo aproximado que o texto mostra.'},
+ {'h': 'Densidade do texto',
+  'b': 'Compacto deixa o texto mais enxuto, Detalhado o deixa mais extenso e Equilibrado, o padrão, fica entre os dois. Escolha pelo uso que a ficha terá.'}]
+MERGE_TEXT['pt-BR'].setdefault('invitar-alumnado', {})
+MERGE_TEXT['pt-BR']['invitar-alumnado']['steps'] = []
+MERGE_TEXT['pt-BR']['invitar-alumnado']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['invitar-alumnado']['sections'] = [{'h': 'Código de inscrição (com conta)',
+  'b': 'Indicado quando os estudantes já têm conta no Seven Assistant. Você encontra o código no cartão "Convidar alunos" da visão geral ou em Definições, e o nome usado é o da '
+       'conta.'},
+ {'h': 'Link público (sem conta)',
+  'b': 'Útil para quem ainda não tem conta. O estudante escreve o seu nome e a primeira letra do sobrenome para entrar, e o link fica ativo enquanto estiver ligado.'},
+ {'h': 'Convite por e-mail (com conta)',
+  'b': 'Serve para convidar uma pessoa específica com o papel que você define. Ela só entra depois de aceitar com a própria conta, e até lá aparece como "Convidado".'}]
+MERGE_TEXT['es'].setdefault('que-es', {})
+MERGE_TEXT['es']['que-es']['title'] = 'Primeros pasos'
+MERGE_TEXT['es']['que-es']['steps'] = []
+MERGE_TEXT['es']['que-es']['stepImg'] = {}
+MERGE_TEXT['es']['que-es']['sections'] = [{'h': 'Lo que puedes hacer',
+  'b': 'Conversar con el asistente y, a partir de ahí, crear cursos con secciones y actividades, guardar materiales en la Biblioteca, preparar series de lecciones, fichas '
+       'interactivas y tareas de corrección. Es el punto de partida de casi todo el trabajo.'},
+ {'h': 'Lo que no hace',
+  'b': 'No sustituye tu criterio profesional. Revisa siempre lo que propone antes de compartirlo con alumnos o familias: la IA puede equivocarse en datos, fechas o niveles.'},
+ {'h': 'Cómo moverte por la barra lateral',
+  'b': 'La barra lateral está a la izquierda y es la misma en todas las pantallas. De arriba abajo tiene: el icono para abrirla o cerrarla, que sirve para ganar espacio cuando '
+       'trabajas con textos largos; el botón + para empezar una conversación nueva; los iconos de cada área (Conversaciones, Cursos, Biblioteca y Plantillas); y, si tu cuenta '
+       'tiene acceso a la administración del centro, un icono de edificio para la organización. Abajo está tu avatar, que abre el menú de cuenta. Para cambiar de área, basta con '
+       'pulsar su icono.'},
+ {'h': 'Conversaciones', 'b': 'Es la página de inicio. Úsala para preguntas rápidas y para pedir ideas o borradores antes de llevarlos a un curso.'},
+ {'h': 'Cursos', 'b': 'Aquí creas cursos, te unes a uno como alumno o importas uno que ya tienes. Un curso reúne todo lo que trabajas con un grupo en un mismo sitio.'},
+ {'h': 'Biblioteca', 'b': 'Guarda documentos, series de lecciones, fichas interactivas y tareas de corrección para reutilizarlos en varios cursos y en otros años.'},
+ {'h': 'Plantillas',
+  'b': 'Icono de estrellas. Son asistentes de IA con instrucciones propias: úsalos cuando repites el mismo tipo de tarea y quieres que siempre salga con el mismo criterio.'},
+ {'h': 'Menú de cuenta', 'b': 'Pulsa el avatar de abajo para acceder a Configuración, al idioma y a las carpetas compartidas del centro.'}]
+MERGE_TEXT['pt-BR'].setdefault('que-es', {})
+MERGE_TEXT['pt-BR']['que-es']['title'] = 'Primeiros passos'
+MERGE_TEXT['pt-BR']['que-es']['steps'] = []
+MERGE_TEXT['pt-BR']['que-es']['stepImg'] = {}
+MERGE_TEXT['pt-BR']['que-es']['sections'] = [{'h': 'O que você pode fazer',
+  'b': 'Conversar com o assistente, montar cursos com seções e atividades, guardar materiais na Biblioteca, criar séries de aulas, fichas interativas e tarefas de correção. Cada '
+       'uma dessas funções tem um artigo próprio nesta ajuda.'},
+ {'h': 'O que ele não faz', 'b': 'O assistente não substitui o seu critério profissional. Revise sempre o que ele propõe antes de compartilhar com estudantes ou famílias.'},
+ {'h': 'Como se mover pela barra lateral',
+  'b': 'A barra lateral fica à esquerda e é a mesma em todas as telas. De cima para baixo, ela tem: o ícone para abrir ou fechar a barra, que ajuda a ganhar espaço quando você '
+       'trabalha com textos longos; o botão + para começar uma conversa nova; os ícones de cada área (Conversas, Cursos, Biblioteca e Modelos); e, se a sua conta tiver acesso à '
+       'administração da escola, um ícone de prédio para a organização. Embaixo, o seu avatar abre o menu da conta. Para mudar de área, basta clicar no ícone correspondente.'},
+ {'h': 'Conversas', 'b': 'É a página inicial e o lugar para fazer perguntas ao assistente. Comece por aqui quando precisar de uma resposta rápida ou de um primeiro rascunho.'},
+ {'h': 'Cursos', 'b': 'Aqui você cria cursos, entra em um curso que já existe ou o importa. É também por essa área que os estudantes entram no curso da turma.'},
+ {'h': 'Biblioteca', 'b': 'Guarde aqui os documentos, séries de aulas, fichas interativas e tarefas de correção que você quer reaproveitar em outras aulas e turmas.'},
+ {'h': 'Modelos',
+  'b': 'Reúne os seus assistentes de IA, cada um com instruções próprias, para tarefas que se repetem. Vale criar um quando você perceber que faz o mesmo tipo de pedido várias '
+       'vezes.'},
+ {'h': 'Menu da conta',
+  'b': 'Fica no avatar, embaixo à esquerda. Dali você acessa Configurações, troca o idioma e gerencia as pastas compartilhadas, e é também a opção para sair em um computador que '
+       'não é seu.'}]
